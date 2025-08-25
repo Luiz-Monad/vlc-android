@@ -119,14 +119,17 @@ android {
         assets.srcDirs = ['assets']
     }
     sourceSets.debug {
+        manifest.srcFile 'flavors/debug/AndroidManifest.xml'
         res.srcDirs = ['flavors/debug/res']
         assets.srcDirs = ['flavors/debug/assets']
     }
     sourceSets.dev {
+        manifest.srcFile 'test/AndroidManifest.xml'
         res.srcDirs = ['flavors/debug/res']
         assets.srcDirs = ['flavors/debug/assets']
     }
     sourceSets.test {
+        manifest.srcFile 'test/AndroidManifest.xml'
         java.srcDirs = ['test', 'test-common']
         assets.srcDirs = ['flavors/debug/assets']
     }
@@ -167,14 +170,16 @@ dependencies {
     api project(':application:resources')
     api project(':application:tools')
     api project(':extension-api')
-    devApi project(':libvlcjni:libvlc')
-    devApi project(':medialibrary')
-    debugApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    debugApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
-    releaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    releaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
-    signedReleaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    signedReleaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
+    api project(':libvlcjni:libvlc')
+    api project(':medialibrary')
+//    debugApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+//    debugApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
+//    devApi project(':libvlcjni:libvlc')
+//    devApi project(':medialibrary')
+//    releaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+//    releaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
+//    signedReleaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+//    signedReleaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
 
     kapt "androidx.room:room-compiler:$rootProject.ext.roomVersion"
     kapt "org.xerial:sqlite-jdbc:$rootProject.ext.sqliteVersion"

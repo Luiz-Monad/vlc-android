@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Keep your uses-sdk override if you were using it from previous steps -->
+    <uses-sdk
+        tools:overrideLibrary="
+                androidx.test.core,
+                androidx.test.monitor,
+                org.videolan.vlc.donations
+                "/>
+
+    <application>
+        <!--
+            Activities from androidx.test.core being added for Android 12+ exported requirement.
+            These are used by the test framework and should not be exported.
+        -->
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+            android:exported="false"
+            tools:node="merge" />
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+            android:exported="false"
+            tools:node="merge" />
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+            android:exported="false"
+            tools:node="merge" />
+
+    </application>
+
+    <instrumentation
+        android:name="androidx.test.runner.AndroidJUnitRunner"
+        android:targetPackage="org.videolan.vlc.donations" />
+
+</manifest>

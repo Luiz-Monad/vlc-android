@@ -31,7 +31,6 @@ android {
 
         vectorDrawables.useSupportLibrary = true
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
         multiDexEnabled true
 
@@ -71,16 +70,18 @@ android {
 
 dependencies {
     api project(':application:tools')
-    devApi project(':libvlcjni:libvlc')
-    devApi project(':medialibrary')
-    debugApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    debugApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
-    noTvApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    noTvApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
-    releaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    releaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
-    vlcBundleApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    vlcBundleApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
+    api project(':libvlcjni:libvlc')
+    api project(':medialibrary')
+//    debugApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+//    debugApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
+//    devApi project(':libvlcjni:libvlc')
+//    devApi project(':medialibrary')
+//    noTvApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+//    noTvApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
+//    releaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+//    releaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
+//    vlcBundleApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+//    vlcBundleApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
 
     api "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
     api "androidx.leanback:leanback-preference:$rootProject.ext.androidxLeanbackVersion"
