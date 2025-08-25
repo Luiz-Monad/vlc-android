@@ -80,7 +80,7 @@ dependencies {
     implementation project(':application:tools')
 
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.androidxConstraintLayoutVersion"
     implementation "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"

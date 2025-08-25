@@ -74,15 +74,15 @@ dependencies {
 
     // Provide proper JDBC version, see https://issuetracker.google.com/issues/174695268
 
-    kapt "androidx.room:room-compiler:$rootProject.ext.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.ext.androidxRoomVersion"
     kapt "org.xerial:sqlite-jdbc:$rootProject.ext.sqliteVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lifecycleVersion"
-    implementation "androidx.paging:paging-runtime-ktx:$rootProject.ext.pagingVersion"
-    implementation "androidx.room:room-runtime:$rootProject.ext.roomVersion"
-    implementation "com.squareup.moshi:moshi-adapters:$rootProject.ext.moshi"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okHttp3_version"
-    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.ext.retrofit"
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.androidxLifecycleVersion"
+    implementation "androidx.paging:paging-runtime-ktx:$rootProject.ext.androidxPagingVersion"
+    implementation "androidx.room:room-runtime:$rootProject.ext.androidxRoomVersion"
+    implementation "com.squareup.moshi:moshi-adapters:$rootProject.ext.moshiVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okHttp3Version"
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"

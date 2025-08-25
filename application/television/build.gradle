@@ -70,7 +70,7 @@ dependencies {
     implementation project(':application:vlc-android')
     api project(':application:moviepedia')
 
-    implementation "com.jaredrummler:colorpicker:$rootProject.ext.colorpicker"
-    testImplementation "androidx.test:core:$rootProject.ext.testCore"
+    implementation "com.jaredrummler:colorpicker:$rootProject.ext.colorpickerVersion"
+    testImplementation "androidx.test:core:$rootProject.ext.testCoreVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
 }

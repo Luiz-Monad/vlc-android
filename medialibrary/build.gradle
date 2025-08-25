@@ -115,9 +115,9 @@ dependencies {
     devImplementation project(':libvlcjni:libvlc')
     debugImplementation "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
 
-    api "androidx.legacy:legacy-support-v4:$rootProject.ext.androidxLegacyVersion"
     api "androidx.core:core:$rootProject.ext.androidxCoreVersion"
     api "androidx.fragment:fragment:$rootProject.ext.androidxFragmentVersion"
+    api "androidx.legacy:legacy-support-v4:$rootProject.ext.androidxLegacyVersion"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectric"
+    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
 }

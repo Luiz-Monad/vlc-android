@@ -82,11 +82,11 @@ dependencies {
     implementation project(':application:resources')
     implementation project(':application:tools')
 
-    kapt "androidx.room:room-compiler:$rootProject.ext.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.ext.androidxRoomVersion"
     kapt "org.xerial:sqlite-jdbc:$rootProject.ext.sqliteVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"
     implementation "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
-    implementation "androidx.room:room-ktx:$rootProject.ext.roomVersion"
+    implementation "androidx.room:room-ktx:$rootProject.ext.androidxRoomVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
