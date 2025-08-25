@@ -32,7 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import org.videolan.vlc.plugin.api.R;
+import org.videolan.vlc.extensions.api.R;
 
 public class Dialogs {
 
