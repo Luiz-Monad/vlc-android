@@ -100,6 +100,8 @@ class TVSearchProvider : ContentProvider() {
                                             matrixCursor.addRow(arrayOf(media.id, "${CONTENT_EPISODE}${mediaMetadataWithImages.metadata.moviepediaId}", mediaMetadataWithImages.metadata.title, mediaMetadataWithImages.subtitle(), thumbnail, mediaMetadataWithImages.metadata.getYear(), media.length))
                                         }
                                     }
+                                } else {
+
                                 }
                     }
                 }

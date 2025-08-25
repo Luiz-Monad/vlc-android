@@ -48,7 +48,7 @@ class SubtitlesModel(private val context: Context, private val mediaUri: Uri, pr
     val observableResultDescription = ObservableField<Spanned>()
 
     private val apiResultLiveData: MutableLiveData<List<OpenSubtitle>> = MutableLiveData()
-    private val downloadedLiveData = Transformations.map(ExternalSubRepository.getInstance(context).getDownloadedSubtitles(mediaUri)) { list ->
+    private val downloadedLiveData = ExternalSubRepository.getInstance(context).getDownloadedSubtitles(mediaUri).map { list ->
         list.map { SubtitleItem(it.idSubtitle, mediaUri, it.subLanguageID, it.movieReleaseName, State.Downloaded, "") }
     }
 

@@ -165,7 +165,7 @@ open class FileBrowserProvider(
         super.release()
     }
 
-    override fun onChanged(list: MutableList<UsbDevice>?) {
+    override fun onChanged(list: MutableList<UsbDevice>) {
         if (list.isNullOrEmpty()) {
             if (otgPosition != -1) {
                 dataset.remove(otgPosition)

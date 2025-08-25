@@ -135,7 +135,7 @@ class VideoStatsDelegate(private val player: VideoPlayerActivity, val scrolling:
                     }
                 }
 
-                val trackTitle = TextView(player, null, R.style.TextAppearance_MaterialComponents_Headline2)
+                val trackTitle = TextView(player, null, R.style.TrackTitleText)
                 trackTitle.setTextColor(ContextCompat.getColor(player, RR.color.orange500))
                 trackTitle.text = when (track.type) {
                     IMedia.Track.Type.Video -> player.getString(RR.string.video)
@@ -160,7 +160,7 @@ class VideoStatsDelegate(private val player: VideoPlayerActivity, val scrolling:
     }
 
     private fun addStreamGridView(grid: GridLayout, titleString: String, valueString: String) {
-        val title = TextView(player, null, R.style.TextAppearance_MaterialComponents_Subtitle1)
+        val title = TextView(player, null, R.style.GridTitleText)
         title.text = titleString
         grid.addView(title)
 

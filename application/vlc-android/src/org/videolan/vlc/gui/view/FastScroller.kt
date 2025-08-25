@@ -371,7 +371,7 @@ class FastScroller : LinearLayout, Observer<HeadersIndex> {
         actor.trySend(Unit)
     }
 
-    override fun onChanged(t: HeadersIndex?) {
+    override fun onChanged(t: HeadersIndex) {
         actor.trySend(Unit)
     }
 }

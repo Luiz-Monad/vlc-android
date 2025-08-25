@@ -74,7 +74,7 @@ class PlayerProgress : View {
         paintProgress.isAntiAlias = true
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         val left = (width.toFloat() - progressWidth.toFloat()) / 2
         val right = width - left
         val top = yOffset.toFloat()

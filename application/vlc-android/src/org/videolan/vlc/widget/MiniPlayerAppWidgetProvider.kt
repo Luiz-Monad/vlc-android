@@ -221,7 +221,7 @@ class MiniPlayerAppWidgetProvider : AppWidgetProvider() {
 
         views.setOnClickPendingIntent(R.id.backward, piBackward)
         views.setOnClickPendingIntent(R.id.play_pause, piPlay)
-        views.setOnClickPendingIntent(R.id.stop, piStop)
+        views.setOnClickPendingIntent(R.id.play_pause, piStop)
         views.setOnClickPendingIntent(R.id.forward, piForward)
         views.setOnClickPendingIntent(R.id.cover, piVlc)
         views.setOnClickPendingIntent(R.id.app_icon, piVlc)

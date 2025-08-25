@@ -60,7 +60,7 @@ class WidgetHandleView : View {
         paint.isAntiAlias = true
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         val padding = 8.dp.toFloat()
         val viewWidth = width
         //3.56 is the known ratio of the [RR.drawable.vlc_widget_mini] image. 6.dp is two times the stroke size

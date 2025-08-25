@@ -336,6 +336,7 @@ object FileUtils {
     }
 
 
+    @SuppressLint("Range")
     @WorkerThread
     fun getUri(data: Uri?): Uri? {
         var uri = data

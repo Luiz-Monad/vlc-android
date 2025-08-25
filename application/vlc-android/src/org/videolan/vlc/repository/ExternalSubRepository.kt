@@ -23,7 +23,7 @@ package org.videolan.vlc.repository
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -49,7 +49,7 @@ class ExternalSubRepository(private val externalSubDao: ExternalSubDao, private 
 
     fun getDownloadedSubtitles(mediaUri: Uri): LiveData<List<org.videolan.vlc.mediadb.models.ExternalSub>> {
         val externalSubs = externalSubDao.get(mediaUri.path!!)
-        return Transformations.map(externalSubs) { list ->
+        return externalSubs.map { list ->
             val existExternalSubs: MutableList<org.videolan.vlc.mediadb.models.ExternalSub> = mutableListOf()
             list.forEach {
                 if (File(Uri.decode(it.subtitlePath)).exists())

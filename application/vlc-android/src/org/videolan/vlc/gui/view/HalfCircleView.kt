@@ -50,7 +50,7 @@ class HalfCircleView : View {
         }
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         if (!Settings.showTvUi) {
             val cx = if (isLeft) -width else width * 2
             val cy = height / 2

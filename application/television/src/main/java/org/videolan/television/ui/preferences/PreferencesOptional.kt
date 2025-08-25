@@ -75,8 +75,8 @@ class PreferencesOptional : BasePreferenceFragment(), SharedPreferences.OnShared
     }
 
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        val enabled = findPreference<CheckBoxPreference>(key)!!.isChecked
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
+        val enabled = findPreference<CheckBoxPreference>(key!!)!!.isChecked
         FeatureFlagManager.getByKey(key)?.let { FeatureFlagManager.enable(activity,it, enabled) }
     }
 

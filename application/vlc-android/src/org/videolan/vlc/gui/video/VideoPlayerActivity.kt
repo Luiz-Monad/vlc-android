@@ -524,7 +524,9 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
         super.onAttachedToWindow()
         hasPhysicalNotch = hasNotch()
         if (hasPhysicalNotch) {
-            window.attributes.layoutInDisplayCutoutMode = settings.getInt(DISPLAY_UNDER_NOTCH, WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                window.attributes.layoutInDisplayCutoutMode = settings.getInt(DISPLAY_UNDER_NOTCH, WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES)
+            }
         }
     }
 
@@ -2272,7 +2274,7 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
     /**
      * Callback called when a Control setting has been changed in the advanced options
      */
-    fun onChangedControlSetting(key: String) = when(key) {
+    fun onChangedControlSetting(key: String?) = when(key) {
         AUDIO_BOOST -> isAudioBoostEnabled = settings.getBoolean(AUDIO_BOOST, true)
         ENABLE_VOLUME_GESTURE, ENABLE_BRIGHTNESS_GESTURE, ENABLE_DOUBLE_TAP_SEEK, ENABLE_DOUBLE_TAP_PLAY, ENABLE_SWIPE_SEEK, ENABLE_SCALE_GESTURE -> touchDelegate.touchControls = generateTouchFlags()
         SCREENSHOT_MODE -> {

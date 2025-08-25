@@ -73,7 +73,7 @@ class PreferencesVideoControls : BasePreferenceFragment(), SharedPreferences.OnS
                 .unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
         (activity as? VideoPlayerActivity)?.onChangedControlSetting(key)
         when (key) {
             VIDEO_HUD_TIMEOUT -> {

@@ -87,7 +87,7 @@ object ThumbnailsProvider {
             if (media.uri.scheme.isSchemeFile()) ThumbnailUtils.createVideoThumbnail(filePath, MediaStore.Video.Thumbnails.MINI_KIND) else null
         }
         if (bitmap != null) {
-            val emptyBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config)
+            val emptyBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config!!)
             if (bitmap.sameAs(emptyBitmap)) { // myBitmap is empty/blank3
                 bitmap = null
             }
@@ -262,7 +262,7 @@ object ThumbnailsProvider {
                 overlayHeight = minHeight
             }
         }
-        val bmOverlay = Bitmap.createBitmap(overlayWidth, overlayHeight, sourcesImages[0].config)
+        val bmOverlay = Bitmap.createBitmap(overlayWidth, overlayHeight, sourcesImages[0].config!!)
 
         val canvas = Canvas(bmOverlay)
         when (count) {

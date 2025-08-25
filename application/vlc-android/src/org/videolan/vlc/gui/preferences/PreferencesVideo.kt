@@ -57,7 +57,7 @@ class PreferencesVideo : BasePreferenceFragment(), SharedPreferences.OnSharedPre
                 .unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
         when (key) {
             "preferred_resolution" -> {
                 lifecycleScope.launch {

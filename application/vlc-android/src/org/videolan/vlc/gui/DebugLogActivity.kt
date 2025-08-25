@@ -20,6 +20,7 @@
  */
 package org.videolan.vlc.gui
 
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.os.Bundle
@@ -151,7 +152,7 @@ class DebugLogActivity : FragmentActivity(), DebugLogService.Client.Callback {
                     getString(RR.string.dump_logcat_success),
                     path), Snackbar.LENGTH_LONG).show()
         } else {
-            UiTools.snacker(window.decorView.findViewById(android.R.id.content), RR.string.dump_logcat_failure)
+            UiTools.snacker(window.decorView.findViewById<View>(android.R.id.content) as Activity, RR.string.dump_logcat_failure)
         }
     }
 

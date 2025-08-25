@@ -485,8 +485,8 @@ object UiTools {
 
 
             val size = min(48.dp, iconBitmap?.height ?: 0)
-            val iconCompat = IconCompat.createWithAdaptiveBitmap(iconBitmap.centerCrop(size, size)
-                    ?: vectorToBitmap(context, RR.drawable.ic_icon, 48.dp, 48.dp))
+            val iconCompat = IconCompat.createWithAdaptiveBitmap(iconBitmap?.centerCrop(size, size)
+                    ?: vectorToBitmap(context, RR.drawable.ic_icon, 48.dp, 48.dp)!!)
             val actionType = when (mediaLibraryItem) {
                 is Album -> "album"
                 is Artist -> "artist"

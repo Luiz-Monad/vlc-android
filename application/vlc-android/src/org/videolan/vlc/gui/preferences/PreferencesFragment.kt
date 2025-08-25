@@ -160,7 +160,7 @@ class PreferencesFragment : BasePreferenceFragment(), SharedPreferences.OnShared
         return true
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String?) {
         val activity = activity ?: return
         when (key) {
             "video_action_switch" -> if (!AndroidUtil.isOOrLater && findPreference<ListPreference>(key)?.value == "2"

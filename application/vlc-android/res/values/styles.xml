@@ -600,6 +600,12 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="TrackTitleText" parent="@style/TextAppearance.MaterialComponents.Headline2">
+    </style>
+
+    <style name="GridTitleText" parent="@style/TextAppearance.MaterialComponents.Subtitle1">
+    </style>
+
     <!--Preferences-->
     <style name="VLCPreferenceTheme.Light" parent="PreferenceThemeOverlay">
         <item name="android:textColorPrimary">@color/grey900</item>

@@ -10,8 +10,8 @@ import org.videolan.resources.R as RR
 import org.videolan.vlc.media.MediaUtils
 import java.util.*
 
-open class FilterDelegate<T : MediaLibraryItem>(protected val dataset: MutableLiveData<out List<T>>) {
-    private var sourceSet: List<T>? = null
+open class FilterDelegate<T : MediaLibraryItem>(protected val dataset: MutableLiveData<MutableList<T>>) {
+    private var sourceSet: MutableList<T>? = null
 
     protected fun initSource() : List<T>? {
         if (sourceSet === null) sourceSet = (dataset.value)
@@ -38,7 +38,7 @@ open class FilterDelegate<T : MediaLibraryItem>(protected val dataset: MutableLi
     private fun publish(list: MutableList<T>?) {
         sourceSet?.let {
             if (list !== null)
-                dataset.value = list
+                dataset.value = list!!
             else {
                 dataset.value = it
                 sourceSet = null
@@ -47,7 +47,7 @@ open class FilterDelegate<T : MediaLibraryItem>(protected val dataset: MutableLi
     }
 }
 
-class PlaylistFilterDelegate(dataset: MutableLiveData<out List<MediaWrapper>>) : FilterDelegate<MediaWrapper>(dataset) {
+class PlaylistFilterDelegate(dataset: MutableLiveData<MutableList<MediaWrapper>>) : FilterDelegate<MediaWrapper>(dataset) {
 
     override suspend fun filteringJob(charSequence: CharSequence?): MutableList<MediaWrapper>? {
         if (charSequence !== null) initSource()?.let { list ->
