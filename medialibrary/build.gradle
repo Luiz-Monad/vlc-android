@@ -20,22 +20,59 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *  ***************************************************************************
  */
-apply plugin: 'com.android.library'
-apply plugin: "com.vanniktech.maven.publish"
 
-def abi = System.getenv('GRADLE_ABI')?.toLowerCase()
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+def abi = System.getenv('GRADLE_ABI')?.toLowerCase() ?: "all"
 ext {
-    library_version = "$rootProject.ext.medialibraryVersion"
+    library_version = "$rootProject.ext.mediaLibVersion"
 }
+
 android {
+    namespace 'org.videolan.medialibrary'
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        compileSdkVersion rootProject.ext.compileSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable true
+        }
+        dev {
+            initWith debug
+            matchingFallbacks = ['debug']
+        }
     }
 
     sourceSets {
@@ -58,23 +95,8 @@ android {
         }
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFile 'proguard.cfg'
-        }
-        dev {
-            initWith debug
-            matchingFallbacks = ['debug']
-        }
-    }
-
-    dataBinding {
-        enabled = true
-    }
-
     // Make per-variant version code
-    libraryVariants.all { variant ->
+    libraryVariants.configureEach { variant ->
         //Custom APK name
         variant.outputs.each { output ->
             if (output.outputFileName != null && output.outputFileName.endsWith('.aar')) {
@@ -90,14 +112,12 @@ clean {
 
 dependencies {
     releaseImplementation project(':libvlcjni:libvlc')
-    debugImplementation "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
     devImplementation project(':libvlcjni:libvlc')
+    debugImplementation "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+
     api "androidx.legacy:legacy-support-v4:$rootProject.ext.androidxLegacyVersion"
     api "androidx.core:core:$rootProject.ext.androidxCoreVersion"
     api "androidx.fragment:fragment:$rootProject.ext.androidxFragmentVersion"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    testImplementation "org.robolectric:robolectric:4.3.1"
-
+    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectric"
 }
-
-apply from: '../buildsystem/publish.gradle'

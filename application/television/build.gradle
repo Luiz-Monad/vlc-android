@@ -2,32 +2,55 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
+
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace 'org.videolan.television'
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
     packagingOptions {
         jniLibs {
             pickFirsts += ['**/*.so']
         }
     }
 
-    kotlinOptions.jvmTarget = "1.8"
-
-    viewBinding.enabled = true
-
-    dataBinding.enabled = true
-
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        compileSdkVersion rootProject.ext.compileSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable true
         }
         dev {
             initWith debug
@@ -42,14 +65,13 @@ android {
             matchingFallbacks = ['release']
         }
     }
-    namespace 'org.videolan.television'
-
 }
 
 dependencies {
     implementation project(':application:vlc-android')
     api project(':application:moviepedia')
+
+    implementation "com.jaredrummler:colorpicker:$rootProject.ext.colorpicker"
     testImplementation "androidx.test:core:$rootProject.ext.testCore"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
-    implementation 'com.jaredrummler:colorpicker:1.1.0'
 }

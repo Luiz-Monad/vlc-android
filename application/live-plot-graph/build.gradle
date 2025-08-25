@@ -24,21 +24,46 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace 'org.videolan.liveplotgraph'
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        compileSdkVersion rootProject.ext.compileSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable true
+        }
+        dev {
+            initWith debug
+            matchingFallbacks = ['debug']
         }
         noTv {
             initWith release
@@ -49,19 +74,17 @@ android {
             matchingFallbacks = ['release']
         }
     }
-    namespace 'org.videolan.liveplotgraph'
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"
-    implementation "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
     implementation project(':application:tools')
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
 
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
+    implementation "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
 }

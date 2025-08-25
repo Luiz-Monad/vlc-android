@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 android {
+    namespace 'org.videolan.mobile.app'
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -9,38 +14,50 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    packagingOptions {
-        jniLibs {
-            pickFirsts += ['lib/armeabi-v7a/libc++_shared.so', 'lib/armeabi/libc++_shared.so', 'lib/arm64-v8a/libc++_shared.so', 'lib/x86/libc++_shared.so', 'lib/x86_64/libc++_shared.so']
-        }
-        resources {
-            excludes += ['META-INF/main.kotlin_module', 'META-INF/donations_debug.kotlin_module', 'META-INF/mediadb_debug.kotlin_module', 'META-INF/resources_debug.kotlin_module', 'META-INF/television_debug.kotlin_module']
-        }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     dataBinding {
         enabled = true
     }
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
-
-    flavorDimensions "abi"
-
+    packagingOptions {
+        jniLibs {
+            pickFirsts += ['lib/armeabi-v7a/libc++_shared.so',
+                           'lib/armeabi/libc++_shared.so',
+                           'lib/arm64-v8a/libc++_shared.so',
+                           'lib/x86/libc++_shared.so',
+                           'lib/x86_64/libc++_shared.so']
+        }
+        resources {
+            excludes += ['META-INF/main.kotlin_module',
+                         'META-INF/donations_debug.kotlin_module',
+                         'META-INF/mediadb_debug.kotlin_module',
+                         'META-INF/resources_debug.kotlin_module',
+                         'META-INF/television_debug.kotlin_module']
+        }
+    }
 
     defaultConfig {
-        applicationId rootProject.ext.appId
-        minSdkVersion rootProject.ext.minSdkVersion
+        compileSdkVersion rootProject.ext.compileSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+
+        applicationId rootProject.ext.appId
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+
         vectorDrawables.useSupportLibrary = true
-        multiDexEnabled true
 
         testInstrumentationRunner "org.videolan.vlc.MultidexTestRunner"
         // The following argument makes the Android Test Orchestrator run its
         // "pm clear" command after each test invocation. This command ensures
         // that the app's state is completely cleared between tests.
         testInstrumentationRunnerArguments clearPackageData: 'true'
+        consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -67,28 +84,20 @@ android {
     }
     androidComponents {
         beforeVariants(selector().withBuildType("vlcBundle")) { variantBuilder ->
-            variantBuilder.minSdk = 30
+            variantBuilder.minSdk = rootProject.ext.minBundleSdkVersion
         }
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
             kotlinOptions.freeCompilerArgs = ['-Xno-param-assertions']
             defaultConfig.minSdkVersion rootProject.ext.minSdkVersion
         }
         signedRelease {
             initWith release
             signingConfig = signingConfigs.release
-            matchingFallbacks = ['release']
-        }
-        noTv {
-            initWith release
-            matchingFallbacks = ['release']
-        }
-        vlcBundle {
-            initWith release
             matchingFallbacks = ['release']
         }
         debug {
@@ -99,6 +108,15 @@ android {
             initWith debug
             matchingFallbacks = ['debug']
         }
+        noTv {
+            initWith release
+            matchingFallbacks = ['release']
+            buildConfigField "boolean", "NO_TV", "true"
+        }
+        vlcBundle {
+            initWith release
+            matchingFallbacks = ['release']
+        }
     }
 
     sourceSets.release {
@@ -108,6 +126,7 @@ android {
         manifest.srcFile 'flavors/release/AndroidManifest.xml'
     }
 
+    flavorDimensions "abi"
     splits {
         abi {
             def isReleaseBuild = false
@@ -122,18 +141,16 @@ android {
             }
             enable isReleaseBuild
             reset()
-            include "x86", "x86_64", "armeabi-v7a", "arm64-v8a"
+            include "arm64-v8a"
+//            include "x86", "x86_64", "armeabi-v7a", "arm64-v8a"
 //            universalApk !isReleaseBuild
         }
     }
 
-    def abiCodes = ['armeabi-v7a': 5, 'arm64-v8a': 6, 'x86': 7, 'x86_64': 8]
-    def abiCodesNoTv = ['armeabi-v7a': 1, 'arm64-v8a': 2, 'x86': 3, 'x86_64': 4]
     lint {
         abortOnError false
         disable 'MissingTranslation', 'ExtraTranslation'
     }
-    namespace 'org.videolan.mobile.app'
     // make per-variant version code
     applicationVariants.all { variant ->
         //Custom APK name and versionCode
@@ -141,21 +158,19 @@ android {
             def outputAbi = output.getFilter(com.android.build.OutputFile.ABI)
             def abiName = System.getenv('GRADLE_ABI')?.toLowerCase() ?: "all"
             if (outputAbi != null) abiName = outputAbi
-            def versionCode = abiCodes.get(abiName, 0)
-            if (variant.buildType.name == "noTv") {
-                versionCode = abiCodesNoTv.get(abiName, 0)
-            }
+
+            def versionCode = rootProject.ext.abiCodes.get(abiName, 0)
             if (variant.buildType.name == "vlcBundle") {
                 versionCode = 9
             }
+            output.versionCodeOverride = defaultConfig.versionCode + versionCode
 
-            output.versionCodeOverride = 10000000 + defaultConfig.versionCode + versionCode
-            def outputName = "VLC-Android-"
-            outputName += variant.versionName.replace(" ", "-")
+            def outputName = rootProject.ext.appId.replace(".", "_")
+            outputName += "-android-" + variant.versionName.replace(" ", "-")
             if (variant.buildType.name == "debug") outputName += "-debug"
             if (variant.buildType.name == "noTv") outputName += "-no-tv"
-            outputName += "-" + abiName + ".apk"
-            output.outputFileName = outputName
+            outputName += "-" + abiName.replace("-", "").replace("_", "")
+            output.outputFileName = outputName + ".apk"
         }
     }
 
@@ -166,26 +181,26 @@ dependencies {
     implementation project(':application:television')
     testImplementation project(':application:television')
 
+    testImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
+    testImplementation "androidx.test:core:$rootProject.ext.testCore"
+    testImplementation "com.jraska.livedata:testing-ktx:$rootProject.ext.livedataTest"
+    testImplementation "io.mockk:mockk:$rootProject.ext.mockk"
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.ext.kotlinx_version"
+    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockito"
+    testImplementation "org.powermock:powermock-api-mockito2:$rootProject.ext.powerMock"
+    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMock"
+    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectric"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.ext.roomVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
-    testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    androidTestImplementation "androidx.room:room-testing:$rootProject.ext.roomVersion"
-    testImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
-    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
-    androidTestUtil "androidx.test:orchestrator:$rootProject.ext.orchestrator"
-    testImplementation "androidx.test:core:$rootProject.ext.testCore"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.ext.kotlinx_version"
-    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockito"
-    testImplementation "io.mockk:mockk:$rootProject.ext.mockk"
-    testImplementation "org.powermock:powermock-api-mockito2:$rootProject.ext.powerMock"
-    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMock"
-    testImplementation "com.jraska.livedata:testing-ktx:$rootProject.ext.livedataTest"
-    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectric"
-    androidTestImplementation "com.android.support:multidex:1.0.3"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:2.2.0"
     androidTestImplementation "androidx.test:rules:$rootProject.ext.testCore"
+    androidTestImplementation "com.android.support:multidex:1.0.3"
     androidTestImplementation 'com.jraska:falcon:2.2.0'
     androidTestImplementation 'tools.fastlane:screengrab:2.1.0'
+    androidTestUtil "androidx.test:orchestrator:$rootProject.ext.orchestrator"
 }

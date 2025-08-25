@@ -2,22 +2,43 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace 'videolan.org.commontools'
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
-    kotlinOptions.jvmTarget = "1.8"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        compileSdkVersion rootProject.ext.compileSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable true
+        }
+        dev {
+            initWith debug
+            matchingFallbacks = ['debug']
         }
         noTv {
             initWith release
@@ -28,20 +49,18 @@ android {
             matchingFallbacks = ['release']
         }
     }
-    namespace 'videolan.org.commontools'
 }
 
 dependencies {
     api "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"
-    implementation "androidx.lifecycle:lifecycle-process:$rootProject.ext.lifecycleVersion"
-    implementation "androidx.preference:preference:$androidxPreferencesVersion"
     api "androidx.tvprovider:tvprovider:$rootProject.ext.androidxLeanbackVersion"
-    implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
     implementation "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
-
+    implementation "androidx.lifecycle:lifecycle-process:$rootProject.ext.lifecycleVersion"
+    implementation "androidx.preference:preference:$rootProject.ext.androidxPreferencesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okHttp3_version"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    androidTestImplementation "androidx.test:runner:$rootProject.ext.testRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test:runner:$rootProject.ext.testRunner"
 }

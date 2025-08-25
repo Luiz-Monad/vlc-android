@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
 
-import org.videolan.R;
 import org.videolan.libvlc.interfaces.IMedia;
 import org.videolan.libvlc.interfaces.IVLCVout;
 import org.videolan.libvlc.util.AndroidUtil;

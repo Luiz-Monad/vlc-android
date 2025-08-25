@@ -1,19 +1,37 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
-def abi = System.getenv('GRADLE_ABI')?.toLowerCase()
-def vlcSrcDirs = System.getenv('GRADLE_VLC_SRC_DIRS')
+def abi = System.getenv('GRADLE_ABI')?.toLowerCase() ?: "all"
 ext {
     library_version = "$rootProject.ext.libvlcVersion"
 }
+
 android {
+    namespace 'org.videolan.libvlc'
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         compileSdkVersion rootProject.ext.compileSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         minSdkVersion rootProject.ext.minSdkVersion
-        resValue "string", "build_libvlc_revision", libvlcRevision()
-        resValue "string", "build_vlc_revision", vlcRevision()
-        tasks.whenTaskAdded { task ->
+
+        resValue "string", "build_libvlc_revision", "${rootProject.ext.libvlcRevisionVersion}"
+        resValue "string", "build_vlc_revision", "${rootProject.ext.libvlcRevisionVersion}"
+        tasks.configureEach { task ->
             if (task.name.startsWith('merge')) {
                 task.dependsOn hrtfsCopy
                 task.dependsOn luaPlaylistCopy
@@ -21,13 +39,11 @@ android {
                 task.dependsOn luaModuleCopy
             }
         }
-
     }
 
     sourceSets {
         main {
             jniLibs.srcDirs = [ 'jni/libs' ]
-            jniLibs.srcDirs += "$vlcSrcDirs"
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
             resources.srcDirs = ['src']
@@ -41,7 +57,10 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable true
         }
         dev {
             initWith debug
@@ -50,7 +69,7 @@ android {
     }
 
     // Make per-variant version code
-    libraryVariants.all { variant ->
+    libraryVariants.configureEach { variant ->
         //Custom APK name
         variant.outputs.each { output ->
             if (output.outputFileName != null && output.outputFileName.endsWith('.aar')) {
@@ -59,25 +78,25 @@ android {
         }
     }
 
-    task hrtfsCopy(type: Copy) {
+    tasks.register('hrtfsCopy', Copy) {
         project.logger.lifecycle('hrtfsCopy')
         from '../../vlc/share/hrtfs'
         into 'assets/hrtfs'
     }
 
-    task luaPlaylistCopy(type: Copy) {
+    tasks.register('luaPlaylistCopy', Copy) {
         from '../../vlc/share/lua/playlist'
         into 'assets/lua/playlist'
         exclude '**/*.txt'
     }
 
-    task luaModuleCopy(type: Copy) {
+    tasks.register('luaModuleCopy', Copy) {
         from '../../vlc/share/lua/modules'
         into 'assets/lua/modules'
         exclude '**/*.txt'
     }
 
-    task luaMetaCopy(type: Copy) {
+    tasks.register('luaMetaCopy', Copy) {
         from '../../vlc/share/lua/meta'
         into 'assets/lua/meta'
         exclude '**/*.txt'
@@ -92,23 +111,3 @@ dependencies {
     api "androidx.annotation:annotation:$rootProject.ext.androidxAnnotationVersion"
     api "androidx.legacy:legacy-support-v4:$rootProject.ext.androidxLegacyVersion"
 }
-
-def libvlcRevision() {
-    def vlc = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', '--short', 'HEAD'
-        standardOutput = vlc
-    }
-    return vlc.toString()
-}
-
-def vlcRevision() {
-    def vlc = new ByteArrayOutputStream()
-    exec {
-        commandLine 'sh', '-c', 'cd ../../vlc  && git rev-parse --short HEAD'
-        standardOutput = vlc
-    }
-    return vlc.toString()
-}
-
-apply from: '../../buildsystem/publish.gradle'

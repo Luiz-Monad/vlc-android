@@ -3,35 +3,49 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace 'org.videolan.moviepedia'
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
-    kotlinOptions.jvmTarget = "1.8"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     dataBinding {
         enabled = true
     }
+
     packagingOptions {
         jniLibs {
             pickFirsts += ['**/*.so']
         }
     }
 
-
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        compileSdkVersion rootProject.ext.compileSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        buildConfigField 'int', 'VLC_VERSION_CODE', "${rootProject.ext.versionCode}"
+        minSdkVersion rootProject.ext.minSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        buildConfigField "String", "MOVIEPEDIA_API_URL", "\"${getMoviepediaUrl(project)}\""
         multiDexEnabled true
+
+        buildConfigField 'int', 'VLC_VERSION_CODE', "${rootProject.ext.versionCode}"
+        buildConfigField "String", "MOVIEPEDIA_API_URL", "\"${getMoviepediaUrl(project)}\""
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
         }
         debug {
             jniDebuggable true
@@ -49,38 +63,32 @@ android {
             matchingFallbacks = ['release']
         }
     }
-    namespace 'org.videolan.moviepedia'
+}
 
+static def getMoviepediaUrl(project) {
+    if (project.hasProperty('moviepedia_api_url')) return project.properties['moviepedia_api_url'] else return  "https://localhost/"
 }
 
 dependencies {
     implementation project(':application:tools')
     implementation project(':application:vlc-android')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
-    implementation "androidx.paging:paging-runtime-ktx:$rootProject.ext.pagingVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lifecycleVersion"
 
-    //Room
-    implementation "androidx.room:room-runtime:$rootProject.ext.roomVersion"
     // Provide proper JDBC version, see https://issuetracker.google.com/issues/174695268
-    kapt ('org.xerial:sqlite-jdbc:3.36.0')
+
     kapt "androidx.room:room-compiler:$rootProject.ext.roomVersion"
-
-
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
-    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.ext.retrofit"
+    kapt "org.xerial:sqlite-jdbc:$rootProject.ext.sqliteVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lifecycleVersion"
+    implementation "androidx.paging:paging-runtime-ktx:$rootProject.ext.pagingVersion"
+    implementation "androidx.room:room-runtime:$rootProject.ext.roomVersion"
     implementation "com.squareup.moshi:moshi-adapters:$rootProject.ext.moshi"
-    implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
-
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okHttp3_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.ext.retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
-}
-
-static def getMoviepediaUrl(project) {
-    if (project.hasProperty('moviepedia_api_url')) return project.properties['moviepedia_api_url'] else return  "https://localhost/"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
 }

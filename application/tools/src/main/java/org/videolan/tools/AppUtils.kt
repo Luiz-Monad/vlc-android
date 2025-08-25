@@ -32,7 +32,7 @@ import android.os.StatFs
 object AppUtils {
 
     fun getVersionName(context: Context): String {
-        return context.packageManager.getPackageInfo(context.packageName, 0).versionName
+        return context.packageManager.getPackageInfo(context.packageName, 0).versionName ?: ""
     }
 
     fun getVersionCode(context: Context): Long {

@@ -23,29 +23,50 @@
 
 apply plugin: 'com.android.library'
 
+def abi = System.getenv('GRADLE_ABI')?.toLowerCase() ?: "all"
 ext {
-    library_version = '0.1'
-    repoName = 'Android'
-    libraryName = 'VLC-API'
-    desc = 'SDK for VLC-Android extensions'
-    lib_artifact = 'vlc-extensions'
-
-    libraryDescription = 'SDK for VLC-Android extensions'
+    library_version = "$rootProject.ext.extensionVersion"
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace 'org.videolan.vlc.plugin.api'
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
+        compileSdkVersion rootProject.ext.compileSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         minSdkVersion rootProject.ext.minSdkVersion
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFile 'proguard-rules.pro'
+        }
+        dev {
+            initWith debug
+            matchingFallbacks = ['debug']
         }
     }
-    namespace 'org.videolan.vlc.plugin.api'
+
+    // Make per-variant version code
+    libraryVariants.all { variant ->
+        //Custom APK name
+        variant.outputs.each { output ->
+            if (output.outputFileName != null && output.outputFileName.endsWith('.aar')) {
+                output.outputFileName = "medialibrary-${abi}-${library_version}.aar"
+            }
+        }
+    }
+}
+
+clean {
+    delete 'build', 'jni/libs', 'jni/obj'
 }
 
 dependencies {

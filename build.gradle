@@ -1,19 +1,18 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.android_plugin_version = '7.3.0'
-    ext.kotlin_version = '1.7.10'
+    ext.android_plugin_version = '8.12.1'
+    ext.kotlin_version = '2.1.20'
     ext.kotlinx_version = '1.6.0'
     repositories {
         flatDir dirs: "gradle/plugins"
         google()
         mavenCentral()
-        mavenLocal()
-   }
+    }
     dependencies {
         classpath "com.android.tools.build:gradle:$android_plugin_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.22.0'
     }
 }
 
@@ -22,74 +21,87 @@ allprojects {
         google()
         mavenCentral()
     }
-    tasks.withType(Javadoc) {
+    tasks.withType(Javadoc).configureEach {
         // Ignores errors from mavenAndroidJavadocs task
         // (reference: github.com/novoda/bintray-release/issues/71#issuecomment-164324255)
         options.addStringOption('Xdoclint:none', '-quiet')
         options.addStringOption('encoding', 'UTF-8')
     }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    tasks.withType(KotlinCompile).configureEach {
         kotlinOptions {
             freeCompilerArgs += ['-opt-in=kotlin.RequiresOptIn']
         }
     }
 }
 
+def _libvlcRevisionVersion = 3
+def _libvlcVersion = "3.6.2"
+def _mediaLibVersion = "0.13.13-rc17"
+def _extensionVersion = "0.1"
+
+def apkMajor = 1
+def apkMinor = 0
+def apkRevision = 0
+def apkFlavor = 0
+
+def _versionCode = apkMajor * 100000 + apkMinor * 1000 + apkRevision * 10 + apkFlavor
+def _versionName = ""
+if (apkRevision > 0) {
+    _versionName = "${apkMajor}.${apkMinor}.${apkRevision}"
+} else {
+    _versionName = "${apkMajor}.${apkMinor}.${apkRevision}-preview"
+}
+def _abiCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, 'x86': 3, 'x86_64': 4]
+
 ext {
-    appId = "org.videolan.vlc"
-    versionName = '3.5.7'
-    versionCode = 3050700
-    libvlcVersion = '3.5.4-eap4'
-    medialibraryVersion = '0.13.5-eap5'
-    minSdkVersion = 17
-    targetSdkVersion = 34
-    compileSdkVersion = 33
-    androidxLegacyVersion = '1.0.0'
-    androidxCoreVersion = '1.7.0'
-    appCompatVersion = '1.4.1'
-    lifecycleVersion = '2.4.0'
-    androidxPreferencesVersion = '1.1.1'
-    androidxVersion = '1.1.0'
+    appId = "com.tridixr.player"
+    versionCode = _versionCode
+    versionName = _versionName
+    libvlcRevisionVersion = _libvlcRevisionVersion
+    libvlcVersion = _libvlcVersion
+    mediaLibVersion = _mediaLibVersion
+    extensionVersion = _extensionVersion
+
+    minSdkVersion = 21
+    targetSdkVersion = 35
+    compileSdkVersion = 35
+    buildToolsVersion = '35.0.0'
+    minBundleSdkVersion = 30
+    abiCodes = _abiCodes
+
     androidxActivityVersion = '1.4.0'
-    androidxFragmentVersion = '1.4.1'
     androidxAnnotationVersion = '1.3.0'
-    androidxRecyclerviewVersion = '1.2.1'
-    androidxMediaVersion = '1.1.0'
+    androidxCoreVersion = '1.7.0'
+    androidxFragmentVersion = '1.4.1'
     androidxLeanbackVersion = '1.0.0'
+    androidxLegacyVersion = '1.0.0'
     androidxMaterialVersion = '1.5.0'
-    constraintLayoutVersion = '2.1.3'
-    viewPager2Version = "1.0.0"
+    androidxMediaVersion = '1.1.0'
+    androidxPreferencesVersion = '1.1.1'
+    androidxRecyclerviewVersion = '1.2.1'
+    androidxVersion = '1.1.0'
+    appCompatVersion = '1.4.1'
     archVersion = '2.1.0'
-    roomVersion = '2.4.1'
-    pagingVersion = '3.1.0'
-    junitVersion = '4.13.2'
-    junitExtVersion = '1.1.2'
-    mockito = '2.25.0'
-    //Retrofit 2.7 drops Android 5 support
-    retrofit = '2.7.1'
-    moshi = '1.8.0'
-    powerMock = '2.0.2'
+    constraintLayoutVersion = '2.1.3'
+    colorpicker = '1.1.0'
+    desugarLib = '2.0.4'
     espressoVersion = '3.4.0'
+    junitExtVersion = '1.1.2'
+    junitVersion = '4.13.2'
+    lifecycleVersion = '2.4.0'
     livedataTest = '1.2.0'
-    robolectric = '4.3.1'
+    mockito = '2.25.0'
     mockk = '1.9.3'
-    testRunner = '1.4.0'
+    moshi = '1.8.0'
+    okHttp3_version = '4.2.1'
     orchestrator = '1.1.0'
+    pagingVersion = '3.1.0'
+    powerMock = '2.0.2'
+    retrofit = '2.7.1'
+    robolectric = '4.3.1'
+    roomVersion = '2.4.1'
+    sqliteVersion = '3.36.0'
     testCore = '1.4.0'
-//    versionCode scheme is T M NN RR AA
-//    T: Target/Flavour (1 for Android, 2 for Chrome?)
-//    M: Major version from 0 to 9
-//    NN: Minor version from 00 to 99
-//    RR: Micro/Revision version from 00 to 99
-//    AA: ABI from 0 to 99
-//    0 is dev
-//    1 was ARMv5        (deprecated)
-//    2 was ARMv6-nofpu  (deprecated)
-//    3 was ARMv6-fpu    (deprecated)
-//    4 is ARMv7-A
-//    5 is x86
-//    6 is MIPS
-//    7 is ARMv8
-//    8 is x86_64
-//    9 is MIPS64
+    testRunner = '1.4.0'
+    viewPager2Version = "1.0.0"
 }

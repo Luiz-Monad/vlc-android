@@ -4,34 +4,38 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 
 android {
+    namespace 'org.videolan.vlc'
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
-    kotlinOptions.jvmTarget = "1.8"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     dataBinding {
         enabled = true
     }
+
     packagingOptions {
         jniLibs {
             pickFirsts += ['**/*.so']
         }
     }
 
-
     defaultConfig {
+        compileSdkVersion rootProject.ext.compileSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
 
-        resValue "string", "build_time", buildTime()
-        resValue "string", "build_host", hostName()
-        resValue "string", "build_revision", revision()
-        resValue "string", "changelog", changelog()
-        resValue 'string', 'tv_provider_authority', "${rootProject.ext.appId}.tv"
-        buildConfigField 'String', 'LIBVLC_VERSION', "\"${rootProject.ext.libvlcVersion}\""
-        buildConfigField 'String', 'ML_VERSION', "\"${rootProject.ext.medialibraryVersion}\""
-        buildConfigField "String", "APP_ID", "\"${rootProject.ext.appId}\""
-        buildConfigField 'int', 'VLC_VERSION_CODE', "${rootProject.ext.versionCode}"
-        buildConfigField 'String', 'VLC_VERSION_NAME', "\"${rootProject.ext.versionName}\""
-        buildConfigField 'String[]', 'TRANSLATION_ARRAY', generateTranslation()
+        vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "org.videolan.vlc.MultidexTestRunner"
         // The following argument makes the Android Test Orchestrator run its
@@ -39,9 +43,20 @@ android {
         // that the app's state is completely cleared between tests.
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        vectorDrawables.useSupportLibrary = true
+        consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
+
+        buildConfigField "String", "APP_ID", "\"${rootProject.ext.appId}\""
+        buildConfigField 'String', 'LIBVLC_VERSION', "\"${rootProject.ext.libvlcVersion}\""
+        buildConfigField 'String', 'ML_VERSION', "\"${rootProject.ext.mediaLibVersion}\""
+        buildConfigField 'String', 'VLC_VERSION_NAME', "\"${rootProject.ext.versionName}\""
+        buildConfigField 'String[]', 'TRANSLATION_ARRAY', generateTranslation()
+        buildConfigField 'int', 'VLC_VERSION_CODE', "${rootProject.ext.versionCode}"
+        resValue "string", "build_host", hostName()
+        resValue "string", "build_revision", revision()
+        resValue "string", "build_time", buildTime()
+        resValue "string", "changelog", changelog()
+        resValue 'string', 'tv_provider_authority', "${rootProject.ext.appId}.tv"
     }
 
     testOptions {
@@ -60,20 +75,28 @@ android {
         }
     }
 
-
     buildTypes {
         release {
-            proguardFile 'proguard.cfg'
+            minifyEnabled false
+            proguardFiles 'proguard-rules.pro'
             buildConfigField "boolean", "BETA", isBeta()
             resValue 'string', 'benchmark_package_name', 'org.videolan.vlcbenchmark'
         }
+        signedRelease {
+            initWith release
+            matchingFallbacks = ['release']
+        }
         debug {
-            buildConfigField "boolean", "BETA", "false"
-            resValue 'string', 'benchmark_package_name', 'org.videolan.vlcbenchmark.debug'
+            jniDebuggable true
             buildConfigField "String", "APP_ID", "\"${rootProject.ext.appId}.debug\""
-            resValue 'string', 'tv_provider_authority', "${rootProject.ext.appId}.debug.tv"
+            buildConfigField "boolean", "BETA", "false"
             buildConfigField "boolean", "NO_TV", "false"
-            multiDexEnabled true
+            resValue 'string', 'benchmark_package_name', 'org.videolan.vlcbenchmark.debug'
+            resValue 'string', 'tv_provider_authority', "${rootProject.ext.appId}.debug.tv"
+        }
+        dev {
+            initWith debug
+            matchingFallbacks = ['debug']
         }
         noTv {
             initWith release
@@ -83,14 +106,6 @@ android {
         vlcBundle {
             initWith release
             matchingFallbacks = ['release']
-        }
-        signedRelease {
-            initWith release
-            matchingFallbacks = ['release']
-        }
-        dev {
-            initWith debug
-            matchingFallbacks = ['debug']
         }
     }
 
@@ -120,14 +135,13 @@ android {
         assets.srcDirs = ['flavors/debug/assets']
         assets.srcDirs += files("$projectDir/assets/schemas".toString())
     }
-    namespace 'org.videolan.vlc'
 }
 
 def generateTranslation() {
     def foundLocales = new StringBuilder()
     foundLocales.append("new String[]{")
 
-    fileTree("../resources/src/main/res").visit { FileVisitDetails details ->
+    fileTree("../resources/src/main/res").visit { /*FileVisitDetails*/ details ->
         println 'details: ' + details
         if (details.file.path.endsWith("strings.xml")) {
             def languageCode = details.file.parentFile.name.replaceAll('values-', '').replaceAll('-r', '-')
@@ -142,91 +156,77 @@ def generateTranslation() {
     return foundLocalesString
 }
 
-task generateSources(type: Jar) {
+tasks.register('generateSources', Jar) {
     archiveClassifier = 'sources'
     from android.sourceSets.main.java.srcDirs
 }
 
 dependencies {
+    api project(':application:live-plot-graph')
+    api project(':application:mediadb')
+    api project(':application:resources')
+    api project(':application:tools')
+    api project(':extension-api')
     devApi project(':libvlcjni:libvlc')
     devApi project(':medialibrary')
     debugApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    debugApi "org.videolan.android:medialibrary-all:$rootProject.ext.medialibraryVersion"
+    debugApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
     releaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    releaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.medialibraryVersion"
+    releaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
     signedReleaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    signedReleaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.medialibraryVersion"
-    api project(':extension-api')
-    api project(':application:tools')
-    api project(':application:resources')
-    api project(':application:mediadb')
-    api project(':application:live-plot-graph')
+    signedReleaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
 
-
-    // AppCompat
+    kapt "androidx.room:room-compiler:$rootProject.ext.roomVersion"
+    kapt "org.xerial:sqlite-jdbc:$rootProject.ext.sqliteVersion"
     api "androidx.activity:activity-ktx:$rootProject.ext.androidxActivityVersion"
-    api "androidx.fragment:fragment-ktx:$rootProject.ext.androidxFragmentVersion"
-    api "androidx.recyclerview:recyclerview:$rootProject.ext.androidxRecyclerviewVersion"
-    api "com.google.android.material:material:$rootProject.ext.androidxMaterialVersion"
     api "androidx.annotation:annotation:$rootProject.ext.androidxAnnotationVersion"
     api "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayoutVersion"
-    api "androidx.viewpager2:viewpager2:$rootProject.ext.viewPager2Version"
-    api 'androidx.multidex:multidex:2.0.1'
+    api "androidx.fragment:fragment-ktx:$rootProject.ext.androidxFragmentVersion"
+    api "androidx.leanback:leanback-preference:$rootProject.ext.androidxLeanbackVersion"
+    api "androidx.leanback:leanback:$rootProject.ext.androidxLeanbackVersion"
+    api "androidx.lifecycle:lifecycle-common-java8:$rootProject.ext.lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.ext.lifecycleVersion"
     api "androidx.lifecycle:lifecycle-process:$rootProject.ext.lifecycleVersion"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.ext.lifecycleVersion"
     api "androidx.lifecycle:lifecycle-service:$rootProject.ext.lifecycleVersion"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.lifecycleVersion"
-    api "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.ext.lifecycleVersion"
-    api "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.ext.lifecycleVersion"
-    api "androidx.lifecycle:lifecycle-common-java8:$rootProject.ext.lifecycleVersion"
-    api "androidx.room:room-runtime:$rootProject.ext.roomVersion"
-    api "androidx.window:window:1.0.0"
     api "androidx.media:media:1.6.0"
-
-    kapt ('org.xerial:sqlite-jdbc:3.36.0')
-    kapt("androidx.room:room-compiler:$rootProject.ext.roomVersion")
-
     api "androidx.paging:paging-runtime-ktx:$rootProject.ext.pagingVersion"
-
-
-    //TV
-    api "androidx.leanback:leanback:$rootProject.ext.androidxLeanbackVersion"
-    api "androidx.leanback:leanback-preference:$rootProject.ext.androidxLeanbackVersion"
+    api "androidx.recyclerview:recyclerview:$rootProject.ext.androidxRecyclerviewVersion"
+    api "androidx.room:room-runtime:$rootProject.ext.roomVersion"
     api "androidx.tvprovider:tvprovider:$rootProject.ext.androidxLeanbackVersion"
-
-    // Kotlin
-    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
+    api "androidx.viewpager2:viewpager2:$rootProject.ext.viewPager2Version"
+    api "androidx.window:window:1.0.0"
+    api "com.google.android.material:material:$rootProject.ext.androidxMaterialVersion"
+    api "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlin_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
-
-    implementation 'nl.dionsegijn:konfetti:1.2.2'
-    implementation 'com.google.zxing:core:3.4.0'
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
+    api 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.palette:palette-ktx:1.0.0"
+    implementation 'com.google.zxing:core:3.4.0'
     implementation 'com.jaredrummler:colorpicker:1.1.0'
-
-    // Tests
+    implementation 'nl.dionsegijn:konfetti:1.2.2'
+    testImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
+    testImplementation "androidx.test:core:$rootProject.ext.testCore"
+    testImplementation "com.jraska.livedata:testing-ktx:$rootProject.ext.livedataTest"
+    testImplementation "io.mockk:mockk:$rootProject.ext.mockk"
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.ext.kotlinx_version"
+    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockito"
+    testImplementation "org.powermock:powermock-api-mockito2:$rootProject.ext.powerMock"
+    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMock"
+    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectric"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.ext.roomVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
-    testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    androidTestImplementation "androidx.room:room-testing:$rootProject.ext.roomVersion"
-    testImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
-    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.ext.archVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
-    androidTestUtil "androidx.test:orchestrator:$rootProject.ext.orchestrator"
-    testImplementation "androidx.test:core:$rootProject.ext.testCore"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.ext.kotlinx_version"
-    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockito"
-    testImplementation "io.mockk:mockk:$rootProject.ext.mockk"
-    testImplementation "org.powermock:powermock-api-mockito2:$rootProject.ext.powerMock"
-    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMock"
-    testImplementation "com.jraska.livedata:testing-ktx:$rootProject.ext.livedataTest"
-    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectric"
     androidTestImplementation "androidx.test:rules:$rootProject.ext.testCore"
     androidTestImplementation 'com.jraska:falcon:2.2.0'
     androidTestImplementation 'tools.fastlane:screengrab:2.1.0'
-
+    androidTestUtil "androidx.test:orchestrator:$rootProject.ext.orchestrator"
 }
-
 
 static def buildTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -271,7 +271,6 @@ def isBeta() {
     def versionNameLower = versionName.toLowerCase()
     return (versionNameLower.contains("beta") || versionNameLower.contains("rc") || versionNameLower.contains("alpha") || versionNameLower.contains("dev")).toString()
 }
-
 
 kapt {
     javacOptions {

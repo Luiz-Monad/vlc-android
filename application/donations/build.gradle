@@ -24,34 +24,51 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace 'org.videolan.vlc.donations'
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     dataBinding {
         enabled = true
     }
+
     packagingOptions {
         jniLibs {
             pickFirsts += ['**/*.so']
         }
     }
 
-
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        compileSdkVersion rootProject.ext.compileSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
         multiDexEnabled true
+
         buildConfigField "String", "PUBLIC_API_KEY", "\"${getPublicApiKey(project)}\""
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
         }
         debug {
             jniDebuggable true
@@ -69,7 +86,6 @@ android {
             matchingFallbacks = ['release']
         }
     }
-    namespace 'org.videolan.vlc.donations'
 }
 
 static def getPublicApiKey(project) {
@@ -77,13 +93,12 @@ static def getPublicApiKey(project) {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':application:tools')
 
-    implementation "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"
+    implementation "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
-
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
 }

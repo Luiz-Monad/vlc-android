@@ -2,30 +2,49 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace 'org.videolan.resources'
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
-    kotlinOptions.jvmTarget = "1.8"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     packagingOptions {
         jniLibs {
             pickFirsts += ['**/*.so']
         }
     }
 
-
     defaultConfig {
+        compileSdkVersion rootProject.ext.compileSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         minSdkVersion rootProject.ext.minSdkVersion
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "APP_ID", "\"${rootProject.ext.appId}\""
         vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
+
+        buildConfigField "String", "APP_ID", "\"${rootProject.ext.appId}\""
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard-rules.pro'
         }
         debug {
+            jniDebuggable true
             buildConfigField "String", "APP_ID", "\"${rootProject.ext.appId}.debug\""
         }
         dev {
@@ -40,7 +59,6 @@ android {
             initWith release
             matchingFallbacks = ['release']
         }
-
     }
 
     sourceSets.debug {
@@ -49,44 +67,33 @@ android {
     sourceSets.dev {
         res.srcDirs = ['flavors/debug/res']
     }
-    namespace 'org.videolan.resources'
-
 }
+
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'androidx.multidex:multidex:2.0.1'
-
-
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
-
     api project(':application:tools')
     devApi project(':libvlcjni:libvlc')
     devApi project(':medialibrary')
     debugApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    debugApi "org.videolan.android:medialibrary-all:$rootProject.ext.medialibraryVersion"
-    releaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    releaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.medialibraryVersion"
+    debugApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
     noTvApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    noTvApi "org.videolan.android:medialibrary-all:$rootProject.ext.medialibraryVersion"
+    noTvApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
+    releaseApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
+    releaseApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
     vlcBundleApi "org.videolan.android:libvlc-all:$rootProject.ext.libvlcVersion"
-    vlcBundleApi "org.videolan.android:medialibrary-all:$rootProject.ext.medialibraryVersion"
-
-    api "com.google.android.material:material:$rootProject.ext.androidxMaterialVersion"
-
-    api "androidx.preference:preference-ktx:$androidxPreferencesVersion"
-    api "androidx.leanback:leanback:$rootProject.ext.androidxLeanbackVersion"
-    api "androidx.leanback:leanback-preference:$rootProject.ext.androidxLeanbackVersion"
-
-    // Retrofit
-    api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
-    api "com.squareup.retrofit2:converter-moshi:$rootProject.ext.retrofit"
-    api "com.squareup.moshi:moshi-adapters:$rootProject.ext.moshi"
+    vlcBundleApi "org.videolan.android:medialibrary-all:$rootProject.ext.mediaLibVersion"
 
     api "androidx.core:core-ktx:$rootProject.ext.androidxCoreVersion"
+    api "androidx.leanback:leanback-preference:$rootProject.ext.androidxLeanbackVersion"
+    api "androidx.leanback:leanback:$rootProject.ext.androidxLeanbackVersion"
+    api "androidx.preference:preference-ktx:$androidxPreferencesVersion"
+    api "com.google.android.material:material:$rootProject.ext.androidxMaterialVersion"
+    api "com.squareup.moshi:moshi-adapters:$rootProject.ext.moshi"
+    api "com.squareup.retrofit2:converter-moshi:$rootProject.ext.retrofit"
+    api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.kotlinx_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.ext.kotlinx_version"
+    api 'androidx.multidex:multidex:2.0.1'
     testImplementation "androidx.test:core:$rootProject.ext.testCore"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
-}
-repositories {
-    mavenCentral()
 }
