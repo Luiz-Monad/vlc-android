@@ -31,6 +31,7 @@ import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import kotlinx.coroutines.launch
+import org.videolan.resources.R as RR
 import org.videolan.tools.PERMISSION_NEVER_ASK
 import org.videolan.tools.Settings
 import org.videolan.tools.putSingle
@@ -56,7 +57,7 @@ class AllAccessPermissionDialog : VLCBottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_all_access, container)
         titleView = view.findViewById(R.id.title)
-        view.findViewById<TextView>(R.id.description).text = getString(R.string.partial_content_description, getString(R.string.allow_storage_manager_explanation))
+        view.findViewById<TextView>(R.id.description).text = getString(RR.string.partial_content_description, getString(RR.string.allow_storage_manager_explanation))
         grantAllAccessButton = view.findViewById(R.id.grant_all_access_button)
         neverAskAgain = view.findViewById(R.id.never_ask_again)
         val settings = Settings.getInstance(requireActivity())

@@ -37,6 +37,7 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.CTX_PLAY_ALL
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.tools.dp
 import org.videolan.tools.putSingle
@@ -83,9 +84,9 @@ class PlaylistFragment : BaseAudioBrowser<PlaylistsViewModel>(), SwipeRefreshLay
 
 
         //size of an item
-        val spacing = resources.getDimension(R.dimen.kl_half).toInt()
+        val spacing = resources.getDimension(RR.dimen.kl_half).toInt()
 
-        val dimension = resources.getDimension(R.dimen.default_content_width)
+        val dimension = resources.getDimension(RR.dimen.default_content_width)
         val totalWidth = if (dimension > 0) min(requireActivity().getScreenWidth(), dimension.toInt()) else requireActivity().getScreenWidth()
 
         val itemSize = RecyclerSectionItemGridDecoration.getItemSize(totalWidth - spacing * 2, nbColumns, spacing, 16.dp)
@@ -122,7 +123,7 @@ class PlaylistFragment : BaseAudioBrowser<PlaylistsViewModel>(), SwipeRefreshLay
     private fun updateEmptyView() {
         if (!isAdded) return
         swipeRefreshLayout.visibility = if (Medialibrary.getInstance().isInitiated) View.VISIBLE else View.GONE
-        binding.emptyLoading.emptyText = viewModel.filterQuery?.let {  getString(R.string.empty_search, it) } ?: getString(R.string.nomedia)
+        binding.emptyLoading.emptyText = viewModel.filterQuery?.let {  getString(RR.string.empty_search, it) } ?: getString(RR.string.nomedia)
         binding.emptyLoading.state =
                 when {
                     viewModel.provider.loading.value == true && empty -> EmptyLoadingState.LOADING
@@ -160,7 +161,7 @@ class PlaylistFragment : BaseAudioBrowser<PlaylistsViewModel>(), SwipeRefreshLay
     }
 
     private fun setupLayoutManager() {
-        val spacing = resources.getDimension(R.dimen.kl_half).toInt()
+        val spacing = resources.getDimension(RR.dimen.kl_half).toInt()
 
         if (playlists.itemDecorationCount > 0) {
             playlists.removeItemDecorationAt(0)
@@ -175,7 +176,7 @@ class PlaylistFragment : BaseAudioBrowser<PlaylistsViewModel>(), SwipeRefreshLay
                 adapter?.cardSize = -1
                 playlists.addItemDecoration(
                     RecyclerSectionItemDecoration(
-                        resources.getDimensionPixelSize(R.dimen.recycler_section_header_height),
+                        resources.getDimensionPixelSize(RR.dimen.recycler_section_header_height),
                         true,
                         viewModel.provider
                     )
@@ -185,12 +186,12 @@ class PlaylistFragment : BaseAudioBrowser<PlaylistsViewModel>(), SwipeRefreshLay
         }
 
         val lp = playlists.layoutParams
-        val dimension = requireActivity().resources.getDimension(R.dimen.default_content_width)
+        val dimension = requireActivity().resources.getDimension(RR.dimen.default_content_width)
         lp.width = if (viewModel.providerInCard) ViewGroup.LayoutParams.MATCH_PARENT else {
             dimension.toInt()
         }
-        (playlists.parent as View).setBackgroundColor(if (!viewModel.providerInCard && dimension != -1F) backgroundColor else ContextCompat.getColor(requireContext(), R.color.transparent))
-        playlists.setBackgroundColor(if (!viewModel.providerInCard && dimension != -1F) listColor else ContextCompat.getColor(requireContext(), R.color.transparent))
+        (playlists.parent as View).setBackgroundColor(if (!viewModel.providerInCard && dimension != -1F) backgroundColor else ContextCompat.getColor(requireContext(), RR.color.transparent))
+        playlists.setBackgroundColor(if (!viewModel.providerInCard && dimension != -1F) listColor else ContextCompat.getColor(requireContext(), RR.color.transparent))
     }
 
     override fun onClick(v: View, position: Int, item: MediaLibraryItem) {
@@ -210,7 +211,7 @@ class PlaylistFragment : BaseAudioBrowser<PlaylistsViewModel>(), SwipeRefreshLay
         activity?.reloadLibrary()
     }
 
-    override fun getTitle(): String = getString(R.string.playlists)
+    override fun getTitle(): String = getString(RR.string.playlists)
 
     override fun getCurrentRV(): RecyclerView = playlists
 

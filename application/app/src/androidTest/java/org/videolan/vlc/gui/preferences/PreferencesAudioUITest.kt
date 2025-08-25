@@ -7,7 +7,7 @@ import androidx.test.filters.SdkSuppress
 import org.junit.Rule
 import org.junit.Test
 import org.videolan.vlc.PreferenceMatchers.withKey
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.onPreferenceRow
 import org.videolan.tools.KEY_PLAYBACK_SPEED_PERSIST
 import org.videolan.tools.RESUME_PLAYBACK
@@ -21,7 +21,7 @@ class PreferencesAudioUITest: BasePreferenceUITest() {
     override fun beforeTest() {
         activity = intentsTestRule.activity
 
-        onPreferenceRow(R.id.recycler_view, withKey("audio_category"))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, withKey("audio_category"))!!
                 .perform(click())
     }
 

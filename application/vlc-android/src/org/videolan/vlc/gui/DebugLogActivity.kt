@@ -31,6 +31,7 @@ import androidx.core.content.getSystemService
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.snackbar.Snackbar
 import org.videolan.libvlc.util.AndroidUtil
+import org.videolan.resources.R as RR
 import org.videolan.vlc.DebugLogService
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.UiTools
@@ -81,7 +82,7 @@ class DebugLogActivity : FragmentActivity(), DebugLogService.Client.Callback {
         val clipboard = applicationContext.getSystemService<ClipboardManager>()!!
         clipboard.setPrimaryClip(ClipData.newPlainText(null, buffer))
 
-        UiTools.snacker(this, R.string.copied_to_clipboard)
+        UiTools.snacker(this, RR.string.copied_to_clipboard)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -147,10 +148,10 @@ class DebugLogActivity : FragmentActivity(), DebugLogService.Client.Callback {
     override fun onSaved(success: Boolean, path: String) {
         if (success) {
             Snackbar.make(logView, String.format(
-                    getString(R.string.dump_logcat_success),
+                    getString(RR.string.dump_logcat_success),
                     path), Snackbar.LENGTH_LONG).show()
         } else {
-            UiTools.snacker(window.decorView.findViewById(android.R.id.content), R.string.dump_logcat_failure)
+            UiTools.snacker(window.decorView.findViewById(android.R.id.content), RR.string.dump_logcat_failure)
         }
     }
 

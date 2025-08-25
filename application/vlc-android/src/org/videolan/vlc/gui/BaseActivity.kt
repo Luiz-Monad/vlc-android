@@ -25,6 +25,7 @@ import androidx.window.layout.WindowLayoutInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.KeyHelper
 import org.videolan.tools.Settings
 import org.videolan.tools.getContextWithLocale
@@ -113,7 +114,7 @@ abstract class BaseActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             startColor = window.statusBarColor
             val typedValue = TypedValue()
-            theme.resolveAttribute(R.attr.actionModeBackground, typedValue, true)
+            theme.resolveAttribute(android.R.attr.actionModeBackground, typedValue, true)
             window.statusBarColor = typedValue.data
         }
         super.onSupportActionModeStarted(mode)

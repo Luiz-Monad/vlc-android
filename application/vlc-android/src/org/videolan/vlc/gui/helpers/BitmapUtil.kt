@@ -41,6 +41,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.BitmapCache
 import org.videolan.tools.dp
 import org.videolan.tools.removeFileScheme
@@ -82,8 +83,8 @@ object BitmapUtil {
         val uri = Uri.decode(path).removeFileScheme()
         var cover: Bitmap? = null
         val options = BitmapFactory.Options()
-        val height = res.getDimensionPixelSize(R.dimen.grid_card_thumb_height)
-        val width = res.getDimensionPixelSize(R.dimen.grid_card_thumb_width)
+        val height = res.getDimensionPixelSize(RR.dimen.grid_card_thumb_height)
+        val width = res.getDimensionPixelSize(RR.dimen.grid_card_thumb_width)
 
         /* Get the resolution of the bitmap without allocating the memory */
         options.inJustDecodeBounds = true
@@ -174,8 +175,8 @@ object BitmapUtil {
     }
 
     fun makeTransparentBackground(context: Context, width: Int = 48.dp): Bitmap {
-        val colorLight = ContextCompat.getColor(context, R.color.grey500)
-        val colorDark = ContextCompat.getColor(context, R.color.grey700)
+        val colorLight = ContextCompat.getColor(context, RR.color.grey500)
+        val colorDark = ContextCompat.getColor(context, RR.color.grey700)
         val paint = Paint()
         val bitmapResult = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmapResult)

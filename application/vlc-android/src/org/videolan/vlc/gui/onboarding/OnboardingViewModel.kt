@@ -3,6 +3,7 @@ package org.videolan.vlc.gui.onboarding
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModel
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 
 class OnboardingViewModel : ViewModel() {
     var permissionAlreadyAsked: Boolean = false

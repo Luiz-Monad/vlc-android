@@ -46,6 +46,7 @@ import kotlinx.coroutines.launch
 import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.PlaybackService
@@ -230,24 +231,24 @@ class MiniPlayerAppWidgetProvider : AppWidgetProvider() {
         views.setOnClickPendingIntent(R.id.seek_forward, piSeekForward)
 
         if (colorChanged) {
-            if (widgetType == WidgetType.MACRO) views.setImageViewBitmap(R.id.cover_background, context.getColoredBitmapFromColor(R.drawable.widget_rectangle_background, widgetCacheEntry.widget.getBackgroundColor(context, palette), widgetCacheEntry.widget.width.dp,  widgetCacheEntry.widget.width.dp))
+            if (widgetType == WidgetType.MACRO) views.setImageViewBitmap(R.id.cover_background, context.getColoredBitmapFromColor(RR.drawable.widget_rectangle_background, widgetCacheEntry.widget.getBackgroundColor(context, palette), widgetCacheEntry.widget.width.dp,  widgetCacheEntry.widget.width.dp))
             log(appWidgetId, WidgetLogType.BITMAP_GENERATION, "Bugfix Color changed!!! for widget $appWidgetId // forPreview $forPreview // foreground color: ${java.lang.String.format("#%06X", 0xFFFFFF and foregroundColor)} /// palette ${widgetCacheEntry.palette}")
             if (android.text.TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL) {
-                views.setImageViewBitmap(R.id.forward, context.getColoredBitmapFromColor(R.drawable.ic_widget_previous_normal, foregroundColor))
-                views.setImageViewBitmap(R.id.backward, context.getColoredBitmapFromColor(R.drawable.ic_widget_next_normal, foregroundColor))
-                views.setImageViewBitmap(R.id.seek_rewind, context.getColoredBitmapFromColor(R.drawable.ic_widget_forward_10, foregroundColor))
-                views.setImageViewBitmap(R.id.seek_forward, context.getColoredBitmapFromColor(R.drawable.ic_widget_rewind_10, foregroundColor))
+                views.setImageViewBitmap(R.id.forward, context.getColoredBitmapFromColor(RR.drawable.ic_widget_previous_normal, foregroundColor))
+                views.setImageViewBitmap(R.id.backward, context.getColoredBitmapFromColor(RR.drawable.ic_widget_next_normal, foregroundColor))
+                views.setImageViewBitmap(R.id.seek_rewind, context.getColoredBitmapFromColor(RR.drawable.ic_widget_forward_10, foregroundColor))
+                views.setImageViewBitmap(R.id.seek_forward, context.getColoredBitmapFromColor(RR.drawable.ic_widget_rewind_10, foregroundColor))
             } else {
-                views.setImageViewBitmap(R.id.forward, context.getColoredBitmapFromColor(R.drawable.ic_widget_next_normal, foregroundColor))
-                views.setImageViewBitmap(R.id.backward, context.getColoredBitmapFromColor(R.drawable.ic_widget_previous_normal, foregroundColor))
-                views.setImageViewBitmap(R.id.seek_rewind, context.getColoredBitmapFromColor(R.drawable.ic_widget_rewind_10, foregroundColor))
-                views.setImageViewBitmap(R.id.seek_forward, context.getColoredBitmapFromColor(R.drawable.ic_widget_forward_10, foregroundColor))
+                views.setImageViewBitmap(R.id.forward, context.getColoredBitmapFromColor(RR.drawable.ic_widget_next_normal, foregroundColor))
+                views.setImageViewBitmap(R.id.backward, context.getColoredBitmapFromColor(RR.drawable.ic_widget_previous_normal, foregroundColor))
+                views.setImageViewBitmap(R.id.seek_rewind, context.getColoredBitmapFromColor(RR.drawable.ic_widget_rewind_10, foregroundColor))
+                views.setImageViewBitmap(R.id.seek_forward, context.getColoredBitmapFromColor(RR.drawable.ic_widget_forward_10, foregroundColor))
             }
-            views.setImageViewBitmap(R.id.play_pause_background, context.getColoredBitmapFromColor(R.drawable.widget_rectangle_background, widgetCacheEntry.widget.getBackgroundSecondaryColor(context, palette = palette), 52.dp, 52.dp))
-            views.setImageViewBitmap(R.id.widget_configure, if (widgetCacheEntry.widget.showConfigure) context.getColoredBitmapFromColor(R.drawable.ic_widget_configure, foregroundColor, 24.dp, 24.dp) else null)
-            if (widgetType == WidgetType.PILL) views.setImageViewBitmap(R.id.cover_background, context.getColoredBitmapFromColor(R.drawable.widget_circle, widgetCacheEntry.widget.getSeparatorColor(context), 48.dp, 48.dp))
+            views.setImageViewBitmap(R.id.play_pause_background, context.getColoredBitmapFromColor(RR.drawable.widget_rectangle_background, widgetCacheEntry.widget.getBackgroundSecondaryColor(context, palette = palette), 52.dp, 52.dp))
+            views.setImageViewBitmap(R.id.widget_configure, if (widgetCacheEntry.widget.showConfigure) context.getColoredBitmapFromColor(RR.drawable.ic_widget_configure, foregroundColor, 24.dp, 24.dp) else null)
+            if (widgetType == WidgetType.PILL) views.setImageViewBitmap(R.id.cover_background, context.getColoredBitmapFromColor(RR.drawable.widget_circle, widgetCacheEntry.widget.getSeparatorColor(context), 48.dp, 48.dp))
 
-            val rippleDrawable = if (backgroundColor.isLight()) R.drawable.widget_touch_background else R.drawable.widget_touch_background_dark
+            val rippleDrawable = if (backgroundColor.isLight()) RR.drawable.widget_touch_background else RR.drawable.widget_touch_background_dark
             arrayOf(R.id.play_pause, R.id.forward, R.id.backward, R.id.seek_rewind, R.id.seek_forward, R.id.widget_configure).forEach {
                 views.setInt(it, "setBackgroundResource", rippleDrawable)
             }
@@ -259,12 +260,12 @@ class MiniPlayerAppWidgetProvider : AppWidgetProvider() {
 
         if (!forPreview) widgetCacheEntry.currentMedia = service?.currentMediaWrapper
         if (!playing)
-            setupTexts(context, views, widgetType, settings.getString(KEY_CURRENT_AUDIO_RESUME_TITLE, context.getString(R.string.widget_default_text)), settings.getString(KEY_CURRENT_AUDIO_RESUME_ARTIST, ""))
+            setupTexts(context, views, widgetType, settings.getString(KEY_CURRENT_AUDIO_RESUME_TITLE, context.getString(RR.string.widget_default_text)), settings.getString(KEY_CURRENT_AUDIO_RESUME_ARTIST, ""))
         else
             setupTexts(context, views, widgetType, service?.title ?: widgetCacheEntry.currentMedia?.title, service?.artist ?: widgetCacheEntry.currentMedia?.artist)
 
         if (widgetCacheEntry.playing != playing || colorChanged) views.setImageViewBitmap(R.id.play_pause, context.getColoredBitmapFromColor(getPlayPauseImage(playing, widgetType), foregroundColor))
-        views.setContentDescription(R.id.play_pause, context.getString(if (!playing) R.string.resume_playback_short_title else R.string.pause))
+        views.setContentDescription(R.id.play_pause, context.getString(if (!playing) RR.string.resume_playback_short_title else RR.string.pause))
 
         views.setInt(R.id.player_container_background, "setColorFilter", backgroundColor)
         views.setInt(R.id.player_container_background, "setImageAlpha", (widgetCacheEntry.widget.opacity.toFloat() * 255 / 100).toInt())
@@ -367,8 +368,8 @@ class MiniPlayerAppWidgetProvider : AppWidgetProvider() {
         views.setViewVisibility(R.id.widget_left_space, if (!showSeek) View.VISIBLE else if (playing) View.GONE else View.VISIBLE)
         views.setViewVisibility(R.id.widget_right_space, if (!showSeek) View.VISIBLE else if (playing) View.GONE else View.VISIBLE)
 
-        views.setContentDescription(R.id.seek_rewind, context.getString(R.string.seek_backward_content_description, widgetCacheEntry.widget.rewindDelay.toString()))
-        views.setContentDescription(R.id.seek_forward, context.getString(R.string.seek_forward_content_description, widgetCacheEntry.widget.forwardDelay.toString()))
+        views.setContentDescription(R.id.seek_rewind, context.getString(RR.string.seek_backward_content_description, widgetCacheEntry.widget.rewindDelay.toString()))
+        views.setContentDescription(R.id.seek_forward, context.getString(RR.string.seek_forward_content_description, widgetCacheEntry.widget.forwardDelay.toString()))
 
 
         views.setTextColor(R.id.songName, foregroundColor)
@@ -457,7 +458,7 @@ class MiniPlayerAppWidgetProvider : AppWidgetProvider() {
         log(-1, WidgetLogType.INFO, "setupTexts: $title /// $artist")
         views.setTextViewText(R.id.songName, title)
         views.setTextViewText(R.id.artist, if (!artist.isNullOrBlank()) "${if (widgetType == WidgetType.MACRO) "" else " ${TextUtils.separator} "}$artist" else artist)
-        if (title == context.getString(R.string.widget_default_text)) {
+        if (title == context.getString(RR.string.widget_default_text)) {
             views.setViewVisibility(R.id.app_name, View.VISIBLE)
             views.setViewVisibility(R.id.songName, View.GONE)
             views.setViewVisibility(R.id.artist, View.GONE)
@@ -495,7 +496,7 @@ class MiniPlayerAppWidgetProvider : AppWidgetProvider() {
                 WidgetType.MACRO -> 128.dp
                 else -> 48.dp
             }
-            views.setImageViewBitmap(R.id.app_icon, context.getColoredBitmapFromColor(R.drawable.ic_widget_icon, foregroundColor, iconSize, iconSize))
+            views.setImageViewBitmap(R.id.app_icon, context.getColoredBitmapFromColor(RR.drawable.ic_widget_icon, foregroundColor, iconSize, iconSize))
             views.setViewVisibility(R.id.cover, View.INVISIBLE)
             views.setViewVisibility(R.id.app_icon, View.VISIBLE)
             views.setViewVisibility(R.id.separator, View.VISIBLE)
@@ -544,7 +545,7 @@ class MiniPlayerAppWidgetProvider : AppWidgetProvider() {
      * @return the drawable to use for the play/pause icon
      */
     @DrawableRes
-    private fun getPlayPauseImage(isPlaying: Boolean, widgetType: WidgetType) = if (isPlaying) if (widgetType == WidgetType.MINI || widgetType == WidgetType.MACRO) R.drawable.ic_widget_pause_inner else R.drawable.ic_widget_pause else R.drawable.ic_widget_play
+    private fun getPlayPauseImage(isPlaying: Boolean, widgetType: WidgetType) = if (isPlaying) if (widgetType == WidgetType.MINI || widgetType == WidgetType.MACRO) RR.drawable.ic_widget_pause_inner else RR.drawable.ic_widget_pause else RR.drawable.ic_widget_play
 
     /**
      * Applies the update to the widget

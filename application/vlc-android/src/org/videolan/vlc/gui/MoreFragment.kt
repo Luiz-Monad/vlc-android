@@ -38,6 +38,7 @@ import org.videolan.libvlc.Dialog
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.ACTIVITY_RESULT_PREFERENCES
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.Click
@@ -93,7 +94,7 @@ class MoreFragment : BaseFragment(), IRefreshable, IHistory, IDialogManager,
         return inflater.inflate(R.layout.more_fragment, container, false)
     }
 
-    override fun getTitle() = getString(R.string.history)
+    override fun getTitle() = getString(RR.string.history)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -226,7 +227,7 @@ class MoreFragment : BaseFragment(), IRefreshable, IHistory, IDialogManager,
             stopActionMode()
             return false
         }
-        mode.title = requireActivity().getString(R.string.selection_count, selectionCount)
+        mode.title = requireActivity().getString(RR.string.selection_count, selectionCount)
         menu.findItem(R.id.action_history_info).isVisible = selectionCount == 1
         menu.findItem(R.id.action_history_append).isVisible = PlaylistManager.hasMedia()
         return true

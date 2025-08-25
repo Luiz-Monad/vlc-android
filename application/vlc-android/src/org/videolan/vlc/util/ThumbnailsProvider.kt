@@ -18,6 +18,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.interfaces.media.VideoGroup
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.BitmapCache
 import org.videolan.tools.sanitizePath
 import org.videolan.vlc.BuildConfig

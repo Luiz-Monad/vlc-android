@@ -28,12 +28,13 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import androidx.preference.DialogPreference
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 
 class NumberPickerPreference(context: Context, attrs: AttributeSet?) : DialogPreference(context, attrs) {
 
     override fun getSummary(): CharSequence {
-        return context.getString(R.string.jump_delay_summary, getPersistedInt().toString())
+        return context.getString(RR.string.jump_delay_summary, getPersistedInt().toString())
     }
 
     fun getPersistedInt() = super.getPersistedInt(FALLBACK_DEFAULT_VALUE)

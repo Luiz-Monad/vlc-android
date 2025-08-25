@@ -39,13 +39,14 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.libvlc.util.HWDecoderUtil
+import org.videolan.resources.R
 import org.videolan.resources.VLCInstance
 import org.videolan.tools.AUDIO_DUCKING
 import org.videolan.tools.LocaleUtils
 import org.videolan.tools.RESUME_PLAYBACK
 import org.videolan.tools.Settings
 import org.videolan.vlc.BuildConfig
-import org.videolan.vlc.R
+import org.videolan.vlc.R as BR
 import org.videolan.vlc.gui.helpers.restartMediaPlayer
 import org.videolan.vlc.util.LocaleUtil
 import java.text.DecimalFormat
@@ -61,7 +62,7 @@ class PreferencesAudio : BasePreferenceFragment(), SharedPreferences.OnSharedPre
     private lateinit var preferredAudioTrack: ListPreference
 
     override fun getXml(): Int {
-        return R.xml.preferences_audio
+        return BR.xml.preferences_audio
     }
 
     override fun getTitleId(): Int {

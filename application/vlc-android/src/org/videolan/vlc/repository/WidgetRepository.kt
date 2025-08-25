@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import org.videolan.resources.R as RR
 import org.videolan.tools.SingletonHolder
 import org.videolan.vlc.R
 import org.videolan.vlc.database.MediaDatabase
@@ -67,7 +68,7 @@ class WidgetRepository(private val widgetDao: WidgetDao) {
     }
 
     suspend fun createNew(context: Context, appWidgetId: Int): Widget {
-        val widget = Widget(appWidgetId, 0, 0, 0, true, ContextCompat.getColor(context, R.color.black), ContextCompat.getColor(context, R.color.white), 10, 10, 100, showConfigure = true, showSeek = true, showCover = true)
+        val widget = Widget(appWidgetId, 0, 0, 0, true, ContextCompat.getColor(context, RR.color.black), ContextCompat.getColor(context, RR.color.white), 10, 10, 100, showConfigure = true, showSeek = true, showCover = true)
         addWidget(widget)
         return widget
     }

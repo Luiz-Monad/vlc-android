@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.medialibrary.media.SearchAggregate
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.Settings
 import org.videolan.vlc.R

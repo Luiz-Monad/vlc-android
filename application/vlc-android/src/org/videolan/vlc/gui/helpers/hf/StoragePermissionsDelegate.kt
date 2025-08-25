@@ -44,6 +44,7 @@ import org.videolan.resources.AndroidDevices
 import org.videolan.resources.EXTRA_FIRST_RUN
 import org.videolan.resources.EXTRA_UPGRADE
 import org.videolan.resources.SCHEME_PACKAGE
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.isExternalStorageManager
 import org.videolan.resources.util.startMedialibrary
 import org.videolan.tools.*

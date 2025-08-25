@@ -34,6 +34,7 @@ import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.launch
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.copy
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.dialogs.CtxActionReceiver
@@ -71,12 +72,12 @@ class StreamsFragmentDelegate : IStreamsFragmentDelegate, CtxActionReceiver {
             CTX_COPY -> {
                 val media = viewModel.dataset.get(position)
                 fragment.requireContext().copy(media.title, media.location)
-                Snackbar.make(fragment.requireActivity().window.decorView.findViewById<View>(android.R.id.content), R.string.url_copied_to_clipboard, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(fragment.requireActivity().window.decorView.findViewById<View>(android.R.id.content), RR.string.url_copied_to_clipboard, Snackbar.LENGTH_LONG).show()
             }
             CTX_DELETE -> {
                 val media = viewModel.dataset.get(position)
                 viewModel.deletingMedia = media
-                UiTools.snackerWithCancel(fragment.requireActivity(), fragment.requireActivity().getString(R.string.stream_deleted), action = { viewModel.delete() }) {
+                UiTools.snackerWithCancel(fragment.requireActivity(), fragment.requireActivity().getString(RR.string.stream_deleted), action = { viewModel.delete() }) {
                     viewModel.deletingMedia = null
                     viewModel.refresh()
                 }

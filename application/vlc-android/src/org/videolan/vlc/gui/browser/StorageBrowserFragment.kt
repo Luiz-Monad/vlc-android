@@ -47,6 +47,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.medialibrary.media.Storage
 import org.videolan.resources.CTX_CUSTOM_REMOVE
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.BrowserItemBinding
@@ -69,7 +70,7 @@ class StorageBrowserFragment : FileBrowserFragment(), BrowserContainer<MediaLibr
     override val inCards = false
 
     override val categoryTitle: String
-        get() = getString(R.string.directories_summary)
+        get() = getString(RR.string.directories_summary)
 
     override fun createFragment(): Fragment {
         return StorageBrowserFragment()
@@ -94,8 +95,8 @@ class StorageBrowserFragment : FileBrowserFragment(), BrowserContainer<MediaLibr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (isRootDirectory && Settings.showTvUi) {
-            snack = com.google.android.material.snackbar.Snackbar.make(view, R.string.tv_settings_hint, com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE)
-            if (AndroidUtil.isLolliPopOrLater) snack?.view?.elevation = view.resources.getDimensionPixelSize(R.dimen.audio_player_elevation).toFloat()
+            snack = com.google.android.material.snackbar.Snackbar.make(view, RR.string.tv_settings_hint, com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE)
+            if (AndroidUtil.isLolliPopOrLater) snack?.view?.elevation = view.resources.getDimensionPixelSize(RR.dimen.audio_player_elevation).toFloat()
         }
     }
 
@@ -187,15 +188,15 @@ class StorageBrowserFragment : FileBrowserFragment(), BrowserContainer<MediaLibr
         val builder = AlertDialog.Builder(context!!)
         val input = AppCompatEditText(context)
         input.inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
-        builder.setTitle(R.string.add_custom_path)
-        builder.setMessage(R.string.add_custom_path_description)
+        builder.setTitle(RR.string.add_custom_path)
+        builder.setMessage(RR.string.add_custom_path_description)
         builder.setView(input)
-        builder.setNegativeButton(R.string.cancel) { _, _ -> }
-        builder.setPositiveButton(R.string.ok, DialogInterface.OnClickListener { _, _ ->
+        builder.setNegativeButton(RR.string.cancel) { _, _ -> }
+        builder.setPositiveButton(RR.string.ok, DialogInterface.OnClickListener { _, _ ->
             val path = input.text.toString().trim { it <= ' ' }
             val f = File(path)
             if (!f.exists() || !f.isDirectory) {
-                UiTools.snacker(requireActivity(), getString(R.string.directorynotfound, path))
+                UiTools.snacker(requireActivity(), getString(RR.string.directorynotfound, path))
                 return@OnClickListener
             }
 

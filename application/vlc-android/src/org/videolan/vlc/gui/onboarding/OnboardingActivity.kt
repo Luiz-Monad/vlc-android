@@ -16,6 +16,7 @@ import org.videolan.resources.ACTIVITY_RESULT_PREFERENCES
 import org.videolan.resources.EXTRA_FIRST_RUN
 import org.videolan.resources.EXTRA_UPGRADE
 import org.videolan.resources.PREF_FIRST_RUN
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.startMedialibrary
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
@@ -121,7 +122,7 @@ class OnboardingActivity : AppCompatActivity(), OnboardingFragmentListener {
             FragmentName.SCAN -> if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S && !Permissions.canSendNotifications(applicationContext)) showFragment(FragmentName.NOTIFICATION_PERMISSION) else showFragment(FragmentName.THEME)
             else ->  onDone()
         }
-        if (viewModel.currentFragment == FragmentName.THEME) nextButton.text = getString(R.string.done)
+        if (viewModel.currentFragment == FragmentName.THEME) nextButton.text = getString(RR.string.done)
     }
 
     fun manageNextVisibility(visible: Boolean) {

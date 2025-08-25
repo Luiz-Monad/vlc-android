@@ -15,6 +15,7 @@ import org.videolan.libvlc.FactoryManager
 import org.videolan.libvlc.MediaPlayer
 import org.videolan.libvlc.interfaces.IMediaFactory
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.getContextWithLocale
 import org.videolan.vlc.media.MediaPlayerEventListener

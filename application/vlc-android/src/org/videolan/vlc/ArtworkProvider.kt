@@ -42,6 +42,7 @@ import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.removeFileScheme
@@ -140,7 +141,7 @@ class ArtworkProvider : ContentProvider() {
             runBlocking(Dispatchers.IO) {
                 var bitmap = AudioUtil.readCoverBitmap(path, width)
                 if (bitmap != null) bitmap = padSquare(bitmap)
-                if (bitmap == null) bitmap = ctx.getBitmapFromDrawable(R.drawable.ic_no_media, width, width)
+                if (bitmap == null) bitmap = ctx.getBitmapFromDrawable(RR.drawable.ic_no_media, width, width)
                 return@runBlocking encodeImage(bitmap)
             }
         }
@@ -176,9 +177,9 @@ class ArtworkProvider : ContentProvider() {
             }?.let { return@getCategoryImage getPFDFromByteArray(it) }
         }
         val unknownIcon = when (category) {
-            ALBUM -> R.drawable.ic_auto_album_unknown
-            ARTIST -> R.drawable.ic_auto_artist_unknown
-            else -> R.drawable.ic_auto_nothumb
+            ALBUM -> RR.drawable.ic_auto_album_unknown
+            ARTIST -> RR.drawable.ic_auto_artist_unknown
+            else -> RR.drawable.ic_auto_nothumb
         }
         return getPFDFromBitmap(context.getBitmapFromDrawable(unknownIcon))
     }
@@ -217,7 +218,7 @@ class ArtworkProvider : ContentProvider() {
                 var bitmap = if (mw != null) ThumbnailsProvider.obtainBitmap(mw, width) else null
                 if (bitmap == null) bitmap = readEmbeddedArtwork(mw, width)
                 if (bitmap != null) bitmap = padSquare(bitmap)
-                if (bitmap == null) bitmap = ctx.getBitmapFromDrawable(R.drawable.ic_no_media, width, width)
+                if (bitmap == null) bitmap = ctx.getBitmapFromDrawable(RR.drawable.ic_no_media, width, width)
                 if (nonTransparent) bitmap = removeTransparency(bitmap)
                 return@runBlocking encodeImage(bitmap)
             }
@@ -236,16 +237,16 @@ class ArtworkProvider : ContentProvider() {
             val cover = tracks?.let {
                 val iconAddition = when {
                     type == PLAYLIST -> null
-                    shuffle -> ctx.getBitmapFromDrawable(R.drawable.ic_auto_shuffle_circle)
-                    else -> ctx.getBitmapFromDrawable(R.drawable.ic_auto_playall_circle)
+                    shuffle -> ctx.getBitmapFromDrawable(RR.drawable.ic_auto_shuffle_circle)
+                    else -> ctx.getBitmapFromDrawable(RR.drawable.ic_auto_playall_circle)
                 }
                 val key = if (shuffle) "${type}_shuffle" else type
                 ThumbnailsProvider.getPlaylistOrGenreImage("${key}:${id}_256", tracks, 256, iconAddition)
             }
             return@runBlocking when {
                 cover != null -> cover
-                type == PLAYLIST -> ctx.getBitmapFromDrawable(R.drawable.ic_auto_playlist_unknown)
-                else -> ctx.getBitmapFromDrawable(R.drawable.ic_auto_playall)
+                type == PLAYLIST -> ctx.getBitmapFromDrawable(RR.drawable.ic_auto_playlist_unknown)
+                else -> ctx.getBitmapFromDrawable(RR.drawable.ic_auto_playall)
             }
         }
         return getPFDFromBitmap(bitmap)
@@ -297,15 +298,15 @@ class ArtworkProvider : ContentProvider() {
             }
             if (tracks.any { mw -> mw.artworkMrl != null && mw.artworkMrl.isNotEmpty() }) {
                 val iconAddition = when (key) {
-                    SHUFFLE_ALL -> getBitmapFromDrawable(context, R.drawable.ic_auto_shuffle_circle)
-                    LAST_ADDED -> getBitmapFromDrawable(context, R.drawable.ic_auto_new_circle)
-                    HISTORY -> getBitmapFromDrawable(context, R.drawable.ic_auto_history_circle)
+                    SHUFFLE_ALL -> getBitmapFromDrawable(context, RR.drawable.ic_auto_shuffle_circle)
+                    LAST_ADDED -> getBitmapFromDrawable(context, RR.drawable.ic_auto_new_circle)
+                    HISTORY -> getBitmapFromDrawable(context, RR.drawable.ic_auto_history_circle)
                     else -> null
                 }
                 cover = ThumbnailsProvider.getPlaylistOrGenreImage("${key}_256", tracks, 256, iconAddition)
             }
         }
-        return encodeImage(cover ?: context.getBitmapFromDrawable(R.drawable.ic_auto_playall))
+        return encodeImage(cover ?: context.getBitmapFromDrawable(RR.drawable.ic_auto_playall))
     }
 
     /**

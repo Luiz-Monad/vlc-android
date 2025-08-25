@@ -46,6 +46,7 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.AppContextProvider
 import org.videolan.resources.CRASH_ML_CTX
 import org.videolan.resources.CRASH_ML_MSG
+import org.videolan.resources.R as RR
 import org.videolan.tools.AppUtils
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.DebugLogService
@@ -79,7 +80,7 @@ class SendCrashActivity : AppCompatActivity(), DebugLogService.Client.Callback {
 
     override fun onSaved(success: Boolean, path: String) {
         if (!success) {
-            Snackbar.make(window.decorView, R.string.dump_logcat_failure, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(window.decorView, RR.string.dump_logcat_failure, Snackbar.LENGTH_LONG).show()
             client.stop()
             return
         }
@@ -147,7 +148,7 @@ class SendCrashActivity : AppCompatActivity(), DebugLogService.Client.Callback {
                 val describeCrash = if (::errMsg.isInitialized) {
                     "$errCtx:\n$errMsg"
                 } else {
-                    getString(R.string.describe_crash)
+                    getString(RR.string.describe_crash)
                 }
                 val body = "<p>Here are my crash logs for VLC</strong></p><p style=3D\"color:#16171A;\"> [$describeCrash]</p><p>$appData</p>"
                 val htmlBody = HtmlCompat.fromHtml(body, HtmlCompat.FROM_HTML_MODE_LEGACY)

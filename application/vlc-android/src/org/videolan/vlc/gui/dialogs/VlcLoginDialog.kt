@@ -34,6 +34,7 @@ import org.videolan.vlc.R
 import org.videolan.vlc.databinding.VlcLoginDialogBinding
 import org.videolan.vlc.gui.helpers.UiTools
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.LOGIN_STORE
 import org.videolan.tools.Settings
 import org.videolan.tools.putSingle

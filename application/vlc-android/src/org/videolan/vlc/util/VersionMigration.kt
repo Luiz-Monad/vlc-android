@@ -34,6 +34,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.*
 import org.videolan.vlc.gui.onboarding.ONBOARDING_DONE_KEY

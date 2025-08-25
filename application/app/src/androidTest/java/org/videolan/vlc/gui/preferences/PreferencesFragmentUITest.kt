@@ -13,7 +13,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.videolan.tools.KEY_MEDIALIBRARY_AUTO_RESCAN
 import org.videolan.vlc.PreferenceMatchers.withKey
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.gui.SecondaryActivity
 import org.videolan.vlc.onPreferenceRow
 import org.videolan.tools.KEY_VIDEO_APP_SWITCH
@@ -33,7 +33,7 @@ class PreferencesFragmentUITest: BasePreferenceUITest() {
     @Test
     fun clickOnMediaFolders_openDirectoriesActivity() {
         val key = "directories"
-        onPreferenceRow(R.id.recycler_view, withKey(key))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, withKey(key))!!
                 .check(matches(isDisplayed()))
                 .perform(click())
 

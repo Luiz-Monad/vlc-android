@@ -34,15 +34,16 @@ import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.*
+import org.videolan.resources.R
 import org.videolan.tools.*
-import org.videolan.vlc.R
+import org.videolan.vlc.R as BR
 import org.videolan.vlc.gui.SecondaryActivity
 import org.videolan.vlc.gui.dialogs.ConfirmAudioPlayQueueDialog
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 class PreferencesFragment : BasePreferenceFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
-    override fun getXml() = R.xml.preferences
+    override fun getXml() = BR.xml.preferences
 
     override fun getTitleId() = R.string.preferences
 

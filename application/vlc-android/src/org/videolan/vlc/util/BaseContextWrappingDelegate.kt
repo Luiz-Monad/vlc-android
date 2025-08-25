@@ -35,6 +35,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.ActionMode
 import androidx.appcompat.widget.Toolbar
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.getContextWithLocale
 
 /**

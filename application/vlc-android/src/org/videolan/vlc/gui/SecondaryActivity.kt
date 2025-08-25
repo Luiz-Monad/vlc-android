@@ -40,6 +40,7 @@ import org.videolan.resources.AndroidDevices
 import org.videolan.resources.KEY_ANIMATED
 import org.videolan.resources.KEY_FOLDER
 import org.videolan.resources.KEY_GROUP
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.applyOverscanMargin
 import org.videolan.tools.RESULT_RESCAN
 import org.videolan.tools.RESULT_RESTART
@@ -86,7 +87,7 @@ class SecondaryActivity : ContentActivity(), IDialogManager {
 
         if (AndroidDevices.isTv) {
             applyOverscanMargin(this)
-            params.topMargin = resources.getDimensionPixelSize(UiTools.getResourceFromAttribute(this, R.attr.actionBarSize))
+            params.topMargin = resources.getDimensionPixelSize(UiTools.getResourceFromAttribute(this, android.R.attr.actionBarSize))
         } else
             params.behavior = AppBarLayout.ScrollingViewBehavior()
         fph.requestLayout()
@@ -105,7 +106,7 @@ class SecondaryActivity : ContentActivity(), IDialogManager {
                 .commit()
         }
         dialogsDelegate.observeDialogs(this, this)
-        if (intent.getBooleanExtra(KEY_ANIMATED, false)) supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_up)
+        if (intent.getBooleanExtra(KEY_ANIMATED, false)) supportActionBar?.setHomeAsUpIndicator(RR.drawable.ic_close_up)
     }
 
     override fun fireDialog(dialog: Dialog) {

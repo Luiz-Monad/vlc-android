@@ -42,11 +42,12 @@ import androidx.preference.Preference
 import kotlinx.coroutines.*
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.*
+import org.videolan.resources.R
 import org.videolan.tools.BitmapCache
 import org.videolan.tools.Settings
 import org.videolan.tools.putSingle
 import org.videolan.vlc.MediaParsingService
-import org.videolan.vlc.R
+import org.videolan.vlc.R as BR
 import org.videolan.vlc.gui.DebugLogActivity
 import org.videolan.vlc.gui.dialogs.ConfirmDeleteDialog
 import org.videolan.vlc.gui.dialogs.RenameDialog
@@ -61,7 +62,7 @@ import java.io.IOException
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnSharedPreferenceChangeListener, CoroutineScope by MainScope() {
     override fun getXml(): Int {
-        return R.xml.preferences_adv
+        return BR.xml.preferences_adv
     }
 
 

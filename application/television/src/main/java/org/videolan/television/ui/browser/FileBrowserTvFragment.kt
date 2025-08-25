@@ -26,7 +26,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.CATEGORY
 import org.videolan.resources.ITEM
-import org.videolan.television.R
+import org.videolan.resources.R
 import org.videolan.television.ui.FileTvItemAdapter
 import org.videolan.television.ui.TvItemAdapter
 import org.videolan.television.ui.TvUtil
@@ -248,7 +248,7 @@ class FileBrowserTvFragment : BaseBrowserTvFragment<MediaLibraryItem>(), PathAda
         (viewModel as BrowserModel).saveList(media)
         if (save) ft.addToBackStack(if (mrl == null) "root" else viewModel.currentItem?.title
                 ?: FileUtils.getFileNameFromPath(mrl))
-        ft.replace(R.id.tv_fragment_placeholder, next, media.title)
+        ft.replace(org.videolan.television.R.id.tv_fragment_placeholder, next, media.title)
         ft.commit()
     }
 

@@ -32,6 +32,7 @@ import android.util.Log
 import androidx.core.content.getSystemService
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.AUDIO_DUCKING
 import org.videolan.tools.RESUME_PLAYBACK
 import org.videolan.vlc.BuildConfig

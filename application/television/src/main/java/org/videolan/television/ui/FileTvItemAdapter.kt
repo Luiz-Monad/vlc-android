@@ -17,7 +17,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.UPDATE_PAYLOAD
 import org.videolan.resources.interfaces.FocusListener
-import org.videolan.television.R
+import org.videolan.resources.R
 import org.videolan.television.databinding.MediaBrowserTvItemBinding
 import org.videolan.television.databinding.MediaBrowserTvItemListBinding
 import org.videolan.television.ui.browser.TvAdapterUtils

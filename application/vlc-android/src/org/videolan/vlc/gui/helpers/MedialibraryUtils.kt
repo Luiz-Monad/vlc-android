@@ -11,6 +11,7 @@ import org.videolan.resources.ACTION_DISCOVER
 import org.videolan.resources.ACTION_DISCOVER_DEVICE
 import org.videolan.resources.AppContextProvider
 import org.videolan.resources.EXTRA_PATH
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.launchForeground
 import org.videolan.tools.runIO
 import org.videolan.tools.stripTrailingSlash

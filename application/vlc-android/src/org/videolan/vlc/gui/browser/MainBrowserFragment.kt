@@ -38,6 +38,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.medialibrary.media.MediaWrapperImpl
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.BaseFragment
@@ -152,7 +153,7 @@ class MainBrowserFragment : BaseFragment(), View.OnClickListener, CtxActionRecei
         currentAdapterActionMode = null
     }
 
-    override fun getTitle() = getString(R.string.browse)
+    override fun getTitle() = getString(RR.string.browse)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         browserFavRepository = BrowserFavRepository.getInstance(requireContext())
@@ -193,7 +194,7 @@ class MainBrowserFragment : BaseFragment(), View.OnClickListener, CtxActionRecei
 
         favoritesEntry = view.findViewById(R.id.fav_browser_entry)
         favoritesEntry.loading.showNoMedia = false
-        favoritesEntry.loading.emptyText = getString(R.string.no_favorite)
+        favoritesEntry.loading.emptyText = getString(RR.string.no_favorite)
         val favoritesBrowserContainer = MainBrowserContainer(isNetwork = false, isFile = true, inCards = !displayInList)
         val favoritesAdapter = BaseBrowserAdapter(favoritesBrowserContainer)
         favoritesEntry.list.adapter = favoritesAdapter
@@ -219,7 +220,7 @@ class MainBrowserFragment : BaseFragment(), View.OnClickListener, CtxActionRecei
 
         networkEntry = view.findViewById(R.id.network_browser_entry)
         networkEntry.loading.showNoMedia = false
-        networkEntry.loading.emptyText = getString(R.string.nomedia)
+        networkEntry.loading.emptyText = getString(RR.string.nomedia)
         val networkBrowserContainer = MainBrowserContainer(isNetwork = true, isFile = false, inCards = !displayInList)
         val networkAdapter = BaseBrowserAdapter(networkBrowserContainer)
         networkEntry.list.adapter = networkAdapter
@@ -248,7 +249,7 @@ class MainBrowserFragment : BaseFragment(), View.OnClickListener, CtxActionRecei
         if (requiringOtg && OtgAccess.otgRoot.value != null) {
             val intent = Intent(requireActivity().applicationContext, SecondaryActivity::class.java)
             val otgMedia = MediaWrapperImpl("otg://".toUri())
-            otgMedia.title = getString(R.string.otg_device_title)
+            otgMedia.title = getString(RR.string.otg_device_title)
             intent.putExtra(KEY_MEDIA, otgMedia)
             intent.putExtra("fragment", SecondaryActivity.FILE_BROWSER)
             startActivity(intent)
@@ -264,10 +265,10 @@ class MainBrowserFragment : BaseFragment(), View.OnClickListener, CtxActionRecei
                 } else {
                     if (networkMonitor.lanAllowed) {
                         emptyLoading.state = EmptyLoadingState.LOADING
-                        emptyLoading.loadingText = getString(R.string.network_shares_discovery)
+                        emptyLoading.loadingText = getString(RR.string.network_shares_discovery)
                     } else {
                         emptyLoading.state = EmptyLoadingState.EMPTY
-                        emptyLoading.emptyText = getString(R.string.network_connection_needed)
+                        emptyLoading.emptyText = getString(RR.string.network_connection_needed)
                     }
                     networkEntry.list.visibility = View.GONE
 //                    handler.sendEmptyMessage(MSG_HIDE_LOADING)
@@ -278,7 +279,7 @@ class MainBrowserFragment : BaseFragment(), View.OnClickListener, CtxActionRecei
             }
         } else {
             emptyLoading.state = EmptyLoadingState.EMPTY
-            emptyLoading.emptyText = getString(R.string.network_connection_needed)
+            emptyLoading.emptyText = getString(RR.string.network_connection_needed)
             networkEntry.list.visibility = View.GONE
         }
     }

@@ -38,6 +38,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import com.google.android.material.animation.ArgbEvaluatorCompat
 import com.google.android.material.button.MaterialButton
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
@@ -99,8 +100,8 @@ class VideoDelayDelegate(private val player: VideoPlayerActivity) : View.OnClick
             delayApplyBt = player.findViewById(R.id.delay_apply_bt)
             close = player.findViewById(R.id.close)
         }
-        delayFirstButton.text = if (playbackSetting == IPlaybackSettingsController.DelayState.AUDIO) player.getString(R.string.audio_delay_start) else player.getString(R.string.subtitle_delay_first)
-        delaySecondButton.text = if (playbackSetting == IPlaybackSettingsController.DelayState.AUDIO) player.getString(R.string.audio_delay_end) else player.getString(R.string.subtitle_delay_end)
+        delayFirstButton.text = if (playbackSetting == IPlaybackSettingsController.DelayState.AUDIO) player.getString(RR.string.audio_delay_start) else player.getString(RR.string.subtitle_delay_first)
+        delaySecondButton.text = if (playbackSetting == IPlaybackSettingsController.DelayState.AUDIO) player.getString(RR.string.audio_delay_end) else player.getString(RR.string.subtitle_delay_end)
         playbackSettingMinus.setOnClickListener(this)
         playbackSettingPlus.setOnClickListener(this)
         delayFirstButton.setOnClickListener(this)
@@ -136,11 +137,11 @@ class VideoDelayDelegate(private val player: VideoPlayerActivity) : View.OnClick
         val title = when (playbackSetting) {
             IPlaybackSettingsController.DelayState.AUDIO -> {
                 text = "${player.service!!.audioDelay / 1000L} ms"
-                player.getString(R.string.audio_delay)
+                player.getString(RR.string.audio_delay)
             }
             IPlaybackSettingsController.DelayState.SUBS -> {
                 text = "${player.service!!.spuDelay / 1000L} ms"
-                player.getString(R.string.spu_delay)
+                player.getString(RR.string.spu_delay)
             }
             else -> {
                 text = "0"
@@ -180,13 +181,13 @@ class VideoDelayDelegate(private val player: VideoPlayerActivity) : View.OnClick
             R.id.delay_apply_all -> {
                 player.service?.let {
                     Settings.getInstance(player).putSingle(AUDIO_DELAY_GLOBAL, it.audioDelay)
-                    UiTools.snacker(player, player.getString(R.string.audio_delay_global, "${it.audioDelay / 1000L}"))
+                    UiTools.snacker(player, player.getString(RR.string.audio_delay_global, "${it.audioDelay / 1000L}"))
                 }
             }
             R.id.delay_apply_bt -> {
                 player.service?.let {
                     Settings.getInstance(player).putSingle(KEY_BLUETOOTH_DELAY, it.audioDelay)
-                    UiTools.snacker(player, player.getString(R.string.audio_delay_bt, "${it.audioDelay / 1000L}"))
+                    UiTools.snacker(player, player.getString(RR.string.audio_delay_bt, "${it.audioDelay / 1000L}"))
                 }
             }
             R.id.close -> endPlaybackSetting()
@@ -212,7 +213,7 @@ class VideoDelayDelegate(private val player: VideoPlayerActivity) : View.OnClick
             player.overlayDelegate.initInfoOverlay()
             if (delayState == IPlaybackSettingsController.DelayState.SUBS) service.setSpuDelay(delay) else service.setAudioDelay(delay)
             if (::delayTitle.isInitialized) delayTitle.text =
-                player.getString(if (delayState == IPlaybackSettingsController.DelayState.SUBS) R.string.spu_delay else R.string.audio_delay)
+                player.getString(if (delayState == IPlaybackSettingsController.DelayState.SUBS) RR.string.spu_delay else RR.string.audio_delay)
             if (::delayInfo.isInitialized) delayInfo.text = "${delay / 1000L} ms"
             if (delayState == IPlaybackSettingsController.DelayState.SUBS) spuDelay = delay else audioDelay = delay
             if (!player.isPlaybackSettingActive) {
@@ -280,16 +281,16 @@ class VideoDelayDelegate(private val player: VideoPlayerActivity) : View.OnClick
         }
         if (!::delayFirstButton.isInitialized) return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            delayFirstButton.iconTint = ColorStateList.valueOf(if (delayValues.start == -1L) ContextCompat.getColor(player, R.color.grey400transparent) else ContextCompat.getColor(player, R.color.orange500))
-            delaySecondButton.iconTint = ColorStateList.valueOf(if (delayValues.stop == -1L) ContextCompat.getColor(player, R.color.grey400transparent) else ContextCompat.getColor(player, R.color.orange500))
+            delayFirstButton.iconTint = ColorStateList.valueOf(if (delayValues.start == -1L) ContextCompat.getColor(player, RR.color.grey400transparent) else ContextCompat.getColor(player, RR.color.orange500))
+            delaySecondButton.iconTint = ColorStateList.valueOf(if (delayValues.stop == -1L) ContextCompat.getColor(player, RR.color.grey400transparent) else ContextCompat.getColor(player, RR.color.orange500))
             val viewToAnime = if (delayValues.start == -1L && delayValues.stop != -1L) delayFirstButton else if (delayValues.start != -1L && delayValues.stop == -1L) delaySecondButton else if (hasChanged) delayInfoContainer else null
             viewToAnime?.let { button ->
-                val anim = ValueAnimator.ofObject(ArgbEvaluatorCompat(), ContextCompat.getColor(player, R.color.playerbackground), ContextCompat.getColor(player, R.color.orange500focus), ContextCompat.getColor(player, R.color.playerbackground))
+                val anim = ValueAnimator.ofObject(ArgbEvaluatorCompat(), ContextCompat.getColor(player, RR.color.playerbackground), ContextCompat.getColor(player, RR.color.orange500focus), ContextCompat.getColor(player, RR.color.playerbackground))
                 anim.addUpdateListener {
                     button.backgroundTintList = ColorStateList.valueOf(it.animatedValue as Int)
-                    if (viewToAnime == delayInfoContainer) viewToAnime.background = ContextCompat.getDrawable(player, R.drawable.video_list_length_bg_opaque)
+                    if (viewToAnime == delayInfoContainer) viewToAnime.background = ContextCompat.getDrawable(player, RR.drawable.video_list_length_bg_opaque)
                 }
-                anim.doOnEnd { button.backgroundTintList = ContextCompat.getColorStateList(player, R.color.player_delay_button_background_tint) }
+                anim.doOnEnd { button.backgroundTintList = ContextCompat.getColorStateList(player, RR.color.player_delay_button_background_tint) }
                 anim.repeatCount = 1
                 anim.interpolator = AccelerateDecelerateInterpolator()
                 anim.duration = 500

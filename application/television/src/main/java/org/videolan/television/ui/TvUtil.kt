@@ -50,7 +50,7 @@ import org.videolan.tools.FORCE_PLAY_ALL_VIDEO
 import org.videolan.tools.HttpImageLoader
 import org.videolan.tools.Settings
 import org.videolan.tools.getposition
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.gui.DialogActivity
 import org.videolan.vlc.gui.helpers.AudioUtil
 import org.videolan.vlc.gui.helpers.BitmapUtil

@@ -17,7 +17,7 @@ import org.videolan.television.viewmodel.MediaBrowserViewModel
 import org.videolan.television.viewmodel.getMediaBrowserModel
 import org.videolan.tools.FORCE_PLAY_ALL_VIDEO
 import org.videolan.tools.Settings
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.gui.view.EmptyLoadingState
 import org.videolan.vlc.interfaces.IEventsHandler
 import org.videolan.vlc.providers.medialibrary.MedialibraryProvider

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.viewmodels.browser.IPathOperationDelegate
 import org.videolan.vlc.viewmodels.browser.PathOperationDelegate
@@ -23,11 +24,11 @@ class PathAdapter(val browser: PathAdapterListener, val media: MediaWrapper) : R
         //we save Base64 encoded strings to be used in substitutions to avoid false positives if a user directory is named as the media title
         // ie "SDCARD", "Internal Memory" and so on
         if (media.hasStateFlags(MediaLibraryItem.FLAG_STORAGE)) PathOperationDelegate.storages.put(Uri.decode(media.uri.path), pathOperationDelegate.makePathSafe(media.title))
-        PathOperationDelegate.storages.put(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY, pathOperationDelegate.makePathSafe(browser.currentContext().getString(R.string.internal_memory)))
+        PathOperationDelegate.storages.put(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY, pathOperationDelegate.makePathSafe(browser.currentContext().getString(RR.string.internal_memory)))
     }
 
-    private val browserTitle = browser.currentContext().getString(R.string.browser)
-    private val otgDevice = browser.currentContext().getString(R.string.otg_device_title)
+    private val browserTitle = browser.currentContext().getString(RR.string.browser)
+    private val otgDevice = browser.currentContext().getString(RR.string.otg_device_title)
     private val segments = prepareSegments(media.uri)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,7 +50,7 @@ class PathAdapter(val browser: PathAdapterListener, val media: MediaWrapper) : R
             } catch (e: Exception) {
                 false
             }
-            holder.root.contentDescription =  holder.root.context.getString(if (isFile) R.string.talkback_file else R.string.talkback_folder, holder.root.text)
+            holder.root.contentDescription =  holder.root.context.getString(if (isFile) RR.string.talkback_file else RR.string.talkback_folder, holder.root.text)
         }
     }
 

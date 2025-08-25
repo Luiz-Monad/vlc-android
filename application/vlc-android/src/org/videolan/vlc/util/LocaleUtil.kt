@@ -31,6 +31,7 @@ import com.squareup.moshi.Types
 import org.videolan.libvlc.interfaces.IMedia
 import org.videolan.libvlc.MediaPlayer
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.firstLetterUppercase
 import java.util.*
 

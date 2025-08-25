@@ -41,6 +41,7 @@ import org.videolan.medialibrary.media.MediaLibraryItem.TYPE_MEDIA
 import org.videolan.medialibrary.media.MediaLibraryItem.TYPE_STORAGE
 import org.videolan.medialibrary.media.Storage
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.resources.UPDATE_SELECTION
 import org.videolan.tools.MultiSelectAdapter
 import org.videolan.tools.MultiSelectHelper
@@ -93,15 +94,15 @@ open class BaseBrowserAdapter(val browserContainer: BrowserContainer<MediaLibrar
         specialIcons = filesRoot || fileBrowser && mrl != null && mrl.endsWith(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY)
         // Setup resources
         val res = browserContainer.containerActivity().resources
-        folderDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_menu_folder))
-        audioDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_browser_audio_normal))
-        videoDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_browser_video_normal))
-        subtitleDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_browser_subtitle_normal))
-        unknownDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_browser_unknown_normal))
-        qaMoviesDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_browser_movies_normal))
-        qaMusicDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_browser_music_normal))
-        qaPodcastsDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_browser_podcasts_normal))
-        qaDownloadDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(R.drawable.ic_browser_download_normal))
+        folderDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_menu_folder))
+        audioDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_browser_audio_normal))
+        videoDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_browser_video_normal))
+        subtitleDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_browser_subtitle_normal))
+        unknownDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_browser_unknown_normal))
+        qaMoviesDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_browser_movies_normal))
+        qaMusicDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_browser_music_normal))
+        qaPodcastsDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_browser_podcasts_normal))
+        qaDownloadDrawable = BitmapDrawable(res, browserContainer.containerActivity().getBitmapFromDrawable(RR.drawable.ic_browser_download_normal))
         diffCallback.oldSort = sort
         diffCallback.newSort = sort
         diffCallback.oldAsc = asc

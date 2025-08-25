@@ -37,6 +37,7 @@ import org.videolan.medialibrary.interfaces.media.Artist
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.TAG_ITEM
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.tools.dp
 import org.videolan.vlc.R
@@ -129,7 +130,7 @@ class InfoActivity : AudioPlayerContainerActivity(), View.OnClickListener, PathA
             val media = item as MediaWrapper
             val parent = media.uri.toString().substring(0, media.uri.toString().lastIndexOf("/"))
             MedialibraryUtils.addDir(parent, applicationContext)
-            Snackbar.make(binding.root, getString(R.string.scanned_directory_added, parent.toUri().lastPathSegment), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, getString(RR.string.scanned_directory_added, parent.toUri().lastPathSegment), Snackbar.LENGTH_LONG).show()
             binding.scanned = true
         }
     }
@@ -153,7 +154,7 @@ class InfoActivity : AudioPlayerContainerActivity(), View.OnClickListener, PathA
             item.itemType == MediaLibraryItem.TYPE_MEDIA -> {
                 val media = item as MediaWrapper
                 binding.progress = if (media.length == 0L) 0 else (100.toLong() * media.time / length).toInt()
-                binding.sizeTitleText = getString(R.string.file_size)
+                binding.sizeTitleText = getString(RR.string.file_size)
 
 
 
@@ -162,7 +163,7 @@ class InfoActivity : AudioPlayerContainerActivity(), View.OnClickListener, PathA
                     binding.ariane.layoutManager = LinearLayoutManager(this@InfoActivity, LinearLayoutManager.HORIZONTAL, false)
                     binding.ariane.adapter = PathAdapter(this@InfoActivity, media)
                     if (binding.ariane.itemDecorationCount == 0) {
-                        binding.ariane.addItemDecoration(VLCDividerItemDecoration(this@InfoActivity, DividerItemDecoration.HORIZONTAL, ContextCompat.getDrawable(this@InfoActivity, R.drawable.ic_divider)!!))
+                        binding.ariane.addItemDecoration(VLCDividerItemDecoration(this@InfoActivity, DividerItemDecoration.HORIZONTAL, ContextCompat.getDrawable(this@InfoActivity, RR.drawable.ic_divider)!!))
                     }
                     //scheme is supported => test if the parent is scanned
                     var isScanned = false
@@ -178,17 +179,17 @@ class InfoActivity : AudioPlayerContainerActivity(), View.OnClickListener, PathA
             item.itemType == MediaLibraryItem.TYPE_ARTIST -> {
                 val albums = (item as Artist).albums
                 val nbAlbums = albums?.size ?: 0
-                binding.sizeTitleText = getString(R.string.albums)
+                binding.sizeTitleText = getString(RR.string.albums)
                 binding.sizeValueText = nbAlbums.toString()
-                binding.sizeIcon.setImageDrawable(ContextCompat.getDrawable(this@InfoActivity, R.drawable.ic_album))
-                binding.extraTitleText = getString(R.string.tracks)
+                binding.sizeIcon.setImageDrawable(ContextCompat.getDrawable(this@InfoActivity, RR.drawable.ic_album))
+                binding.extraTitleText = getString(RR.string.tracks)
                 binding.extraValueText = nbTracks.toString()
-                binding.extraIcon.setImageDrawable(ContextCompat.getDrawable(this@InfoActivity, R.drawable.ic_song))
+                binding.extraIcon.setImageDrawable(ContextCompat.getDrawable(this@InfoActivity, RR.drawable.ic_song))
             }
             else -> {
-                binding.sizeTitleText = getString(R.string.tracks)
+                binding.sizeTitleText = getString(RR.string.tracks)
                 binding.sizeValueText = nbTracks.toString()
-                binding.sizeIcon.setImageDrawable(ContextCompat.getDrawable(this@InfoActivity, R.drawable.ic_song))
+                binding.sizeIcon.setImageDrawable(ContextCompat.getDrawable(this@InfoActivity, RR.drawable.ic_song))
             }
         }
     }
@@ -219,7 +220,7 @@ class InfoActivity : AudioPlayerContainerActivity(), View.OnClickListener, PathA
         val lp = binding.fab.layoutParams as CoordinatorLayout.LayoutParams
         lp.anchorId = binding.container.id
         lp.anchorGravity = Gravity.BOTTOM or Gravity.END
-        lp.bottomMargin = resources.getDimensionPixelSize(R.dimen.default_margin)
+        lp.bottomMargin = resources.getDimensionPixelSize(RR.dimen.default_margin)
         lp.behavior = FloatingActionButtonBehavior(this@InfoActivity, null)
         binding.fab.layoutParams = lp
         binding.fab.show()

@@ -17,8 +17,8 @@ import org.videolan.libvlc.stubs.StubMedia
 import org.videolan.libvlc.util.MediaBrowser
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.stubs.StubMediaWrapper
+import org.videolan.resources.R
 import org.videolan.vlc.BaseTest
-import org.videolan.vlc.R
 import org.videolan.vlc.database.CustomDirectoryDao
 import org.videolan.vlc.providers.BrowserProvider
 import org.videolan.vlc.repository.DirectoryRepository

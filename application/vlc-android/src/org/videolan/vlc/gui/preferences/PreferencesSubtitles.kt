@@ -32,6 +32,7 @@ import androidx.preference.ListPreference
 import androidx.preference.SeekBarPreference
 import com.jaredrummler.android.colorpicker.ColorPreferenceCompat
 import kotlinx.coroutines.launch
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.tools.LocaleUtils
 import org.videolan.tools.Settings
@@ -67,7 +68,7 @@ class PreferencesSubtitles : BasePreferenceFragment(), SharedPreferences.OnShare
     }
 
     override fun getTitleId(): Int {
-        return R.string.subtitles_prefs_category
+        return RR.string.subtitles_prefs_category
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,28 +135,28 @@ class PreferencesSubtitles : BasePreferenceFragment(), SharedPreferences.OnShare
     private fun resetAll() {
         subtitlesSize.value = "16"
         subtitlesBold.isChecked = false
-        subtitlesColor.saveValue(ContextCompat.getColor(requireActivity(), R.color.white))
+        subtitlesColor.saveValue(ContextCompat.getColor(requireActivity(), RR.color.white))
         subtitlesOpacity.value = 255
 
         subtitlesBackgroundEnabled.isChecked = false
-        subtitlesBackgroundColor.saveValue(ContextCompat.getColor(requireActivity(), R.color.black))
+        subtitlesBackgroundColor.saveValue(ContextCompat.getColor(requireActivity(), RR.color.black))
         subtitlesBackgroundOpacity.value = 255
 
         subtitlesShadowEnabled.isChecked = true
-        subtitlesShadowColor.saveValue(ContextCompat.getColor(requireActivity(), R.color.black))
+        subtitlesShadowColor.saveValue(ContextCompat.getColor(requireActivity(), RR.color.black))
         subtitlesShadowOpacity.value = 128
 
         subtitlesOutlineEnabled.isChecked = true
-        subtitlesOutlineColor.saveValue(ContextCompat.getColor(requireActivity(), R.color.black))
+        subtitlesOutlineColor.saveValue(ContextCompat.getColor(requireActivity(), RR.color.black))
         subtitlesOutlineOpacity.value = 255
     }
 
     private fun updatePreferredSubtitleTrack() {
         val value = Settings.getInstance(requireActivity()).getString("subtitle_preferred_language", null)
         if (value.isNullOrEmpty())
-            preferredSubtitleTrack.summary = getString(R.string.no_track_preference)
+            preferredSubtitleTrack.summary = getString(RR.string.no_track_preference)
         else
-            preferredSubtitleTrack.summary = getString(R.string.track_preference, value)
+            preferredSubtitleTrack.summary = getString(RR.string.track_preference, value)
     }
 
     override fun onStart() {
@@ -202,7 +203,7 @@ class PreferencesSubtitles : BasePreferenceFragment(), SharedPreferences.OnShare
     }
 
     private fun prepareLocaleList() {
-        val localePair = LocaleUtils.getLocalesUsedInProject(requireActivity(), BuildConfig.TRANSLATION_ARRAY, getString(R.string.no_track_preference))
+        val localePair = LocaleUtils.getLocalesUsedInProject(requireActivity(), BuildConfig.TRANSLATION_ARRAY, getString(RR.string.no_track_preference))
         preferredSubtitleTrack.entries = localePair.localeEntries
         preferredSubtitleTrack.entryValues = localePair.localeEntryValues
     }

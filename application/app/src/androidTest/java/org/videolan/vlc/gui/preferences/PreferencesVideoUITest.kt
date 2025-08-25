@@ -21,7 +21,7 @@ class PreferencesVideoUITest: BasePreferenceUITest() {
     override fun beforeTest() {
         activity = intentsTestRule.activity
 
-        onPreferenceRow(R.id.recycler_view, withKey("video_category"))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, withKey("video_category"))!!
                 .perform(click())
     }
 

@@ -31,6 +31,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.AppContextProvider
 import org.videolan.resources.TYPE_LOCAL_FAV
 import org.videolan.resources.TYPE_NETWORK_FAV
+import org.videolan.resources.R as RR
 import org.videolan.tools.NetworkMonitor
 import org.videolan.tools.SingletonHolder
 import org.videolan.vlc.database.BrowserFavDao

@@ -46,6 +46,7 @@ import androidx.transition.TransitionManager
 import androidx.window.layout.FoldingFeature
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.PlaylistItemBinding
@@ -147,7 +148,7 @@ class AudioPlaylistTipsDelegate(private val activity: AudioPlayerContainerActivi
 
     private fun getItemColor(): Int {
         val typedValue = TypedValue()
-        activity.theme.resolveAttribute(R.attr.tips_item_background, typedValue, true)
+        activity.theme.resolveAttribute(RR.attr.tips_item_background, typedValue, true)
         return typedValue.data
     }
 
@@ -282,7 +283,7 @@ class AudioPlaylistTipsDelegate(private val activity: AudioPlayerContainerActivi
 
 
         clearAllAnimations()
-        nextButton.setText(R.string.next_step)
+        nextButton.setText(RR.string.next_step)
 
         constraintSet.setGuidelinePercent(R.id.endGuideline, rightGuidelineEndBound)
         constraintSet.setGuidelinePercent(R.id.middleGuideline, middleGuidelineEndBound)
@@ -337,7 +338,7 @@ class AudioPlaylistTipsDelegate(private val activity: AudioPlayerContainerActivi
                 constraintSet.connect(R.id.helpTitle, ConstraintSet.BOTTOM, R.id.guideline8, ConstraintSet.TOP, 72.dp)
                 currentAnimations.clear()
                 currentAnimations.add(longTapSeek(tapIndicatorRewind, tapIndicatorForward, plTipsTimeline))
-                nextButton.setText(R.string.close)
+                nextButton.setText(RR.string.close)
             }
             else -> {}
         }
@@ -378,9 +379,9 @@ class AudioPlaylistTipsDelegate(private val activity: AudioPlayerContainerActivi
  * @param descriptionText: the string resource to display in the description [TextView]
  */
 enum class AudioPlaylistTipsStep(@StringRes var titleText: Int, @StringRes var descriptionText: Int, @StringRes var descriptionTextTablet: Int) {
-    REMOVE(R.string.remove_song, R.string.tips_swipe_horizontal, R.string.tap_to_remove),
-    REARRANGE(R.string.rearrange_order, R.string.tips_long_drop, R.string.tap_to_rearrange),
-    SEEK(R.string.seek, R.string.tips_hold_seek, R.string.tips_hold_seek);
+    REMOVE(RR.string.remove_song, RR.string.tips_swipe_horizontal, RR.string.tap_to_remove),
+    REARRANGE(RR.string.rearrange_order, RR.string.tips_long_drop, RR.string.tap_to_rearrange),
+    SEEK(RR.string.seek, RR.string.tips_hold_seek, RR.string.tips_hold_seek);
 
     /**
      * @return the next step

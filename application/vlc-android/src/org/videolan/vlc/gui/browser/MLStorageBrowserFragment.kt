@@ -40,6 +40,7 @@ import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.medialibrary.media.Storage
+import org.videolan.resources.R as RR
 import org.videolan.tools.NetworkMonitor
 import org.videolan.tools.setGone
 import org.videolan.vlc.R
@@ -68,7 +69,7 @@ class MLStorageBrowserFragment : BaseFragment(), IStorageFragmentDelegate by Sto
 
     private var alertDialog: AlertDialog? = null
 
-    override fun getTitle() = getString(if (arguments?.getBoolean(FROM_ONBOARDING, false) == true) R.string.medialibrary_directories else  R.string.directories_summary)
+    override fun getTitle() = getString(if (arguments?.getBoolean(FROM_ONBOARDING, false) == true) RR.string.medialibrary_directories else  RR.string.directories_summary)
 
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?) = false
 
@@ -128,7 +129,7 @@ class MLStorageBrowserFragment : BaseFragment(), IStorageFragmentDelegate by Sto
 
         networkEntry = view.findViewById(R.id.network_browser_entry)
         networkEntry.loading.showNoMedia = false
-        networkEntry.loading.emptyText = getString(R.string.nomedia)
+        networkEntry.loading.emptyText = getString(RR.string.nomedia)
         val networkAdapter = StorageBrowserAdapter(getBrowserContainer(true))
         networkEntry.list.adapter = networkAdapter
         networkViewModel = getBrowserModel(category = TYPE_NETWORK, url = null)
@@ -159,10 +160,10 @@ class MLStorageBrowserFragment : BaseFragment(), IStorageFragmentDelegate by Sto
                 } else {
                     if (networkMonitor.lanAllowed) {
                         emptyLoading.state = EmptyLoadingState.LOADING
-                        emptyLoading.loadingText = getString(R.string.network_shares_discovery)
+                        emptyLoading.loadingText = getString(RR.string.network_shares_discovery)
                     } else {
                         emptyLoading.state = EmptyLoadingState.EMPTY
-                        emptyLoading.emptyText = getString(R.string.network_connection_needed)
+                        emptyLoading.emptyText = getString(RR.string.network_connection_needed)
                     }
                     networkEntry.list.visibility = View.GONE
                 }
@@ -172,7 +173,7 @@ class MLStorageBrowserFragment : BaseFragment(), IStorageFragmentDelegate by Sto
             }
         } else {
             emptyLoading.state = EmptyLoadingState.EMPTY
-            emptyLoading.emptyText = getString(R.string.network_connection_needed)
+            emptyLoading.emptyText = getString(RR.string.network_connection_needed)
             networkEntry.list.visibility = View.GONE
         }
     }
@@ -201,15 +202,15 @@ class MLStorageBrowserFragment : BaseFragment(), IStorageFragmentDelegate by Sto
         val builder = AlertDialog.Builder(context!!)
         val input = AppCompatEditText(context)
         input.inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
-        builder.setTitle(R.string.add_custom_path)
-        builder.setMessage(R.string.add_custom_path_description)
+        builder.setTitle(RR.string.add_custom_path)
+        builder.setMessage(RR.string.add_custom_path_description)
         builder.setView(input)
-        builder.setNegativeButton(R.string.cancel) { _, _ -> }
-        builder.setPositiveButton(R.string.ok, DialogInterface.OnClickListener { _, _ ->
+        builder.setNegativeButton(RR.string.cancel) { _, _ -> }
+        builder.setPositiveButton(RR.string.ok, DialogInterface.OnClickListener { _, _ ->
             val path = input.text.toString().trim { it <= ' ' }
             val f = File(path)
             if (!f.exists() || !f.isDirectory) {
-                UiTools.snacker(requireActivity(), getString(R.string.directorynotfound, path))
+                UiTools.snacker(requireActivity(), getString(RR.string.directorynotfound, path))
                 return@OnClickListener
             }
 

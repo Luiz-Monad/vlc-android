@@ -16,9 +16,9 @@ import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
+import org.videolan.tools.Settings;
 import org.videolan.vlc.R;
 import org.videolan.vlc.gui.MainActivity;
-import org.videolan.tools.Settings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -154,7 +154,7 @@ public class ExtensionsManager {
                 try {
                     item.setIcon(activity.getPackageManager().getApplicationIcon(extension.componentName().getPackageName()));
                 } catch (PackageManager.NameNotFoundException e) {
-                    item.setIcon(R.drawable.icon);
+                    item.setIcon(org.videolan.resources.R.drawable.icon);
                 }
         }
     }
@@ -165,13 +165,13 @@ public class ExtensionsManager {
 
         //Add necessary checkboxes
         if (androidAutoInstalled && extension.androidAutoEnabled()) {
-            extraTitles.add(activity.getString(R.string.extension_permission_checkbox_title, activity.getString(R.string.android_auto)));
+            extraTitles.add(activity.getString(org.videolan.resources.R.string.extension_permission_checkbox_title, activity.getString(org.videolan.resources.R.string.android_auto)));
             extraKeys.add(key + "_" + ANDROID_AUTO_SUFFIX);
         }
 
         final boolean[] extraCheckedStates = new boolean[extraTitles.size()];
         Arrays.fill(extraCheckedStates, Boolean.TRUE);
-        new AlertDialog.Builder(activity).setTitle(activity.getString(R.string.extension_permission_title, extension.title()))
+        new AlertDialog.Builder(activity).setTitle(activity.getString(org.videolan.resources.R.string.extension_permission_title, extension.title()))
                 .setMultiChoiceItems(extraTitles.toArray(new CharSequence[extraTitles.size()]),
                         extraCheckedStates,
                         new DialogInterface.OnMultiChoiceClickListener() {
@@ -180,7 +180,7 @@ public class ExtensionsManager {
                                 extraCheckedStates[pos] = b;
                             }
                         })
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(org.videolan.resources.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         Settings.INSTANCE.getInstance(activity.getApplication()).edit().putBoolean(key, true).apply();
@@ -190,7 +190,7 @@ public class ExtensionsManager {
                         activity.findViewById(R.id.navigation).postInvalidate();
                     }
                 })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                .setNegativeButton(org.videolan.resources.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();

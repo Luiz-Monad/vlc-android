@@ -19,6 +19,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.videolan.vlc.BaseUITest
 import org.videolan.vlc.R
+import org.videolan.resources.R as RR
 import org.videolan.vlc.gui.SecondaryActivity
 import org.videolan.vlc.*
 import org.videolan.vlc.gui.helpers.ThreeStatesCheckbox
@@ -48,12 +49,12 @@ class StorageBrowserFragmentUITest : BaseUITest() {
     fun whenAtRoot_checkCorrectAppbar() {
         onView(withId(R.id.main_toolbar))
                 .check(matches(
-                        hasDescendant(withText(R.string.directories_summary))
+                        hasDescendant(withText(RR.string.directories_summary))
                 ))
 
         openActionBarOverflowOrOptionsMenu(context)
 
-        onView(withText(R.string.add_custom_path))
+        onView(withText(RR.string.add_custom_path))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
     }
@@ -62,7 +63,7 @@ class StorageBrowserFragmentUITest : BaseUITest() {
     fun whenAtRootClickAddCustomPath_showDialog() {
         openActionBarOverflowOrOptionsMenu(context)
 
-        onView(withText(R.string.add_custom_path))
+        onView(withText(RR.string.add_custom_path))
                 .inRoot(isPlatformPopup())
                 .perform(click())
     }
@@ -73,7 +74,7 @@ class StorageBrowserFragmentUITest : BaseUITest() {
 
         val rvMatcher = withRecyclerView(R.id.network_list)
         onView(rvMatcher.atPosition(0))
-                .check(matches(hasDescendant(withText(R.string.internal_memory))))
+                .check(matches(hasDescendant(withText(RR.string.internal_memory))))
     }
 
     @Test

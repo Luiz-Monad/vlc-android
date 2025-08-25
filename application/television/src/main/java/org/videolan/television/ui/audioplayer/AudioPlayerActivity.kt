@@ -40,7 +40,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.AndroidDevices
-import org.videolan.television.R
+import org.videolan.resources.R
+import org.videolan.television.R as TR
 import org.videolan.television.databinding.TvAudioPlayerBinding
 import org.videolan.television.ui.browser.BaseTvActivity
 import org.videolan.tools.Settings
@@ -79,7 +80,7 @@ class AudioPlayerActivity : BaseTvActivity(),KeycodeListener  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.tv_audio_player)
+        binding = DataBindingUtil.setContentView(this, TR.layout.tv_audio_player)
         settings = Settings.getInstance(this)
 
         model = ViewModelProvider(this).get(PlaylistModel::class.java)
@@ -180,7 +181,7 @@ class AudioPlayerActivity : BaseTvActivity(),KeycodeListener  {
         }
 
         wasPlaying = state.playing
-        binding.buttonPlay.contentDescription = getString(if (state.playing) org.videolan.vlc.R.string.pause else org.videolan.vlc.R.string.play)
+        binding.buttonPlay.contentDescription = getString(if (state.playing) R.string.pause else R.string.play)
 
         val mw = model.currentMediaWrapper
         lifecycleScope.launch {
@@ -194,7 +195,7 @@ class AudioPlayerActivity : BaseTvActivity(),KeycodeListener  {
                 R.drawable.ic_shuffle_on
             else
                 R.drawable.ic_shuffle_audio)
-            binding.buttonShuffle.contentDescription = getString(if (shuffling) org.videolan.vlc.R.string.shuffle_on else org.videolan.vlc.R.string.shuffle)
+            binding.buttonShuffle.contentDescription = getString(if (shuffling) R.string.shuffle_on else R.string.shuffle)
             if (mw == null || currentCoverArt == mw.artworkMrl) return@launch
             currentCoverArt = mw.artworkMrl
             updateBackground()
@@ -268,7 +269,7 @@ class AudioPlayerActivity : BaseTvActivity(),KeycodeListener  {
 
     override fun bookmark() {
         bookmarkModel.addBookmark(this)
-        UiTools.snackerConfirm(this, getString(org.videolan.vlc.R.string.bookmark_added), confirmMessage = org.videolan.vlc.R.string.show) {
+        UiTools.snackerConfirm(this, getString(R.string.bookmark_added), confirmMessage = R.string.show) {
             showBookmarks()
         }
     }
@@ -301,12 +302,12 @@ class AudioPlayerActivity : BaseTvActivity(),KeycodeListener  {
 
     fun onClick(v: View) {
         when (v.id) {
-            R.id.button_play -> togglePlayPause()
-            R.id.button_next -> next()
-            R.id.button_previous -> previous()
-            R.id.button_repeat -> switchRepeatMode()
-            R.id.button_shuffle -> setShuffleMode(!shuffling)
-            R.id.button_more -> showAdvancedOptions(v)
+            TR.id.button_play -> togglePlayPause()
+            TR.id.button_next -> next()
+            TR.id.button_previous -> previous()
+            TR.id.button_repeat -> switchRepeatMode()
+            TR.id.button_shuffle -> setShuffleMode(!shuffling)
+            TR.id.button_more -> showAdvancedOptions(v)
         }
     }
 

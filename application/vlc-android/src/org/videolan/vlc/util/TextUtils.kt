@@ -26,6 +26,7 @@ package org.videolan.vlc.util
 
 import android.content.Context
 import org.videolan.vlc.R
+import org.videolan.resources.R as RR
 
 object TextUtils {
 
@@ -75,6 +76,6 @@ object TextUtils {
      * @param title the title to format
      * @return a formatted string
      */
-    fun formatChapterTitle(context: Context, title: String?) = if (title?.firstOrNull { it.isLetter() } == null) context.getString(R.string.current_chapter, title) else title
+    fun formatChapterTitle(context: Context, title: String?) = if (title?.firstOrNull { it.isLetter() } == null) context.getString(RR.string.current_chapter, title) else title
 
 }

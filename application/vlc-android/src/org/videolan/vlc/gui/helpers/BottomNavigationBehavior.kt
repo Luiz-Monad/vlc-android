@@ -37,6 +37,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.customview.view.AbsSavedState
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 
 private const val STATE_SCROLLED_DOWN = 1
@@ -132,7 +133,7 @@ class BottomNavigationBehavior<V : View>(context: Context, attrs: AttributeSet) 
             if (player.layoutParams is CoordinatorLayout.LayoutParams) {
                 val params = player.layoutParams as CoordinatorLayout.LayoutParams
                 val playerBehavior = params.behavior as PlayerBehavior<*>
-                playerBehavior.peekHeight = child.context.resources.getDimensionPixelSize(R.dimen.player_peek_height) + child.height - if (stateIsScrolling || currentState == STATE_SCROLLED_DOWN) child.translationY.toInt() else 0
+                playerBehavior.peekHeight = child.context.resources.getDimensionPixelSize(RR.dimen.player_peek_height) + child.height - if (stateIsScrolling || currentState == STATE_SCROLLED_DOWN) child.translationY.toInt() else 0
             }
         }
     }

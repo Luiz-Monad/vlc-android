@@ -34,7 +34,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.Settings
-import org.videolan.vlc.R
+import org.videolan.resources.R
 
 private const val TAG = "SearchFragment"
 private const val REQUEST_SPEECH = 1

@@ -37,6 +37,7 @@ import org.videolan.medialibrary.interfaces.media.Album
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.interfaces.media.Playlist
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import java.lang.IllegalStateException
 
@@ -107,23 +108,23 @@ class ConfirmDeleteDialog : VLCBottomSheetDialogFragment() {
                 val nbFiles = mediaList.filter { it is MediaWrapper && it.type != MediaWrapper.TYPE_DIR }.size
                 val nbFolders = mediaList.filter { it is MediaWrapper && it.type == MediaWrapper.TYPE_DIR }.size
                 when {
-                    nbFiles == 0 -> getString(R.string.confirm_delete_folders, nbFolders)
-                    nbFolders == 0 -> getString(R.string.confirm_delete_files, nbFiles)
-                    else -> getString(R.string.confirm_delete_folders_and_files, nbFolders, nbFiles)
+                    nbFiles == 0 -> getString(RR.string.confirm_delete_folders, nbFolders)
+                    nbFolders == 0 -> getString(RR.string.confirm_delete_files, nbFiles)
+                    else -> getString(RR.string.confirm_delete_folders_and_files, nbFolders, nbFiles)
                 }
 
             }
-            mediaList[0] is MediaWrapper -> getString(if ((mediaList[0] as MediaWrapper).type == MediaWrapper.TYPE_DIR) R.string.confirm_delete_folder else R.string.confirm_delete, mediaList[0].title)
-            mediaList[0] is Album -> getString(R.string.confirm_delete_album, mediaList[0].title)
-            mediaList[0] is Playlist -> getString(R.string.confirm_delete_playlist, mediaList[0].title)
-            else -> getString(R.string.confirm_delete_several_media, mediaList.size)
+            mediaList[0] is MediaWrapper -> getString(if ((mediaList[0] as MediaWrapper).type == MediaWrapper.TYPE_DIR) RR.string.confirm_delete_folder else RR.string.confirm_delete, mediaList[0].title)
+            mediaList[0] is Album -> getString(RR.string.confirm_delete_album, mediaList[0].title)
+            mediaList[0] is Playlist -> getString(RR.string.confirm_delete_playlist, mediaList[0].title)
+            else -> getString(RR.string.confirm_delete_several_media, mediaList.size)
         }
 
         if (descriptionString?.isNotEmpty() == true) description.text = descriptionString
         if (buttonText?.isNotEmpty() == true) deleteButton.text = buttonText
 
 
-        val anim = AnimatedVectorDrawableCompat.create(requireActivity(), R.drawable.anim_delete)!!
+        val anim = AnimatedVectorDrawableCompat.create(requireActivity(), RR.drawable.anim_delete)!!
         deleteAnimation.setImageDrawable(anim)
         anim.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
             override fun onAnimationEnd(drawable: Drawable?) {

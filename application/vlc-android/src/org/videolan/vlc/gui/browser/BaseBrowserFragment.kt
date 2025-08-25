@@ -49,6 +49,7 @@ import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
@@ -198,7 +199,7 @@ abstract class BaseBrowserFragment : MediaBrowserFragment<BrowserModel>(), IRefr
             ariane.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             ariane.adapter = PathAdapter(this, media)
             if (ariane.itemDecorationCount == 0) {
-                ariane.addItemDecoration(VLCDividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL, ContextCompat.getDrawable(requireContext(), R.drawable.ic_divider)!!))
+                ariane.addItemDecoration(VLCDividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL, ContextCompat.getDrawable(requireContext(), RR.drawable.ic_divider)!!))
             }
             ariane.scrollToPosition(ariane.adapter!!.itemCount - 1)
         } else ariane.visibility = View.GONE
@@ -232,9 +233,9 @@ abstract class BaseBrowserFragment : MediaBrowserFragment<BrowserModel>(), IRefr
     override fun onStart() {
         super.onStart()
         fabPlay?.run {
-            setImageResource(R.drawable.ic_fab_play)
+            setImageResource(RR.drawable.ic_fab_play)
             updateFab()
-            fabPlay?.contentDescription = getString(R.string.play)
+            fabPlay?.contentDescription = getString(RR.string.play)
         }
         (activity as? AudioPlayerContainerActivity)?.expandAppBar()
     }
@@ -269,7 +270,7 @@ abstract class BaseBrowserFragment : MediaBrowserFragment<BrowserModel>(), IRefr
                 var mrl = mrl?.removeFileScheme() ?: ""
                 if (mrl.isNotEmpty()) {
                     if (this is FileBrowserFragment && mrl.startsWith(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY))
-                        mrl = getString(R.string.internal_memory) + mrl.substring(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY.length)
+                        mrl = getString(RR.string.internal_memory) + mrl.substring(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY.length)
                     mrl = Uri.decode(mrl).replace("://".toRegex(), " ").replace("/".toRegex(), " > ")
                 }
                 if (currentMedia != null) mrl else null
@@ -305,7 +306,7 @@ abstract class BaseBrowserFragment : MediaBrowserFragment<BrowserModel>(), IRefr
      * Update views visibility and emptiness info
      */
     protected open fun updateEmptyView() {
-        binding.emptyLoading.emptyText = viewModel.filterQuery?.let {  getString(R.string.empty_search, it) } ?: getString(R.string.nomedia)
+        binding.emptyLoading.emptyText = viewModel.filterQuery?.let {  getString(RR.string.empty_search, it) } ?: getString(RR.string.nomedia)
         swipeRefreshLayout.let {
             when {
                !Permissions.canReadStorage(requireActivity()) -> binding.emptyLoading.state = EmptyLoadingState.MISSING_PERMISSION
@@ -353,7 +354,7 @@ abstract class BaseBrowserFragment : MediaBrowserFragment<BrowserModel>(), IRefr
                 }
                 MSG_SHOW_ENQUEUING -> {
                     owner?.activity?.let {
-                        enqueuingSnackbar = UiTools.snackerMessageInfinite(it, it.getString(R.string.enqueuing))
+                        enqueuingSnackbar = UiTools.snackerMessageInfinite(it, it.getString(RR.string.enqueuing))
                     }
                     enqueuingSnackbar?.show()
 
@@ -418,7 +419,7 @@ abstract class BaseBrowserFragment : MediaBrowserFragment<BrowserModel>(), IRefr
             stopActionMode()
             return false
         }
-        mode.title = requireActivity().getString(R.string.selection_count, count)
+        mode.title = requireActivity().getString(RR.string.selection_count, count)
         val fileBrowser = this is FileBrowserFragment
         val single = fileBrowser && count == 1
         val selection = if (single) adapter.multiSelectHelper.getSelection() else null
@@ -501,7 +502,7 @@ abstract class BaseBrowserFragment : MediaBrowserFragment<BrowserModel>(), IRefr
 
     private fun addToScannedFolders(mw: MediaWrapper) {
         MedialibraryUtils.addDir(mw.uri.toString(), requireActivity().applicationContext)
-        Snackbar.make(binding.root, getString(R.string.scanned_directory_added, mw.uri.toString().toUri().lastPathSegment), Snackbar.LENGTH_LONG).show()
+        Snackbar.make(binding.root, getString(RR.string.scanned_directory_added, mw.uri.toString().toUri().lastPathSegment), Snackbar.LENGTH_LONG).show()
     }
 
     private fun toggleFavorite() = lifecycleScope.launch {

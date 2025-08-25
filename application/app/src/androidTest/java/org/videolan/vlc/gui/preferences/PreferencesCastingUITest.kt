@@ -9,7 +9,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.videolan.vlc.PreferenceMatchers.isEnabled
 import org.videolan.vlc.PreferenceMatchers.withKey
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.onPreferenceRow
 
 class PreferencesCastingUITest: BasePreferenceUITest() {
@@ -21,7 +21,7 @@ class PreferencesCastingUITest: BasePreferenceUITest() {
     override fun beforeTest() {
         activity = intentsTestRule.activity
 
-        onPreferenceRow(R.id.recycler_view, withKey("casting_category"))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, withKey("casting_category"))!!
                 .perform(click())
     }
 
@@ -29,12 +29,12 @@ class PreferencesCastingUITest: BasePreferenceUITest() {
     fun checkWirelessCastingSetting() {
         val key = "enable_casting"
 
-        onPreferenceRow(R.id.recycler_view, withKey("casting_passthrough"), isEnabled)!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, withKey("casting_passthrough"), isEnabled)!!
                 .check(matches(isDisplayed()))
 
         checkToggleWorks(key, settings)
 
-        onPreferenceRow(R.id.recycler_view, withKey("casting_passthrough"), not(isEnabled))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, withKey("casting_passthrough"), not(isEnabled))!!
                 .check(matches(isDisplayed()))
     }
 

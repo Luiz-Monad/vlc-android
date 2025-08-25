@@ -46,7 +46,7 @@ import org.videolan.resources.*
 import org.videolan.tools.Settings
 import org.videolan.tools.dp
 import org.videolan.tools.getLocaleLanguages
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.gui.helpers.*
 
 
@@ -132,7 +132,7 @@ class CardPresenter(private val context: Activity, private val isPoster: Boolean
         val cardView = ImageCardView(context)
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
-        cardView.setBackgroundColor(ContextCompat.getColor(context, R.color.lb_details_overview_bg_color))
+        cardView.setBackgroundColor(ContextCompat.getColor(context, androidx.leanback.R.color.lb_details_overview_bg_color))
         if (isPoster) cardView.setMainImageDimensions(CARD_WIDTH_POSTER, CARD_HEIGHT_POSTER)
         else cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT)
         return ViewHolder(cardView)

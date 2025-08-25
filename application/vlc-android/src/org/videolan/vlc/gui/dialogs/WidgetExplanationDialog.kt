@@ -38,6 +38,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.DialogWidgetExplanationBinding
@@ -67,7 +68,7 @@ class WidgetExplanationDialog : VLCBottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sizeDrawbles = listOf(R.drawable.vlc_widget_mini, R.drawable.vlc_widget_micro, R.drawable.vlc_widget_pill, R.drawable.vlc_widget_macro)
+        val sizeDrawbles = listOf(RR.drawable.vlc_widget_mini, RR.drawable.vlc_widget_micro, RR.drawable.vlc_widget_pill, RR.drawable.vlc_widget_macro)
         displaySizeImage(sizeDrawbles[0])
         handler.sendEmptyMessageDelayed(ACTION_DISPLAY_NEXT, 1000)
         binding.widgetNextButton.setOnClickListener {
@@ -82,7 +83,7 @@ class WidgetExplanationDialog : VLCBottomSheetDialogFragment() {
                     binding.step1.setGone()
                     binding.step2.setGone()
                     binding.step3.setVisible()
-                    binding.widgetNextButton.text = getString(R.string.close)
+                    binding.widgetNextButton.text = getString(RR.string.close)
                     resizeAnimation.cancel()
                 }
                 else -> dismiss()
@@ -155,8 +156,8 @@ private const val ACTION_DISPLAY_NEXT = 1
  * @param owner the dialog itself
  */
 private class ResizeHandler(owner: WidgetExplanationDialog) : WeakHandler<WidgetExplanationDialog>(owner) {
-    private val sizeDrawables = listOf(R.drawable.vlc_widget_mini, R.drawable.vlc_widget_micro, R.drawable.vlc_widget_pill, R.drawable.vlc_widget_macro)
-    var currentDrawable = R.drawable.vlc_widget_macro
+    private val sizeDrawables = listOf(RR.drawable.vlc_widget_mini, RR.drawable.vlc_widget_micro, RR.drawable.vlc_widget_pill, RR.drawable.vlc_widget_macro)
+    var currentDrawable = RR.drawable.vlc_widget_macro
 
     private fun displaySizeImage(@DrawableRes drawable: Int) {
         owner?.let { owner ->

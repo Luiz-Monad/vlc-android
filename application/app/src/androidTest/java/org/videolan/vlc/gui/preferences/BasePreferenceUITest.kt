@@ -12,7 +12,6 @@ import org.hamcrest.Matchers.allOf
 import org.videolan.tools.Settings
 import org.videolan.vlc.BaseUITest
 import org.videolan.vlc.PreferenceMatchers
-import org.videolan.vlc.R
 import org.videolan.vlc.onPreferenceRow
 
 abstract class BasePreferenceUITest : BaseUITest() {
@@ -31,7 +30,7 @@ abstract class BasePreferenceUITest : BaseUITest() {
     fun checkModeChanged(key: String, mode: String, defValue: String, map: Map<String, *>) {
         val oldMode = settings.getString(key, defValue) ?: defValue
 
-        onPreferenceRow(R.id.recycler_view, PreferenceMatchers.withKey(key))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, PreferenceMatchers.withKey(key))!!
                 .perform(ViewActions.click())
 
         val oldVal = map.getValue(oldMode).toString()
@@ -51,7 +50,7 @@ abstract class BasePreferenceUITest : BaseUITest() {
 
     fun checkToggleWorks(key: String, settings: SharedPreferences, default: Boolean = true) {
         val oldValue = settings.getBoolean(key, default)
-        onPreferenceRow(R.id.recycler_view, PreferenceMatchers.withKey(key))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, PreferenceMatchers.withKey(key))!!
                 .check(ViewAssertions.matches(ViewMatchers.hasDescendant(if (oldValue) ViewMatchers.isChecked() else ViewMatchers.isNotChecked())))
                 .perform(ViewActions.click())
 

@@ -61,13 +61,15 @@ import org.videolan.moviepedia.database.models.MediaImage
 import org.videolan.moviepedia.database.models.MediaImageType
 import org.videolan.moviepedia.database.models.Person
 import org.videolan.television.R
+import org.videolan.resources.R as RR
+import org.videolan.vlc.R as BR
 import org.videolan.tools.dp
 import org.videolan.vlc.gui.helpers.downloadIcon
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 class MediaImageCardPresenter(private val context: Activity, private val imageType: MediaImageType) : Presenter() {
 
-    private var defaultCardImage: Drawable? = ContextCompat.getDrawable(context, R.drawable.ic_people_big)
+    private var defaultCardImage: Drawable? = ContextCompat.getDrawable(context, RR.drawable.ic_people_big)
 
     inner class ViewHolder(view: View) : Presenter.ViewHolder(view) {
         private val cardView: ImageCardView = view as ImageCardView
@@ -93,10 +95,10 @@ class MediaImageCardPresenter(private val context: Activity, private val imageTy
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
-        val cardView = ImageCardView(ContextThemeWrapper(context, R.style.VLCImageCardViewNoTitle))
+        val cardView = ImageCardView(ContextThemeWrapper(context, BR.style.VLCImageCardViewNoTitle))
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
-        cardView.setBackgroundColor(ContextCompat.getColor(context, R.color.lb_details_overview_bg_color))
+        cardView.setBackgroundColor(ContextCompat.getColor(context, androidx.leanback.R.color.lb_details_overview_bg_color))
         cardView.setMainImageDimensions(if (imageType == MediaImageType.POSTER) CARD_WIDTH_POSTER else CARD_WIDTH_BACKDROP, if (imageType == MediaImageType.POSTER) CARD_HEIGHT_POSTER else CARD_HEIGHT_BACKDROP)
         return ViewHolder(cardView)
     }

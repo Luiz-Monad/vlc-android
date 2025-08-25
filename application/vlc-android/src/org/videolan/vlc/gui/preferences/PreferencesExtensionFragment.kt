@@ -9,6 +9,7 @@ import androidx.preference.Preference
 import androidx.preference.SwitchPreferenceCompat
 import androidx.preference.TwoStatePreference
 import com.google.android.material.appbar.AppBarLayout
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.tools.putSingle
 import org.videolan.vlc.R
@@ -77,7 +78,7 @@ class PreferencesExtensionFragment : BasePreferenceFragment() {
 
         //Main switch
         val switchPreference = SwitchPreferenceCompat(preferenceScreen!!.context)
-        switchPreference.title = preferenceScreen!!.context.getString(R.string.extension_prefs_activation_title).uppercase(Locale.getDefault())
+        switchPreference.title = preferenceScreen!!.context.getString(RR.string.extension_prefs_activation_title).uppercase(Locale.getDefault())
         switchPreference.key = extensionKey
         switchPreference.isChecked = settings.getBoolean(extensionKey, false)
         switchPreference.onPreferenceChangeListener = null
@@ -86,7 +87,7 @@ class PreferencesExtensionFragment : BasePreferenceFragment() {
         //Android-auto
         if (androidAutoAvailable) {
             val checkbox = CheckBoxPreference(preferenceScreen!!.context)
-            checkbox.setTitle(R.string.android_auto)
+            checkbox.setTitle(RR.string.android_auto)
             val key = extensionKey + "_" + ExtensionsManager.ANDROID_AUTO_SUFFIX
             checkbox.key = key
             checkbox.isChecked = switchPreference.isChecked && settings.getBoolean(key, false)

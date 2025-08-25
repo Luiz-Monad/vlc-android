@@ -48,7 +48,8 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.util.HeadersIndex
-import org.videolan.television.R
+import org.videolan.vlc.R
+import org.videolan.resources.R as RR
 import org.videolan.television.databinding.SongBrowserBinding
 import org.videolan.television.ui.*
 import org.videolan.tools.Settings
@@ -149,8 +150,8 @@ abstract class BaseBrowserTvFragment<T> : Fragment(), BrowserFragmentInterface, 
         binding.displayButton.setOnClickListener(displayClick)
         binding.imageButtonDisplay.setOnClickListener(displayClick)
 
-        spacing = resources.getDimensionPixelSize(R.dimen.kl_small)
-        recyclerSectionItemGridDecoration = RecyclerSectionItemGridDecoration(resources.getDimensionPixelSize(R.dimen.recycler_section_header_tv_height), spacing, spacing, true, viewModel.nbColumns, viewModel.provider)
+        spacing = resources.getDimensionPixelSize(RR.dimen.kl_small)
+        recyclerSectionItemGridDecoration = RecyclerSectionItemGridDecoration(resources.getDimensionPixelSize(RR.dimen.recycler_section_header_tv_height), spacing, spacing, true, viewModel.nbColumns, viewModel.provider)
         inGrid = Settings.getInstance(requireActivity()).getBoolean(getDisplayPrefId(), true)
         setupDisplayIcon()
         setupLayoutManager()
@@ -262,11 +263,11 @@ abstract class BaseBrowserTvFragment<T> : Fragment(), BrowserFragmentInterface, 
     }
 
     private fun setupDisplayIcon() {
-        binding.imageButtonDisplay.setImageResource(if (inGrid) R.drawable.ic_fabtvmini_list else R.drawable.ic_fabtvmini_grid)
-        binding.displayButton.setImageResource(if (inGrid) R.drawable.ic_list else R.drawable.ic_grid)
-        binding.displayDescription.setText(if (inGrid) R.string.display_in_list else R.string.display_in_grid)
-        binding.displayButton.contentDescription = getString(if (inGrid) R.string.display_in_list else R.string.display_in_grid)
-        binding.imageButtonDisplay.contentDescription = getString(if (inGrid) R.string.display_in_list else R.string.display_in_grid)
+        binding.imageButtonDisplay.setImageResource(if (inGrid) RR.drawable.ic_fabtvmini_list else RR.drawable.ic_fabtvmini_grid)
+        binding.displayButton.setImageResource(if (inGrid) RR.drawable.ic_list else RR.drawable.ic_grid)
+        binding.displayDescription.setText(if (inGrid) RR.string.display_in_list else RR.string.display_in_grid)
+        binding.displayButton.contentDescription = getString(if (inGrid) RR.string.display_in_list else RR.string.display_in_grid)
+        binding.imageButtonDisplay.contentDescription = getString(if (inGrid) RR.string.display_in_list else RR.string.display_in_grid)
     }
 
     override fun onStart() {

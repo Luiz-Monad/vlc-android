@@ -31,16 +31,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.videolan.resources.VLCInstance
+import org.videolan.resources.R
+import org.videolan.vlc.R as BR
 import org.videolan.tools.LOCK_USE_SENSOR
 import org.videolan.tools.POPUP_FORCE_LEGACY
 import org.videolan.tools.SAVE_BRIGHTNESS
-import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.restartMediaPlayer
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 class PreferencesVideo : BasePreferenceFragment(), SharedPreferences.OnSharedPreferenceChangeListener, CoroutineScope by MainScope() {
 
-    override fun getXml() = R.xml.preferences_video
+    override fun getXml() = BR.xml.preferences_video
 
     override fun getTitleId() = R.string.video_prefs_category
 

@@ -29,6 +29,7 @@ import android.view.Gravity
 import android.view.View
 import androidx.core.os.bundleOf
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.BaseActivity
 import org.videolan.vlc.gui.video.VideoPlayerActivity

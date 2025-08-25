@@ -6,6 +6,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.tools.Settings
 
@@ -29,9 +30,9 @@ class HalfCircleView : View {
 
     private fun initAttributes(attrs: AttributeSet, defStyle: Int) {
         attrs.let {
-            val a = context.theme.obtainStyledAttributes(attrs, R.styleable.HalfCircleView, 0, defStyle)
+            val a = context.theme.obtainStyledAttributes(attrs, RR.styleable.HalfCircleView, 0, defStyle)
             try {
-                isLeft = a.getBoolean(R.styleable.HalfCircleView_is_left, true)
+                isLeft = a.getBoolean(RR.styleable.HalfCircleView_is_left, true)
             } catch (e: Exception) {
             } finally {
                 a.recycle()
@@ -40,10 +41,10 @@ class HalfCircleView : View {
     }
 
     private fun initialize() {
-        paint.color = ContextCompat.getColor(context, R.color.blacktransparent)
+        paint.color = ContextCompat.getColor(context, RR.color.blacktransparent)
         paint.isAntiAlias = true
         if (Settings.showTvUi) {
-            background = ContextCompat.getDrawable(context, if (isLeft) R.drawable.half_circle_tv_left else R.drawable.half_circle_tv_right)
+            background = ContextCompat.getDrawable(context, if (isLeft) RR.drawable.half_circle_tv_left else RR.drawable.half_circle_tv_right)
         } else {
             background = null
         }

@@ -40,6 +40,7 @@ import org.videolan.medialibrary.Tools
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.Settings
 import org.videolan.tools.removeQuery
@@ -139,9 +140,9 @@ internal class MediaSessionCallback(private val playbackService: PlaybackService
                     val context = playbackService.applicationContext
                     playbackService.currentMediaWrapper?.let {
                         val bookmark = it.addBookmark(playbackService.getTime())
-                        val bookmarkName = context.getString(R.string.bookmark_default_name, Tools.millisToString(playbackService.getTime()))
+                        val bookmarkName = context.getString(RR.string.bookmark_default_name, Tools.millisToString(playbackService.getTime()))
                         bookmark?.setName(bookmarkName)
-                        playbackService.displayPlaybackMessage(R.string.saved, bookmarkName)
+                        playbackService.displayPlaybackMessage(RR.string.saved, bookmarkName)
                     }
                 }
             }
@@ -170,8 +171,8 @@ internal class MediaSessionCallback(private val playbackService: PlaybackService
                     val page = mediaIdUri.getQueryParameter("p")
                     val pageOffset = page?.toInt()?.times(MediaSessionBrowser.MAX_RESULT_SIZE) ?: 0
                     when (mediaIdUri.removeQuery().toString()) {
-                        MediaSessionBrowser.ID_NO_MEDIA -> playbackService.displayPlaybackError(R.string.search_no_result)
-                        MediaSessionBrowser.ID_NO_PLAYLIST -> playbackService.displayPlaybackError(R.string.noplaylist)
+                        MediaSessionBrowser.ID_NO_MEDIA -> playbackService.displayPlaybackError(RR.string.search_no_result)
+                        MediaSessionBrowser.ID_NO_PLAYLIST -> playbackService.displayPlaybackError(RR.string.noplaylist)
                         MediaSessionBrowser.ID_SHUFFLE_ALL -> {
                             val tracks = context.getFromMl { audio }
                             if (tracks.isNotEmpty() && isActive) {
@@ -179,7 +180,7 @@ internal class MediaSessionCallback(private val playbackService: PlaybackService
                                 loadMedia(tracks.toList(), SecureRandom().nextInt(min(tracks.size, MEDIALIBRARY_PAGE_SIZE)))
                                 if (!playbackService.isShuffling) playbackService.shuffle()
                             } else {
-                                playbackService.displayPlaybackError(R.string.search_no_result)
+                                playbackService.displayPlaybackError(RR.string.search_no_result)
                             }
                         }
                         MediaSessionBrowser.ID_LAST_ADDED -> {
@@ -250,7 +251,7 @@ internal class MediaSessionCallback(private val playbackService: PlaybackService
                 Log.e(TAG, "Could not play media: $mediaId", e)
                 when {
                     playbackService.hasMedia() -> playbackService.play()
-                    else -> playbackService.displayPlaybackError(R.string.search_no_result)
+                    else -> playbackService.displayPlaybackError(RR.string.search_no_result)
                 }
             }
         }
@@ -267,7 +268,7 @@ internal class MediaSessionCallback(private val playbackService: PlaybackService
 
     private fun checkForSeekFailure(forward: Boolean) {
         if (playbackService.playlistManager.player.lastPosition == 0.0f && (forward || playbackService.getTime() > 0))
-            playbackService.displayPlaybackMessage(R.string.unseekable_stream)
+            playbackService.displayPlaybackMessage(RR.string.unseekable_stream)
     }
 
     override fun onPlayFromUri(uri: Uri?, extras: Bundle?) = playbackService.loadUri(uri)
@@ -317,7 +318,7 @@ internal class MediaSessionCallback(private val playbackService: PlaybackService
                         if (vsp.isAny == !playbackService.isShuffling) playbackService.shuffle()
                     }
                     playbackService.hasMedia() -> playbackService.play()
-                    else -> playbackService.displayPlaybackError(R.string.search_no_result)
+                    else -> playbackService.displayPlaybackError(RR.string.search_no_result)
                 }
             }
         }

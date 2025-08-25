@@ -27,6 +27,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.videolan.libvlc.interfaces.IMedia
+import org.videolan.resources.R as RR
 import org.videolan.tools.readableSize
 import org.videolan.vlc.R
 import org.videolan.vlc.util.LocaleUtil
@@ -48,20 +49,20 @@ class MediaInfoAdapter : RecyclerView.Adapter<MediaInfoAdapter.ViewHolder>() {
         val res = holder.itemView.context.resources
         when (track.type) {
             IMedia.Track.Type.Audio -> {
-                title = res.getString(R.string.track_audio)
+                title = res.getString(RR.string.track_audio)
                 appendCommon(textBuilder, res, track)
                 appendAudio(textBuilder, res, track as IMedia.AudioTrack)
             }
             IMedia.Track.Type.Video -> {
-                title = res.getString(R.string.track_video)
+                title = res.getString(RR.string.track_video)
                 appendCommon(textBuilder, res, track)
                 appendVideo(textBuilder, res, track as IMedia.VideoTrack)
             }
             IMedia.Track.Type.Text -> {
-                title = res.getString(R.string.track_text)
+                title = res.getString(RR.string.track_text)
                 appendCommon(textBuilder, res, track)
             }
-            else -> title = res.getString(R.string.track_unknown)
+            else -> title = res.getString(RR.string.track_unknown)
         }
         holder.title.text = title
         holder.text.text = textBuilder.toString()
@@ -78,23 +79,23 @@ class MediaInfoAdapter : RecyclerView.Adapter<MediaInfoAdapter.ViewHolder>() {
 
     private fun appendCommon(textBuilder: StringBuilder, res: Resources, track: IMedia.Track) {
         if (track.bitrate != 0)
-            textBuilder.append(res.getString(R.string.track_bitrate_info, track.bitrate.toLong().readableSize()))
-        textBuilder.append(res.getString(R.string.track_codec_info, track.codec))
+            textBuilder.append(res.getString(RR.string.track_bitrate_info, track.bitrate.toLong().readableSize()))
+        textBuilder.append(res.getString(RR.string.track_codec_info, track.codec))
         if (track.language != null && !track.language.equals("und", ignoreCase = true))
-            textBuilder.append(res.getString(R.string.track_language_info, LocaleUtil.getLocaleName(track.language)))
+            textBuilder.append(res.getString(RR.string.track_language_info, LocaleUtil.getLocaleName(track.language)))
     }
 
     private fun appendAudio(textBuilder: StringBuilder, res: Resources, track: IMedia.AudioTrack) {
-        textBuilder.append(res.getQuantityString(R.plurals.track_channels_info_quantity, track.channels, track.channels))
-        textBuilder.append(res.getString(R.string.track_samplerate_info, track.rate))
+        textBuilder.append(res.getQuantityString(RR.plurals.track_channels_info_quantity, track.channels, track.channels))
+        textBuilder.append(res.getString(RR.string.track_samplerate_info, track.rate))
     }
 
     private fun appendVideo(textBuilder: StringBuilder, res: Resources, track: IMedia.VideoTrack) {
         val frameRate = track.frameRateNum / track.frameRateDen.toDouble()
         if (track.width != 0 && track.height != 0)
-            textBuilder.append(res.getString(R.string.track_resolution_info, track.width, track.height))
+            textBuilder.append(res.getString(RR.string.track_resolution_info, track.width, track.height))
         if (!frameRate.isNaN())
-            textBuilder.append(res.getString(R.string.track_framerate_info, frameRate))
+            textBuilder.append(res.getString(RR.string.track_framerate_info, frameRate))
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

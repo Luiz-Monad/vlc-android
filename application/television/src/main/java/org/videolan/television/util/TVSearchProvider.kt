@@ -44,7 +44,7 @@ import org.videolan.resources.CONTENT_EPISODE
 import org.videolan.resources.CONTENT_RESUME
 import org.videolan.tools.Settings
 import org.videolan.vlc.BuildConfig
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.getFileUri
 import org.videolan.vlc.util.ThumbnailsProvider
 import java.util.*

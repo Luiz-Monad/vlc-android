@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentActivity
 import org.videolan.medialibrary.interfaces.EntryPointsEventsCb
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.util.canReadStorage
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.MediaParsingService
 import org.videolan.vlc.gui.SecondaryActivity

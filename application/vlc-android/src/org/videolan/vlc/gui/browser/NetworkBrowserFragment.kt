@@ -36,6 +36,7 @@ import kotlinx.coroutines.withContext
 import org.videolan.libvlc.Dialog
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.CTX_FAV_ADD
+import org.videolan.resources.R as RR
 import org.videolan.tools.NetworkMonitor
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.SecondaryActivity
@@ -55,13 +56,13 @@ class NetworkBrowserFragment : BaseBrowserFragment(), IDialogManager {
     override fun createFragment() = NetworkBrowserFragment()
 
     override val categoryTitle: String
-        get() = getString(R.string.network_browsing)
+        get() = getString(RR.string.network_browsing)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dialogsDelegate.observeDialogs(this, this)
         networkMonitor = NetworkMonitor.getInstance(requireContext())
-        (requireActivity() as? SecondaryActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_up)
+        (requireActivity() as? SecondaryActivity)?.supportActionBar?.setHomeAsUpIndicator(RR.drawable.ic_close_up)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,8 +88,8 @@ class NetworkBrowserFragment : BaseBrowserFragment(), IDialogManager {
         item.isVisible = !isRootDirectory
         lifecycleScope.launchWhenStarted {
             val isFavorite = mrl != null && browserFavRepository.browserFavExists(mrl!!.toUri())
-            item.setIcon(if (isFavorite) R.drawable.ic_menu_bookmark_w else R.drawable.ic_menu_bookmark_outline_w)
-            item.setTitle(if (isFavorite) R.string.favorites_remove else R.string.favorites_add)
+            item.setIcon(if (isFavorite) RR.drawable.ic_menu_bookmark_w else RR.drawable.ic_menu_bookmark_outline_w)
+            item.setTitle(if (isFavorite) RR.string.favorites_remove else RR.string.favorites_add)
             mrl?.let {
                 val isScanned = withContext(Dispatchers.IO) { MedialibraryUtils.isScanned(it) }
                 menu.findItem(R.id.ml_menu_scan)?.isVisible = !isRootDirectory && it.startsWith("smb") && !isScanned
@@ -99,8 +100,8 @@ class NetworkBrowserFragment : BaseBrowserFragment(), IDialogManager {
 
     override fun onStart() {
         super.onStart()
-        fabPlay?.setImageResource(if (isRootDirectory) R.drawable.ic_fab_add else R.drawable.ic_fab_play)
-        fabPlay?.contentDescription = getString(if (isRootDirectory) R.string.add else R.string.play)
+        fabPlay?.setImageResource(if (isRootDirectory) RR.drawable.ic_fab_add else RR.drawable.ic_fab_play)
+        fabPlay?.contentDescription = getString(if (isRootDirectory) RR.string.add else RR.string.play)
         fabPlay?.setOnClickListener { onFabPlayClick(it) }
     }
 
@@ -147,7 +148,7 @@ class NetworkBrowserFragment : BaseBrowserFragment(), IDialogManager {
                     binding.emptyLoading.state = EmptyLoadingState.LOADING
                     binding.networkList.visibility = View.GONE
                 } else {
-                    binding.emptyLoading.emptyText = viewModel.filterQuery?.let {  getString(R.string.empty_search, it) } ?: getString(R.string.nomedia)
+                    binding.emptyLoading.emptyText = viewModel.filterQuery?.let {  getString(RR.string.empty_search, it) } ?: getString(RR.string.nomedia)
                     if (viewModel.filterQuery != null) {
                         binding.emptyLoading.state = EmptyLoadingState.EMPTY_SEARCH
                         return
@@ -155,14 +156,14 @@ class NetworkBrowserFragment : BaseBrowserFragment(), IDialogManager {
                     if (isRootDirectory) {
                         if (networkMonitor.lanAllowed) {
                             binding.emptyLoading.state = EmptyLoadingState.LOADING
-                            binding.emptyLoading.loadingText = getString(R.string.network_shares_discovery)
+                            binding.emptyLoading.loadingText = getString(RR.string.network_shares_discovery)
                         } else {
                             binding.emptyLoading.state = EmptyLoadingState.EMPTY
-                            binding.emptyLoading.emptyText = getString(R.string.network_connection_needed)
+                            binding.emptyLoading.emptyText = getString(RR.string.network_connection_needed)
                         }
                     } else {
                         binding.emptyLoading.state = EmptyLoadingState.EMPTY
-                        binding.emptyLoading.emptyText = getString(R.string.network_empty)
+                        binding.emptyLoading.emptyText = getString(RR.string.network_empty)
                     }
                     binding.networkList.visibility = View.GONE
                     handler.sendEmptyMessage(MSG_HIDE_LOADING)
@@ -173,7 +174,7 @@ class NetworkBrowserFragment : BaseBrowserFragment(), IDialogManager {
             }
         } else {
             binding.emptyLoading.state = EmptyLoadingState.EMPTY
-            binding.emptyLoading.emptyText = getString(R.string.network_connection_needed)
+            binding.emptyLoading.emptyText = getString(RR.string.network_connection_needed)
             binding.networkList.visibility = View.GONE
             binding.showFavorites = false
         }

@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import com.google.android.material.appbar.AppBarLayout
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.extensions.ExtensionListing
 import org.videolan.vlc.extensions.ExtensionsManager
@@ -48,7 +49,7 @@ class PreferencesExtensions : BasePreferenceFragment() {
     }
 
     override fun getTitleId(): Int {
-        return R.string.extensions_prefs_category
+        return RR.string.extensions_prefs_category
     }
 
     private fun createCheckboxes() {
@@ -75,7 +76,7 @@ class PreferencesExtensions : BasePreferenceFragment() {
                 try {
                     switchPreference.icon = pm.getApplicationIcon(extensions[i].componentName().packageName)
                 } catch (e: PackageManager.NameNotFoundException) {
-                    switchPreference.setIcon(R.drawable.icon)
+                    switchPreference.setIcon(RR.drawable.icon)
                 }
 
             val checked = settings.getBoolean(key, false)
@@ -94,7 +95,7 @@ class PreferencesExtensions : BasePreferenceFragment() {
 
         if (count == 0) {
             val emptyCategory = PreferenceCategory(preferenceScreen!!.context)
-            emptyCategory.setTitle(R.string.extensions_empty)
+            emptyCategory.setTitle(RR.string.extensions_empty)
             preferenceScreen!!.addPreference(emptyCategory)
         }
     }

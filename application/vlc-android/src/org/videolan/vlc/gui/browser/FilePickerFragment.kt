@@ -37,6 +37,7 @@ import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.removeFileScheme
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.ContentActivity
@@ -73,7 +74,7 @@ class FilePickerFragment : FileBrowserFragment(), BrowserContainer<MediaLibraryI
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.emptyLoading.emptyText = getString(R.string.no_subs_found)
+        binding.emptyLoading.emptyText = getString(RR.string.no_subs_found)
     }
 
     override fun onStart() {

@@ -29,6 +29,7 @@ import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.channels.actor
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.conflatedActor
 import org.videolan.vlc.util.FileUtils
 import java.io.File

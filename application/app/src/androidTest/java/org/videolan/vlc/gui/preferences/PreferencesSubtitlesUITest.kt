@@ -5,7 +5,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule
 import org.junit.Rule
 import org.junit.Test
 import org.videolan.vlc.PreferenceMatchers.withKey
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.onPreferenceRow
 
 class PreferencesSubtitlesUITest: BasePreferenceUITest() {
@@ -17,7 +17,7 @@ class PreferencesSubtitlesUITest: BasePreferenceUITest() {
     override fun beforeTest() {
         activity = intentsTestRule.activity
 
-        onPreferenceRow(R.id.recycler_view, withKey("subtitles_category"))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, withKey("subtitles_category"))!!
                 .perform(click())
     }
 

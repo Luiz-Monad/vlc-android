@@ -47,6 +47,7 @@ import org.videolan.resources.ACTION_CHECK_STORAGES
 import org.videolan.resources.AppContextProvider
 import org.videolan.resources.util.getFromMl
 import org.videolan.resources.util.launchForeground
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.tools.livedata.LiveDataset
 import org.videolan.vlc.gui.helpers.UiTools

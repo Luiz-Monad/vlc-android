@@ -33,6 +33,7 @@ import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.videolan.resources.ACTIVITY_RESULT_PREFERENCES
+import org.videolan.resources.R as RR
 import org.videolan.tools.RESULT_RESTART
 import org.videolan.tools.RESULT_RESTART_APP
 import org.videolan.tools.RESULT_UPDATE_ARTISTS
@@ -62,7 +63,7 @@ class PreferencesActivity : BaseActivity() {
                     .commit()
         }
         mAppBarLayout = findViewById(R.id.appbar)
-        mAppBarLayout!!.post { ViewCompat.setElevation(mAppBarLayout!!, resources.getDimensionPixelSize(R.dimen.default_appbar_elevation).toFloat()) }
+        mAppBarLayout!!.post { ViewCompat.setElevation(mAppBarLayout!!, resources.getDimensionPixelSize(RR.dimen.default_appbar_elevation).toFloat()) }
     }
 
     internal fun expandBar() {

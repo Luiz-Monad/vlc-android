@@ -36,6 +36,7 @@ import org.videolan.libvlc.MediaPlayer
 import org.videolan.libvlc.interfaces.IMedia
 import org.videolan.medialibrary.Tools
 import org.videolan.medialibrary.interfaces.media.Bookmark
+import org.videolan.resources.R as RR
 import org.videolan.tools.livedata.LiveDataset
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.PlaybackService
@@ -113,7 +114,7 @@ class BookmarkModel : ViewModel(), PlaybackService.Callback {
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
                     val bookmark = it.addBookmark(service!!.getTime())
-                    bookmark?.setName(context.getString(R.string.bookmark_default_name, Tools.millisToString(service!!.getTime())))
+                    bookmark?.setName(context.getString(RR.string.bookmark_default_name, Tools.millisToString(service!!.getTime())))
                 }
                 refresh()
             }

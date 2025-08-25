@@ -24,6 +24,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCOptions
 import org.videolan.tools.AppScope
 import org.videolan.tools.Settings
@@ -88,40 +89,40 @@ class PlayerOptionsDelegate(val activity: FragmentActivity, val service: Playbac
     fun setup() {
         if (!this::recyclerview.isInitialized || PlayerController.playbackState == PlaybackStateCompat.STATE_STOPPED) return
         val options = mutableListOf<PlayerOption>()
-        if (video) options.add(PlayerOption(ID_LOCK_PLAYER, R.drawable.ic_lock_player, res.getString(R.string.lock)))
-        options.add(PlayerOption(ID_SLEEP, R.drawable.ic_sleep, res.getString(R.string.sleep_title)))
-        if (!isChromecast) options.add(PlayerOption(ID_PLAYBACK_SPEED, R.drawable.ic_speed, res.getString(R.string.playback_speed)))
-        options.add(PlayerOption(ID_JUMP_TO, R.drawable.ic_jumpto, res.getString(R.string.jump_to_time)))
-        options.add(PlayerOption(ID_EQUALIZER, R.drawable.ic_equalizer, res.getString(R.string.equalizer)))
+        if (video) options.add(PlayerOption(ID_LOCK_PLAYER, RR.drawable.ic_lock_player, res.getString(RR.string.lock)))
+        options.add(PlayerOption(ID_SLEEP, RR.drawable.ic_sleep, res.getString(RR.string.sleep_title)))
+        if (!isChromecast) options.add(PlayerOption(ID_PLAYBACK_SPEED, RR.drawable.ic_speed, res.getString(RR.string.playback_speed)))
+        options.add(PlayerOption(ID_JUMP_TO, RR.drawable.ic_jumpto, res.getString(RR.string.jump_to_time)))
+        options.add(PlayerOption(ID_EQUALIZER, RR.drawable.ic_equalizer, res.getString(RR.string.equalizer)))
         if (video) {
             if (primary && !Settings.showTvUi && service.audioTracksCount > 0)
-                options.add(PlayerOption(ID_PLAY_AS_AUDIO, R.drawable.ic_playasaudio_on, res.getString(R.string.play_as_audio)))
+                options.add(PlayerOption(ID_PLAY_AS_AUDIO, RR.drawable.ic_playasaudio_on, res.getString(RR.string.play_as_audio)))
             if (primary && AndroidDevices.pipAllowed && !AndroidDevices.isDex(activity))
-                options.add(PlayerOption(ID_POPUP_VIDEO, R.drawable.ic_popup_dim, res.getString(R.string.ctx_pip_title)))
+                options.add(PlayerOption(ID_POPUP_VIDEO, RR.drawable.ic_popup_dim, res.getString(RR.string.ctx_pip_title)))
             if (primary)
-                options.add(PlayerOption(ID_REPEAT, R.drawable.ic_repeat, res.getString(R.string.repeat_title)))
-            if (service.canShuffle()) options.add(PlayerOption(ID_SHUFFLE, R.drawable.ic_shuffle, res.getString(R.string.shuffle_title)))
-            options.add(PlayerOption(ID_VIDEO_STATS, R.drawable.ic_video_stats, res.getString(R.string.video_information)))
+                options.add(PlayerOption(ID_REPEAT, RR.drawable.ic_repeat, res.getString(RR.string.repeat_title)))
+            if (service.canShuffle()) options.add(PlayerOption(ID_SHUFFLE, RR.drawable.ic_shuffle, res.getString(RR.string.shuffle_title)))
+            options.add(PlayerOption(ID_VIDEO_STATS, RR.drawable.ic_video_stats, res.getString(RR.string.video_information)))
         } else {
-            if (service.videoTracksCount > 0) options.add(PlayerOption(ID_PLAY_AS_VIDEO, R.drawable.ic_playasaudio_off, res.getString(R.string.play_as_video)))
+            if (service.videoTracksCount > 0) options.add(PlayerOption(ID_PLAY_AS_VIDEO, RR.drawable.ic_playasaudio_off, res.getString(RR.string.play_as_video)))
         }
         val chaptersCount = service.getChapters(-1)?.size ?: 0
-        if (chaptersCount > 1) options.add(PlayerOption(ID_CHAPTER_TITLE, R.drawable.ic_chapter, res.getString(R.string.go_to_chapter)))
-        if (::bookmarkClickedListener.isInitialized) options.add(PlayerOption(ID_BOOKMARK, R.drawable.ic_bookmark, res.getString(R.string.bookmarks)))
-        if (showABReapeat) options.add(PlayerOption(ID_ABREPEAT, R.drawable.ic_abrepeat, res.getString(R.string.ab_repeat)))
-        options.add(PlayerOption(ID_SAVE_PLAYLIST, R.drawable.ic_addtoplaylist, res.getString(R.string.playlist_save)))
+        if (chaptersCount > 1) options.add(PlayerOption(ID_CHAPTER_TITLE, RR.drawable.ic_chapter, res.getString(RR.string.go_to_chapter)))
+        if (::bookmarkClickedListener.isInitialized) options.add(PlayerOption(ID_BOOKMARK, RR.drawable.ic_bookmark, res.getString(RR.string.bookmarks)))
+        if (showABReapeat) options.add(PlayerOption(ID_ABREPEAT, RR.drawable.ic_abrepeat, res.getString(RR.string.ab_repeat)))
+        options.add(PlayerOption(ID_SAVE_PLAYLIST, RR.drawable.ic_addtoplaylist, res.getString(RR.string.playlist_save)))
         if (service.playlistManager.player.canDoPassthrough() && settings.getString("aout", "0") == "0")
-            options.add(PlayerOption(ID_PASSTHROUGH, R.drawable.ic_passthrough, res.getString(R.string.audio_digital_title)))
+            options.add(PlayerOption(ID_PASSTHROUGH, RR.drawable.ic_passthrough, res.getString(RR.string.audio_digital_title)))
         if (video)
-            options.add(PlayerOption(ID_VIDEO_CONTROLS_SETTING, R.drawable.ic_video_controls, res.getString(R.string.controls_setting)))
+            options.add(PlayerOption(ID_VIDEO_CONTROLS_SETTING, RR.drawable.ic_video_controls, res.getString(RR.string.controls_setting)))
 
         if (!Settings.showTvUi) {
             if (video) {
-                options.add(PlayerOption(ID_SHOW_VIDEO_TIPS, R.drawable.ic_videotips, res.getString(R.string.tips_title)))
+                options.add(PlayerOption(ID_SHOW_VIDEO_TIPS, RR.drawable.ic_videotips, res.getString(RR.string.tips_title)))
             } else {
-                options.add(PlayerOption(ID_AUDIO_CONTROLS_SETTING, R.drawable.ic_audio_controls, res.getString(R.string.controls_setting)))
-                options.add(PlayerOption(ID_SHOW_AUDIO_TIPS, R.drawable.ic_audiotips, res.getString(R.string.audio_player_tips)))
-                options.add(PlayerOption(ID_SHOW_PLAYLIST_TIPS, R.drawable.ic_playlisttips, res.getString(R.string.playlist_tips)))
+                options.add(PlayerOption(ID_AUDIO_CONTROLS_SETTING, RR.drawable.ic_audio_controls, res.getString(RR.string.controls_setting)))
+                options.add(PlayerOption(ID_SHOW_AUDIO_TIPS, RR.drawable.ic_audiotips, res.getString(RR.string.audio_player_tips)))
+                options.add(PlayerOption(ID_SHOW_PLAYLIST_TIPS, RR.drawable.ic_playlisttips, res.getString(RR.string.playlist_tips)))
             }
         }
         (recyclerview.adapter as OptionsAdapter).update(options)
@@ -299,37 +300,37 @@ class PlayerOptionsDelegate(val activity: FragmentActivity, val service: Playbac
     private fun setRepeatMode() {
         when (service.repeatType) {
             PlaybackStateCompat.REPEAT_MODE_NONE -> {
-                repeatBinding.optionIcon.setImageResource(R.drawable.ic_repeat_one)
+                repeatBinding.optionIcon.setImageResource(RR.drawable.ic_repeat_one)
                 service.repeatType = PlaybackStateCompat.REPEAT_MODE_ONE
-                repeatBinding.root.contentDescription = repeatBinding.root.context.getString(R.string.repeat_single)
+                repeatBinding.root.contentDescription = repeatBinding.root.context.getString(RR.string.repeat_single)
             }
             PlaybackStateCompat.REPEAT_MODE_ONE -> if (service.hasPlaylist()) {
-                repeatBinding.optionIcon.setImageResource(R.drawable.ic_repeat_all)
+                repeatBinding.optionIcon.setImageResource(RR.drawable.ic_repeat_all)
                 service.repeatType = PlaybackStateCompat.REPEAT_MODE_ALL
-                repeatBinding.root.contentDescription = repeatBinding.root.context.getString(R.string.repeat_all)
+                repeatBinding.root.contentDescription = repeatBinding.root.context.getString(RR.string.repeat_all)
             } else {
-                repeatBinding.optionIcon.setImageResource(R.drawable.ic_repeat)
+                repeatBinding.optionIcon.setImageResource(RR.drawable.ic_repeat)
                 service.repeatType = PlaybackStateCompat.REPEAT_MODE_NONE
-                repeatBinding.root.contentDescription = repeatBinding.root.context.getString(R.string.repeat)
+                repeatBinding.root.contentDescription = repeatBinding.root.context.getString(RR.string.repeat)
             }
             PlaybackStateCompat.REPEAT_MODE_ALL -> {
-                repeatBinding.optionIcon.setImageResource(R.drawable.ic_repeat)
+                repeatBinding.optionIcon.setImageResource(RR.drawable.ic_repeat)
                 service.repeatType = PlaybackStateCompat.REPEAT_MODE_NONE
-                repeatBinding.root.contentDescription = repeatBinding.root.context.getString(R.string.repeat)
+                repeatBinding.root.contentDescription = repeatBinding.root.context.getString(RR.string.repeat)
             }
         }
     }
 
     private fun setShuffle() {
-        shuffleBinding.optionIcon.setImageResource(if (service.isShuffling) R.drawable.ic_shuffle_on_48dp else R.drawable.ic_shuffle)
-        shuffleBinding.root.contentDescription = shuffleBinding.root.context.getString(if (service.isShuffling) R.string.shuffle_on else R.string.shuffle)
+        shuffleBinding.optionIcon.setImageResource(if (service.isShuffling) RR.drawable.ic_shuffle_on_48dp else RR.drawable.ic_shuffle)
+        shuffleBinding.root.contentDescription = shuffleBinding.root.context.getString(if (service.isShuffling) RR.string.shuffle_on else RR.string.shuffle)
     }
 
     private fun initShuffle(binding: PlayerOptionItemBinding) {
         shuffleBinding = binding
         AppScope.launch(Dispatchers.Main) {
-            shuffleBinding.optionIcon.setImageResource(if (service.isShuffling) R.drawable.ic_shuffle_on_48dp else R.drawable.ic_shuffle)
-            shuffleBinding.root.contentDescription = shuffleBinding.root.context.getString(if (service.isShuffling) R.string.shuffle_on else R.string.shuffle)
+            shuffleBinding.optionIcon.setImageResource(if (service.isShuffling) RR.drawable.ic_shuffle_on_48dp else RR.drawable.ic_shuffle)
+            shuffleBinding.root.contentDescription = shuffleBinding.root.context.getString(if (service.isShuffling) RR.string.shuffle_on else RR.string.shuffle)
         }
     }
 
@@ -337,14 +338,14 @@ class PlayerOptionsDelegate(val activity: FragmentActivity, val service: Playbac
         repeatBinding = binding
         AppScope.launch(Dispatchers.Main) {
             repeatBinding.optionIcon.setImageResource(when (service.repeatType) {
-                PlaybackStateCompat.REPEAT_MODE_ONE -> R.drawable.ic_repeat_one
-                PlaybackStateCompat.REPEAT_MODE_ALL -> R.drawable.ic_repeat_all
-                else -> R.drawable.ic_repeat
+                PlaybackStateCompat.REPEAT_MODE_ONE -> RR.drawable.ic_repeat_one
+                PlaybackStateCompat.REPEAT_MODE_ALL -> RR.drawable.ic_repeat_all
+                else -> RR.drawable.ic_repeat
             })
             repeatBinding.root.contentDescription = repeatBinding.root.context.getString(when (service.repeatType) {
-                PlaybackStateCompat.REPEAT_MODE_ONE -> R.string.repeat_single
-                PlaybackStateCompat.REPEAT_MODE_ALL -> R.string.repeat_all
-                else -> R.string.repeat
+                PlaybackStateCompat.REPEAT_MODE_ONE -> RR.string.repeat_single
+                PlaybackStateCompat.REPEAT_MODE_ALL -> RR.string.repeat_all
+                else -> RR.string.repeat
             })
         }
     }
@@ -352,12 +353,12 @@ class PlayerOptionsDelegate(val activity: FragmentActivity, val service: Playbac
     private fun togglePassthrough() {
         val enabled = !VLCOptions.isAudioDigitalOutputEnabled(settings)
         if (service.setAudioDigitalOutputEnabled(enabled)) {
-            ptBinding.optionIcon.setImageResource(if (enabled) R.drawable.ic_passthrough_on
-            else UiTools.getResourceFromAttribute(activity, R.attr.ic_passthrough))
+            ptBinding.optionIcon.setImageResource(if (enabled) RR.drawable.ic_passthrough_on
+            else UiTools.getResourceFromAttribute(activity, RR.attr.ic_passthrough))
             VLCOptions.setAudioDigitalOutputEnabled(settings, enabled)
-            toast.setText(res.getString(if (enabled) R.string.audio_digital_output_enabled else R.string.audio_digital_output_disabled))
+            toast.setText(res.getString(if (enabled) RR.string.audio_digital_output_enabled else RR.string.audio_digital_output_disabled))
         } else
-            toast.setText(R.string.audio_digital_failed)
+            toast.setText(RR.string.audio_digital_failed)
         toast.show()
     }
 

@@ -9,6 +9,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.interfaces.media.Playlist
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.dp
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.SearchItemBinding
@@ -44,7 +45,7 @@ class SearchResultAdapter internal constructor(private val mLayoutInflater: Layo
                     } else Tools.millisToString(item.length)
                 } else null
             }
-            item is Playlist || item is Genre -> holder.itemView.context.getString(R.string.track_number, item.tracksCount)
+            item is Playlist || item is Genre -> holder.itemView.context.getString(RR.string.track_number, item.tracksCount)
             else -> item.description
         }
     }

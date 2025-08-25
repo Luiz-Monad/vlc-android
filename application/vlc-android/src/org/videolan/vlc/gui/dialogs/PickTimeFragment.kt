@@ -32,6 +32,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
+import org.videolan.resources.R as RR
 import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.TalkbackUtil
@@ -118,7 +119,7 @@ abstract class PickTimeFragment : VLCBottomSheetDialogFragment(), View.OnClickLi
 
     override fun onFocusChange(v: View, hasFocus: Boolean) {
         if (v is TextView) {
-            v.setTextColor(if (hasFocus) ContextCompat.getColor(requireActivity(), R.color.orange500) else mTextColor)
+            v.setTextColor(if (hasFocus) ContextCompat.getColor(requireActivity(), RR.color.orange500) else mTextColor)
         }
     }
 

@@ -26,6 +26,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.videolan.resources.R as RR
 import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
 import org.videolan.vlc.viewmodels.PlaylistModel
@@ -67,7 +68,7 @@ class SleepTimerDialog : PickTimeFragment() {
     }
 
     override fun getTitle(): Int {
-        return R.string.sleep_in
+        return RR.string.sleep_in
     }
 
     companion object {

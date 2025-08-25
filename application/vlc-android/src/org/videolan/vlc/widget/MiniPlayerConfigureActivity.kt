@@ -41,6 +41,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
@@ -73,7 +74,7 @@ class MiniPlayerConfigureActivity : BaseActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.main_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        title = getString(R.string.configure_widget)
+        title = getString(RR.string.configure_widget)
 
 
         // Find the widget id from the intent.
@@ -129,7 +130,7 @@ class MiniPlayerConfigureActivity : BaseActivity() {
         model.widget.value?.let {widget ->
             lifecycleScope.launch {
                 withContext((Dispatchers.IO)) {
-                        val coverBitmap = BitmapFactory.decodeResource(resources, R.drawable.vlc_fake_cover)
+                        val coverBitmap = BitmapFactory.decodeResource(resources, RR.drawable.vlc_fake_cover)
                         val palette = Palette.from(coverBitmap).generate()
                     val provider = MiniPlayerAppWidgetProvider()
                     model.widget.value?.widgetId?.let { id ->

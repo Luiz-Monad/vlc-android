@@ -37,6 +37,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 import org.videolan.tools.MultiSelectHelper
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.BaseFragment
@@ -147,7 +148,7 @@ abstract class MediaBrowserFragment<T : SortableModel> : BaseFragment(), Filtera
     }
 
     private fun onDeleteFailed(item: MediaLibraryItem) {
-        if (isAdded) UiTools.snacker(requireActivity(), getString(R.string.msg_delete_failed, item.title))
+        if (isAdded) UiTools.snacker(requireActivity(), getString(RR.string.msg_delete_failed, item.title))
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

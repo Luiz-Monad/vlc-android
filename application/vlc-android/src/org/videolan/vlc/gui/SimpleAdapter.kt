@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.videolan.medialibrary.media.DummyItem
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 import org.videolan.tools.dp
 import org.videolan.vlc.databinding.SimpleItemBinding
 import org.videolan.vlc.gui.helpers.getDummyItemIcon

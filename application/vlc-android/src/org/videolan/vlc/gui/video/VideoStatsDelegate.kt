@@ -40,6 +40,7 @@ import androidx.core.widget.NestedScrollView
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.interfaces.IMedia
 import org.videolan.liveplotgraph.LineGraph
+import org.videolan.resources.R as RR
 import org.videolan.tools.dp
 import org.videolan.tools.readableSize
 import org.videolan.vlc.BuildConfig
@@ -85,8 +86,8 @@ class VideoStatsDelegate(private val player: VideoPlayerActivity, val scrolling:
         }
 
         binding.statsScrollview.scrollState({ idle() }, { scrolling() })
-        binding.plotView.addLine(LineGraph(StatIndex.DEMUX_BITRATE.ordinal, player.getString(R.string.demux_bitrate), ContextCompat.getColor(player, R.color.material_blue)))
-        binding.plotView.addLine(LineGraph(StatIndex.INPUT_BITRATE.ordinal, player.getString(R.string.input_bitrate), ContextCompat.getColor(player, R.color.material_pink)))
+        binding.plotView.addLine(LineGraph(StatIndex.DEMUX_BITRATE.ordinal, player.getString(RR.string.demux_bitrate), ContextCompat.getColor(player, RR.color.material_blue)))
+        binding.plotView.addLine(LineGraph(StatIndex.INPUT_BITRATE.ordinal, player.getString(RR.string.input_bitrate), ContextCompat.getColor(player, RR.color.material_pink)))
         setupLayout()
     }
 
@@ -111,36 +112,36 @@ class VideoStatsDelegate(private val player: VideoPlayerActivity, val scrolling:
                 grid.columnCount = 2
 
                 val track = media.getTrack(i)
-                if (track.bitrate > 0) addStreamGridView(grid, player.getString(R.string.bitrate), player.getString(R.string.bitrate_value, track.bitrate.toLong().readableSize()))
-                addStreamGridView(grid, player.getString(R.string.codec), track.codec)
+                if (track.bitrate > 0) addStreamGridView(grid, player.getString(RR.string.bitrate), player.getString(RR.string.bitrate_value, track.bitrate.toLong().readableSize()))
+                addStreamGridView(grid, player.getString(RR.string.codec), track.codec)
                 if (track.language != null && !track.language.equals("und", ignoreCase = true))
-                    addStreamGridView(grid, player.getString(R.string.language), LocaleUtil.getLocaleName(track.language))
+                    addStreamGridView(grid, player.getString(RR.string.language), LocaleUtil.getLocaleName(track.language))
 
                 when (track.type) {
                     IMedia.Track.Type.Audio -> {
                         (track as? IMedia.AudioTrack)?.let {
-                            addStreamGridView(grid, player.getString(R.string.channels), track.channels.toString())
-                            addStreamGridView(grid, player.getString(R.string.track_samplerate), player.getString(R.string.track_samplerate_value, track.rate))
+                            addStreamGridView(grid, player.getString(RR.string.channels), track.channels.toString())
+                            addStreamGridView(grid, player.getString(RR.string.track_samplerate), player.getString(RR.string.track_samplerate_value, track.rate))
                         }
                     }
                     IMedia.Track.Type.Video -> {
                         (track as? IMedia.VideoTrack)?.let {
                             val frameRate = track.frameRateNum / track.frameRateDen.toDouble()
                             if (track.width != 0 && track.height != 0)
-                                addStreamGridView(grid, player.getString(R.string.resolution), player.getString(R.string.resolution_value, track.width, track.height))
+                                addStreamGridView(grid, player.getString(RR.string.resolution), player.getString(RR.string.resolution_value, track.width, track.height))
                             if (!frameRate.isNaN())
-                                addStreamGridView(grid, player.getString(R.string.framerate), player.getString(R.string.framerate_value, frameRate))
+                                addStreamGridView(grid, player.getString(RR.string.framerate), player.getString(RR.string.framerate_value, frameRate))
                         }
                     }
                 }
 
                 val trackTitle = TextView(player, null, R.style.TextAppearance_MaterialComponents_Headline2)
-                trackTitle.setTextColor(ContextCompat.getColor(player, R.color.orange500))
+                trackTitle.setTextColor(ContextCompat.getColor(player, RR.color.orange500))
                 trackTitle.text = when (track.type) {
-                    IMedia.Track.Type.Video -> player.getString(R.string.video)
-                    IMedia.Track.Type.Audio -> player.getString(R.string.audio)
-                    IMedia.Track.Type.Text -> player.getString(R.string.text)
-                    else -> player.getString(R.string.unknown)
+                    IMedia.Track.Type.Video -> player.getString(RR.string.video)
+                    IMedia.Track.Type.Audio -> player.getString(RR.string.audio)
+                    IMedia.Track.Type.Text -> player.getString(RR.string.text)
+                    else -> player.getString(RR.string.unknown)
                 }
                 val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 layoutParams.bottomMargin = 4.dp

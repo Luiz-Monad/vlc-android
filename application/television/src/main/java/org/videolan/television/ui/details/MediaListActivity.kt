@@ -15,7 +15,7 @@ import org.videolan.medialibrary.Tools
 import org.videolan.medialibrary.interfaces.media.Playlist
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.ITEM
-import org.videolan.television.R
+import org.videolan.resources.R
 import org.videolan.television.databinding.ActivityMediaListTvBinding
 import org.videolan.television.ui.TvUtil
 import org.videolan.television.ui.browser.BaseTvActivity
@@ -42,7 +42,7 @@ class MediaListActivity : BaseTvActivity(), ITVEventsHandler {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_media_list_tv)
+        binding = DataBindingUtil.setContentView(this, org.videolan.television.R.layout.activity_media_list_tv)
         item = (savedInstanceState?.getParcelable(ITEM) ?: intent.getParcelableExtra<Parcelable>(ITEM)) as MediaLibraryItem
         binding.item = item
 

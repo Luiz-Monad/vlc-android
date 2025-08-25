@@ -37,6 +37,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.videolan.libvlc.MediaPlayer
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.tools.AppScope
 import org.videolan.tools.Settings

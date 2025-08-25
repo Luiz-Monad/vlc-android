@@ -41,6 +41,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.FragmentActivity
 import androidx.transition.TransitionManager
 import org.videolan.resources.ACTIVITY_RESULT_PREFERENCES
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.BaseActivity
 import org.videolan.vlc.gui.SecondaryActivity
@@ -75,7 +76,7 @@ class EmptyLoadingStateView : FrameLayout {
             loadingTitle.visibility = if (value == EmptyLoadingState.LOADING) View.VISIBLE else View.GONE
             emptyTextView.visibility = if (value in arrayOf(EmptyLoadingState.EMPTY, EmptyLoadingState.EMPTY_SEARCH)) View.VISIBLE else View.GONE
             emptyImageView.visibility = if (value in arrayOf(EmptyLoadingState.EMPTY,EmptyLoadingState.MISSING_PERMISSION, EmptyLoadingState.EMPTY_SEARCH)) View.VISIBLE else View.GONE
-            emptyImageView.setImageBitmap(context.getBitmapFromDrawable(if (value in arrayOf(EmptyLoadingState.EMPTY, EmptyLoadingState.EMPTY_SEARCH)) R.drawable.ic_empty else R.drawable.ic_empty_warning))
+            emptyImageView.setImageBitmap(context.getBitmapFromDrawable(if (value in arrayOf(EmptyLoadingState.EMPTY, EmptyLoadingState.EMPTY_SEARCH)) RR.drawable.ic_empty else RR.drawable.ic_empty_warning))
             permissionTitle.visibility = if (value == EmptyLoadingState.MISSING_PERMISSION) View.VISIBLE else View.GONE
             permissionTextView.visibility = if (value == EmptyLoadingState.MISSING_PERMISSION) View.VISIBLE else View.GONE
             grantPermissionButton.visibility = if (value == EmptyLoadingState.MISSING_PERMISSION) View.VISIBLE else View.GONE
@@ -84,13 +85,13 @@ class EmptyLoadingStateView : FrameLayout {
             field = value
         }
 
-    var emptyText: String = context.getString(R.string.nomedia)
+    var emptyText: String = context.getString(RR.string.nomedia)
         set(value) {
             emptyTextView.text = value
             field = emptyText
         }
 
-    var loadingText: String = context.getString(R.string.loading)
+    var loadingText: String = context.getString(RR.string.loading)
         set(value) {
             loadingTitle.text = value
             field = emptyText
@@ -117,11 +118,11 @@ class EmptyLoadingStateView : FrameLayout {
     @SuppressLint("SetTextI18n")
     private fun initAttributes(attrs: AttributeSet, defStyle: Int) {
         attrs.let {
-            val a = context.theme.obtainStyledAttributes(attrs, R.styleable.EmptyLoadingStateView, 0, defStyle)
+            val a = context.theme.obtainStyledAttributes(attrs, RR.styleable.EmptyLoadingStateView, 0, defStyle)
             try {
-                emptyTextView.text = a.getString(R.styleable.EmptyLoadingStateView_empty_text)
-                showNoMedia = a.getBoolean(R.styleable.EmptyLoadingStateView_show_no_media, true)
-                compactMode = a.getBoolean(R.styleable.EmptyLoadingStateView_compact_mode, true)
+                emptyTextView.text = a.getString(RR.styleable.EmptyLoadingStateView_empty_text)
+                showNoMedia = a.getBoolean(RR.styleable.EmptyLoadingStateView_show_no_media, true)
+                compactMode = a.getBoolean(RR.styleable.EmptyLoadingStateView_compact_mode, true)
             } catch (e: Exception) {
                 Log.w("", e.message, e)
             } finally {
@@ -147,7 +148,7 @@ class EmptyLoadingStateView : FrameLayout {
             }
         }
 
-        permissionTextView.text = "${context.getString(R.string.permission_expanation_no_allow)}\n\n${context.getString(R.string.permission_expanation_allow)}"
+        permissionTextView.text = "${context.getString(RR.string.permission_expanation_no_allow)}\n\n${context.getString(RR.string.permission_expanation_allow)}"
     }
 
     private fun applyCompactMode() {

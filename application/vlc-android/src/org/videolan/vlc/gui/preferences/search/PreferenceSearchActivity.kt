@@ -34,6 +34,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.videolan.resources.AppContextProvider
 import org.videolan.resources.buildPkgString
+import org.videolan.resources.R as RR
 import org.videolan.tools.LocaleUtils
 import org.videolan.tools.setGone
 import org.videolan.vlc.databinding.PreferencesSearchActivityBinding

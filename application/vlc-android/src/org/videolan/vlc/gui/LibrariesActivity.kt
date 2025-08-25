@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.LibraryItemBinding
 import org.videolan.vlc.databinding.LicenseActivityBinding
@@ -41,8 +42,8 @@ class LibrariesActivity : BaseActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.main_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_up)
-        title = getString(R.string.libraries)
+        supportActionBar?.setHomeAsUpIndicator(RR.drawable.ic_close_up)
+        title = getString(RR.string.libraries)
 
         binding.licenses.layoutManager = LinearLayoutManager(this)
         adapter = LibrariesAdapter {

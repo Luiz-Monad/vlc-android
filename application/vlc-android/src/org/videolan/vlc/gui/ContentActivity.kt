@@ -31,6 +31,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
@@ -57,7 +58,7 @@ open class ContentActivity : AudioPlayerContainerActivity(), SearchView.OnQueryT
             PlaybackService.renderer.observe(this) {
                 val item = toolbar.menu.findItem(R.id.ml_menu_renderers) ?: return@observe
                 item.isVisible = !hideRenderers() && showRenderers
-                item.setIcon(if (!PlaybackService.hasRenderer()) R.drawable.ic_am_renderer else R.drawable.ic_am_renderer_on)
+                item.setIcon(if (!PlaybackService.hasRenderer()) RR.drawable.ic_am_renderer else RR.drawable.ic_am_renderer_on)
             }
             RendererDelegate.renderers.observe(this) { rendererItems ->
                 showRenderers = !rendererItems.isNullOrEmpty()
@@ -90,7 +91,7 @@ open class ContentActivity : AudioPlayerContainerActivity(), SearchView.OnQueryT
             val filterable = current as Filterable?
             searchItem = menu.findItem(R.id.ml_menu_filter)
             searchView = searchItem.actionView as SearchView
-            searchView.queryHint = getString(R.string.search_in_list_hint)
+            searchView.queryHint = getString(RR.string.search_in_list_hint)
             searchView.setOnQueryTextListener(this)
             val query = filterable?.getFilterQuery()
             if (!query.isNullOrEmpty()) {
@@ -105,7 +106,7 @@ open class ContentActivity : AudioPlayerContainerActivity(), SearchView.OnQueryT
         } else
             menu.findItem(R.id.ml_menu_filter).isVisible = false
         menu.findItem(R.id.ml_menu_renderers).isVisible = current !is MLStorageBrowserFragment && !hideRenderers() && showRenderers && Settings.getInstance(this).getBoolean("enable_casting", true)
-        menu.findItem(R.id.ml_menu_renderers).setIcon(if (!PlaybackService.hasRenderer()) R.drawable.ic_am_renderer else R.drawable.ic_am_renderer_on)
+        menu.findItem(R.id.ml_menu_renderers).setIcon(if (!PlaybackService.hasRenderer()) RR.drawable.ic_am_renderer else RR.drawable.ic_am_renderer_on)
         return true
     }
 
@@ -119,7 +120,7 @@ open class ContentActivity : AudioPlayerContainerActivity(), SearchView.OnQueryT
                 if (!PlaybackService.hasRenderer() && RendererDelegate.renderers.size == 1) {
                     val renderer = RendererDelegate.renderers.value[0]
                     PlaybackService.renderer.value = renderer
-                    UiTools.snacker(this, getString(R.string.casting_connected_renderer, renderer.displayName))
+                    UiTools.snacker(this, getString(RR.string.casting_connected_renderer, renderer.displayName))
                 } else if (supportFragmentManager.findFragmentByTag("renderers") == null)
                     RenderersDialog().show(supportFragmentManager, "renderers")
                 return true

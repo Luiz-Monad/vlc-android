@@ -37,6 +37,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.CTX_FAV_ADD
+import org.videolan.resources.R as RR
 import org.videolan.tools.removeFileScheme
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.SecondaryActivity
@@ -50,7 +51,7 @@ open class FileBrowserFragment : BaseBrowserFragment() {
     private var needsRefresh: Boolean = false
 
     override val categoryTitle: String
-        get() = getString(R.string.directories)
+        get() = getString(RR.string.directories)
 
     override fun createFragment(): Fragment {
         return FileBrowserFragment()
@@ -58,7 +59,7 @@ open class FileBrowserFragment : BaseBrowserFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (requireActivity() as? SecondaryActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_up)
+        (requireActivity() as? SecondaryActivity)?.supportActionBar?.setHomeAsUpIndicator(RR.drawable.ic_close_up)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,7 +93,7 @@ open class FileBrowserFragment : BaseBrowserFragment() {
     else {
         when {
             currentMedia != null -> when {
-                AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY == mrl?.removeFileScheme() -> getString(R.string.internal_memory)
+                AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY == mrl?.removeFileScheme() -> getString(RR.string.internal_memory)
                 this is FilePickerFragment -> currentMedia!!.uri.toString()
                 else -> currentMedia!!.title
             }
@@ -147,10 +148,10 @@ open class FileBrowserFragment : BaseBrowserFragment() {
             val isFavorite = mrl != null && browserFavRepository.browserFavExists(mrl!!.toUri())
 
             item.setIcon(if (isFavorite)
-                R.drawable.ic_menu_bookmark_w
+                RR.drawable.ic_menu_bookmark_w
             else
-                R.drawable.ic_menu_bookmark_outline_w)
-            item.setTitle(if (isFavorite) R.string.favorites_remove else R.string.favorites_add)
+                RR.drawable.ic_menu_bookmark_outline_w)
+            item.setTitle(if (isFavorite) RR.string.favorites_remove else RR.string.favorites_add)
         }
     }
 

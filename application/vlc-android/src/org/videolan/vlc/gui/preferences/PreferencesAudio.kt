@@ -36,6 +36,7 @@ import kotlinx.coroutines.launch
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.libvlc.util.HWDecoderUtil
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.tools.AUDIO_DUCKING
 import org.videolan.tools.LocaleUtils
@@ -64,7 +65,7 @@ class PreferencesAudio : BasePreferenceFragment(), SharedPreferences.OnSharedPre
 
     override fun getXml() = R.xml.preferences_audio
 
-    override fun getTitleId() = R.string.audio_prefs_category
+    override fun getTitleId() = RR.string.audio_prefs_category
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,14 +94,14 @@ class PreferencesAudio : BasePreferenceFragment(), SharedPreferences.OnSharedPre
     private fun updatePreferredAudioTrack() {
         val value = Settings.getInstance(requireActivity()).getString("audio_preferred_language", null)
         if (value.isNullOrEmpty())
-            preferredAudioTrack.summary = getString(R.string.no_track_preference)
+            preferredAudioTrack.summary = getString(RR.string.no_track_preference)
          else
-            preferredAudioTrack.summary = getString(R.string.track_preference, LocaleUtil.getLocaleName(value))
+            preferredAudioTrack.summary = getString(RR.string.track_preference, LocaleUtil.getLocaleName(value))
     }
 
     private fun updatePassThroughSummary() {
         val pt = preferenceManager.sharedPreferences.getBoolean("audio_digital_output", false)
-        findPreference<Preference>("audio_digital_output")?.setSummary(if (pt) R.string.audio_digital_output_enabled else R.string.audio_digital_output_disabled)
+        findPreference<Preference>("audio_digital_output")?.setSummary(if (pt) RR.string.audio_digital_output_enabled else RR.string.audio_digital_output_disabled)
     }
 
     override fun onStart() {
@@ -182,7 +183,7 @@ class PreferencesAudio : BasePreferenceFragment(), SharedPreferences.OnSharedPre
     }
 
     private fun prepareLocaleList() {
-        val localePair = LocaleUtils.getLocalesUsedInProject(requireActivity(), BuildConfig.TRANSLATION_ARRAY, getString(R.string.no_track_preference))
+        val localePair = LocaleUtils.getLocalesUsedInProject(requireActivity(), BuildConfig.TRANSLATION_ARRAY, getString(RR.string.no_track_preference))
         preferredAudioTrack.entries = localePair.localeEntries
         preferredAudioTrack.entryValues = localePair.localeEntryValues
     }

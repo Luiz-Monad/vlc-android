@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
+import org.videolan.resources.R as RR
 import org.videolan.tools.AppScope
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.DialogActivity
@@ -72,14 +73,14 @@ class NetworkServerDialog : VLCBottomSheetDialogFragment(), AdapterView.OnItemSe
         cancel = v.findViewById(R.id.server_cancel)
         portTitle = v.findViewById(R.id.server_port_text)
 
-        protocols = resources.getStringArray(R.array.server_protocols)
+        protocols = resources.getStringArray(RR.array.server_protocols)
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinnerArrayAdapter = ArrayAdapter(view.context, R.layout.dropdown_item, resources.getStringArray(R.array.server_protocols))
+        val spinnerArrayAdapter = ArrayAdapter(view.context, R.layout.dropdown_item, resources.getStringArray(RR.array.server_protocols))
         spinnerProtocol.adapter = spinnerArrayAdapter
 
         if (::networkUri.isInitialized) {
@@ -174,14 +175,14 @@ class NetworkServerDialog : VLCBottomSheetDialogFragment(), AdapterView.OnItemSe
         var portEnabled = true
         var userEnabled = true
         val port = getPortForProtocol(position)
-        var addressHint = R.string.server_domain_hint
+        var addressHint = RR.string.server_domain_hint
         when (protocols[position]) {
             "SMB" -> {
-                addressHint = R.string.server_share_hint
+                addressHint = RR.string.server_share_hint
                 userEnabled = false
             }
             "NFS" -> {
-                addressHint = R.string.server_share_hint
+                addressHint = RR.string.server_share_hint
                 userEnabled = false
                 portEnabled = false
             }

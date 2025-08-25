@@ -35,6 +35,7 @@ import androidx.core.app.NotificationCompat
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.launchForeground
 import org.videolan.resources.util.startForegroundCompat
 import org.videolan.resources.util.stopForegroundCompat
@@ -133,9 +134,9 @@ class DebugLogService : Service(), Logcat.Callback, Runnable {
         val pi = PendingIntent.getActivity(this, 0, debugLogIntent,  PendingIntent.FLAG_IMMUTABLE)
 
         val builder = NotificationCompat.Builder(this, NotificationHelper.VLC_DEBUG_CHANNEL)
-        builder.setContentTitle(resources.getString(R.string.log_service_title))
-        builder.setContentText(resources.getString(R.string.log_service_text))
-        builder.setSmallIcon(R.drawable.ic_stat_vlc)
+        builder.setContentTitle(resources.getString(RR.string.log_service_title))
+        builder.setContentText(resources.getString(RR.string.log_service_text))
+        builder.setSmallIcon(RR.drawable.ic_stat_vlc)
         builder.setContentIntent(pi)
         val notification = builder.build()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)

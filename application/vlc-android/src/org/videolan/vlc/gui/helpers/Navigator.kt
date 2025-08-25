@@ -37,6 +37,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
@@ -153,7 +154,7 @@ class Navigator : NavigationBarView.OnItemSelectedListener, DefaultLifecycleObse
 
     override fun getFragmentWidth(activity: Activity): Int {
         val screenWidth = activity.getScreenWidth()
-       return screenWidth - activity.resources.getDimension(R.dimen.navigation_margin).toInt()
+       return screenWidth - activity.resources.getDimension(RR.dimen.navigation_margin).toInt()
     }
 
     private fun getTag(id: Int) = when (id) {

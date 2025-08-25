@@ -33,6 +33,7 @@ import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.videolan.libvlc.RendererItem
+import org.videolan.resources.R as RR
 import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
 import org.videolan.vlc.RendererDelegate
@@ -85,7 +86,7 @@ class RenderersDialog : DialogFragment() {
         val orangeColor by lazy {
             val typedValue = TypedValue()
             val theme: Resources.Theme = context!!.theme
-            theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
+            theme.resolveAttribute(android.R.attr.colorPrimary, typedValue, true)
             typedValue.data
 
         }
@@ -98,7 +99,7 @@ class RenderersDialog : DialogFragment() {
 
         override fun onBindViewHolder(holder: SelectorViewHolder<ItemRendererBinding>, position: Int) {
             holder.binding.renderer = renderers[position]
-            holder.binding.rendererIcon.setImageDrawable(ContextCompat.getDrawable(holder.binding.rendererIcon.context, if (renderers[position].type == "chromecast")  R.drawable.ic_dialog_renderer else R.drawable.ic_dialog_unknown))
+            holder.binding.rendererIcon.setImageDrawable(ContextCompat.getDrawable(holder.binding.rendererIcon.context, if (renderers[position].type == "chromecast")  RR.drawable.ic_dialog_renderer else RR.drawable.ic_dialog_unknown))
             if (renderers[position] == PlaybackService.renderer.value) {
                 holder.binding.rendererName.setTextColor(orangeColor)
                 ImageViewCompat.setImageTintList(holder.binding.rendererIcon, ColorStateList.valueOf(orangeColor))
@@ -116,7 +117,7 @@ class RenderersDialog : DialogFragment() {
             dismissAllowingStateLoss()
             item?.run {
                 activity?.window?.findViewById<View>(R.id.audio_player_container)?.let {
-                    UiTools.snacker(requireActivity(), getString(R.string.casting_connected_renderer, displayName))
+                    UiTools.snacker(requireActivity(), getString(RR.string.casting_connected_renderer, displayName))
                 }
             }
         }

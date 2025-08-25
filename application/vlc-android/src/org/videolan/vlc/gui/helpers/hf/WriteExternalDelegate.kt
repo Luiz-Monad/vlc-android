@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentActivity
 import kotlinx.coroutines.launch
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.AppScope
 import org.videolan.tools.Settings
 import org.videolan.tools.putSingle
@@ -36,15 +37,15 @@ class WriteExternalDelegate : BaseHeadlessFragment() {
     private fun showDialog() {
         if (!isAdded || isDetached) return
         val builder = AlertDialog.Builder(requireActivity())
-        builder.setMessage(R.string.sdcard_permission_dialog_message)
-                .setTitle(R.string.sdcard_permission_dialog_title)
-                .setPositiveButton(R.string.ok) { _, _ ->
+        builder.setMessage(RR.string.sdcard_permission_dialog_message)
+                .setTitle(RR.string.sdcard_permission_dialog_title)
+                .setPositiveButton(RR.string.ok) { _, _ ->
                     if (!isAdded || isDetached) return@setPositiveButton
                     val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
                     storage = arguments?.getString(KEY_STORAGE_PATH)?.apply { intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, toUri()) }
                     startActivityForResult(intent, REQUEST_CODE_STORAGE_ACCESS)
                 }
-                .setNeutralButton(getString(R.string.dialog_sd_wizard)) { _, _ -> showHelpDialog() }.create().show()
+                .setNeutralButton(getString(RR.string.dialog_sd_wizard)) { _, _ -> showHelpDialog() }.create().show()
     }
 
     private fun showHelpDialog() {

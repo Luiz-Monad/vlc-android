@@ -43,6 +43,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.tools.WeakHandler
 import org.videolan.tools.setGone
@@ -80,7 +81,7 @@ class PlaylistAdapter(private val player: IPlayer) : DiffUtilAdapter<MediaWrappe
             else -> AppContextProvider.appContext
         }
 
-        defaultCoverAudio = BitmapDrawable(ctx.resources, getBitmapFromDrawable(ctx, R.drawable.ic_no_song_background))
+        defaultCoverAudio = BitmapDrawable(ctx.resources, getBitmapFromDrawable(ctx, RR.drawable.ic_no_song_background))
         defaultCoverVideo = UiTools.getDefaultVideoDrawable(ctx)
     }
 
@@ -180,7 +181,7 @@ class PlaylistAdapter(private val player: IPlayer) : DiffUtilAdapter<MediaWrappe
 
     override fun onItemDismiss(position: Int) {
         val media = getItem(position)
-        val message = String.format(AppContextProvider.appResources.getString(R.string.remove_playlist_item), media.title)
+        val message = String.format(AppContextProvider.appResources.getString(RR.string.remove_playlist_item), media.title)
         if (player is Fragment) {
             UiTools.snackerWithCancel(player.requireActivity(), message, overAudioPlayer = true, action = {}) {
                  model?.run { insertMedia(position, media) }

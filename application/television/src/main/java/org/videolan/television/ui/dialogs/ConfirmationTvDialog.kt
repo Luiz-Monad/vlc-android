@@ -5,7 +5,7 @@ import androidx.core.os.bundleOf
 import androidx.leanback.app.GuidedStepSupportFragment
 import androidx.leanback.widget.GuidanceStylist
 import androidx.leanback.widget.GuidedAction
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.television.ui.dialogs.ConfirmationTvActivity.Companion.ACTION_ID_NEGATIVE
 import org.videolan.television.ui.dialogs.ConfirmationTvActivity.Companion.ACTION_ID_POSITIVE
 import org.videolan.television.ui.dialogs.ConfirmationTvActivity.Companion.CONFIRMATION_DIALOG_TEXT

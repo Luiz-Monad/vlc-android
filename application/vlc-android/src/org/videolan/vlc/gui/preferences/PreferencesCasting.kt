@@ -27,13 +27,14 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import kotlinx.coroutines.launch
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.restartMediaPlayer
 
 class PreferencesCasting : BasePreferenceFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
-    override fun getTitleId() = R.string.casting_category
+    override fun getTitleId() = RR.string.casting_category
 
     override fun getXml() = R.xml.preferences_casting
 

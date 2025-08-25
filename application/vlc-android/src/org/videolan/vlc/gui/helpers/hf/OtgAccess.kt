@@ -35,6 +35,7 @@ import androidx.fragment.app.FragmentActivity
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 
 const val SAF_REQUEST = 85
@@ -50,10 +51,10 @@ class OtgAccess : BaseHeadlessFragment() {
 
         if (savedInstanceState == null) {
             AlertDialog.Builder(requireActivity())
-                    .setTitle(resources.getString(R.string.allow_otg))
-                    .setMessage(resources.getString(R.string.allow_otg_description))
+                    .setTitle(resources.getString(RR.string.allow_otg))
+                    .setMessage(resources.getString(RR.string.allow_otg_description))
 
-                    .setPositiveButton(R.string.ok) { _, _ ->
+                    .setPositiveButton(RR.string.ok) { _, _ ->
                         val safIntent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
                         try {
                             startActivityForResult(safIntent, SAF_REQUEST)

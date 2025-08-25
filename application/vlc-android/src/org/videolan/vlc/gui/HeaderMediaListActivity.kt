@@ -52,6 +52,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.interfaces.media.Playlist
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
@@ -143,7 +144,7 @@ open class HeaderMediaListActivity : AudioPlayerContainerActivity(), IEventsHand
             binding.releaseDate.visibility = View.GONE
         } else {
             audioBrowserAdapter = AudioAlbumTracksAdapter(MediaLibraryItem.TYPE_MEDIA, this, this)
-            binding.songs.addItemDecoration(RecyclerSectionItemDecoration(resources.getDimensionPixelSize(R.dimen.recycler_section_header_height), true, viewModel.tracksProvider))
+            binding.songs.addItemDecoration(RecyclerSectionItemDecoration(resources.getDimensionPixelSize(RR.dimen.recycler_section_header_height), true, viewModel.tracksProvider))
             if (viewModel.playlist is Album) {
                 val releaseYear = (viewModel.playlist as Album).releaseYear
                 binding.releaseYear =  if (releaseYear > 0) releaseYear.toString() else ""
@@ -176,7 +177,7 @@ open class HeaderMediaListActivity : AudioPlayerContainerActivity(), IEventsHand
                 val radius = if (isPlaylist) 25f else 15f
                 val blurredCover = UiTools.blurBitmap(cover, radius)
                 withContext(Dispatchers.Main) {
-                    binding.backgroundView.setColorFilter(UiTools.getColorFromAttribute(context, R.attr.audio_player_background_tint))
+                    binding.backgroundView.setColorFilter(UiTools.getColorFromAttribute(context, RR.attr.audio_player_background_tint))
                     binding.backgroundView.setImageBitmap(blurredCover)
                 }
             }
@@ -212,7 +213,7 @@ open class HeaderMediaListActivity : AudioPlayerContainerActivity(), IEventsHand
         menu.findItem(R.id.ml_menu_sortby_last_modified).isVisible = viewModel.canSortByLastModified()
         val searchItem = menu.findItem(R.id.ml_menu_filter)
         searchView = searchItem.actionView as SearchView
-        searchView.queryHint = getString(R.string.search_in_list_hint)
+        searchView.queryHint = getString(RR.string.search_in_list_hint)
         searchView.setOnQueryTextListener(this)
         val query = getFilterQuery()
         if (!query.isNullOrEmpty()) {
@@ -432,7 +433,7 @@ open class HeaderMediaListActivity : AudioPlayerContainerActivity(), IEventsHand
             }
             CTX_COPY -> {
                 copy(media.title, media.location)
-                Snackbar.make(window.decorView.findViewById(android.R.id.content), R.string.url_copied_to_clipboard, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(window.decorView.findViewById(android.R.id.content), RR.string.url_copied_to_clipboard, Snackbar.LENGTH_LONG).show()
             }
         }
 
@@ -455,7 +456,7 @@ open class HeaderMediaListActivity : AudioPlayerContainerActivity(), IEventsHand
                     val deleteAction = kotlinx.coroutines.Runnable {
                         lifecycleScope.launch {
                             MediaUtils.deleteItem(this@HeaderMediaListActivity, item) {
-                                UiTools.snacker(this@HeaderMediaListActivity, getString(R.string.msg_delete_failed, it.title))
+                                UiTools.snacker(this@HeaderMediaListActivity, getString(RR.string.msg_delete_failed, it.title))
                             }
                             if (isStarted()) viewModel.refresh()
                         }
@@ -474,7 +475,7 @@ open class HeaderMediaListActivity : AudioPlayerContainerActivity(), IEventsHand
             if (parentPath != null && FileUtils.deleteFile(path) && media.id > 0L && !foldersToReload.contains(parentPath)) {
                 foldersToReload.add(parentPath)
             } else
-                UiTools.snacker(this@HeaderMediaListActivity, getString(R.string.msg_delete_failed, media.title))
+                UiTools.snacker(this@HeaderMediaListActivity, getString(RR.string.msg_delete_failed, media.title))
         }
         for (folder in foldersToReload) mediaLibrary.reload(folder)
     }
@@ -498,7 +499,7 @@ open class HeaderMediaListActivity : AudioPlayerContainerActivity(), IEventsHand
                     playlist.remove(trueIndex)
                 }
             }
-            var removedMessage = if (indexes.size>1) getString(R.string.removed_from_playlist_anonymous) else getString(R.string.remove_playlist_item,list.first().title)
+            var removedMessage = if (indexes.size>1) getString(RR.string.removed_from_playlist_anonymous) else getString(RR.string.remove_playlist_item,list.first().title)
             UiTools.snackerWithCancel(this@HeaderMediaListActivity, removedMessage, action = {
                 lastDismissedPosition = -1
             }) {

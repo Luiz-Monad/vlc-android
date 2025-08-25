@@ -17,7 +17,7 @@ class VideoControlsSettingsDialog : VLCBottomSheetDialogFragment() {
     private lateinit var binding: DialogVideoControlsSettingsBinding
 
 
-    override fun initialFocusedView() = binding.fragmentContainerView.findViewById<View>(R.id.recycler_view) ?: binding.container
+    override fun initialFocusedView() = binding.fragmentContainerView.findViewById<View>(androidx.preference.R.id.recycler_view) ?: binding.container
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DialogVideoControlsSettingsBinding.inflate(layoutInflater, container, false)

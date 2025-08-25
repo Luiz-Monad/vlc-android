@@ -35,6 +35,7 @@ import androidx.preference.Preference
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
@@ -48,7 +49,7 @@ class PreferencesFragment : BasePreferenceFragment(), SharedPreferences.OnShared
 
     override fun getXml() = R.xml.preferences
 
-    override fun getTitleId() = R.string.preferences
+    override fun getTitleId() = RR.string.preferences
 
     override fun onStart() {
         super.onStart()
@@ -95,7 +96,7 @@ class PreferencesFragment : BasePreferenceFragment(), SharedPreferences.OnShared
         when (preference.key) {
             "directories" -> {
                 if (Medialibrary.getInstance().isWorking) {
-                    UiTools.snacker(requireActivity(), getString(R.string.settings_ml_block_scan))
+                    UiTools.snacker(requireActivity(), getString(RR.string.settings_ml_block_scan))
                 } else {
                     val activity = requireActivity()
                     val intent = Intent(activity.applicationContext, SecondaryActivity::class.java)

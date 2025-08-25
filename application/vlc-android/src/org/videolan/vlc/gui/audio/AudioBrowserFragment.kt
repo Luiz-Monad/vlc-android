@@ -42,6 +42,7 @@ import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.CTX_PLAY_ALL
 import org.videolan.resources.KEY_AUDIO_CURRENT_TAB
 import org.videolan.resources.KEY_AUDIO_LAST_PLAYLIST
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.waitForML
 import org.videolan.tools.KEY_ARTISTS_SHOW_ALL
 import org.videolan.tools.RESULT_RESTART
@@ -88,7 +89,7 @@ class AudioBrowserFragment : BaseAudioBrowser<AudioBrowserViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        spacing = requireActivity().resources.getDimension(R.dimen.kl_small).toInt()
+        spacing = requireActivity().resources.getDimension(RR.dimen.kl_small).toInt()
 
         if (!::settings.isInitialized) settings = Settings.getInstance(requireContext())
     }
@@ -117,7 +118,7 @@ class AudioBrowserFragment : BaseAudioBrowser<AudioBrowserViewModel>() {
                 lists.add(it.findViewById(R.id.audio_list))
             }
         }
-        val titles = arrayOf(getString(R.string.artists), getString(R.string.albums), getString(R.string.tracks), getString(R.string.genres))
+        val titles = arrayOf(getString(RR.string.artists), getString(RR.string.albums), getString(RR.string.tracks), getString(RR.string.genres))
         viewPager.offscreenPageLimit = MODE_TOTAL - 1
         val audioPagerAdapter = AudioPagerAdapter(views.toTypedArray(), titles)
         @Suppress("UNCHECKED_CAST")
@@ -233,8 +234,8 @@ class AudioBrowserFragment : BaseAudioBrowser<AudioBrowserViewModel>() {
     override fun onStart() {
         super.onStart()
         setFabPlayShuffleAllVisibility()
-        fabPlay?.setImageResource(R.drawable.ic_fab_shuffle)
-        fabPlay?.contentDescription = getString(R.string.shuffle_play)
+        fabPlay?.setImageResource(RR.drawable.ic_fab_shuffle)
+        fabPlay?.contentDescription = getString(RR.string.shuffle_play)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -298,13 +299,13 @@ class AudioBrowserFragment : BaseAudioBrowser<AudioBrowserViewModel>() {
         setFabPlayVisibility(force || viewModel.providers[currentTab].pagedList.value?.size ?: 0 > 2)
     }
 
-    override fun getTitle(): String = getString(R.string.audio)
+    override fun getTitle(): String = getString(RR.string.audio)
 
     override fun enableSearchOption() = true
 
     private fun updateEmptyView() {
         swipeRefreshLayout.visibility = if (Medialibrary.getInstance().isInitiated) View.VISIBLE else View.GONE
-        emptyView.emptyText = viewModel.filterQuery?.let {  getString(R.string.empty_search, it) } ?: getString(R.string.nomedia)
+        emptyView.emptyText = viewModel.filterQuery?.let {  getString(RR.string.empty_search, it) } ?: getString(RR.string.nomedia)
         emptyView.state = when {
             !Permissions.canReadStorage(requireActivity()) && empty -> EmptyLoadingState.MISSING_PERMISSION
             viewModel.providers[currentTab].loading.value == true && empty -> EmptyLoadingState.LOADING

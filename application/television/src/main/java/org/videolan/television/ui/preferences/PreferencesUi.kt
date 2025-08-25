@@ -36,9 +36,10 @@ import androidx.preference.TwoStatePreference
 import org.videolan.resources.AppContextProvider
 import org.videolan.television.ui.browser.REQUEST_CODE_RESTART_APP
 import org.videolan.television.ui.dialogs.ConfirmationTvActivity
+import org.videolan.resources.R
+import org.videolan.vlc.R as BR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
-import org.videolan.vlc.R
 import org.videolan.vlc.gui.dialogs.FeatureTouchOnlyWarningDialog
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -47,7 +48,7 @@ class PreferencesUi : BasePreferenceFragment(), SharedPreferences.OnSharedPrefer
     private lateinit var tvUiPref: CheckBoxPreference
     private var currentLocale: String? = null
 
-    override fun getXml() = R.xml.preferences_ui
+    override fun getXml() = BR.xml.preferences_ui
 
     override fun getTitleId() = R.string.interface_prefs_screen
 

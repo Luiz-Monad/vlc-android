@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.UPDATE_SELECTION
+import org.videolan.resources.R as RR
 import org.videolan.tools.MultiSelectAdapter
 import org.videolan.tools.MultiSelectHelper
 import org.videolan.tools.Settings

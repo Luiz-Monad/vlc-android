@@ -48,6 +48,7 @@ import org.videolan.medialibrary.interfaces.media.VideoGroup
 import org.videolan.medialibrary.media.FolderImpl
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.waitForML
 import org.videolan.tools.*
 import org.videolan.vlc.R
@@ -242,8 +243,8 @@ class VideoGridFragment : MediaBrowserFragment<VideosViewModel>(), SwipeRefreshL
         registerForContextMenu(binding.videoGrid)
         updateViewMode()
         setFabPlayVisibility(true)
-        fabPlay?.setImageResource(R.drawable.ic_fab_play)
-        fabPlay?.contentDescription = getString(R.string.play)
+        fabPlay?.setImageResource(RR.drawable.ic_fab_play)
+        fabPlay?.contentDescription = getString(RR.string.play)
         if (!viewModel.isEmpty() && getFilterQuery() == null) viewModel.refresh()
     }
 
@@ -268,9 +269,9 @@ class VideoGridFragment : MediaBrowserFragment<VideosViewModel>(), SwipeRefreshL
 
     override fun getTitle() = when(viewModel.groupingType) {
         VideoGroupingType.NONE -> viewModel.folder?.displayTitle ?: viewModel.group?.displayTitle
-        ?: getString(R.string.videos)
-        VideoGroupingType.FOLDER -> getString(R.string.videos_folders_title)
-        VideoGroupingType.NAME -> getString(R.string.videos_groups_title)
+        ?: getString(RR.string.videos)
+        VideoGroupingType.FOLDER -> getString(RR.string.videos_folders_title)
+        VideoGroupingType.NAME -> getString(RR.string.videos_groups_title)
     }
 
     override fun getMultiHelper(): MultiSelectHelper<VideosViewModel>? = if (::videoListAdapter.isInitialized) videoListAdapter.multiSelectHelper as? MultiSelectHelper<VideosViewModel> else null
@@ -281,15 +282,15 @@ class VideoGridFragment : MediaBrowserFragment<VideosViewModel>(), SwipeRefreshL
             return
         }
         val res = resources
-        if (gridItemDecoration == null) gridItemDecoration = ItemOffsetDecoration(resources, R.dimen.left_right_1610_margin, R.dimen.top_bottom_1610_margin)
+        if (gridItemDecoration == null) gridItemDecoration = ItemOffsetDecoration(resources, RR.dimen.left_right_1610_margin, RR.dimen.top_bottom_1610_margin)
         val listMode = !settings.getBoolean(KEY_VIDEOS_CARDS, true)
 
         // Select between grid or list
         binding.videoGrid.removeItemDecoration(gridItemDecoration!!)
         if (!listMode) {
-            val thumbnailWidth = res.getDimensionPixelSize(R.dimen.grid_card_thumb_width)
+            val thumbnailWidth = res.getDimensionPixelSize(RR.dimen.grid_card_thumb_width)
             val margin = binding.videoGrid.paddingStart + binding.videoGrid.paddingEnd
-            val columnWidth = binding.videoGrid.getPerfectColumnWidth(thumbnailWidth, margin) - res.getDimensionPixelSize(R.dimen.left_right_1610_margin) * 2
+            val columnWidth = binding.videoGrid.getPerfectColumnWidth(thumbnailWidth, margin) - res.getDimensionPixelSize(RR.dimen.left_right_1610_margin) * 2
             binding.videoGrid.columnWidth = columnWidth
             binding.videoGrid.addItemDecoration(gridItemDecoration!!)
             binding.videoGrid.setPadding(4.dp, 4.dp, 4.dp, 4.dp)
@@ -309,7 +310,7 @@ class VideoGridFragment : MediaBrowserFragment<VideosViewModel>(), SwipeRefreshL
         if (!isAdded) return
         val empty = viewModel.isEmpty() && videoListAdapter.currentList.isNullOrEmpty()
         val working = viewModel.provider.loading.value != false
-        binding.emptyLoading.emptyText = viewModel.filterQuery?.let {  getString(R.string.empty_search, it) } ?: getString(R.string.nomedia)
+        binding.emptyLoading.emptyText = viewModel.filterQuery?.let {  getString(RR.string.empty_search, it) } ?: getString(RR.string.nomedia)
         binding.emptyLoading.state = when {
             !Permissions.canReadStorage(AppContextProvider.appContext) && empty -> EmptyLoadingState.MISSING_PERMISSION
             empty && working -> EmptyLoadingState.LOADING

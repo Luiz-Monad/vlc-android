@@ -16,6 +16,7 @@ import org.videolan.libvlc.interfaces.IMedia
 import org.videolan.libvlc.interfaces.IMediaList
 import org.videolan.libvlc.interfaces.IVLCVout
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.resources.VLCOptions
 import org.videolan.tools.*
@@ -345,7 +346,7 @@ class PlayerController(val context: Context) : IVLCVout.Callback, MediaPlayer.Ev
     //    private fun onPlayerError() {
 //        launch(UI) {
 //            restart()
-//            Toast.makeText(context, context.getString(R.string.feedback_player_crashed), Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, context.getString(RR.string.feedback_player_crashed), Toast.LENGTH_LONG).show()
 //        }
 //    }
     companion object {

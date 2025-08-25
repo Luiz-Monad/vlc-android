@@ -42,6 +42,7 @@ import org.videolan.medialibrary.interfaces.media.Album
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.resources.AppContextProvider.appContext
 import org.videolan.tools.*
 import org.videolan.vlc.ArtworkProvider
@@ -240,7 +241,7 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                                     b = (context.packageManager.getApplicationIcon(extension.componentName().packageName) as BitmapDrawable).bitmap
                                     item.setIconBitmap(b)
                                 } catch (e: PackageManager.NameNotFoundException) {
-                                    b = context.getBitmapFromDrawable(R.drawable.icon)
+                                    b = context.getBitmapFromDrawable(RR.drawable.icon)
                                     item.setIconBitmap(b)
                                 }
                                 results.add(MediaBrowserCompat.MediaItem(item.build(), MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
@@ -251,8 +252,8 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                         else {
                             val homeMediaDesc = MediaDescriptionCompat.Builder()
                                     .setMediaId(ID_HOME)
-                                    .setTitle(res.getString(R.string.auto_home))
-                                    .setIconUri(res.getResourceUri(R.drawable.ic_auto_home))
+                                    .setTitle(res.getString(RR.string.auto_home))
+                                    .setIconUri(res.getResourceUri(RR.drawable.ic_auto_home))
                                     .setExtras(getContentStyle(CONTENT_STYLE_GRID_ITEM_HINT_VALUE, CONTENT_STYLE_GRID_ITEM_HINT_VALUE))
                                     .build()
                             results.add(MediaBrowserCompat.MediaItem(homeMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
@@ -260,8 +261,8 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                         //Playlists
                         val playlistMediaDesc = MediaDescriptionCompat.Builder()
                                 .setMediaId(ID_PLAYLIST)
-                                .setTitle(res.getString(R.string.playlists))
-                                .setIconUri(res.getResourceUri(R.drawable.ic_auto_playlist))
+                                .setTitle(res.getString(RR.string.playlists))
+                                .setIconUri(res.getResourceUri(RR.drawable.ic_auto_playlist))
                                 .setExtras(getContentStyle(CONTENT_STYLE_GRID_ITEM_HINT_VALUE, CONTENT_STYLE_GRID_ITEM_HINT_VALUE))
                                 .build()
                         results.add(MediaBrowserCompat.MediaItem(playlistMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
@@ -270,8 +271,8 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                         else {
                             val libraryMediaDesc = MediaDescriptionCompat.Builder()
                                     .setMediaId(ID_LIBRARY)
-                                    .setTitle(res.getString(R.string.auto_my_library))
-                                    .setIconUri(res.getResourceUri(R.drawable.ic_auto_audio))
+                                    .setTitle(res.getString(RR.string.auto_my_library))
+                                    .setIconUri(res.getResourceUri(RR.drawable.ic_auto_audio))
                                     .setExtras(getContentStyle(CONTENT_STYLE_CATEGORY_ITEM_HINT_VALUE))
                                     .build()
                             results.add(MediaBrowserCompat.MediaItem(libraryMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
@@ -279,8 +280,8 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                         //Streams
                         val streamsMediaDesc = MediaDescriptionCompat.Builder()
                                 .setMediaId(ID_STREAM)
-                                .setTitle(res.getString(R.string.streams))
-                                .setIconUri(res.getResourceUri(R.drawable.ic_auto_stream))
+                                .setTitle(res.getString(RR.string.streams))
+                                .setIconUri(res.getResourceUri(RR.drawable.ic_auto_stream))
                                 .build()
                         results.add(MediaBrowserCompat.MediaItem(streamsMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
                         return results
@@ -295,7 +296,7 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                                     .appendPath("$audioCount")
                                     .build()
                         } else null
-                        val shuffleAllMediaDesc = getPlayAllBuilder(context, ID_SHUFFLE_ALL, R.string.shuffle_all_title, audioCount, shuffleAllPath).build()
+                        val shuffleAllMediaDesc = getPlayAllBuilder(context, ID_SHUFFLE_ALL, RR.string.shuffle_all_title, audioCount, shuffleAllPath).build()
                         results.add(MediaBrowserCompat.MediaItem(shuffleAllMediaDesc, MediaBrowserCompat.MediaItem.FLAG_PLAYABLE))
                         /* Last Added */
                         val recentAudio = ml.getPagedAudio(Medialibrary.SORT_INSERTIONDATE, true, false, MAX_HISTORY_SIZE, 0)
@@ -307,7 +308,7 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                                     .appendPath("$recentAudioSize")
                                     .build()
                         } else null
-                        val lastAddedMediaDesc = getPlayAllBuilder(context, ID_LAST_ADDED, R.string.auto_last_added_media, recentAudioSize, lastAddedPath).build()
+                        val lastAddedMediaDesc = getPlayAllBuilder(context, ID_LAST_ADDED, RR.string.auto_last_added_media, recentAudioSize, lastAddedPath).build()
                         results.add(MediaBrowserCompat.MediaItem(lastAddedMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
                         /* History */
                         if (Settings.getInstance(context).getBoolean(PLAYBACK_HISTORY, true)) {
@@ -319,7 +320,7 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                                         .appendPath("${ArtworkProvider.computeChecksum(lastMediaPlayed)}")
                                         .appendPath("$lastMediaSize")
                                         .build()
-                                val historyMediaDesc = getPlayAllBuilder(context, ID_HISTORY, R.string.history, lastMediaSize, historyPath).build()
+                                val historyMediaDesc = getPlayAllBuilder(context, ID_HISTORY, RR.string.history, lastMediaSize, historyPath).build()
                                 results.add(MediaBrowserCompat.MediaItem(historyMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
                             }
                         }
@@ -331,32 +332,32 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                         val artistsCount = ml.getArtistsCount(artistsShowAll)
                         val artistsMediaDesc = MediaDescriptionCompat.Builder()
                                 .setMediaId(ID_ARTIST)
-                                .setTitle(res.getString(R.string.artists))
-                                .setIconUri(res.getResourceUri(R.drawable.ic_auto_artist))
+                                .setTitle(res.getString(RR.string.artists))
+                                .setIconUri(res.getResourceUri(RR.drawable.ic_auto_artist))
                                 .setExtras(if (artistsCount > MAX_RESULT_SIZE) getContentStyle(CONTENT_STYLE_CATEGORY_ITEM_HINT_VALUE) else null)
                                 .build()
                         results.add(MediaBrowserCompat.MediaItem(artistsMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
                         //Albums
                         val albumsMediaDesc = MediaDescriptionCompat.Builder()
                                 .setMediaId(ID_ALBUM)
-                                .setTitle(res.getString(R.string.albums))
-                                .setIconUri(res.getResourceUri(R.drawable.ic_auto_album))
+                                .setTitle(res.getString(RR.string.albums))
+                                .setIconUri(res.getResourceUri(RR.drawable.ic_auto_album))
                                 .setExtras(getContentStyle(if(ml.albumsCount > MAX_RESULT_SIZE) CONTENT_STYLE_CATEGORY_ITEM_HINT_VALUE else CONTENT_STYLE_GRID_ITEM_HINT_VALUE))
                                 .build()
                         results.add(MediaBrowserCompat.MediaItem(albumsMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
                         //Tracks
                         val tracksMediaDesc = MediaDescriptionCompat.Builder()
                                 .setMediaId(ID_TRACK)
-                                .setTitle(res.getString(R.string.tracks))
-                                .setIconUri(res.getResourceUri(R.drawable.ic_auto_audio))
+                                .setTitle(res.getString(RR.string.tracks))
+                                .setIconUri(res.getResourceUri(RR.drawable.ic_auto_audio))
                                 .setExtras(getContentStyle(if (ml.audioCount > MAX_RESULT_SIZE) CONTENT_STYLE_CATEGORY_ITEM_HINT_VALUE else CONTENT_STYLE_LIST_ITEM_HINT_VALUE))
                                 .build()
                         results.add(MediaBrowserCompat.MediaItem(tracksMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
                         //Genres
                         val genresMediaDesc = MediaDescriptionCompat.Builder()
                                 .setMediaId(ID_GENRE)
-                                .setTitle(res.getString(R.string.genres))
-                                .setIconUri(res.getResourceUri(R.drawable.ic_auto_genre))
+                                .setTitle(res.getString(RR.string.genres))
+                                .setIconUri(res.getResourceUri(RR.drawable.ic_auto_genre))
                                 .setExtras(getContentStyle(if (ml.genresCount > MAX_RESULT_SIZE) CONTENT_STYLE_CATEGORY_ITEM_HINT_VALUE else CONTENT_STYLE_LIST_ITEM_HINT_VALUE))
                                 .build()
                         results.add(MediaBrowserCompat.MediaItem(genresMediaDesc, MediaBrowserCompat.MediaItem.FLAG_BROWSABLE))
@@ -367,28 +368,28 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                         val artists = ml.getArtists(artistsShowAll, Medialibrary.SORT_ALPHA, false, false)
                         artists.sortWith(MediaComparators.ANDROID_AUTO)
                         if (page == null && artists.size > MAX_RESULT_SIZE)
-                            return paginateLibrary(artists, parentIdUri, res.getResourceUri(R.drawable.ic_auto_artist))
+                            return paginateLibrary(artists, parentIdUri, res.getResourceUri(RR.drawable.ic_auto_artist))
                         list = artists.copyOfRange(pageOffset.coerceAtMost(artists.size), (pageOffset + MAX_RESULT_SIZE).coerceAtMost(artists.size))
                     }
                     ID_ALBUM -> {
                         val albums = ml.getAlbums(Medialibrary.SORT_ALPHA, false, false)
                         albums.sortWith(MediaComparators.ANDROID_AUTO)
                         if (page == null && albums.size > MAX_RESULT_SIZE)
-                            return paginateLibrary(albums, parentIdUri, res.getResourceUri(R.drawable.ic_auto_album), getContentStyle(CONTENT_STYLE_GRID_ITEM_HINT_VALUE))
+                            return paginateLibrary(albums, parentIdUri, res.getResourceUri(RR.drawable.ic_auto_album), getContentStyle(CONTENT_STYLE_GRID_ITEM_HINT_VALUE))
                         list = albums.copyOfRange(pageOffset.coerceAtMost(albums.size), (pageOffset + MAX_RESULT_SIZE).coerceAtMost(albums.size))
                     }
                     ID_TRACK -> {
                         val tracks = ml.getAudio(Medialibrary.SORT_ALPHA, false, false)
                         tracks.sortWith(MediaComparators.ANDROID_AUTO)
                         if (page == null && tracks.size > MAX_RESULT_SIZE)
-                            return paginateLibrary(tracks, parentIdUri, res.getResourceUri(R.drawable.ic_auto_audio))
+                            return paginateLibrary(tracks, parentIdUri, res.getResourceUri(RR.drawable.ic_auto_audio))
                         list = tracks.copyOfRange(pageOffset.coerceAtMost(tracks.size), (pageOffset + MAX_RESULT_SIZE).coerceAtMost(tracks.size))
                     }
                     ID_GENRE -> {
                         val genres = ml.getGenres(Medialibrary.SORT_ALPHA, false, false)
                         genres.sortWith(MediaComparators.ANDROID_AUTO)
                         if (page == null && genres.size > MAX_RESULT_SIZE)
-                            return paginateLibrary(genres, parentIdUri, res.getResourceUri(R.drawable.ic_auto_genre))
+                            return paginateLibrary(genres, parentIdUri, res.getResourceUri(RR.drawable.ic_auto_genre))
                         list = genres.copyOfRange(pageOffset.coerceAtMost(genres.size), (pageOffset + MAX_RESULT_SIZE).coerceAtMost(genres.size))
                     }
                     ID_PLAYLIST -> {
@@ -427,7 +428,7 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                                                 .appendQueryParameter(ArtworkProvider.SHUFFLE, "${shuffleMode.toInt()}")
                                                 .build()
                                     } else null
-                                    val title = if (shuffleMode) R.string.shuffle_all_title else R.string.play_all
+                                    val title = if (shuffleMode) RR.string.shuffle_all_title else RR.string.play_all
                                     val playAllMediaDesc = getPlayAllBuilder(context, parentId, title, artist.tracksCount, playAllPath).build()
                                     results.add(MediaBrowserCompat.MediaItem(playAllMediaDesc, MediaBrowserCompat.MediaItem.FLAG_PLAYABLE))
                                 }
@@ -445,7 +446,7 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                                             .appendPath("$id")
                                             .appendQueryParameter(ArtworkProvider.SHUFFLE, "${shuffleMode.toInt()}")
                                             .build()
-                                    val title = if (shuffleMode) R.string.shuffle_all_title else R.string.play_all
+                                    val title = if (shuffleMode) RR.string.shuffle_all_title else RR.string.play_all
                                     val playAllMediaDesc = getPlayAllBuilder(context, parentId, title, tracksCount, playAllPath).build()
                                     results.add(MediaBrowserCompat.MediaItem(playAllMediaDesc, MediaBrowserCompat.MediaItem.FLAG_PLAYABLE))
                                 }
@@ -458,20 +459,20 @@ class MediaSessionBrowser : ExtensionManagerActivity {
             if (results.isEmpty()) {
                 val emptyMediaDesc = MediaDescriptionCompat.Builder()
                         .setMediaId(ID_NO_MEDIA)
-                        .setIconUri(res.getResourceUri(R.drawable.ic_auto_nothumb))
-                        .setTitle(res.getString(R.string.search_no_result))
+                        .setIconUri(res.getResourceUri(RR.drawable.ic_auto_nothumb))
+                        .setTitle(res.getString(RR.string.search_no_result))
                         .setExtras(Bundle().apply {
                             putInt(EXTRA_CONTENT_STYLE_SINGLE_ITEM, CONTENT_STYLE_LIST_ITEM_HINT_VALUE)
                         })
                 when (parentId) {
-                    ID_ARTIST -> emptyMediaDesc.setIconUri(res.getResourceUri(R.drawable.ic_auto_artist_unknown))
-                    ID_ALBUM -> emptyMediaDesc.setIconUri(res.getResourceUri(R.drawable.ic_auto_album_unknown))
+                    ID_ARTIST -> emptyMediaDesc.setIconUri(res.getResourceUri(RR.drawable.ic_auto_artist_unknown))
+                    ID_ALBUM -> emptyMediaDesc.setIconUri(res.getResourceUri(RR.drawable.ic_auto_album_unknown))
                     ID_GENRE -> emptyMediaDesc.setIconUri(null)
                     ID_PLAYLIST -> {
                         emptyMediaDesc.setMediaId(ID_NO_PLAYLIST)
-                        emptyMediaDesc.setTitle(res.getString(R.string.noplaylist))
+                        emptyMediaDesc.setTitle(res.getString(RR.string.noplaylist))
                     }
-                    ID_STREAM -> emptyMediaDesc.setIconUri(res.getResourceUri(R.drawable.ic_auto_stream_unknown))
+                    ID_STREAM -> emptyMediaDesc.setIconUri(res.getResourceUri(RR.drawable.ic_auto_stream_unknown))
                 }
                 results.add(MediaBrowserCompat.MediaItem(emptyMediaDesc.build(), MediaBrowserCompat.MediaItem.FLAG_PLAYABLE))
             }
@@ -490,16 +491,16 @@ class MediaSessionBrowser : ExtensionManagerActivity {
             val results: MutableList<MediaBrowserCompat.MediaItem> = ArrayList()
             val searchAggregate = Medialibrary.getInstance().search(query, false)
             val searchMediaId = ID_SEARCH.toUri().buildUpon().appendQueryParameter("query", query).toString()
-            results.addAll(buildMediaItems(context, ID_PLAYLIST, searchAggregate.playlists, res.getString(R.string.playlists)))
-            results.addAll(buildMediaItems(context, ID_GENRE, searchAggregate.genres, res.getString(R.string.genres)))
-            results.addAll(buildMediaItems(context, ID_ARTIST, searchAggregate.artists, res.getString(R.string.artists)))
-            results.addAll(buildMediaItems(context, ID_ALBUM, searchAggregate.albums, res.getString(R.string.albums)))
-            results.addAll(buildMediaItems(context, searchMediaId, searchAggregate.tracks, res.getString(R.string.tracks)))
+            results.addAll(buildMediaItems(context, ID_PLAYLIST, searchAggregate.playlists, res.getString(RR.string.playlists)))
+            results.addAll(buildMediaItems(context, ID_GENRE, searchAggregate.genres, res.getString(RR.string.genres)))
+            results.addAll(buildMediaItems(context, ID_ARTIST, searchAggregate.artists, res.getString(RR.string.artists)))
+            results.addAll(buildMediaItems(context, ID_ALBUM, searchAggregate.albums, res.getString(RR.string.albums)))
+            results.addAll(buildMediaItems(context, searchMediaId, searchAggregate.tracks, res.getString(RR.string.tracks)))
             if (results.isEmpty()) {
                 val emptyMediaDesc = MediaDescriptionCompat.Builder()
                         .setMediaId(ID_NO_MEDIA)
-                        .setIconUri(res.getResourceUri(R.drawable.ic_auto_nothumb))
-                        .setTitle(res.getString(R.string.search_no_result))
+                        .setIconUri(res.getResourceUri(RR.drawable.ic_auto_nothumb))
+                        .setTitle(res.getString(RR.string.search_no_result))
                         .build()
                 results.add(MediaBrowserCompat.MediaItem(emptyMediaDesc, MediaBrowserCompat.MediaItem.FLAG_PLAYABLE))
             }
@@ -529,7 +530,7 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                     .appendPath(ArtworkProvider.computeExpiration())
                     .appendPath("$audioCount")
                     .build()
-            val shuffleAllMediaDesc = getPlayAllBuilder(context, ID_SHUFFLE_ALL, R.string.shuffle_all_title, audioCount, shuffleAllPath).build()
+            val shuffleAllMediaDesc = getPlayAllBuilder(context, ID_SHUFFLE_ALL, RR.string.shuffle_all_title, audioCount, shuffleAllPath).build()
             results.add(MediaBrowserCompat.MediaItem(shuffleAllMediaDesc, MediaBrowserCompat.MediaItem.FLAG_PLAYABLE))
             /* Query albums by name */
             val albums = mutableSetOf<Album>()
@@ -584,18 +585,18 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                             else -> TextUtils.separatedString('-', getMediaArtist(context, media), getMediaAlbum(context, media))
                         }
                     }
-                    MediaLibraryItem.TYPE_PLAYLIST -> res.getString(R.string.track_number, libraryItem.tracksCount)
+                    MediaLibraryItem.TYPE_PLAYLIST -> res.getString(RR.string.track_number, libraryItem.tracksCount)
                     MediaLibraryItem.TYPE_ARTIST -> {
                         val albumsCount = Medialibrary.getInstance().getArtist(libraryItem.id).albumsCount
-                        res.getQuantityString(R.plurals.albums_quantity, albumsCount, albumsCount)
+                        res.getQuantityString(RR.plurals.albums_quantity, albumsCount, albumsCount)
                     }
                     MediaLibraryItem.TYPE_GENRE -> {
                         val albumsCount = Medialibrary.getInstance().getGenre(libraryItem.id).albumsCount
-                        res.getQuantityString(R.plurals.albums_quantity, albumsCount, albumsCount)
+                        res.getQuantityString(RR.plurals.albums_quantity, albumsCount, albumsCount)
                     }
                     MediaLibraryItem.TYPE_ALBUM -> {
                         if (parentId.startsWith(ID_ARTIST))
-                            res.getString(R.string.track_number, libraryItem.tracksCount)
+                            res.getString(RR.string.track_number, libraryItem.tracksCount)
                         else
                             libraryItem.description
                     }
@@ -629,16 +630,16 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                     iconUri.appendPath("${libraryItem.id}")
                     artworkToUriCache.getOrPut(libraryItem.artworkMrl) { ArtworkProvider.buildUri(context, iconUri.build()) }
                 } else if (libraryItem.itemType == MediaLibraryItem.TYPE_MEDIA && (libraryItem as MediaWrapper).type == MediaWrapper.TYPE_STREAM)
-                    res.getResourceUri(R.drawable.ic_auto_stream_unknown)
+                    res.getResourceUri(RR.drawable.ic_auto_stream_unknown)
                 else {
                     when (libraryItem.itemType) {
-                        MediaLibraryItem.TYPE_ARTIST -> res.getResourceUri(R.drawable.ic_auto_artist_unknown)
-                        MediaLibraryItem.TYPE_ALBUM -> res.getResourceUri(R.drawable.ic_auto_album_unknown)
+                        MediaLibraryItem.TYPE_ARTIST -> res.getResourceUri(RR.drawable.ic_auto_artist_unknown)
+                        MediaLibraryItem.TYPE_ALBUM -> res.getResourceUri(RR.drawable.ic_auto_album_unknown)
                         MediaLibraryItem.TYPE_GENRE -> null
                         MediaLibraryItem.TYPE_PLAYLIST -> {
                             val trackList = libraryItem.tracks.toList()
                             val hasArtwork = trackList.any { (ThumbnailsProvider.isMediaVideo(it) || (!it.artworkMrl.isNullOrEmpty() && isPathValid(it.artworkMrl))) }
-                            if (!hasArtwork) res.getResourceUri(R.drawable.ic_auto_playlist_unknown) else {
+                            if (!hasArtwork) res.getResourceUri(RR.drawable.ic_auto_playlist_unknown) else {
                                 val playAllPlaylist = Uri.Builder()
                                         .appendPath(ArtworkProvider.PLAY_ALL)
                                         .appendPath(ArtworkProvider.PLAYLIST)
@@ -649,7 +650,7 @@ class MediaSessionBrowser : ExtensionManagerActivity {
                                 ArtworkProvider.buildUri(context, playAllPlaylist)
                             }
                         }
-                        else -> res.getResourceUri(R.drawable.ic_auto_nothumb)
+                        else -> res.getResourceUri(RR.drawable.ic_auto_nothumb)
                     }
                 }
 
@@ -751,8 +752,8 @@ class MediaSessionBrowser : ExtensionManagerActivity {
             return MediaDescriptionCompat.Builder()
                     .setMediaId(mediaId)
                     .setTitle(res.getString(title))
-                    .setSubtitle(res.getString(R.string.track_number, trackCount))
-                    .setIconUri(if (uri != null) ArtworkProvider.buildUri(ctx, uri) else res.getResourceUri(R.drawable.ic_auto_playall))
+                    .setSubtitle(res.getString(RR.string.track_number, trackCount))
+                    .setIconUri(if (uri != null) ArtworkProvider.buildUri(ctx, uri) else res.getResourceUri(RR.drawable.ic_auto_playall))
         }
 
         private fun createExtensionServiceConnection(context: Context) {

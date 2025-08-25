@@ -36,6 +36,7 @@ import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.medialibrary.Tools
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.vlc.BR
 import org.videolan.vlc.databinding.AudioAlbumTrackItemBinding

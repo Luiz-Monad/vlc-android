@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.videolan.libvlc.util.Extensions
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.registerReceiverCompat
 import org.videolan.tools.isStarted
 import org.videolan.vlc.R
@@ -65,7 +66,7 @@ object VLCDownloadManager: BroadcastReceiver(), DefaultLifecycleObserver {
     suspend fun download(context: FragmentActivity, subtitleItem: SubtitleItem) {
         val request = DownloadManager.Request(subtitleItem.zipDownloadLink.toUri())
         request.setDescription(subtitleItem.movieReleaseName)
-        request.setTitle(context.resources.getString(R.string.download_subtitle_title))
+        request.setTitle(context.resources.getString(RR.string.download_subtitle_title))
         request.setDestinationInExternalFilesDir(context, getDownloadPath(subtitleItem), "")
         val id = downloadManager.enqueue(request)
         val deferred = CompletableDeferred<SubDlResult>().also { dlDeferred = it }
@@ -92,7 +93,7 @@ object VLCDownloadManager: BroadcastReceiver(), DefaultLifecycleObserver {
                     )
                 }
                 else
-                    Toast.makeText(context, R.string.subtitles_download_failed, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, RR.string.subtitles_download_failed, Toast.LENGTH_SHORT).show()
             }
             withContext(Dispatchers.IO) { FileUtils.deleteFile(localUri) }
         }
@@ -108,7 +109,7 @@ object VLCDownloadManager: BroadcastReceiver(), DefaultLifecycleObserver {
     }
 
     private fun downloadFailed(id: Long, context: Context) {
-        Toast.makeText(context, R.string.subtitles_download_failed, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, RR.string.subtitles_download_failed, Toast.LENGTH_SHORT).show()
         ExternalSubRepository.getInstance(context).removeDownloadingItem(id)
     }
 

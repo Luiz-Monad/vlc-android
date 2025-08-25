@@ -35,6 +35,7 @@ import kotlinx.coroutines.*
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.getContextWithLocale
 import org.videolan.vlc.gui.helpers.BitmapUtil
 import org.videolan.vlc.gui.video.VideoPlayerActivity
@@ -72,14 +73,14 @@ class RecommendationsService : IntentService("RecommendationService"), Coroutine
                 NotificationCompat.Builder(this@RecommendationsService, "vlc_recommendations")
                         .setContentTitle(mw.title)
                         .setContentText(mw.description)
-                        .setContentInfo(getString(R.string.app_name))
+                        .setContentInfo(getString(RR.string.app_name))
                         .setPriority(priority)
                         .setLocalOnly(true)
                         .setOngoing(true)
-                        .setColor(ContextCompat.getColor(this, R.color.orange800))
+                        .setColor(ContextCompat.getColor(this, RR.color.orange800))
                         .setCategory(Notification.CATEGORY_RECOMMENDATION)
                         .setLargeIcon(BitmapUtil.getPicture(mw))
-                        .setSmallIcon(R.drawable.icon)
+                        .setSmallIcon(RR.drawable.icon)
                         .setContentIntent(buildPendingIntent(mw, id))
         ).build()
         // post the recommendation to the NotificationManager

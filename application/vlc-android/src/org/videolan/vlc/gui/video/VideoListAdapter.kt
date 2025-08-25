@@ -45,6 +45,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.interfaces.media.VideoGroup
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.MultiSelectAdapter
 import org.videolan.tools.MultiSelectHelper
 import org.videolan.vlc.BR
@@ -135,13 +136,13 @@ class VideoListAdapter(private var isSeenMediaMarkerVisible: Boolean
                 holder.binding.setVariable(BR.seen, 0L)
                 holder.binding.setVariable(BR.max, 0)
                 val count = item.mediaCount(Folder.TYPE_FOLDER_VIDEO)
-                holder.binding.setVariable(BR.time, holder.itemView.context.resources.getQuantityString(R.plurals.videos_quantity, count, count))
+                holder.binding.setVariable(BR.time, holder.itemView.context.resources.getQuantityString(RR.plurals.videos_quantity, count, count))
                 holder.binding.setVariable(BR.isNetwork, false)
                 holder.binding.setVariable(BR.isPresent, true)
             }
             is VideoGroup -> holder.itemView.scope.launch {
                 val count = item.mediaCount()
-                holder.binding.setVariable(BR.time, if (count < 2) null else if (item.presentCount == item.mediaCount()) holder.itemView.context.resources.getQuantityString(R.plurals.videos_quantity, count, count) else if(item.presentCount == 0) holder.itemView.context.resources.getString(R.string.no_video) else item.getPresenceDescription())
+                holder.binding.setVariable(BR.time, if (count < 2) null else if (item.presentCount == item.mediaCount()) holder.itemView.context.resources.getQuantityString(RR.plurals.videos_quantity, count, count) else if(item.presentCount == 0) holder.itemView.context.resources.getString(RR.string.no_video) else item.getPresenceDescription())
                 holder.title.text = item.title
                 if (!isListMode) holder.binding.setVariable(BR.resolution, null)
                 val seen = if (item.presentSeen == item.presentCount && item.presentCount != 0) 1L else 0L
@@ -228,7 +229,7 @@ class VideoListAdapter(private var isSeenMediaMarkerVisible: Boolean
 
         override fun selectView(selected: Boolean) {
             binding.setVariable(BR.selected, selected)
-            overlay.setImageResource(if (selected) R.drawable.video_overlay_selected else if (isListMode) 0 else R.drawable.video_overlay_gradient)
+            overlay.setImageResource(if (selected) RR.drawable.video_overlay_selected else if (isListMode) 0 else RR.drawable.video_overlay_gradient)
             if (isListMode) overlay.visibility = if (selected) View.VISIBLE else View.GONE
             more.visibility = if (multiSelectHelper.inActionMode) View.INVISIBLE else View.VISIBLE
         }

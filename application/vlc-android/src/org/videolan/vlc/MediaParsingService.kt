@@ -51,6 +51,7 @@ import org.videolan.medialibrary.interfaces.DevicesDiscoveryCb
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.stubs.StubMedialibrary
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.dbExists
 import org.videolan.resources.util.launchForeground
 import org.videolan.resources.util.registerReceiverCompat
@@ -204,7 +205,7 @@ class MediaParsingService : LifecycleService(), DevicesDiscoveryCb {
 
     @TargetApi(Build.VERSION_CODES.O)
     private fun forceForeground() {
-        val notification = NotificationHelper.createScanNotification(applicationContext, getString(R.string.loading_medialibrary), scanPaused, -1, -1)
+        val notification = NotificationHelper.createScanNotification(applicationContext, getString(RR.string.loading_medialibrary), scanPaused, -1, -1)
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
                 startForeground(43, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
@@ -381,9 +382,9 @@ class MediaParsingService : LifecycleService(), DevicesDiscoveryCb {
         val parsing = (done.toFloat() / scheduled.toFloat() * 100F)
         val discovery = withContext(Dispatchers.Default) {
             val progressText = when {
-                inDiscovery -> getString(R.string.ml_discovering) + " " + Uri.decode(currentDiscovery?.removeFileScheme())
-                parsing > 0 -> TextUtils.separatedString(getString(R.string.ml_parse_media) + " " + String.format("%.02f",parsing) + "%", "$done/$scheduled")
-                else -> getString(R.string.ml_parse_media)
+                inDiscovery -> getString(RR.string.ml_discovering) + " " + Uri.decode(currentDiscovery?.removeFileScheme())
+                parsing > 0 -> TextUtils.separatedString(getString(RR.string.ml_parse_media) + " " + String.format("%.02f",parsing) + "%", "$done/$scheduled")
+                else -> getString(RR.string.ml_parse_media)
             }
             if (!isActive) return@withContext ""
             if (lastNotificationTime != -1L) {

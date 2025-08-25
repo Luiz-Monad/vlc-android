@@ -46,6 +46,7 @@ import org.videolan.medialibrary.interfaces.media.Playlist
 import org.videolan.medialibrary.interfaces.media.VideoGroup
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.AppScope
 import org.videolan.tools.isStarted
@@ -95,8 +96,8 @@ fun FragmentActivity.share(file: File) {
         intentShareFile.type = "*/*"
         intentShareFile.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, "$packageName.provider", fileWithinMyDir))
         intentShareFile.putExtra(Intent.EXTRA_SUBJECT, file.name)
-        intentShareFile.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, file.name))
-        startActivity(Intent.createChooser(intentShareFile, getString(R.string.share_file,file.name)))
+        intentShareFile.putExtra(Intent.EXTRA_TEXT, getString(RR.string.share_message, file.name))
+        startActivity(Intent.createChooser(intentShareFile, getString(RR.string.share_file,file.name)))
     }
 }
 
@@ -112,15 +113,15 @@ suspend fun AppCompatActivity.share(media: MediaWrapper) {
             intentShareFile.type = if (media.type == TYPE_VIDEO) "video/*" else "audio/*"
             intentShareFile.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, "$packageName.provider", fileWithinMyDir))
             intentShareFile.putExtra(Intent.EXTRA_SUBJECT, media.title)
-            intentShareFile.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, media.title))
-            startActivity(Intent.createChooser(intentShareFile, getString(R.string.share_file, media.title)))
-        } else Snackbar.make(findViewById(android.R.id.content), R.string.invalid_file, Snackbar.LENGTH_LONG).show()
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, getString(RR.string.share_message, media.title))
+            startActivity(Intent.createChooser(intentShareFile, getString(RR.string.share_file, media.title)))
+        } else Snackbar.make(findViewById(android.R.id.content), RR.string.invalid_file, Snackbar.LENGTH_LONG).show()
 }
 
 fun FragmentActivity.share(medias: List<MediaWrapper>) = lifecycleScope.launch {
     val intentShareFile = Intent(Intent.ACTION_SEND_MULTIPLE)
     val uris = arrayListOf<Uri>()
-    val title = if (medias.size == 1) medias[0].title else resources.getQuantityString(R.plurals.media_quantity, medias.size, medias.size)
+    val title = if (medias.size == 1) medias[0].title else resources.getQuantityString(RR.plurals.media_quantity, medias.size, medias.size)
     withContext(Dispatchers.IO) {
         medias.filter { it.uri.path != null && File(it.uri.path!!).exists() }.forEach {
             val file = File(it.uri.path!!)
@@ -133,9 +134,9 @@ fun FragmentActivity.share(medias: List<MediaWrapper>) = lifecycleScope.launch {
             intentShareFile.type = "*/*"
             intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris)
             intentShareFile.putExtra(Intent.EXTRA_SUBJECT, title)
-            intentShareFile.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, title))
-            startActivity(Intent.createChooser(intentShareFile, getString(R.string.share_file, title)))
-        } else Snackbar.make(findViewById(android.R.id.content), R.string.invalid_file, Snackbar.LENGTH_LONG).show()
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, getString(RR.string.share_message, title))
+            startActivity(Intent.createChooser(intentShareFile, getString(RR.string.share_file, title)))
+        } else Snackbar.make(findViewById(android.R.id.content), RR.string.invalid_file, Snackbar.LENGTH_LONG).show()
 }
 
 fun MediaWrapper?.isMedia() = this != null && (type == MediaWrapper.TYPE_AUDIO || type == MediaWrapper.TYPE_VIDEO)
@@ -197,8 +198,8 @@ fun asyncTextItem(view: TextView, item: MediaLibraryItem?) {
     val text = if (item is Playlist) {
         if (item.duration != 0L) {
             val duration = Tools.millisToString(item.duration)
-            TextUtils.separatedString(view.context.getString(R.string.track_number, item.tracksCount), if (item.nbDurationUnknown > 0) "$duration+" else duration)
-        } else view.context.getString(R.string.track_number, item.tracksCount)
+            TextUtils.separatedString(view.context.getString(RR.string.track_number, item.tracksCount), if (item.nbDurationUnknown > 0) "$duration+" else duration)
+        } else view.context.getString(RR.string.track_number, item.tracksCount)
     } else item.description
     if (text.isNullOrEmpty()) {
         view.visibility = View.GONE
@@ -240,10 +241,10 @@ fun browserDescription(view: TextView, description: String?) {
 fun CharSequence.getDescriptionSpan(context: Context):SpannableString {
     val string = SpannableString(this)
     if (this.contains(folderReplacementMarker)) {
-        string.setSpan(ImageSpan(context, R.drawable.ic_emoji_folder, DynamicDrawableSpan.ALIGN_BASELINE), this.indexOf(folderReplacementMarker), this.indexOf(folderReplacementMarker)+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        string.setSpan(ImageSpan(context, RR.drawable.ic_emoji_folder, DynamicDrawableSpan.ALIGN_BASELINE), this.indexOf(folderReplacementMarker), this.indexOf(folderReplacementMarker)+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
     if (this.contains(fileReplacementMarker)) {
-        string.setSpan(ImageSpan(context, R.drawable.ic_emoji_file, DynamicDrawableSpan.ALIGN_BASELINE), this.indexOf(fileReplacementMarker), this.indexOf(fileReplacementMarker)+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        string.setSpan(ImageSpan(context, RR.drawable.ic_emoji_file, DynamicDrawableSpan.ALIGN_BASELINE), this.indexOf(fileReplacementMarker), this.indexOf(fileReplacementMarker)+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
     return string
 }
@@ -288,10 +289,10 @@ fun presenceDescription(view: TextView, description: String?) {
 fun CharSequence.getPresenceDescriptionSpan(context: Context):SpannableString {
     val string = SpannableString(this)
     if (this.contains(presentReplacementMarker)) {
-        string.setSpan(ImageSpan(context, R.drawable.ic_emoji_media_present, DynamicDrawableSpan.ALIGN_CENTER), this.indexOf(folderReplacementMarker), this.indexOf(folderReplacementMarker)+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        string.setSpan(ImageSpan(context, RR.drawable.ic_emoji_media_present, DynamicDrawableSpan.ALIGN_CENTER), this.indexOf(folderReplacementMarker), this.indexOf(folderReplacementMarker)+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
     if (this.contains(missingReplacementMarker)) {
-        string.setSpan(ImageSpan(context, R.drawable.ic_emoji_media_absent, DynamicDrawableSpan.ALIGN_CENTER), this.indexOf(fileReplacementMarker), this.indexOf(fileReplacementMarker)+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        string.setSpan(ImageSpan(context, RR.drawable.ic_emoji_media_absent, DynamicDrawableSpan.ALIGN_CENTER), this.indexOf(fileReplacementMarker), this.indexOf(fileReplacementMarker)+3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
     return string
 }

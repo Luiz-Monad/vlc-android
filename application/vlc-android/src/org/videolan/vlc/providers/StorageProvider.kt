@@ -29,6 +29,7 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.medialibrary.media.Storage
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.livedata.LiveDataset
 import org.videolan.vlc.R
 import org.videolan.vlc.repository.DirectoryRepository
@@ -49,7 +50,7 @@ class StorageProvider(context: Context, dataset: LiveDataset<MediaLibraryItem>, 
             if (mediaDirLocation.isEmpty()) continue
             storage = Storage(Uri.fromFile(File(mediaDirLocation)))
             if (AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY == mediaDirLocation)
-                storage.name = context.getString(R.string.internal_memory)
+                storage.name = context.getString(RR.string.internal_memory)
             storagesList.add(storage)
         }
         customLoop@ for (customDir in customDirectories) {
@@ -68,8 +69,8 @@ class StorageProvider(context: Context, dataset: LiveDataset<MediaLibraryItem>, 
         val res = context.resources
         sb.clear()
         if (folderCount > 0) {
-            sb.append(res.getQuantityString(R.plurals.subfolders_quantity, folderCount, folderCount))
-        } else sb.append(res.getString(R.string.nosubfolder))
+            sb.append(res.getQuantityString(RR.plurals.subfolders_quantity, folderCount, folderCount))
+        } else sb.append(res.getString(RR.string.nosubfolder))
         return sb.toString()
     }
 

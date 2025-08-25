@@ -40,6 +40,7 @@ import kotlinx.coroutines.withContext
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.resources.util.launchForeground
 import org.videolan.resources.util.startMedialibrary

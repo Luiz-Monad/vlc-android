@@ -45,6 +45,7 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.medialibrary.media.Storage
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.resources.util.HeaderProvider
 import org.videolan.tools.AppScope
@@ -348,7 +349,7 @@ abstract class BrowserProvider(val context: Context, val dataset: LiveDataset<Me
         val texts = ArrayList<String>()
         if (folderCount > 0)  texts.add("$folderCount $folderReplacementMarker")
         if (mediaFileCount > 0) texts.add("$mediaFileCount $fileReplacementMarker")
-        if(texts.isEmpty()) texts.add(res.getString(R.string.empty_directory))
+        if(texts.isEmpty()) texts.add(res.getString(RR.string.empty_directory))
         return TextUtils.separatedString(texts.toTypedArray())
     }
 

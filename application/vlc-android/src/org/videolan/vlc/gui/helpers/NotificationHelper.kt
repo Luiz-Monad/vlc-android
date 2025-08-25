@@ -37,6 +37,7 @@ import androidx.core.content.getSystemService
 import androidx.media.session.MediaButtonReceiver
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.DrawableCache
 import org.videolan.tools.Settings
 import org.videolan.tools.getContextWithLocale
@@ -65,7 +66,7 @@ object NotificationHelper {
 
         val piStop = MediaButtonReceiver.buildMediaButtonPendingIntent(ctx, PlaybackStateCompat.ACTION_STOP)
         val builder = NotificationCompat.Builder(ctx, PLAYBACK_SERVICE_CHANNEL_ID)
-        builder.setSmallIcon(if (video) R.drawable.ic_notif_video else R.drawable.ic_notif_audio)
+        builder.setSmallIcon(if (video) RR.drawable.ic_notif_video else RR.drawable.ic_notif_audio)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentTitle(title)
                 .setContentText(TextUtils.separatedString('-', artist, album))
@@ -80,46 +81,46 @@ object NotificationHelper {
         /* Previous */
         if (podcastMode) {
             val speedIcons = hashMapOf(
-                    0.50f to R.drawable.ic_notif_speed_0_50,
-                    0.80f to R.drawable.ic_notif_speed_0_80,
-                    1.00f to R.drawable.ic_notif_speed_1_00,
-                    1.10f to R.drawable.ic_notif_speed_1_10,
-                    1.20f to R.drawable.ic_notif_speed_1_20,
-                    1.50f to R.drawable.ic_notif_speed_1_50,
-                    2.00f to R.drawable.ic_notif_speed_2_00
+                    0.50f to RR.drawable.ic_notif_speed_0_50,
+                    0.80f to RR.drawable.ic_notif_speed_0_80,
+                    1.00f to RR.drawable.ic_notif_speed_1_00,
+                    1.10f to RR.drawable.ic_notif_speed_1_10,
+                    1.20f to RR.drawable.ic_notif_speed_1_20,
+                    1.50f to RR.drawable.ic_notif_speed_1_50,
+                    2.00f to RR.drawable.ic_notif_speed_2_00
             )
-            val speedResId = speedIcons[speedIcons.keys.minByOrNull { abs(speed - it) }] ?: R.drawable.ic_notif_speed_1_00
-            builder.addAction(NotificationCompat.Action(speedResId, ctx.getString(R.string.playback_speed),
+            val speedResId = speedIcons[speedIcons.keys.minByOrNull { abs(speed - it) }] ?: RR.drawable.ic_notif_speed_1_00
+            builder.addAction(NotificationCompat.Action(speedResId, ctx.getString(RR.string.playback_speed),
                     buildCustomButtonPendingIntent(ctx, CUSTOM_ACTION_SPEED)
             ))
         } else {
-            builder.addAction(NotificationCompat.Action(R.drawable.ic_notif_previous, ctx.getString(R.string.previous),
+            builder.addAction(NotificationCompat.Action(RR.drawable.ic_notif_previous, ctx.getString(RR.string.previous),
                     buildMediaButtonPendingIntent(ctx, enabledActions, PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)))
         }
         /* Rewind */
         builder.addAction(NotificationCompat.Action(
-                DrawableCache.getDrawableFromMemCache(ctx, "ic_notif_rewind_${Settings.audioJumpDelay}", R.drawable.ic_notif_rewind),
-                ctx.getString(R.string.playback_rewind),
+                DrawableCache.getDrawableFromMemCache(ctx, "ic_notif_rewind_${Settings.audioJumpDelay}", RR.drawable.ic_notif_rewind),
+                ctx.getString(RR.string.playback_rewind),
                 buildMediaButtonPendingIntent(ctx, enabledActions, PlaybackStateCompat.ACTION_REWIND, playing)))
         /* Play/Pause or Stop */
         if (pausable) {
-            if (playing) builder.addAction(NotificationCompat.Action(R.drawable.ic_widget_pause_w, ctx.getString(R.string.pause),
+            if (playing) builder.addAction(NotificationCompat.Action(RR.drawable.ic_widget_pause_w, ctx.getString(RR.string.pause),
                     MediaButtonReceiver.buildMediaButtonPendingIntent(ctx, PlaybackStateCompat.ACTION_PLAY_PAUSE)))
-            else builder.addAction(NotificationCompat.Action(R.drawable.ic_widget_play_w, ctx.getString(R.string.play),
+            else builder.addAction(NotificationCompat.Action(RR.drawable.ic_widget_play_w, ctx.getString(RR.string.play),
                     MediaButtonReceiver.buildMediaButtonPendingIntent(ctx, PlaybackStateCompat.ACTION_PLAY_PAUSE)))
-        } else builder.addAction(NotificationCompat.Action(R.drawable.ic_widget_close_w, ctx.getString(R.string.stop), piStop))
+        } else builder.addAction(NotificationCompat.Action(RR.drawable.ic_widget_close_w, ctx.getString(RR.string.stop), piStop))
         /* Fast Forward */
         builder.addAction(NotificationCompat.Action(
-                DrawableCache.getDrawableFromMemCache(ctx, "ic_notif_forward_${Settings.audioJumpDelay}", R.drawable.ic_notif_forward),
-                ctx.getString(R.string.playback_forward),
+                DrawableCache.getDrawableFromMemCache(ctx, "ic_notif_forward_${Settings.audioJumpDelay}", RR.drawable.ic_notif_forward),
+                ctx.getString(RR.string.playback_forward),
                 buildMediaButtonPendingIntent(ctx, enabledActions, PlaybackStateCompat.ACTION_FAST_FORWARD, playing)))
         /* Next */
         if (podcastMode) {
-            builder.addAction(NotificationCompat.Action(R.drawable.ic_notif_bookmark_add, ctx.getString(R.string.add_bookmark),
+            builder.addAction(NotificationCompat.Action(RR.drawable.ic_notif_bookmark_add, ctx.getString(RR.string.add_bookmark),
                     buildCustomButtonPendingIntent(ctx, CUSTOM_ACTION_BOOKMARK)
             ))
         } else {
-            builder.addAction(NotificationCompat.Action(R.drawable.ic_notif_next, ctx.getString(R.string.next),
+            builder.addAction(NotificationCompat.Action(RR.drawable.ic_notif_next, ctx.getString(RR.string.next),
                     buildMediaButtonPendingIntent(ctx, enabledActions, PlaybackStateCompat.ACTION_SKIP_TO_NEXT)))
         }
         if (AndroidDevices.showMediaStyle) {
@@ -150,9 +151,9 @@ object NotificationHelper {
         val intent = Intent(Intent.ACTION_VIEW).setClassName(ctx, START_ACTIVITY)
         val scanCompatBuilder = NotificationCompat.Builder(ctx, MEDIALIBRRARY_CHANNEL_ID)
                 .setContentIntent(PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE))
-                .setSmallIcon(R.drawable.ic_notif_scan)
+                .setSmallIcon(RR.drawable.ic_notif_scan)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setContentTitle(ctx.getString(R.string.ml_scanning))
+                .setContentTitle(ctx.getString(RR.string.ml_scanning))
                 .setProgress(max, progress, max < 1 || progress < 1)
                 .setAutoCancel(false)
                 .setCategory(NotificationCompat.CATEGORY_PROGRESS)
@@ -162,9 +163,9 @@ object NotificationHelper {
         notificationIntent.action = if (paused) ACTION_RESUME_SCAN else ACTION_PAUSE_SCAN
         val pi = PendingIntent.getBroadcast(ctx.applicationContext.getContextWithLocale(AppContextProvider.locale), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val playpause = if (paused)
-            NotificationCompat.Action(R.drawable.ic_play_notif, ctx.getString(R.string.resume), pi)
+            NotificationCompat.Action(RR.drawable.ic_play_notif, ctx.getString(RR.string.resume), pi)
         else
-            NotificationCompat.Action(R.drawable.ic_pause_notif, ctx.getString(R.string.pause), pi)
+            NotificationCompat.Action(RR.drawable.ic_pause_notif, ctx.getString(RR.string.pause), pi)
         scanCompatBuilder.addAction(playpause)
         return scanCompatBuilder.build()
     }
@@ -176,8 +177,8 @@ object NotificationHelper {
         val channels = mutableListOf<NotificationChannel>()
         // Playback channel
         if (notificationManager.getNotificationChannel(PLAYBACK_SERVICE_CHANNEL_ID) == null ) {
-            val name: CharSequence = appCtx.getString(R.string.playback)
-            val description = appCtx.getString(R.string.playback_controls)
+            val name: CharSequence = appCtx.getString(RR.string.playback)
+            val description = appCtx.getString(RR.string.playback_controls)
             val channel = NotificationChannel(PLAYBACK_SERVICE_CHANNEL_ID, name, NotificationManager.IMPORTANCE_LOW)
             channel.description = description
             channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
@@ -185,8 +186,8 @@ object NotificationHelper {
         }
         // Scan channel
         if (notificationManager.getNotificationChannel(MEDIALIBRRARY_CHANNEL_ID) == null ) {
-            val name = appCtx.getString(R.string.medialibrary_scan)
-            val description = appCtx.getString(R.string.Medialibrary_progress)
+            val name = appCtx.getString(RR.string.medialibrary_scan)
+            val description = appCtx.getString(RR.string.Medialibrary_progress)
             val channel = NotificationChannel(MEDIALIBRRARY_CHANNEL_ID, name, NotificationManager.IMPORTANCE_LOW)
             channel.description = description
             channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
@@ -195,7 +196,7 @@ object NotificationHelper {
 
         // Misc channel
         if (notificationManager.getNotificationChannel(MISC_CHANNEL_ID) == null ) {
-            val name = appCtx.getString(R.string.misc)
+            val name = appCtx.getString(RR.string.misc)
             val channel = NotificationChannel(MISC_CHANNEL_ID, name, NotificationManager.IMPORTANCE_LOW)
             channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             channels.add(channel)
@@ -203,8 +204,8 @@ object NotificationHelper {
 
         // Recommendations channel
         if (AndroidDevices.isAndroidTv && notificationManager.getNotificationChannel(RECOMMENDATION_CHANNEL_ID) == null) {
-            val name = appCtx.getString(R.string.recommendations)
-            val description = appCtx.getString(R.string.recommendations_desc)
+            val name = appCtx.getString(RR.string.recommendations)
+            val description = appCtx.getString(RR.string.recommendations_desc)
             val channel = NotificationChannel(RECOMMENDATION_CHANNEL_ID, name, NotificationManager.IMPORTANCE_LOW)
             channel.description = description
             channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
@@ -217,7 +218,7 @@ object NotificationHelper {
     fun createDebugServcieChannel(appCtx: Context) {
         val notificationManager = appCtx.getSystemService<NotificationManager>()!!
 // Playback channel
-        val name = appCtx.getString(R.string.debug_logs)
+        val name = appCtx.getString(RR.string.debug_logs)
         val channel = NotificationChannel(VLC_DEBUG_CHANNEL, name, NotificationManager.IMPORTANCE_LOW)
         channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         notificationManager.createNotificationChannel(channel)

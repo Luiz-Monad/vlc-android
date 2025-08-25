@@ -62,7 +62,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.moviepedia.MediaScraper
 import org.videolan.moviepedia.models.identify.MoviepediaMedia
 import org.videolan.moviepedia.viewmodel.MediaScrapingModel
-import org.videolan.television.R
+import org.videolan.resources.R
 import org.videolan.television.util.manageHttpException
 import org.videolan.tools.NetworkMonitor
 

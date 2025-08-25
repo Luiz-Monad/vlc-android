@@ -31,6 +31,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import org.videolan.resources.R as RR
 import org.videolan.tools.dp
 import org.videolan.vlc.R
 
@@ -54,7 +55,7 @@ class WidgetHandleView : View {
     private fun initialize() {
         val typedValue = TypedValue()
         val theme: Resources.Theme = context.theme
-        theme.resolveAttribute(R.attr.colorPrimary, typedValue, true)
+        theme.resolveAttribute(android.R.attr.colorPrimary, typedValue, true)
         paint.color = typedValue.data
         paint.isAntiAlias = true
     }
@@ -62,7 +63,7 @@ class WidgetHandleView : View {
     override fun onDraw(canvas: Canvas?) {
         val padding = 8.dp.toFloat()
         val viewWidth = width
-        //3.56 is the known ratio of the [R.drawable.vlc_widget_mini] image. 6.dp is two times the stroke size
+        //3.56 is the known ratio of the [RR.drawable.vlc_widget_mini] image. 6.dp is two times the stroke size
         val width = ((height - 16.dp) * 3.56) - 6.dp
         val hPadding = ((viewWidth.toFloat() - width) / 2).toFloat()
         val height = height - padding

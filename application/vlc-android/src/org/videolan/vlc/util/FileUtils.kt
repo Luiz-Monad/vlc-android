@@ -43,6 +43,7 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.isExternalStorageManager
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig

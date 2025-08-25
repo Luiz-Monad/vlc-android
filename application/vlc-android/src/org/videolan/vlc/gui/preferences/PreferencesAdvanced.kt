@@ -45,6 +45,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.BitmapCache
 import org.videolan.tools.Settings
 import org.videolan.tools.putSingle
@@ -67,7 +68,7 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
     override fun getXml() =  R.xml.preferences_adv
 
     override fun getTitleId(): Int {
-        return R.string.advanced_prefs_category
+        return RR.string.advanced_prefs_category
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,7 +103,7 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
                 return true
             }
             "clear_history" -> {
-                val dialog = ConfirmDeleteDialog.newInstance(title = getString(R.string.clear_playback_history), description = getString(R.string.clear_history_message), buttonText = getString(R.string.clear_history))
+                val dialog = ConfirmDeleteDialog.newInstance(title = getString(RR.string.clear_playback_history), description = getString(RR.string.clear_history_message), buttonText = getString(RR.string.clear_history))
                 dialog.show((activity as FragmentActivity).supportFragmentManager, RenameDialog::class.simpleName)
                 dialog.setListener {
                     Medialibrary.getInstance().clearHistory()
@@ -126,15 +127,15 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
                     activity?.let {
                         Toast.makeText(
                             it,
-                            R.string.settings_ml_block_scan,
+                            RR.string.settings_ml_block_scan,
                             Toast.LENGTH_LONG
                         ).show()
                     }
                 } else {
                     val dialog = ConfirmDeleteDialog.newInstance(
-                        title = getString(R.string.clear_media_db),
-                        description = getString(R.string.clear_media_db_message),
-                        buttonText = getString(R.string.clear)
+                        title = getString(RR.string.clear_media_db),
+                        description = getString(RR.string.clear_media_db_message),
+                        buttonText = getString(RR.string.clear)
                     )
                     dialog.show(
                         requireActivity().supportFragmentManager,
@@ -166,7 +167,7 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
             }
             "clear_app_data" -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    val dialog = ConfirmDeleteDialog.newInstance(title = getString(R.string.clear_app_data), description = getString(R.string.clear_app_data_message), buttonText = getString(R.string.clear))
+                    val dialog = ConfirmDeleteDialog.newInstance(title = getString(RR.string.clear_app_data), description = getString(RR.string.clear_app_data_message), buttonText = getString(RR.string.clear))
                     dialog.show(requireActivity().supportFragmentManager, RenameDialog::class.simpleName)
                     dialog.setListener { (requireActivity().getSystemService(ACTIVITY_SERVICE) as ActivityManager).clearApplicationUserData() }
                 } else {
@@ -183,7 +184,7 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
             }
             "dump_media_db" -> {
                 if (Medialibrary.getInstance().isWorking)
-                    UiTools.snacker(requireActivity(), getString(R.string.settings_ml_block_scan))
+                    UiTools.snacker(requireActivity(), getString(RR.string.settings_ml_block_scan))
                 else {
                     val dst = File(AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY + Medialibrary.VLC_MEDIA_DB_NAME)
                     lifecycleScope.launch {
@@ -194,10 +195,10 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
                                 FileUtils.copyFile(db, dst)
                             }
                             if (copied)
-                                UiTools.snackerConfirm(requireActivity(), getString(R.string.dump_db_succes), confirmMessage = R.string.share, overAudioPlayer = false) {
+                                UiTools.snackerConfirm(requireActivity(), getString(RR.string.dump_db_succes), confirmMessage = RR.string.share, overAudioPlayer = false) {
                                     requireActivity().share(dst)
                                 } else {
-                                Toast.makeText(context, getString(R.string.dump_db_failure), Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, getString(RR.string.dump_db_failure), Toast.LENGTH_LONG).show()
                             }
                         }
                     }
@@ -218,10 +219,10 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
 
                         }
                         if (copied)
-                            UiTools.snackerConfirm(requireActivity(), getString(R.string.dump_db_succes), confirmMessage = R.string.share, overAudioPlayer = false) {
+                            UiTools.snackerConfirm(requireActivity(), getString(RR.string.dump_db_succes), confirmMessage = RR.string.share, overAudioPlayer = false) {
                                 requireActivity().share(dst)
                             } else {
-                            Toast.makeText(context, getString(R.string.dump_db_failure), Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, getString(RR.string.dump_db_failure), Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -244,11 +245,11 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
                         val newValue = origValue.coerceIn(0, 60000)
                         putInt("network_caching_value", newValue)
                         findPreference<EditTextPreference>(key)?.let { it.text = newValue.toString() }
-                        if (origValue != newValue) UiTools.snacker(requireActivity(), R.string.network_caching_popup)
+                        if (origValue != newValue) UiTools.snacker(requireActivity(), RR.string.network_caching_popup)
                     } catch (e: NumberFormatException) {
                         putInt("network_caching_value", 0)
                         findPreference<EditTextPreference>(key)?.let { it.text = "0" }
-                        UiTools.snacker(requireActivity(), R.string.network_caching_popup)
+                        UiTools.snacker(requireActivity(), RR.string.network_caching_popup)
                     }
                 }
                 lifecycleScope.launch { restartLibVLC() }
@@ -259,7 +260,7 @@ class PreferencesAdvanced : BasePreferenceFragment(), SharedPreferences.OnShared
                     try {
                         VLCInstance.restart()
                     } catch (e: IllegalStateException) {
-                        UiTools.snacker(requireActivity(), R.string.custom_libvlc_options_invalid)
+                        UiTools.snacker(requireActivity(), RR.string.custom_libvlc_options_invalid)
                         sharedPreferences.putSingle("custom_libvlc_options", "")
                     } finally {
                         restartMediaPlayer()

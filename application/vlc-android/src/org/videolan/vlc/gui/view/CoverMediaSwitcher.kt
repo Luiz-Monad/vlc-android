@@ -28,6 +28,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.setEllipsizeModeByPref
@@ -46,7 +47,7 @@ class CoverMediaSwitcher(context: Context, attrs: AttributeSet) : AudioMediaSwit
         if (cover != null) {
             coverView.setImageBitmap(cover)
         } else {
-            coverView.setImageDrawable(ContextCompat.getDrawable(v.context, R.drawable.ic_player_cover_audiotrack))
+            coverView.setImageDrawable(ContextCompat.getDrawable(v.context, RR.drawable.ic_player_cover_audiotrack))
         }
 
         trackInfoView?.visibility = if (Settings.showAudioTrackInfo) View.VISIBLE else View.GONE

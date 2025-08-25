@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.core.content.ContextCompat
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 
 class VerticalSeekBar : AppCompatSeekBar {
@@ -29,7 +30,7 @@ class VerticalSeekBar : AppCompatSeekBar {
 
         //The custom drawable looks not great for kitkat. So we use the default one to mitigate the issue
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            progressDrawable = ContextCompat.getDrawable(context, R.drawable.po_seekbar)
+            progressDrawable = ContextCompat.getDrawable(context, RR.drawable.po_seekbar)
         }
     }
 

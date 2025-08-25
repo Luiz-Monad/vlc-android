@@ -21,13 +21,14 @@
 package org.videolan.vlc.widget
 
 import org.videolan.vlc.R
+import org.videolan.resources.R as RR
 
 class VLCAppWidgetProviderBlack : VLCAppWidgetProvider() {
 
     override fun getlayout(): Int = R.layout.widget_old
 
     override fun getPlayPauseImage(isPlaying: Boolean): Int {
-        return if (isPlaying) R.drawable.ic_widget_pause_w else R.drawable.ic_widget_play_w
+        return if (isPlaying) RR.drawable.ic_widget_pause_w else RR.drawable.ic_widget_play_w
     }
 
 }

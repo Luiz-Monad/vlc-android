@@ -39,6 +39,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import org.videolan.medialibrary.interfaces.media.Bookmark
+import org.videolan.resources.R as RR
 import org.videolan.tools.setGone
 import org.videolan.tools.setVisible
 import org.videolan.vlc.BuildConfig
@@ -68,7 +69,7 @@ class BookmarkListDelegate(val activity: FragmentActivity, val service: Playback
             addBookmarButton = rootView.findViewById<ImageView>(R.id.add_bookmark)
             addBookmarButton.setOnClickListener {
                 bookmarkModel.addBookmark(activity)
-                addBookmarButton.announceForAccessibility(activity.getString(R.string.bookmark_added))
+                addBookmarButton.announceForAccessibility(activity.getString(RR.string.bookmark_added))
             }
             rootView.findViewById<View>(R.id.top_bar).setOnTouchListener { v, _ ->
                 v.parent.requestDisallowInterceptTouchEvent(true)
@@ -106,7 +107,7 @@ class BookmarkListDelegate(val activity: FragmentActivity, val service: Playback
                         constraintSet.constrainHeight(imageView.id, ConstraintSet.WRAP_CONTENT)
                         constraintSet.connect(imageView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
                         constraintSet.connect(imageView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-                        imageView.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_bookmark_marker))
+                        imageView.setImageDrawable(ContextCompat.getDrawable(activity, RR.drawable.ic_bookmark_marker))
                         markerContainer.addView(imageView)
                     }
                     constraintSet.applyTo(markerContainer)

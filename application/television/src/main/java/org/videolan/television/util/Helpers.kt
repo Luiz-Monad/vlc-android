@@ -7,8 +7,8 @@ import com.google.android.material.snackbar.Snackbar
 import org.videolan.television.ui.browser.REQUEST_CODE_NO_CONNECTION
 import org.videolan.television.ui.dialogs.ConfirmationTvActivity
 import org.videolan.resources.util.NoConnectivityException
+import org.videolan.resources.R
 import org.videolan.tools.Settings
-import org.videolan.vlc.R
 
 
 fun Activity.manageHttpException(e: Exception) {

@@ -42,6 +42,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.TipsUtils
@@ -231,7 +232,7 @@ class VideoTipsDelegate(private val player: VideoPlayerActivity) : OnClickListen
         getTapIndicators().forEach { constraintSet.setVisibility(it.id, GONE) }
 
         clearAllAnimations()
-        nextButton.setText(R.string.next_step)
+        nextButton.setText(RR.string.next_step)
 
         when (currentTip) {
             VideoPlayerTipsStep.CONTROLS -> {
@@ -307,7 +308,7 @@ class VideoTipsDelegate(private val player: VideoPlayerActivity) : OnClickListen
                 constraintSet.setVisibility(R.id.tapGestureHorizontal, VISIBLE)
                 currentAnimations.clear()
                 currentAnimations.add(TipsUtils.horizontalSwipe(tapGestureHorizontal))
-                nextButton.setText(R.string.close)
+                nextButton.setText(RR.string.close)
             }
             else -> {}
         }
@@ -347,40 +348,40 @@ class VideoTipsDelegate(private val player: VideoPlayerActivity) : OnClickListen
     override fun onClick(v: View?) {
         getTapIndicators().forEach { it.setBackgroundResource(0) }
         if (currentControl == v?.id) {
-            helpTitle.setText(R.string.tips_player_controls)
-            helpDescription.setText(R.string.tips_player_controls_description)
+            helpTitle.setText(RR.string.tips_player_controls)
+            helpDescription.setText(RR.string.tips_player_controls_description)
             currentControl = null
             return
         }
         when (v?.id) {
             R.id.tapIndicatorTracks -> {
-                helpTitle.setText(R.string.tips_audio_sub)
-                helpDescription.setText(R.string.tap)
-                v.background = ContextCompat.getDrawable(player, R.drawable.tips_tap)
+                helpTitle.setText(RR.string.tips_audio_sub)
+                helpDescription.setText(RR.string.tap)
+                v.background = ContextCompat.getDrawable(player, RR.drawable.tips_tap)
                 currentControl = v.id
             }
             R.id.tapIndicatorOrientation -> {
-                helpTitle.setText(R.string.lock_orientation)
-                helpDescription.setText(R.string.lock_orientation_description)
-                v.background = ContextCompat.getDrawable(player, R.drawable.tips_tap)
+                helpTitle.setText(RR.string.lock_orientation)
+                helpDescription.setText(RR.string.lock_orientation_description)
+                v.background = ContextCompat.getDrawable(player, RR.drawable.tips_tap)
                 currentControl = v.id
             }
             R.id.tapIndicatorPlay -> {
-                helpTitle.setText(R.string.play)
-                helpDescription.setText(R.string.tips_play_description)
-                v.background = ContextCompat.getDrawable(player, R.drawable.tips_tap)
+                helpTitle.setText(RR.string.play)
+                helpDescription.setText(RR.string.tips_play_description)
+                v.background = ContextCompat.getDrawable(player, RR.drawable.tips_tap)
                 currentControl = v.id
             }
             R.id.tapIndicatorRatio -> {
-                helpTitle.setText(R.string.aspect_ratio)
-                helpDescription.setText(R.string.aspect_ratio_description)
-                v.background = ContextCompat.getDrawable(player, R.drawable.tips_tap)
+                helpTitle.setText(RR.string.aspect_ratio)
+                helpDescription.setText(RR.string.aspect_ratio_description)
+                v.background = ContextCompat.getDrawable(player, RR.drawable.tips_tap)
                 currentControl = v.id
             }
             R.id.tapIndicatorAdvanced -> {
-                helpTitle.setText(R.string.advanced_options)
-                helpDescription.setText(R.string.advanced_options_description)
-                v.background = ContextCompat.getDrawable(player, R.drawable.tips_tap)
+                helpTitle.setText(RR.string.advanced_options)
+                helpDescription.setText(RR.string.advanced_options_description)
+                v.background = ContextCompat.getDrawable(player, RR.drawable.tips_tap)
                 currentControl = v.id
             }
         }
@@ -393,12 +394,12 @@ class VideoTipsDelegate(private val player: VideoPlayerActivity) : OnClickListen
  * @param descriptionText: the string resource to display in the description [TextView]
  */
 enum class VideoPlayerTipsStep(@StringRes var titleText: Int, @StringRes var descriptionText: Int) {
-    CONTROLS(R.string.tips_player_controls, R.string.tips_player_controls_description),
-    BRIGHTNESS(R.string.brightness, R.string.tips_swipe),
-    VOLUME(R.string.volume, R.string.tips_swipe),
-    PAUSE(R.string.pause, R.string.pause_description),
-    SEEK_TAP(R.string.seek_tap, R.string.seek_tap_description),
-    SEEK(R.string.seek, R.string.tips_swipe_horizontal);
+    CONTROLS(RR.string.tips_player_controls, RR.string.tips_player_controls_description),
+    BRIGHTNESS(RR.string.brightness, RR.string.tips_swipe),
+    VOLUME(RR.string.volume, RR.string.tips_swipe),
+    PAUSE(RR.string.pause, RR.string.pause_description),
+    SEEK_TAP(RR.string.seek_tap, RR.string.seek_tap_description),
+    SEEK(RR.string.seek, RR.string.tips_swipe_horizontal);
 
     /**
      * @return the next step

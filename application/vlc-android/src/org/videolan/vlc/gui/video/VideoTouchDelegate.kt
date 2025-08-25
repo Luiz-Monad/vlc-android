@@ -24,6 +24,7 @@ import org.videolan.libvlc.MediaPlayer
 import org.videolan.medialibrary.Tools
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.AndroidDevices.isTv
+import org.videolan.resources.R as RR
 import org.videolan.tools.setVisible
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
@@ -370,7 +371,7 @@ class VideoTouchDelegate(private val player: VideoPlayerActivity,
                     if (coef > 1) String.format(" x%.1g", 1.0 / coef) else ""
                 ), 50
             )
-            else player.overlayDelegate.showInfo(R.string.unseekable_stream, 1000)
+            else player.overlayDelegate.showInfo(RR.string.unseekable_stream, 1000)
         }
     }
 
@@ -514,16 +515,16 @@ class VideoTouchDelegate(private val player: VideoPlayerActivity,
                     seekTVConstraintSet.connect(R.id.rightContainerBackground, ConstraintSet.START, R.id.seekRightContainer, ConstraintSet.START)
                     seekTVConstraintSet.connect(R.id.rightContainerBackground, ConstraintSet.TOP, R.id.seekRightContainer, ConstraintSet.TOP)
                     seekTVConstraintSet.connect(R.id.rightContainerBackground, ConstraintSet.BOTTOM, R.id.seekRightContainer, ConstraintSet.BOTTOM)
-                    seekTVConstraintSet.setMargin(R.id.seekRightText, ConstraintSet.END, player.resources.getDimensionPixelSize(R.dimen.tv_overscan_horizontal))
+                    seekTVConstraintSet.setMargin(R.id.seekRightText, ConstraintSet.END, player.resources.getDimensionPixelSize(RR.dimen.tv_overscan_horizontal))
 
                     seekTVConstraintSet.connect(R.id.leftContainerBackground, ConstraintSet.END, R.id.seekLeftContainer, ConstraintSet.END)
                     seekTVConstraintSet.connect(R.id.leftContainerBackground, ConstraintSet.TOP, R.id.seekLeftContainer, ConstraintSet.TOP)
                     seekTVConstraintSet.connect(R.id.leftContainerBackground, ConstraintSet.BOTTOM, R.id.seekLeftContainer, ConstraintSet.BOTTOM)
-                    seekTVConstraintSet.setMargin(R.id.seekLeftText, ConstraintSet.START, player.resources.getDimensionPixelSize(R.dimen.tv_overscan_horizontal))
-                    seekForwardFirst.setImageResource(R.drawable.ic_half_seek_forward_tv)
-                    seekForwardSecond.setImageResource(R.drawable.ic_half_seek_forward_tv)
-                    seekRewindFirst.setImageResource(R.drawable.ic_half_seek_rewind_tv)
-                    seekRewindSecond.setImageResource(R.drawable.ic_half_seek_rewind_tv)
+                    seekTVConstraintSet.setMargin(R.id.seekLeftText, ConstraintSet.START, player.resources.getDimensionPixelSize(RR.dimen.tv_overscan_horizontal))
+                    seekForwardFirst.setImageResource(RR.drawable.ic_half_seek_forward_tv)
+                    seekForwardSecond.setImageResource(RR.drawable.ic_half_seek_forward_tv)
+                    seekRewindFirst.setImageResource(RR.drawable.ic_half_seek_rewind_tv)
+                    seekRewindSecond.setImageResource(RR.drawable.ic_half_seek_rewind_tv)
 
                     seekRightText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28f)
                     seekLeftText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28f)

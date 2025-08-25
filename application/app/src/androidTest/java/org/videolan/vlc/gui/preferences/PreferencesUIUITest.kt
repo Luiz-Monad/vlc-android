@@ -9,7 +9,7 @@ import org.junit.Test
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.PreferenceMatchers.withKey
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.onPreferenceRow
 import org.videolan.vlc.util.*
 
@@ -22,7 +22,7 @@ class PreferencesUIUITest: BasePreferenceUITest() {
     override fun beforeTest() {
         activity = intentsTestRule.activity
 
-        onPreferenceRow(R.id.recycler_view, withKey("ui_category"))!!
+        onPreferenceRow(androidx.preference.R.id.recycler_view, withKey("ui_category"))!!
                 .perform(click())
     }
 

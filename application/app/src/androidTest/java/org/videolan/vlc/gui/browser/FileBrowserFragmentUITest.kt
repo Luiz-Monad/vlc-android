@@ -20,6 +20,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.EXTRA_TARGET
 import org.videolan.tools.Settings
+import org.videolan.resources.R as RR
 import org.videolan.vlc.*
 import org.videolan.vlc.gui.DiffUtilAdapter
 import org.videolan.vlc.gui.MainActivity
@@ -50,7 +51,7 @@ class FileBrowserFragmentUITest : BaseUITest() {
     fun whenAtRoot_checkCorrectAppbarTitle() {
         onView(withId(R.id.main_toolbar))
                 .check(matches(
-                        hasDescendant(withText(R.string.directories))
+                        hasDescendant(withText(RR.string.directories))
                 ))
     }
 
@@ -61,9 +62,9 @@ class FileBrowserFragmentUITest : BaseUITest() {
         val rvMatcher = withRecyclerView(R.id.network_list)
         // Shows Dummy category
         onView(rvMatcher.atPositionOnView(0, R.id.separator_title))
-                .check(matches(withText(context.getString(R.string.browser_storages))))
+                .check(matches(withText(context.getString(RR.string.browser_storages))))
         onView(rvMatcher.atPosition(1))
-                .check(matches(hasDescendant(withText(R.string.internal_memory))))
+                .check(matches(hasDescendant(withText(RR.string.internal_memory))))
     }
 
     @Test
@@ -71,7 +72,7 @@ class FileBrowserFragmentUITest : BaseUITest() {
         testRecyclerViewShownAndSizeGreaterThanSize(3)
 
         onView(withRecyclerView(R.id.network_list).atPositionOnView(2, R.id.separator_title))
-                .check(matches(withText(R.string.browser_quick_access)))
+                .check(matches(withText(RR.string.browser_quick_access)))
     }
 
     @Test
@@ -80,7 +81,7 @@ class FileBrowserFragmentUITest : BaseUITest() {
 
         onView(withId(R.id.main_toolbar))
                 .check(matches(
-                        hasDescendant(withText(R.string.internal_memory))
+                        hasDescendant(withText(RR.string.internal_memory))
                 ))
     }
 
@@ -90,7 +91,7 @@ class FileBrowserFragmentUITest : BaseUITest() {
         onView(rvMatcher.atPosition(1)).perform(longClick())
 
         onView(rvMatcher.atPosition(1))
-                .check(matches(withBgColor(context.getColor(R.color.orange200transparent))))
+                .check(matches(withBgColor(context.getColor(RR.color.orange200transparent))))
 
         onView(withId(R.id.action_mode_file_play))
                 .check(matches(isDisplayed()))
@@ -111,7 +112,7 @@ class FileBrowserFragmentUITest : BaseUITest() {
 
         openActionBarOverflowOrOptionsMenu(context)
 
-        onView(withText(R.string.refresh))
+        onView(withText(RR.string.refresh))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
     }
@@ -124,28 +125,28 @@ class FileBrowserFragmentUITest : BaseUITest() {
 
         openActionBarOverflowOrOptionsMenu(context)
 
-        onView(anyOf(withText(R.string.sortby), withId(R.id.ml_menu_sortby)))
+        onView(anyOf(withText(RR.string.sortby), withId(R.id.ml_menu_sortby)))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
                 .perform(click())
 
-        onView(anyOf(withText(R.string.sortby_name), withId(R.id.ml_menu_sortby_name)))
+        onView(anyOf(withText(RR.string.sortby_name), withId(R.id.ml_menu_sortby_name)))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
-        onView(anyOf(withText(R.string.sortby_filename), withId(R.id.ml_menu_sortby_filename)))
+        onView(anyOf(withText(RR.string.sortby_filename), withId(R.id.ml_menu_sortby_filename)))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
 
         onView(isRoot()).perform(orientationLandscape())
 
-        onView(anyOf(withContentDescription(R.string.sortby), withId(R.id.ml_menu_sortby)))
+        onView(anyOf(withContentDescription(RR.string.sortby), withId(R.id.ml_menu_sortby)))
                 .check(matches(isDisplayed()))
                 .perform(click())
 
-        onView(anyOf(withText(R.string.sortby_name), withId(R.id.ml_menu_sortby_name)))
+        onView(anyOf(withText(RR.string.sortby_name), withId(R.id.ml_menu_sortby_name)))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
-        onView(anyOf(withText(R.string.sortby_filename), withId(R.id.ml_menu_sortby_filename)))
+        onView(anyOf(withText(RR.string.sortby_filename), withId(R.id.ml_menu_sortby_filename)))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
     }
@@ -164,7 +165,7 @@ class FileBrowserFragmentUITest : BaseUITest() {
     fun whenAtRoot_checkOverflowMenuShowsRefresh() {
         openActionBarOverflowOrOptionsMenu(context)
 
-        onView(withText(R.string.refresh))
+        onView(withText(RR.string.refresh))
                 .check(matches(isDisplayed()))
     }
 
@@ -177,7 +178,7 @@ class FileBrowserFragmentUITest : BaseUITest() {
 
         onView(withId(R.id.ctx_title))
                 .check(matches(isDisplayed()))
-                .check(matches(withText(R.string.internal_memory)))
+                .check(matches(withText(RR.string.internal_memory)))
         onView(withId(R.id.ctx_list))
                 .check(matches(isDisplayed()))
                 .check(matches(sizeOfAtLeast(2)))
@@ -196,7 +197,7 @@ class FileBrowserFragmentUITest : BaseUITest() {
                 .perform(click())
 
         onView(withRecyclerView(R.id.ctx_list).atPosition(1))
-                .check(matches(hasDescendant(withText(R.string.favorites_add))))
+                .check(matches(hasDescendant(withText(RR.string.favorites_add))))
                 .perform(click())
 
         onView(withId(R.id.network_list))
@@ -212,8 +213,8 @@ class FileBrowserFragmentUITest : BaseUITest() {
         onView(rvMatcher.atPosition(0)).perform(longClick())
         onView(rvMatcher.atPosition(2)).perform(longClick())
 
-        onView(rvMatcher.atPosition(0)).check(matches(withBgColor(context.getColor(R.color.orange200transparent))))
-        onView(rvMatcher.atPosition(2)).check(matches(withBgColor(context.getColor(R.color.orange200transparent))))
+        onView(rvMatcher.atPosition(0)).check(matches(withBgColor(context.getColor(RR.color.orange200transparent))))
+        onView(rvMatcher.atPosition(2)).check(matches(withBgColor(context.getColor(RR.color.orange200transparent))))
     }
 
     @Test
@@ -249,9 +250,9 @@ class FileBrowserFragmentUITest : BaseUITest() {
         onView(withId(R.id.ctx_list))
                 .check(matches(isDisplayed()))
                 .check(matches(withCount(equalTo(3))))
-                .check(matches(hasDescendant(withText(R.string.play))))
-                .check(matches(hasDescendant(withText(R.string.favorites_add))))
-                .check(matches(hasDescendant(withText(R.string.delete))))
+                .check(matches(hasDescendant(withText(RR.string.play))))
+                .check(matches(hasDescendant(withText(RR.string.favorites_add))))
+                .check(matches(hasDescendant(withText(RR.string.delete))))
     }
 
     @Test
@@ -289,13 +290,13 @@ class FileBrowserFragmentUITest : BaseUITest() {
         onView(withId(R.id.ctx_list))
                 .check(matches(isDisplayed()))
                 .check(matches(withCount(equalTo(7))))
-                .check(matches(hasDescendant(withText(R.string.play_all))))
-                .check(matches(hasDescendant(withText(R.string.play_as_audio))))
-                .check(matches(hasDescendant(withText(R.string.append))))
-                .check(matches(hasDescendant(withText(R.string.info))))
-                .check(matches(hasDescendant(withText(R.string.download_subtitles))))
-                .check(matches(hasDescendant(withText(R.string.add_to_playlist))))
-                .check(matches(hasDescendant(withText(R.string.delete))))
+                .check(matches(hasDescendant(withText(RR.string.play_all))))
+                .check(matches(hasDescendant(withText(RR.string.play_as_audio))))
+                .check(matches(hasDescendant(withText(RR.string.append))))
+                .check(matches(hasDescendant(withText(RR.string.info))))
+                .check(matches(hasDescendant(withText(RR.string.download_subtitles))))
+                .check(matches(hasDescendant(withText(RR.string.add_to_playlist))))
+                .check(matches(hasDescendant(withText(RR.string.delete))))
     }
 
     @Test
@@ -352,11 +353,11 @@ class FileBrowserFragmentUITest : BaseUITest() {
         onView(withId(R.id.ctx_list))
                 .check(matches(isDisplayed()))
                 .check(matches(sizeOfAtLeast(4)))
-                .check(matches(hasDescendant(withText(R.string.play_all))))
-                .check(matches(hasDescendant(withText(R.string.append))))
-                .check(matches(hasDescendant(withText(R.string.info))))
-                .check(matches(hasDescendant(withText(R.string.add_to_playlist))))
-                .check(matches(hasDescendant(withText(R.string.delete))))
+                .check(matches(hasDescendant(withText(RR.string.play_all))))
+                .check(matches(hasDescendant(withText(RR.string.append))))
+                .check(matches(hasDescendant(withText(RR.string.info))))
+                .check(matches(hasDescendant(withText(RR.string.add_to_playlist))))
+                .check(matches(hasDescendant(withText(RR.string.delete))))
     }
 
     @Test
@@ -368,14 +369,14 @@ class FileBrowserFragmentUITest : BaseUITest() {
         )).perform(click())
         onView(rvMatcher.atPosition(3)).perform(click())
 
-        onView(rvMatcher.atPosition(1)).check(matches(withBgColor(context.getColor(R.color.orange200transparent))))
-        onView(rvMatcher.atPosition(3)).check(matches(withBgColor(context.getColor(R.color.orange200transparent))))
+        onView(rvMatcher.atPosition(1)).check(matches(withBgColor(context.getColor(RR.color.orange200transparent))))
+        onView(rvMatcher.atPosition(3)).check(matches(withBgColor(context.getColor(RR.color.orange200transparent))))
 
         onView(rvMatcher.atPosition(3)).perform(click())
         onView(rvMatcher.atPosition(1)).perform(click())
 
-        onView(rvMatcher.atPosition(1)).check(matches(not(withBgColor(context.getColor(R.color.orange200transparent)))))
-        onView(rvMatcher.atPosition(3)).check(matches(not(withBgColor(context.getColor(R.color.orange200transparent)))))
+        onView(rvMatcher.atPosition(1)).check(matches(not(withBgColor(context.getColor(RR.color.orange200transparent)))))
+        onView(rvMatcher.atPosition(3)).check(matches(not(withBgColor(context.getColor(RR.color.orange200transparent)))))
     }
 
     @Test
@@ -391,9 +392,9 @@ class FileBrowserFragmentUITest : BaseUITest() {
         onView(withRecyclerView(R.id.network_list).atPosition(0)).perform(click())
 
         onView(withId(R.id.ml_menu_save))
-                .check(matches(withActionIconDrawable(R.drawable.ic_menu_bookmark_outline_w)))
+                .check(matches(withActionIconDrawable(RR.drawable.ic_menu_bookmark_outline_w)))
                 .perform(click())
-                .check(matches(withActionIconDrawable(R.drawable.ic_menu_bookmark_w)))
+                .check(matches(withActionIconDrawable(RR.drawable.ic_menu_bookmark_w)))
 
         onView(isRoot()).perform(pressBack())
         onView(isRoot()).perform(pressBack())
@@ -414,9 +415,9 @@ class FileBrowserFragmentUITest : BaseUITest() {
         onView(withRecyclerView(R.id.network_list).atPosition(3)).perform(click())
 
         onView(withId(R.id.ml_menu_save))
-                .check(matches(withActionIconDrawable(R.drawable.ic_menu_bookmark_w)))
+                .check(matches(withActionIconDrawable(RR.drawable.ic_menu_bookmark_w)))
                 .perform(click())
-                .check(matches(withActionIconDrawable(R.drawable.ic_menu_bookmark_outline_w)))
+                .check(matches(withActionIconDrawable(RR.drawable.ic_menu_bookmark_outline_w)))
 
         onView(isRoot()).perform(pressBack())
 

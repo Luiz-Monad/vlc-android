@@ -40,6 +40,7 @@ import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.tools.WIDGETS_BACKGROUND_LAST_COLORS
 import org.videolan.tools.WIDGETS_FOREGROUND_LAST_COLORS
@@ -70,7 +71,7 @@ class PreferencesWidgets : BasePreferenceFragment(), SharedPreferences.OnSharedP
 
     override fun getXml() = R.xml.preferences_widgets
 
-    override fun getTitleId() = R.string.widget_preferences
+    override fun getTitleId() = RR.string.widget_preferences
 
     override fun onStart() {
         super.onStart()
@@ -131,7 +132,7 @@ class PreferencesWidgets : BasePreferenceFragment(), SharedPreferences.OnSharedP
 
         if (!DynamicColors.isDynamicColorAvailable()) {
             themePreference.entryValues = themePreference.entryValues.filter { it != "0"}.toTypedArray()
-            themePreference.entries = themePreference.entries.filter { it != getString(R.string.material_you) }.toTypedArray()
+            themePreference.entries = themePreference.entries.filter { it != getString(RR.string.material_you) }.toTypedArray()
         }
 
 
@@ -143,12 +144,12 @@ class PreferencesWidgets : BasePreferenceFragment(), SharedPreferences.OnSharedP
                 model.widget.value?.opacity = sharedPreferences.getInt(key, 100)
             }
             "background_color" -> {
-                val newColor = sharedPreferences.getInt(key, ContextCompat.getColor(requireActivity(), R.color.black))
+                val newColor = sharedPreferences.getInt(key, ContextCompat.getColor(requireActivity(), RR.color.black))
                 saveNewColor(false, newColor)
                 model.widget.value?.backgroundColor = newColor
             }
             "foreground_color" -> {
-                val newColor = sharedPreferences.getInt(key, ContextCompat.getColor(requireActivity(), R.color.white))
+                val newColor = sharedPreferences.getInt(key, ContextCompat.getColor(requireActivity(), RR.color.white))
                 saveNewColor(true, newColor)
                 model.widget.value?.foregroundColor = newColor
             }

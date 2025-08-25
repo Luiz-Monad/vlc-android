@@ -34,6 +34,7 @@ import androidx.preference.TwoStatePreference
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
@@ -43,7 +44,7 @@ class PreferencesUi : BasePreferenceFragment(), SharedPreferences.OnSharedPrefer
 
     override fun getXml() = R.xml.preferences_ui
 
-    override fun getTitleId() = R.string.interface_prefs_screen
+    override fun getTitleId() = RR.string.interface_prefs_screen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +63,7 @@ class PreferencesUi : BasePreferenceFragment(), SharedPreferences.OnSharedPrefer
             if (text.isNullOrEmpty()) {
                 ""
             } else {
-                getString(R.string.video_group_size_summary, text)
+                getString(RR.string.video_group_size_summary, text)
             }
         }
     }
@@ -149,7 +150,7 @@ class PreferencesUi : BasePreferenceFragment(), SharedPreferences.OnSharedPrefer
     }
 
     private fun prepareLocaleList() {
-        val localePair = LocaleUtils.getLocalesUsedInProject(requireActivity(), BuildConfig.TRANSLATION_ARRAY, getString(R.string.device_default))
+        val localePair = LocaleUtils.getLocalesUsedInProject(requireActivity(), BuildConfig.TRANSLATION_ARRAY, getString(RR.string.device_default))
         val lp = findPreference<ListPreference>("set_locale")
         lp?.entries = localePair.localeEntries
         lp?.entryValues = localePair.localeEntryValues

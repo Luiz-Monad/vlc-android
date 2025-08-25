@@ -32,6 +32,7 @@ import androidx.databinding.BindingAdapter
 import org.videolan.medialibrary.interfaces.media.*
 import org.videolan.medialibrary.media.HistoryItem
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 import org.videolan.resources.R
 import org.videolan.vlc.gui.helpers.TalkbackUtil
 
@@ -47,7 +48,7 @@ fun mediaDescription(v: View, media: MediaLibraryItem?) {
         is Artist -> TalkbackUtil.getArtist(v.context, media)
         is Folder -> TalkbackUtil.getFolder(v.context, media)
         is Genre -> TalkbackUtil.getGenre(v.context, media)
-        is HistoryItem -> v.context.getString(R.string.talkback_history_item)
+        is HistoryItem -> v.context.getString(RR.string.talkback_history_item)
         is Playlist -> TalkbackUtil.getPlaylist(v.context, media)
         is MediaWrapper -> when (media.type) {
             MediaWrapper.TYPE_VIDEO -> TalkbackUtil.getVideo(v.context, media)

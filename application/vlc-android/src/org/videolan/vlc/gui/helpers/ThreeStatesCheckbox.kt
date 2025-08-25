@@ -27,6 +27,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatCheckBox
 import org.videolan.vlc.R
+import org.videolan.resources.R as RR
 
 class ThreeStatesCheckbox : AppCompatCheckBox {
     private var currentState = 0
@@ -62,9 +63,9 @@ class ThreeStatesCheckbox : AppCompatCheckBox {
 
     private fun updateBtn() {
         val btnDrawable: Int = when (currentState) {
-            STATE_PARTIAL -> R.drawable.ic_checkbox_partialy
-            STATE_CHECKED -> R.drawable.ic_checkbox_true
-            else -> R.drawable.ic_checkbox_not_checked
+            STATE_PARTIAL -> RR.drawable.ic_checkbox_partialy
+            STATE_CHECKED -> RR.drawable.ic_checkbox_true
+            else -> RR.drawable.ic_checkbox_not_checked
         }
         setButtonDrawable(btnDrawable)
 

@@ -41,6 +41,7 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.interfaces.media.Playlist
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 import org.videolan.tools.AppScope
 import org.videolan.tools.CoroutineContextProvider
 import org.videolan.tools.DependencyProvider
@@ -101,7 +102,7 @@ class SavePlaylistDialog : VLCBottomSheetDialogFragment(), View.OnClickListener,
         newTracks = try {
             @Suppress("UNCHECKED_CAST")
             val tracks = requireArguments().getParcelableArray(KEY_NEW_TRACKS) as Array<MediaWrapper>
-            filesText = resources.getQuantityString(R.plurals.media_quantity, tracks.size, tracks.size)
+            filesText = resources.getQuantityString(RR.plurals.media_quantity, tracks.size, tracks.size)
             tracks
         } catch (e: Exception) {
             try {
@@ -113,13 +114,13 @@ class SavePlaylistDialog : VLCBottomSheetDialogFragment(), View.OnClickListener,
                         withContext(Dispatchers.IO) {
                             newTracks = (viewModel.provider as FileBrowserProvider).browseByUrl(folder).toTypedArray()
                             isLoading = false
-                            filesText = resources.getQuantityString(R.plurals.media_quantity, newTracks.size, newTracks.size)
+                            filesText = resources.getQuantityString(RR.plurals.media_quantity, newTracks.size, newTracks.size)
                         }
                     } else {
                         viewModel.dataset.observe(this) { mediaLibraryItems ->
                             newTracks = mediaLibraryItems.asSequence().map { it as MediaWrapper }.filter { it.type != MediaWrapper.TYPE_DIR }.toList().toTypedArray()
                             isLoading = false
-                            filesText = resources.getQuantityString(R.plurals.media_quantity, newTracks.size, newTracks.size)
+                            filesText = resources.getQuantityString(RR.plurals.media_quantity, newTracks.size, newTracks.size)
                         }
                     }
                 }
@@ -153,8 +154,8 @@ class SavePlaylistDialog : VLCBottomSheetDialogFragment(), View.OnClickListener,
         }
         binding.list.layoutManager = LinearLayoutManager(view.context)
         binding.list.adapter = adapter
-        adapter.submitList(listOf<MediaLibraryItem>(*medialibrary.playlists.apply { forEach { it.description = resources.getQuantityString(R.plurals.media_quantity, it.tracksCount, it.tracksCount) } }))
-        if (!Tools.isArrayEmpty(newTracks)) binding.dialogPlaylistSave.setText(R.string.save)
+        adapter.submitList(listOf<MediaLibraryItem>(*medialibrary.playlists.apply { forEach { it.description = resources.getQuantityString(RR.plurals.media_quantity, it.tracksCount, it.tracksCount) } }))
+        if (!Tools.isArrayEmpty(newTracks)) binding.dialogPlaylistSave.setText(RR.string.save)
         updateEmptyView()
         parentFragmentManager.setFragmentResultListener(
                 REQUEST_KEY,
@@ -197,7 +198,7 @@ class SavePlaylistDialog : VLCBottomSheetDialogFragment(), View.OnClickListener,
                 ?: return
         lifecycleScope.launch {
             withContext(Dispatchers.IO) { medialibrary.getPlaylistByName(name) }?.let {
-                binding.dialogPlaylistName.error = getString(R.string.playlist_existing, it.title)
+                binding.dialogPlaylistName.error = getString(RR.string.playlist_existing, it.title)
                 alreadyAdding.set(false)
                 return@launch
             }

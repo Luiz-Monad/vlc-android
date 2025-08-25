@@ -41,6 +41,7 @@ import androidx.window.layout.FoldingFeature
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.AudioPlayerContainerActivity
@@ -125,7 +126,7 @@ class AudioTipsDelegate(private val activity: AudioPlayerContainerActivity) {
         TransitionManager.beginDelayedTransition(audioPlayerTips, transition)
 
         clearAllAnimations()
-        nextButton.setText(R.string.next_step)
+        nextButton.setText(RR.string.next_step)
 
         constraintSet.setGuidelinePercent(R.id.endGuideline, rightGuidelineEndBound)
         constraintSet.setGuidelinePercent(R.id.topGuideline, topGuidelineEndBound)
@@ -159,7 +160,7 @@ class AudioTipsDelegate(private val activity: AudioPlayerContainerActivity) {
                 }
 
                 TipsUtils.startTapAnimation(listOf(tapIndicatorStop), true)
-                nextButton.setText(R.string.close)
+                nextButton.setText(RR.string.close)
             }
             else -> {}
         }
@@ -205,9 +206,9 @@ class AudioTipsDelegate(private val activity: AudioPlayerContainerActivity) {
  * @param descriptionText: the string resource to display in the description [TextView]
  */
 enum class AudioPlayerTipsStep(@StringRes var titleText: Int, @StringRes var descriptionText: Int, @StringRes var descriptionTextTablet: Int) {
-    SWIPE_NEXT(R.string.previous_next_song, R.string.tips_swipe_horizontal, R.string.tap_to_previous_next),
-    TAP_PLAYLIST(R.string.tips_playlist, R.string.tap, R.string.tap),
-    HOLD_STOP(R.string.stop, R.string.hold_to_stop, R.string.hold_to_stop);
+    SWIPE_NEXT(RR.string.previous_next_song, RR.string.tips_swipe_horizontal, RR.string.tap_to_previous_next),
+    TAP_PLAYLIST(RR.string.tips_playlist, RR.string.tap, RR.string.tap),
+    HOLD_STOP(RR.string.stop, RR.string.hold_to_stop, RR.string.hold_to_stop);
 
     /**
      * @return the next step

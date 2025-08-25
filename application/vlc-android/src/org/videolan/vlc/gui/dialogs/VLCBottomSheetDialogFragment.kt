@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.vlc.R
 import org.videolan.vlc.util.isTalkbackIsEnabled
@@ -37,20 +38,20 @@ abstract class VLCBottomSheetDialogFragment : BottomSheetDialogFragment() {
      * Apply bottom margin for Android TV
      */
     private fun applyOverscanMargin(view: View) {
-        val vm = requireActivity().resources.getDimensionPixelSize(org.videolan.resources.R.dimen.tv_overscan_vertical)
+        val vm = requireActivity().resources.getDimensionPixelSize(RR.dimen.tv_overscan_vertical)
         view.setPadding(view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom + vm)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launchWhenStarted {
-            dialog?.window?.setLayout(resources.getDimensionPixelSize(R.dimen.default_context_width), ViewGroup.LayoutParams.MATCH_PARENT)
+            dialog?.window?.setLayout(resources.getDimensionPixelSize(RR.dimen.default_context_width), ViewGroup.LayoutParams.MATCH_PARENT)
             dialog?.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)?.let {
                 val bsb = BottomSheetBehavior.from(it)
                 if (bsb.state == BottomSheetBehavior.STATE_COLLAPSED) bsb.state = getDefaultState()
             }
-            dialog?.findViewById<View>(R.id.touch_outside)?.isFocusable = false
-            dialog?.findViewById<View>(R.id.touch_outside)?.isFocusableInTouchMode = false
+            dialog?.findViewById<View>(com.google.android.material.R.id.touch_outside)?.isFocusable = false
+            dialog?.findViewById<View>(com.google.android.material.R.id.touch_outside)?.isFocusableInTouchMode = false
             if (AndroidDevices.isTv) applyOverscanMargin(view)
         }
 

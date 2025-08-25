@@ -26,6 +26,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import org.videolan.resources.R as RR
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.DialogAboutVersionBinding
@@ -66,8 +67,8 @@ class AboutVersionDialog : VLCBottomSheetDialogFragment() {
         binding.medias2.text = getString(R.string.build_time)
         binding.changelog.text = getString(R.string.changelog).replace("*", "•")
         binding.revision.text = getString(R.string.build_revision)
-        binding.vlcRevision.text = getString(R.string.build_vlc_revision)
-        binding.libvlcRevision.text = getString(R.string.build_libvlc_revision)
+        binding.vlcRevision.text = getString(org.videolan.libvlc.R.string.build_libvlc_revision)
+        binding.libvlcRevision.text = getString(org.videolan.libvlc.R.string.build_libvlc_revision)
         binding.libvlcVersion.text = BuildConfig.LIBVLC_VERSION
         binding.compiledBy.text = getString(R.string.build_host)
     }

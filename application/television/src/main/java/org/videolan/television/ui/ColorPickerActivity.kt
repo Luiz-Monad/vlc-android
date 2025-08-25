@@ -42,6 +42,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.videolan.resources.UPDATE_PAYLOAD
 import org.videolan.resources.util.applyOverscanMargin
 import org.videolan.television.R
+import org.videolan.resources.R as RR
 import org.videolan.television.databinding.ActivityColorPickerBinding
 import org.videolan.television.databinding.ColorPickerItemBinding
 import org.videolan.tools.dp
@@ -60,7 +61,7 @@ class ColorPickerActivity : AppCompatActivity() {
         applyOverscanMargin(this)
 
         binding.colorPickerTitle.text = intent.extras?.getString(COLOR_PICKER_TITLE)
-                ?: getString(R.string.subtitles_color)
+                ?: getString(RR.string.subtitles_color)
         val previousColor = intent.extras?.getInt(COLOR_PICKER_SELECTED_COLOR) ?: Color.BLACK
         binding.oldColor.color = previousColor
         binding.newColor.color = previousColor
@@ -80,7 +81,7 @@ class ColorPickerActivity : AppCompatActivity() {
             val paint by lazy {
                 Paint().apply {
                     isAntiAlias = true
-                    color = ContextCompat.getColor(this@ColorPickerActivity, R.color.grey800)
+                    color = ContextCompat.getColor(this@ColorPickerActivity, RR.color.grey800)
                 }
             }
 

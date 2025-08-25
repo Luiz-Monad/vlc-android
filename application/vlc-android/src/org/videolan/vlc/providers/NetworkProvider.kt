@@ -30,6 +30,7 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.DummyItem
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 import org.videolan.tools.NetworkMonitor
 import org.videolan.tools.livedata.LiveDataset
 import org.videolan.vlc.R
@@ -94,9 +95,9 @@ class NetworkProvider(context: Context, dataset: LiveDataset<MediaLibraryItem>, 
     private fun getFavoritesList(favs: List<MediaWrapper>?): MutableList<MediaLibraryItem>? {
         if (favs?.isNotEmpty() == true) {
             val list = mutableListOf<MediaLibraryItem>()
-            list.add(0, DummyItem(context.getString(R.string.network_favorites)))
+            list.add(0, DummyItem(context.getString(RR.string.network_favorites)))
             for ((index, fav) in favs.withIndex()) list.add(index + 1, fav)
-            list.add(DummyItem(context.getString(R.string.network_shared_folders)))
+            list.add(DummyItem(context.getString(RR.string.network_shared_folders)))
             return list
         }
         return null

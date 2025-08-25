@@ -39,6 +39,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
+import org.videolan.resources.R as RR
 import org.videolan.tools.BitmapCache
 import org.videolan.tools.CloseableUtils
 import org.videolan.tools.HttpImageLoader
@@ -62,10 +63,10 @@ object AudioUtil {
             return
         }
         val view = window.decorView.findViewById(R.id.coordinator) ?: window.decorView
-        lifecycleScope.snackerConfirm(this, getString(R.string.set_song_question, song.title)) {
+        lifecycleScope.snackerConfirm(this, getString(RR.string.set_song_question, song.title)) {
             val newRingtone = AndroidUtil.UriToFile(song.uri)
             if (!withContext(Dispatchers.IO) { newRingtone.exists() }) {
-                Toast.makeText(applicationContext, getString(R.string.ringtone_error), Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, getString(RR.string.ringtone_error), Toast.LENGTH_SHORT).show()
                 return@snackerConfirm
             }
 
@@ -115,13 +116,13 @@ object AudioUtil {
             } catch (e: Exception) {
                 Log.e(TAG, "error setting ringtone", e)
                 Toast.makeText(applicationContext,
-                        getString(R.string.ringtone_error),
+                        getString(RR.string.ringtone_error),
                         Toast.LENGTH_SHORT).show()
                 return@snackerConfirm
             }
             Toast.makeText(
                             applicationContext,
-                            getString(R.string.ringtone_set, song.title),
+                            getString(RR.string.ringtone_set, song.title),
                             Toast.LENGTH_SHORT)
                     .show()
         }

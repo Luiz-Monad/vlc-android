@@ -50,6 +50,7 @@ import kotlinx.coroutines.delay
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.KEY_CURRENT_AUDIO
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.resources.util.startMedialibrary
 import org.videolan.tools.*
@@ -225,7 +226,7 @@ open class AudioPlayerContainerActivity : BaseActivity(), KeycodeListener {
         playerBehavior = from(audioPlayerContainer) as PlayerBehavior<*>
         val bottomBehavior = bottomBar?.let { BottomNavigationBehavior.from(it) as BottomNavigationBehavior<View> }
         if (bottomIsHiddden) bottomBehavior?.setCollapsed() else hideStatusIfNeeded(playerBehavior.state)
-        playerBehavior.peekHeight = resources.getDimensionPixelSize(R.dimen.player_peek_height)
+        playerBehavior.peekHeight = resources.getDimensionPixelSize(RR.dimen.player_peek_height)
         updateFragmentMargins()
         playerBehavior.setPeekHeightListener {
             applyMarginToProgressBar(playerBehavior.peekHeight)
@@ -259,9 +260,9 @@ open class AudioPlayerContainerActivity : BaseActivity(), KeycodeListener {
                 setContentBottomPadding()
                 if (isTalkbackIsEnabled()) {
                     when (playerBehavior.state) {
-                        STATE_EXPANDED -> audioPlayerContainer.announceForAccessibility(getString(R.string.talkback_audio_player_opened))
-                        STATE_COLLAPSED -> audioPlayerContainer.announceForAccessibility(getString(R.string.talkback_audio_player_collapsed))
-                        STATE_HIDDEN -> audioPlayerContainer.announceForAccessibility(getString(R.string.talkback_audio_player_closed))
+                        STATE_EXPANDED -> audioPlayerContainer.announceForAccessibility(getString(RR.string.talkback_audio_player_opened))
+                        STATE_COLLAPSED -> audioPlayerContainer.announceForAccessibility(getString(RR.string.talkback_audio_player_collapsed))
+                        STATE_HIDDEN -> audioPlayerContainer.announceForAccessibility(getString(RR.string.talkback_audio_player_closed))
                     }
                 }
             }
@@ -330,7 +331,7 @@ open class AudioPlayerContainerActivity : BaseActivity(), KeycodeListener {
 
     override fun bookmark() {
         audioPlayer.bookmarkModel.addBookmark(this)
-        UiTools.snackerConfirm(this, getString(R.string.bookmark_added), overAudioPlayer = true, confirmMessage = R.string.show) {
+        UiTools.snackerConfirm(this, getString(RR.string.bookmark_added), overAudioPlayer = true, confirmMessage = RR.string.show) {
             audioPlayer.showBookmarks()
         }
     }
@@ -340,7 +341,7 @@ open class AudioPlayerContainerActivity : BaseActivity(), KeycodeListener {
         setContentBottomPadding()
     }
 
-//    fun getAudioMargin() = if (playerShown) resources.getDimensionPixelSize(R.dimen.player_peek_height) else 0
+//    fun getAudioMargin() = if (playerShown) resources.getDimensionPixelSize(RR.dimen.player_peek_height) else 0
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(BOTTOM_IS_HIDDEN, bottomBar?.let { it.translationY != 0F }
@@ -586,7 +587,7 @@ open class AudioPlayerContainerActivity : BaseActivity(), KeycodeListener {
             }
         }
         MediaParsingService.discoveryError.observe(this) {
-            UiTools.snacker(this, getString(R.string.discovery_failed, it.entryPoint))
+            UiTools.snacker(this, getString(RR.string.discovery_failed, it.entryPoint))
         }
         MediaParsingService.newStorages.observe(this) { devices ->
             if (devices == null) return@observe
@@ -604,8 +605,8 @@ open class AudioPlayerContainerActivity : BaseActivity(), KeycodeListener {
         if (!settings.getBoolean(AUDIO_RESUME_PLAYBACK, true)) return@launchWhenStarted
         val title = media.title
         resumeCard = Snackbar.make(getSnackAnchorView()
-                ?: appBarLayout, getString(R.string.resume_card_message, title), Snackbar.LENGTH_LONG)
-                .setAction(R.string.play) { PlaybackService.loadLastAudio(it.context) }
+                ?: appBarLayout, getString(RR.string.resume_card_message, title), Snackbar.LENGTH_LONG)
+                .setAction(RR.string.play) { PlaybackService.loadLastAudio(it.context) }
         resumeCard.show()
     }
 

@@ -36,6 +36,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.KEY_AUDIO_LAST_PLAYLIST
 import org.videolan.resources.KEY_MEDIA_LAST_PLAYLIST
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.browser.MediaBrowserFragment
@@ -130,7 +131,7 @@ class HistoryFragment : MediaBrowserFragment<HistoryModel>(), IRefreshable, IHis
         return when (item.itemId) {
             R.id.ml_menu_clean -> {
 
-                val dialog = ConfirmDeleteDialog.newInstance(title = getString(R.string.clear_playback_history), description = getString(R.string.clear_history_message), buttonText = getString(R.string.clear_history))
+                val dialog = ConfirmDeleteDialog.newInstance(title = getString(RR.string.clear_playback_history), description = getString(RR.string.clear_history_message), buttonText = getString(RR.string.clear_history))
                 dialog.show((activity as FragmentActivity).supportFragmentManager, RenameDialog::class.simpleName)
                 dialog.setListener {
                     clearHistory()
@@ -153,7 +154,7 @@ class HistoryFragment : MediaBrowserFragment<HistoryModel>(), IRefreshable, IHis
     }
 
     override fun getTitle(): String {
-        return getString(R.string.history)
+        return getString(RR.string.history)
     }
 
     override fun getMultiHelper(): MultiSelectHelper<HistoryModel>? = historyAdapter.multiSelectHelper as? MultiSelectHelper<HistoryModel>

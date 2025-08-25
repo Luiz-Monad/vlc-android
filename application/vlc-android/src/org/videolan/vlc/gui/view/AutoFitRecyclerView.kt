@@ -29,6 +29,7 @@ import android.view.WindowManager
 import androidx.core.content.getSystemService
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.videolan.resources.R as RR
 
 class AutoFitRecyclerView : RecyclerView {
 

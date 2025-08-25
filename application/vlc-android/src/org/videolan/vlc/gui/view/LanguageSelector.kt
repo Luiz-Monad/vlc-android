@@ -31,6 +31,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 
 class LanguageSelector: ConstraintLayout, DialogInterface.OnDismissListener, DialogInterface.OnMultiChoiceClickListener {
@@ -60,15 +61,15 @@ class LanguageSelector: ConstraintLayout, DialogInterface.OnDismissListener, Dia
     }
 
     private fun initViews() {
-        allValuesOfLanguages = resources.getStringArray(R.array.language_values)
-        allEntriesOfLanguages = resources.getStringArray(R.array.language_entries)
+        allValuesOfLanguages = resources.getStringArray(RR.array.language_values)
+        allEntriesOfLanguages = resources.getStringArray(RR.array.language_entries)
         LayoutInflater.from(context).inflate(R.layout.language_spinner, this, true)
         selection.addAll(allEntriesOfLanguages.map { false })
         setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setOnDismissListener(this)
             builder.setMultiChoiceItems(allEntriesOfLanguages, selection.toBooleanArray(), this)
-                    .setPositiveButton(R.string.done) { dialogInterface: DialogInterface, _: Int ->
+                    .setPositiveButton(RR.string.done) { dialogInterface: DialogInterface, _: Int ->
                         dialogInterface.dismiss()
                     }
                     .show()
@@ -80,7 +81,7 @@ class LanguageSelector: ConstraintLayout, DialogInterface.OnDismissListener, Dia
         selectedIndices.forEach {
             if (it >= 0 && it < selection.size) selection[it] = true
         }
-        contentDescription = context.getString(R.string.talkback_language_selection, selection.filter { it }.size.toString())
+        contentDescription = context.getString(RR.string.talkback_language_selection, selection.filter { it }.size.toString())
         updateBadge()
         listener?.onItemSelect(selectedIndices)
     }

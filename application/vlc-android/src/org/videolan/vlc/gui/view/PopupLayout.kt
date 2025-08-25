@@ -35,6 +35,7 @@ import androidx.core.content.getSystemService
 import androidx.core.view.GestureDetectorCompat
 import org.videolan.libvlc.interfaces.IVLCVout
 import org.videolan.libvlc.util.AndroidUtil
+import org.videolan.resources.R as RR
 import org.videolan.tools.CUSTOM_POPUP_HEIGHT
 import org.videolan.tools.Settings
 import org.videolan.tools.putSingle
@@ -116,8 +117,8 @@ class PopupLayout : ConstraintLayout, ScaleGestureDetector.OnScaleGestureListene
         windowManager = context.applicationContext.getSystemService()
 
         screenSize = DisplayMetrics().also { windowManager!!.defaultDisplay.getMetrics(it) }
-        popupWidth = context.resources.getDimensionPixelSize(R.dimen.video_pip_width)
-        popupHeight = context.resources.getDimensionPixelSize(R.dimen.video_pip_height)
+        popupWidth = context.resources.getDimensionPixelSize(RR.dimen.video_pip_width)
+        popupHeight = context.resources.getDimensionPixelSize(RR.dimen.video_pip_height)
         val ratio = popupWidth.toFloat() / popupHeight.toFloat()
         val customPopupHeight = Settings.getInstance(context).getInt(CUSTOM_POPUP_HEIGHT, -1)
         if (customPopupHeight != -1) {

@@ -8,6 +8,7 @@ import android.view.accessibility.AccessibilityEvent
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.TalkbackUtil
 import org.videolan.vlc.util.isTalkbackIsEnabled
@@ -37,7 +38,7 @@ class AccessibleSeekBar : AppCompatSeekBar {
                 super.sendAccessibilityEventUnchecked(host, event)
                 return
             }
-            contentDescription = context.getString(R.string.talkback_out_of, TalkbackUtil.millisToString(context, progress.toLong()), TalkbackUtil.millisToString(context, max.toLong()) )
+            contentDescription = context.getString(RR.string.talkback_out_of, TalkbackUtil.millisToString(context, progress.toLong()), TalkbackUtil.millisToString(context, max.toLong()) )
             if (event.eventType != AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
                     && event.eventType != AccessibilityEvent.TYPE_VIEW_SELECTED) {
                 super.sendAccessibilityEventUnchecked(host, event)

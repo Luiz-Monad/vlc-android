@@ -25,6 +25,7 @@ import kotlinx.coroutines.flow.onEach
 import org.videolan.libvlc.RendererDiscoverer
 import org.videolan.libvlc.RendererItem
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.tools.AppScope
 import org.videolan.tools.NetworkMonitor

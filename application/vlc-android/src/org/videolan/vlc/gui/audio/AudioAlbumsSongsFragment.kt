@@ -35,6 +35,7 @@ import org.videolan.medialibrary.interfaces.media.Album
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.CTX_PLAY_ALL
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.tools.dp
 import org.videolan.tools.putSingle
@@ -94,14 +95,14 @@ class AudioAlbumsSongsFragment : BaseAudioBrowser<AlbumSongsViewModel>(), SwipeR
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        spacing = resources.getDimension(R.dimen.kl_small).toInt()
+        spacing = resources.getDimension(RR.dimen.kl_small).toInt()
         val itemSize = RecyclerSectionItemGridDecoration.getItemSize(requireActivity().getScreenWidth(), nbColumns, spacing, 16.dp)
 
         val albumsList = viewPager.getChildAt(MODE_ALBUM).findViewById(R.id.audio_list) as RecyclerView
         val songsList = viewPager.getChildAt(MODE_SONG).findViewById(R.id.audio_list) as RecyclerView
 
         lists = arrayOf(albumsList, songsList)
-        val titles = arrayOf(getString(R.string.albums), getString(R.string.songs))
+        val titles = arrayOf(getString(RR.string.albums), getString(RR.string.songs))
         albumsAdapter = AudioBrowserAdapter(MediaLibraryItem.TYPE_ALBUM, this, cardSize = if (viewModel.providersInCard[0]) itemSize else -1)
         songsAdapter = AudioBrowserAdapter(MediaLibraryItem.TYPE_MEDIA, this, cardSize = if (viewModel.providersInCard[1]) itemSize else -1)
         adapters = arrayOf(albumsAdapter, songsAdapter)
@@ -127,8 +128,8 @@ class AudioAlbumsSongsFragment : BaseAudioBrowser<AlbumSongsViewModel>(), SwipeR
             rv.addOnScrollListener(scrollListener)
 
         }
-        fabPlay?.setImageResource(R.drawable.ic_fab_play)
-        fabPlay?.contentDescription = getString(R.string.play)
+        fabPlay?.setImageResource(RR.drawable.ic_fab_play)
+        fabPlay?.contentDescription = getString(RR.string.play)
         viewModel.albumsProvider.pagedList.observe(requireActivity()) { albums ->
             @Suppress("UNCHECKED_CAST")
             (albums as? PagedList<MediaLibraryItem>)?.let { albumsAdapter.submitList(it) }

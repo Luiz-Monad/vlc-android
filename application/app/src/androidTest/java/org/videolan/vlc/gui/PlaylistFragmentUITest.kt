@@ -17,6 +17,7 @@ import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.videolan.medialibrary.interfaces.Medialibrary
+import org.videolan.resources.R as RR
 import org.videolan.vlc.*
 import org.videolan.vlc.gui.dialogs.SavePlaylistDialog
 import org.videolan.tools.CoroutineContextProvider
@@ -65,7 +66,7 @@ class PlaylistFragmentUITest: BaseUITest() {
 //        onView(withId(R.id.root_container))
 //                .perform(open())
 
-        onView(allOf(instanceOf(NavigationMenuItemView::class.java), hasDescendant(withText(R.string.directories))))
+        onView(allOf(instanceOf(NavigationMenuItemView::class.java), hasDescendant(withText(RR.string.directories))))
                 .check(matches(isDisplayed()))
                 .perform(click())
 
@@ -84,7 +85,7 @@ class PlaylistFragmentUITest: BaseUITest() {
 //        onView(withId(R.id.root_container))
 //                .perform(open())
 
-        onView(allOf(instanceOf(NavigationMenuItemView::class.java), hasDescendant(withText(R.string.playlists))))
+        onView(allOf(instanceOf(NavigationMenuItemView::class.java), hasDescendant(withText(RR.string.playlists))))
                 .check(matches(isDisplayed()))
                 .perform(click())
 
@@ -131,11 +132,11 @@ class PlaylistFragmentUITest: BaseUITest() {
         onView(withId(R.id.ctx_list))
                 .check(matches(isDisplayed()))
                 .check(matches(sizeOfAtLeast(5)))
-                .check(matches(hasDescendant(withText(R.string.play))))
-                .check(matches(hasDescendant(withText(R.string.append))))
-                .check(matches(hasDescendant(withText(R.string.insert_next))))
-                .check(matches(hasDescendant(withText(R.string.add_to_playlist))))
-                .check(matches(hasDescendant(withText(R.string.delete))))
+                .check(matches(hasDescendant(withText(RR.string.play))))
+                .check(matches(hasDescendant(withText(RR.string.append))))
+                .check(matches(hasDescendant(withText(RR.string.insert_next))))
+                .check(matches(hasDescendant(withText(RR.string.add_to_playlist))))
+                .check(matches(hasDescendant(withText(RR.string.delete))))
     }
 
     @Test
@@ -166,7 +167,7 @@ class PlaylistFragmentUITest: BaseUITest() {
                 .check(matches(isDisplayed()))
                 .perform(click())
 
-        onView(anyOf(withText(R.string.sortby_name), withId(R.id.ml_menu_sortby_name)))
+        onView(anyOf(withText(RR.string.sortby_name), withId(R.id.ml_menu_sortby_name)))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
 
@@ -175,7 +176,7 @@ class PlaylistFragmentUITest: BaseUITest() {
         // Check overflow menu works
         openActionBarOverflowOrOptionsMenu(context)
 
-        onView(withText(R.string.refresh))
+        onView(withText(RR.string.refresh))
                 .inRoot(isPlatformPopup())
                 .check(matches(isDisplayed()))
 

@@ -17,6 +17,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.videolan.tools.FileUtils
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.NoConnectivityException
 import org.videolan.tools.Settings
 import org.videolan.vlc.R
@@ -114,9 +115,9 @@ class SubtitlesModel(private val context: Context, private val mediaUri: Uri, pr
 
     private suspend fun getSubtitleByName(name: String, episode: Int?, season: Int?, languageIds: List<String>?): List<OpenSubtitle> {
         if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, "Getting subs by name with $name")
-        val builder = StringBuilder(context.getString(R.string.sub_result_by_name, "<i>$name</i>"))
-        season?.let { builder.append(" - ").append(context.getString(R.string.sub_result_by_name_season, "<i>$it</i>")) }
-        episode?.let { builder.append(" - ").append(context.getString(R.string.sub_result_by_name_episode, "<i>$it</i>")) }
+        val builder = StringBuilder(context.getString(RR.string.sub_result_by_name, "<i>$name</i>"))
+        season?.let { builder.append(" - ").append(context.getString(RR.string.sub_result_by_name_season, "<i>$it</i>")) }
+        episode?.let { builder.append(" - ").append(context.getString(RR.string.sub_result_by_name_episode, "<i>$it</i>")) }
         observableResultDescription.set(Html.fromHtml(builder.toString()))
         manualSearchEnabled.set(true)
         return OpenSubtitleRepository.getInstance().queryWithName(name, episode, season, languageIds)
@@ -125,7 +126,7 @@ class SubtitlesModel(private val context: Context, private val mediaUri: Uri, pr
     private suspend fun getSubtitleByHash(movieByteSize: Long, movieHash: String?, languageIds: List<String>?): List<OpenSubtitle> {
         if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, "Getting subs by hash with $movieHash")
         manualSearchEnabled.set(false)
-        observableResultDescription.set(context.getString(R.string.sub_result_by_file).toSpanned())
+        observableResultDescription.set(context.getString(RR.string.sub_result_by_file).toSpanned())
         return OpenSubtitleRepository.getInstance().queryWithHash(movieByteSize, movieHash, languageIds)
     }
 
@@ -168,7 +169,7 @@ class SubtitlesModel(private val context: Context, private val mediaUri: Uri, pr
                 }
                 if (isActive) apiResultLiveData.postValue(subs)
                 if (subs.isEmpty()) {
-                    observableMessage.set(context.getString(R.string.no_result))
+                    observableMessage.set(context.getString(RR.string.no_result))
                 } else {
                     observableMessage.set("")
                 }
@@ -177,9 +178,9 @@ class SubtitlesModel(private val context: Context, private val mediaUri: Uri, pr
                 Log.e("SubtitlesModel", e.message, e)
                 observableError.set(true)
                 if (e is NoConnectivityException)
-                    observableMessage.set(context.getString(R.string.no_internet_connection))
+                    observableMessage.set(context.getString(RR.string.no_internet_connection))
                 else
-                    observableMessage.set(context.getString(R.string.subs_download_error))
+                    observableMessage.set(context.getString(RR.string.subs_download_error))
             } finally {
                 isApiLoading.postValue(false)
             }

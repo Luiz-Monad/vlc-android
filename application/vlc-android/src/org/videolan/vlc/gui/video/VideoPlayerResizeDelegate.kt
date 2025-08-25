@@ -40,6 +40,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.videolan.libvlc.MediaPlayer
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.VideoScaleItemBinding
@@ -161,17 +162,17 @@ class VideoPlayerResizeDelegate(private val player: VideoPlayerActivity) {
     fun setVideoScale(scale: MediaPlayer.ScaleType) = player.service?.run {
         mediaplayer.videoScale = scale
         when (scale) {
-            MediaPlayer.ScaleType.SURFACE_BEST_FIT -> overlayDelegate.showInfo(R.string.surface_best_fit, 1000, R.string.resize_tip)
-            MediaPlayer.ScaleType.SURFACE_FIT_SCREEN -> overlayDelegate.showInfo(R.string.surface_fit_screen, 1000, R.string.resize_tip)
-            MediaPlayer.ScaleType.SURFACE_FILL -> overlayDelegate.showInfo(R.string.surface_fill, 1000, R.string.resize_tip)
-            MediaPlayer.ScaleType.SURFACE_16_9 -> overlayDelegate.showInfo("16:9", 1000, player.getString(R.string.resize_tip))
-            MediaPlayer.ScaleType.SURFACE_4_3 -> overlayDelegate.showInfo("4:3", 1000, player.getString(R.string.resize_tip))
-            MediaPlayer.ScaleType.SURFACE_16_10 -> overlayDelegate.showInfo("16:10", 1000, player.getString(R.string.resize_tip))
-            MediaPlayer.ScaleType.SURFACE_221_1 -> overlayDelegate.showInfo("2.21:1", 1000, player.getString(R.string.resize_tip))
-            MediaPlayer.ScaleType.SURFACE_235_1 -> overlayDelegate.showInfo("2.35:1", 1000, player.getString(R.string.resize_tip))
-            MediaPlayer.ScaleType.SURFACE_239_1 -> overlayDelegate.showInfo("2.39:1", 1000, player.getString(R.string.resize_tip))
-            MediaPlayer.ScaleType.SURFACE_5_4 -> overlayDelegate.showInfo("5:4", 1000, player.getString(R.string.resize_tip))
-            MediaPlayer.ScaleType.SURFACE_ORIGINAL -> overlayDelegate.showInfo(R.string.surface_original, 1000, R.string.resize_tip)
+            MediaPlayer.ScaleType.SURFACE_BEST_FIT -> overlayDelegate.showInfo(RR.string.surface_best_fit, 1000, RR.string.resize_tip)
+            MediaPlayer.ScaleType.SURFACE_FIT_SCREEN -> overlayDelegate.showInfo(RR.string.surface_fit_screen, 1000, RR.string.resize_tip)
+            MediaPlayer.ScaleType.SURFACE_FILL -> overlayDelegate.showInfo(RR.string.surface_fill, 1000, RR.string.resize_tip)
+            MediaPlayer.ScaleType.SURFACE_16_9 -> overlayDelegate.showInfo("16:9", 1000, player.getString(RR.string.resize_tip))
+            MediaPlayer.ScaleType.SURFACE_4_3 -> overlayDelegate.showInfo("4:3", 1000, player.getString(RR.string.resize_tip))
+            MediaPlayer.ScaleType.SURFACE_16_10 -> overlayDelegate.showInfo("16:10", 1000, player.getString(RR.string.resize_tip))
+            MediaPlayer.ScaleType.SURFACE_221_1 -> overlayDelegate.showInfo("2.21:1", 1000, player.getString(RR.string.resize_tip))
+            MediaPlayer.ScaleType.SURFACE_235_1 -> overlayDelegate.showInfo("2.35:1", 1000, player.getString(RR.string.resize_tip))
+            MediaPlayer.ScaleType.SURFACE_239_1 -> overlayDelegate.showInfo("2.39:1", 1000, player.getString(RR.string.resize_tip))
+            MediaPlayer.ScaleType.SURFACE_5_4 -> overlayDelegate.showInfo("5:4", 1000, player.getString(RR.string.resize_tip))
+            MediaPlayer.ScaleType.SURFACE_ORIGINAL -> overlayDelegate.showInfo(RR.string.surface_original, 1000, RR.string.resize_tip)
         }
         settings.putSingle(VIDEO_RATIO, scale.ordinal)
     }
@@ -236,10 +237,10 @@ class SizeAdapter : RecyclerView.Adapter<SizeAdapter.ViewHolder>() {
 
         fun bind(scaleType: MediaPlayer.ScaleType, selected: Boolean) {
             binding.scaleName = when (scaleType){
-                MediaPlayer.ScaleType.SURFACE_BEST_FIT -> binding.trackTitle.context.getString(R.string.surface_best_fit)
-                MediaPlayer.ScaleType.SURFACE_FIT_SCREEN -> binding.trackTitle.context.getString(R.string.surface_fit_screen)
-                MediaPlayer.ScaleType.SURFACE_FILL -> binding.trackTitle.context.getString(R.string.surface_fill)
-                MediaPlayer.ScaleType.SURFACE_ORIGINAL -> binding.trackTitle.context.getString(R.string.surface_original)
+                MediaPlayer.ScaleType.SURFACE_BEST_FIT -> binding.trackTitle.context.getString(RR.string.surface_best_fit)
+                MediaPlayer.ScaleType.SURFACE_FIT_SCREEN -> binding.trackTitle.context.getString(RR.string.surface_fit_screen)
+                MediaPlayer.ScaleType.SURFACE_FILL -> binding.trackTitle.context.getString(RR.string.surface_fill)
+                MediaPlayer.ScaleType.SURFACE_ORIGINAL -> binding.trackTitle.context.getString(RR.string.surface_original)
                 MediaPlayer.ScaleType.SURFACE_16_9 -> "16:9"
                 MediaPlayer.ScaleType.SURFACE_4_3 -> "4:3"
                 MediaPlayer.ScaleType.SURFACE_16_10 -> "16:10"

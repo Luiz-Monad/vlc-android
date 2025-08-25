@@ -28,6 +28,7 @@ import android.view.View
 import org.videolan.libvlc.Dialog
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.dialogs.DeviceDialog
 import org.videolan.vlc.gui.dialogs.NetworkServerDialog

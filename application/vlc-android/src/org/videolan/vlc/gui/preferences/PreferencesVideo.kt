@@ -28,6 +28,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import kotlinx.coroutines.launch
 import org.videolan.libvlc.util.AndroidUtil
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.tools.POPUP_FORCE_LEGACY
 import org.videolan.vlc.R
@@ -38,7 +39,7 @@ class PreferencesVideo : BasePreferenceFragment(), SharedPreferences.OnSharedPre
 
     override fun getXml() = R.xml.preferences_video
 
-    override fun getTitleId() = R.string.video_prefs_category
+    override fun getTitleId() = RR.string.video_prefs_category
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

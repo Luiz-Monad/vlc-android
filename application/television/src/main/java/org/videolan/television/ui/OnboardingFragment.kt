@@ -34,7 +34,7 @@ import androidx.core.content.ContextCompat
 import androidx.leanback.app.OnboardingSupportFragment
 import org.videolan.resources.TV_MAIN_ACTIVITY
 import org.videolan.resources.util.canReadStorage
-import org.videolan.television.R
+import org.videolan.resources.R
 import org.videolan.tools.KEY_TV_ONBOARDING_DONE
 import org.videolan.tools.Settings
 import org.videolan.tools.putSingle

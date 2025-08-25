@@ -17,6 +17,7 @@ import org.videolan.resources.CTX_APPEND
 import org.videolan.resources.CTX_ITEM_DL
 import org.videolan.resources.CTX_PLAY_ALL
 import org.videolan.resources.CTX_PLAY_AS_AUDIO
+import org.videolan.resources.R as RR
 import org.videolan.tools.WeakHandler
 import org.videolan.vlc.R
 import org.videolan.vlc.extensions.ExtensionManagerService
@@ -61,7 +62,7 @@ class ExtensionBrowser : Fragment(), View.OnClickListener, androidx.swiperefresh
         val v = inflater.inflate(R.layout.directory_browser, container, false)
         mRecyclerView = v.findViewById(R.id.network_list)
         mEmptyView = v.findViewById(android.R.id.empty)
-        mEmptyView.setText(R.string.extension_empty)
+        mEmptyView.setText(RR.string.extension_empty)
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
         mRecyclerView.adapter = mAdapter
         registerForContextMenu(mRecyclerView)
@@ -83,7 +84,7 @@ class ExtensionBrowser : Fragment(), View.OnClickListener, androidx.swiperefresh
         updateDisplay()
         if (showSettings) {
             if (mAddDirectoryFAB == null) mAddDirectoryFAB = requireActivity().findViewById(R.id.fab)
-            mAddDirectoryFAB!!.setImageResource(R.drawable.ic_fab_add)
+            mAddDirectoryFAB!!.setImageResource(RR.drawable.ic_fab_add)
             mAddDirectoryFAB!!.show()
             mAddDirectoryFAB!!.setOnClickListener(this)
         }

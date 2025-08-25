@@ -24,6 +24,7 @@ package org.videolan.vlc
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.channels.SendChannel
 import org.videolan.medialibrary.interfaces.Medialibrary
+import org.videolan.resources.R as RR
 import org.videolan.tools.conflatedActor
 
 /**

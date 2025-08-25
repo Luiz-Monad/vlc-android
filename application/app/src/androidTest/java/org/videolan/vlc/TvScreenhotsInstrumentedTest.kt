@@ -45,6 +45,8 @@ import org.videolan.television.ui.MainTvActivity
 import org.videolan.television.ui.audioplayer.AudioPlayerActivity
 import org.videolan.television.ui.browser.VerticalGridActivity
 import org.videolan.tools.Settings
+import org.videolan.vlc.R as BR
+import org.videolan.resources.R
 import org.videolan.vlc.util.DpadHelper.pressBack
 import org.videolan.vlc.util.DpadHelper.pressDPad
 import org.videolan.vlc.util.DpadHelper.pressDPadCenter
@@ -80,7 +82,7 @@ class TvScreenhotsInstrumentedTest : BaseUITest() {
         Screengrab.setDefaultScreenshotStrategy(UiAutomatorScreenshotStrategy())
         Settings.getInstance(context).edit().putBoolean("auto_rescan", false).putBoolean("audio_resume_card", false).commit()
         val intent = Intent().apply {
-            putExtra(EXTRA_TARGET, R.id.nav_audio)
+            putExtra(EXTRA_TARGET, BR.id.nav_audio)
         }
         activityTestRule.launchActivity(intent)
         activity = activityTestRule.activity
@@ -98,7 +100,7 @@ class TvScreenhotsInstrumentedTest : BaseUITest() {
         //Audio
         ScreenshotUtil.takeScreenshot(1, "tv_home")
 
-        onView(allOf(withId(R.id.row_header), withText(activity.getString(R.string.audio)), withEffectiveVisibility(Visibility.VISIBLE))).perform(click())
+        onView(allOf(withId(androidx.leanback.R.id.row_header), withText(activity.getString(R.string.audio)), withEffectiveVisibility(Visibility.VISIBLE))).perform(click())
         pressDPad(Direction.RIGHT, 4)
         pressDPadCenter()
 
@@ -127,7 +129,7 @@ class TvScreenhotsInstrumentedTest : BaseUITest() {
         ScreenshotUtil.takeScreenshot(5,"tv_files")
         pressBack()
         pressDPad(Direction.LEFT)
-        onView(allOf(withId(R.id.row_header), withText(activity.getString(R.string.video)), withEffectiveVisibility(Visibility.VISIBLE))).perform(click())
+        onView(allOf(withId(androidx.leanback.R.id.row_header), withText(activity.getString(R.string.video)), withEffectiveVisibility(Visibility.VISIBLE))).perform(click())
         pressDPadCenter()
         pressDPadCenter()
         waitForActivity(VerticalGridActivity::class.java)

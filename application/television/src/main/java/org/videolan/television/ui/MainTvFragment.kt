@@ -43,7 +43,7 @@ import org.videolan.television.ui.preferences.PreferencesActivity
 import org.videolan.television.viewmodel.MainTvModel
 import org.videolan.television.viewmodel.MainTvModel.Companion.getMainTvModel
 import org.videolan.vlc.BuildConfig
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.RecommendationsService
 //import org.videolan.vlc.donations.BillingStatus
 //import org.videolan.vlc.donations.VLCBilling

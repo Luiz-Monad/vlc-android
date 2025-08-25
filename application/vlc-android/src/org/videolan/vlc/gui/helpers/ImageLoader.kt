@@ -40,6 +40,7 @@ import org.videolan.resources.AppContextProvider
 import org.videolan.resources.DUMMY_NEW_GROUP
 import org.videolan.resources.HEADER_MOVIES
 import org.videolan.resources.HEADER_TV_SHOW
+import org.videolan.resources.R as RR
 import org.videolan.tools.BitmapCache
 import org.videolan.tools.HttpImageLoader
 import org.videolan.tools.Settings
@@ -149,7 +150,7 @@ fun getMediaIconDrawable(context: Context, type: Int): BitmapDrawable? = when (t
 }
 
 fun getDummyItemIcon(context: Context, item:DummyItem) = when (item.id) {
-    DUMMY_NEW_GROUP -> BitmapDrawable(context.resources, getBitmapFromDrawable(context, R.drawable.ic_add_to_group))
+    DUMMY_NEW_GROUP -> BitmapDrawable(context.resources, getBitmapFromDrawable(context, RR.drawable.ic_add_to_group))
     else -> null
 }
 
@@ -158,7 +159,7 @@ private var placeholderTvBg: Drawable? = null
 @BindingAdapter("placeholder")
 fun placeHolderView(v: View, item: Any?) {
     if (item == null) {
-        if (placeholderTvBg === null) placeholderTvBg = ContextCompat.getDrawable(v.context, R.drawable.rounded_corners_grey)
+        if (placeholderTvBg === null) placeholderTvBg = ContextCompat.getDrawable(v.context, RR.drawable.rounded_corners_grey)
         v.background = placeholderTvBg
     } else {
         v.background = null
@@ -169,7 +170,7 @@ fun placeHolderView(v: View, item: Any?) {
 @BindingAdapter("placeholderImage")
 fun placeHolderImageView(v: View, item: MediaLibraryItem?) {
     if (item == null) {
-        v.background = ContextCompat.getDrawable(v.context, R.drawable.rounded_corners_grey)
+        v.background = ContextCompat.getDrawable(v.context, RR.drawable.rounded_corners_grey)
     } else {
         v.background = UiTools.getDefaultAudioDrawable(v.context)
     }
@@ -227,7 +228,7 @@ private suspend fun getImage(v: View, item: MediaLibraryItem, binding: ViewDataB
     val width = when {
         tv -> {
             if (defaultImageWidthTV == 0) {
-                defaultImageWidthTV = v.context.resources.getDimensionPixelSize(R.dimen.tv_grid_card_thumb_width)
+                defaultImageWidthTV = v.context.resources.getDimensionPixelSize(RR.dimen.tv_grid_card_thumb_width)
             }
             defaultImageWidthTV
         }
@@ -235,7 +236,7 @@ private suspend fun getImage(v: View, item: MediaLibraryItem, binding: ViewDataB
         v.width > 0 -> v.width
         defaultImageWidth > 0 -> defaultImageWidth
         else -> {
-            defaultImageWidth = v.context.resources.getDimensionPixelSize(if (v is ImageCardView) R.dimen.tv_grid_card_thumb_width else R.dimen.audio_browser_item_size)
+            defaultImageWidth = v.context.resources.getDimensionPixelSize(if (v is ImageCardView) RR.dimen.tv_grid_card_thumb_width else RR.dimen.audio_browser_item_size)
             defaultImageWidth
         }
     }

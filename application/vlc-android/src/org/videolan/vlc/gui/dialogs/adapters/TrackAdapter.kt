@@ -29,6 +29,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.videolan.libvlc.MediaPlayer
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.VideoTrackItemBinding
@@ -75,7 +76,7 @@ class TrackAdapter(private val tracks: Array<MediaPlayer.TrackDescription>, var 
         fun bind(trackDescription: MediaPlayer.TrackDescription, selected: Boolean) {
             binding.track = trackDescription
             val context = binding.root.context
-            binding.contentDescription = context.getString(R.string.talkback_track, trackTypePrefix, if (trackDescription.id == -1) context.getString(R.string.disable_track) else trackDescription.name, if (selected) context.getString(R.string.selected) else "")
+            binding.contentDescription = context.getString(RR.string.talkback_track, trackTypePrefix, if (trackDescription.id == -1) context.getString(RR.string.disable_track) else trackDescription.name, if (selected) context.getString(RR.string.selected) else "")
             binding.selected = selected
             binding.executePendingBindings()
         }

@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.interfaces.FocusListener
-import org.videolan.television.R
+import org.videolan.resources.R
 import org.videolan.television.databinding.ActivityMediaListTvItemBinding
 import org.videolan.television.ui.TvFocusableAdapter
 import org.videolan.vlc.BuildConfig

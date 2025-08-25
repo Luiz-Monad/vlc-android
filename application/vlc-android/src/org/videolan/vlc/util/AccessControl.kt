@@ -30,6 +30,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 

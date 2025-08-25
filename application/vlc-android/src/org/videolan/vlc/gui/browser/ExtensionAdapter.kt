@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.ExtensionItemViewBinding
 import org.videolan.vlc.extensions.api.VLCExtensionItem
@@ -68,11 +69,11 @@ class ExtensionAdapter(internal var fragment: ExtensionBrowser?) : RecyclerView.
 
     private fun getIconResId(item: VLCExtensionItem): Int {
         return when (item.type) {
-            VLCExtensionItem.TYPE_AUDIO -> R.drawable.ic_browser_audio_normal
-            VLCExtensionItem.TYPE_DIRECTORY -> R.drawable.ic_menu_folder
-            VLCExtensionItem.TYPE_VIDEO -> R.drawable.ic_browser_video_normal
-            VLCExtensionItem.TYPE_SUBTITLE -> R.drawable.ic_browser_subtitle_normal
-            else -> R.drawable.ic_browser_unknown_normal
+            VLCExtensionItem.TYPE_AUDIO -> RR.drawable.ic_browser_audio_normal
+            VLCExtensionItem.TYPE_DIRECTORY -> RR.drawable.ic_menu_folder
+            VLCExtensionItem.TYPE_VIDEO -> RR.drawable.ic_browser_video_normal
+            VLCExtensionItem.TYPE_SUBTITLE -> RR.drawable.ic_browser_subtitle_normal
+            else -> RR.drawable.ic_browser_unknown_normal
         }
     }
 

@@ -41,7 +41,8 @@ import org.videolan.libvlc.Dialog
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.resources.AppContextProvider
 import org.videolan.resources.util.startMedialibrary
-import org.videolan.television.R
+import org.videolan.resources.R
+import org.videolan.vlc.R as BR
 import org.videolan.television.ui.SearchActivity
 import org.videolan.television.ui.dialogs.ConfirmationTvActivity
 import org.videolan.television.ui.registerTimeView
@@ -84,7 +85,7 @@ abstract class BaseTvActivity : FragmentActivity(), IDialogManager {
         mediaLibrary = Medialibrary.getInstance()
         settings = Settings.getInstance(this)
         registerLiveData()
-        lifecycleScope.launch { findViewById<View>(R.id.tv_time)?.let { registerTimeView(it as TextView) } }
+        lifecycleScope.launch { findViewById<View>(BR.id.tv_time)?.let { registerTimeView(it as TextView) } }
         dialogsDelegate.observeDialogs(this, this)
     }
 

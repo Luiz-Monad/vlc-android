@@ -32,6 +32,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.onEach
+import org.videolan.resources.R as RR
 import org.videolan.tools.formatRateString
 import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
@@ -149,7 +150,7 @@ class PlaybackSpeedDialog : VLCBottomSheetDialogFragment() {
         val rate = playbackService!!.rate
         speedValue.text = rate.formatRateString()
         if (rate != 1.0f) {
-            speedValue.setTextColor(ContextCompat.getColor(requireActivity(), R.color.orange500))
+            speedValue.setTextColor(ContextCompat.getColor(requireActivity(), RR.color.orange500))
         } else {
             speedValue.setTextColor(textColor)
         }

@@ -23,6 +23,7 @@
 package org.videolan.vlc.gui.preferences
 
 import android.content.SharedPreferences
+import org.videolan.resources.R as RR
 import org.videolan.tools.KEY_AUDIO_JUMP_DELAY
 import org.videolan.tools.KEY_AUDIO_LONG_JUMP_DELAY
 import org.videolan.tools.Settings
@@ -33,7 +34,7 @@ class PreferencesAudioControls : BasePreferenceFragment(), SharedPreferences.OnS
 
     override fun getXml() = R.xml.preferences_audio_controls
 
-    override fun getTitleId() = R.string.controls_prefs_category
+    override fun getTitleId() = RR.string.controls_prefs_category
 
     override fun onStart() {
         super.onStart()

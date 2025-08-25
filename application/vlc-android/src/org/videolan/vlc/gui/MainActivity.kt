@@ -38,6 +38,7 @@ import org.videolan.resources.ACTIVITY_RESULT_OPEN
 import org.videolan.resources.ACTIVITY_RESULT_PREFERENCES
 import org.videolan.resources.ACTIVITY_RESULT_SECONDARY
 import org.videolan.resources.EXTRA_TARGET
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
@@ -107,7 +108,7 @@ class MainActivity : ContentActivity(),
         super.onResume()
         //Only the partial permission is granted for Android 11+
         if (!settings.getBoolean(PERMISSION_NEVER_ASK, false) && settings.getLong(PERMISSION_NEXT_ASK, 0L) < System.currentTimeMillis() && Permissions.canReadStorage(this) && !Permissions.hasAllAccess(this)) {
-            UiTools.snackerMessageInfinite(this, getString(R.string.partial_content))?.setAction(R.string.more) {
+            UiTools.snackerMessageInfinite(this, getString(RR.string.partial_content))?.setAction(RR.string.more) {
                 AllAccessPermissionDialog.newInstance().show(supportFragmentManager, AllAccessPermissionDialog::class.simpleName)
             }?.show()
             settings.putSingle(PERMISSION_NEXT_ASK, System.currentTimeMillis() + TimeUnit.DAYS.toMillis(2))

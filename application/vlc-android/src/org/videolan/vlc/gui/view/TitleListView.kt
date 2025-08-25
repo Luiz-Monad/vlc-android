@@ -35,6 +35,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.videolan.resources.R as RR
 import org.videolan.tools.dp
 import org.videolan.tools.setGone
 import org.videolan.vlc.R
@@ -87,13 +88,13 @@ class TitleListView : ConstraintLayout {
 
     private fun initAttributes(attrs: AttributeSet, defStyle: Int) {
         attrs.let {
-            val a = context.theme.obtainStyledAttributes(attrs, R.styleable.TitleListView, 0, defStyle)
+            val a = context.theme.obtainStyledAttributes(attrs, RR.styleable.TitleListView, 0, defStyle)
             try {
-                val titleString = a.getString(R.styleable.TitleListView_title)
+                val titleString = a.getString(RR.styleable.TitleListView_title)
                 titleView.text = titleString
-                titleView.contentDescription = context.getString(R.string.talkback_list_section, titleString)
-                actionButton.contentDescription = context.getString(R.string.talkback_enter_screen, titleString)
-                if (!a.getBoolean(R.styleable.TitleListView_show_button, false)) actionButton.setGone()
+                titleView.contentDescription = context.getString(RR.string.talkback_list_section, titleString)
+                actionButton.contentDescription = context.getString(RR.string.talkback_enter_screen, titleString)
+                if (!a.getBoolean(RR.styleable.TitleListView_show_button, false)) actionButton.setGone()
                 actionButton.setOnClickListener {
                     actionClickListener?.let { listener -> listener(actionButton) }
                 }
@@ -120,8 +121,8 @@ class TitleListView : ConstraintLayout {
             list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             list.addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                    outRect.left = resources.getDimension(R.dimen.kl_half).toInt()
-                    outRect.right = resources.getDimension(R.dimen.kl_half).toInt()
+                    outRect.left = resources.getDimension(RR.dimen.kl_half).toInt()
+                    outRect.right = resources.getDimension(RR.dimen.kl_half).toInt()
                 }
             })
 

@@ -6,6 +6,7 @@ import kotlinx.coroutines.withContext
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.vlc.media.MediaUtils
 import java.util.*
 

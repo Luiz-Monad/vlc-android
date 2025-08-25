@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.StartActivity
 import org.videolan.vlc.databinding.DialogExtDeviceBinding
@@ -29,7 +30,7 @@ class DeviceDialog : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog?.setTitle(getString(R.string.device_dialog_title))
+        dialog?.setTitle(getString(RR.string.device_dialog_title))
         val binding = DialogExtDeviceBinding.inflate(inflater, container, false)
         binding.handler = clickHandler
         if (scan) binding.extDeviceScan.visibility = View.VISIBLE

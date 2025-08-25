@@ -23,6 +23,7 @@ import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.VLCCrashHandler
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
@@ -130,7 +131,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
                     if (mediaWrapper === null) {
                         if (!location.validateLocation()) {
                             Log.w(TAG, "Invalid location $location")
-                            service.showToast(if (Uri.parse(location).scheme == "missing")service.resources.getString(R.string.missing_location) else service.resources.getString(R.string.invalid_location,  location), Toast.LENGTH_SHORT)
+                            service.showToast(if (Uri.parse(location).scheme == "missing")service.resources.getString(RR.string.missing_location) else service.resources.getString(RR.string.invalid_location,  location), Toast.LENGTH_SHORT)
                             continue
                         }
                         Log.v(TAG, "Creating on-the-fly Media object for $location")
@@ -1036,7 +1037,7 @@ class PlaylistManager(val service: PlaybackService) : MediaWrapperList.EventList
                     }
                     Log.w(TAG, "Invalid location $location")
 
-                    service.showToast(if (location != null && Uri.parse(location).scheme == "missing") service.getString(R.string.missing_location) else service.getString(R.string.invalid_location, location
+                    service.showToast(if (location != null && Uri.parse(location).scheme == "missing") service.getString(RR.string.missing_location) else service.getString(RR.string.invalid_location, location
                             ?: ""), Toast.LENGTH_SHORT, true)
                     if (currentIndex != nextIndex) next() else stop()
                 }

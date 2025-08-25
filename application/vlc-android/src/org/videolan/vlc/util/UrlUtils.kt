@@ -35,6 +35,7 @@ import androidx.core.net.toUri
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import org.videolan.vlc.R
+import org.videolan.resources.R as RR
 
 
 fun Context.openLinkIfPossible(url: String, size: Int = 512) {
@@ -64,10 +65,10 @@ fun Context.openLinkIfPossible(url: String, size: Int = 512) {
         }
         image.setImageBitmap(bitmap)
         AlertDialog.Builder(this)
-                .setTitle(getString(R.string.no_web_browser))
-                .setMessage(getString(R.string.no_web_browser_message, url))
+                .setTitle(getString(RR.string.no_web_browser))
+                .setMessage(getString(RR.string.no_web_browser_message, url))
                 .setView(image)
-                .setPositiveButton(R.string.ok) { _, _ ->
+                .setPositiveButton(RR.string.ok) { _, _ ->
 
                 }
                 .show()

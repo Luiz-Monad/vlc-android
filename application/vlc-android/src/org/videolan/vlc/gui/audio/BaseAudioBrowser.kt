@@ -47,6 +47,7 @@ import kotlinx.coroutines.withContext
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.R
@@ -139,7 +140,7 @@ abstract class BaseAudioBrowser<T : MedialibraryViewModel> : MediaBrowserFragmen
         list.layoutManager = gridLayoutManager
         list.addItemDecoration(
             RecyclerSectionItemGridDecoration(
-                resources.getDimensionPixelSize(R.dimen.recycler_section_header_height),
+                resources.getDimensionPixelSize(RR.dimen.recycler_section_header_height),
                 spacing,
                 16.dp,
                 true,
@@ -154,10 +155,10 @@ abstract class BaseAudioBrowser<T : MedialibraryViewModel> : MediaBrowserFragmen
         nbColumns = resources.getInteger(R.integer.mobile_card_columns)
         val typedValue = TypedValue()
         val theme: Resources.Theme = requireActivity().theme
-        theme.resolveAttribute(R.attr.background_default_darker, typedValue, true)
+        theme.resolveAttribute(RR.attr.background_default_darker, typedValue, true)
         backgroundColor = typedValue.data
 
-        theme.resolveAttribute(R.attr.background_default, typedValue, true)
+        theme.resolveAttribute(RR.attr.background_default, typedValue, true)
         listColor = typedValue.data
     }
 
@@ -187,7 +188,7 @@ abstract class BaseAudioBrowser<T : MedialibraryViewModel> : MediaBrowserFragmen
                 adapter.cardSize = -1
                 list.addItemDecoration(
                     RecyclerSectionItemDecoration(
-                        resources.getDimensionPixelSize(R.dimen.recycler_section_header_height),
+                        resources.getDimensionPixelSize(RR.dimen.recycler_section_header_height),
                         true,
                         provider
                     )
@@ -196,13 +197,13 @@ abstract class BaseAudioBrowser<T : MedialibraryViewModel> : MediaBrowserFragmen
             }
         }
         val lp = list.layoutParams
-        val dimension = requireActivity().resources.getDimension(R.dimen.default_content_width)
+        val dimension = requireActivity().resources.getDimension(RR.dimen.default_content_width)
         lp.width = if (providerInCard) ViewGroup.LayoutParams.MATCH_PARENT else {
             dimension.toInt()
         }
 
-        (list.parent as View).setBackgroundColor(if (!providerInCard && dimension != -1F) backgroundColor else ContextCompat.getColor(requireContext(), R.color.transparent))
-        list.setBackgroundColor(if (!providerInCard && dimension != -1F) listColor else ContextCompat.getColor(requireContext(), R.color.transparent))
+        (list.parent as View).setBackgroundColor(if (!providerInCard && dimension != -1F) backgroundColor else ContextCompat.getColor(requireContext(), RR.color.transparent))
+        list.setBackgroundColor(if (!providerInCard && dimension != -1F) listColor else ContextCompat.getColor(requireContext(), RR.color.transparent))
         list.layoutParams = lp
     }
 

@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.applyOverscanMargin
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.AboutAuthorsActivityBinding
@@ -37,8 +38,8 @@ class AuthorsActivity : BaseActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.main_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_up)
-        title = getString(R.string.authors)
+        supportActionBar?.setHomeAsUpIndicator(RR.drawable.ic_close_up)
+        title = getString(RR.string.authors)
 
         binding.authorsList.layoutManager = LinearLayoutManager(this)
         loadAuthors()

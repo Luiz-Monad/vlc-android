@@ -31,6 +31,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import androidx.core.content.ContextCompat
 import org.videolan.tools.dp
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 
 /**
@@ -43,7 +44,7 @@ open class FocusableTextView : androidx.appcompat.widget.AppCompatTextView {
     val paint: Paint by lazy {
         Paint().apply {
             isAntiAlias = true
-            color = ContextCompat.getColor(context, R.color.orange500focus)
+            color = ContextCompat.getColor(context, RR.color.orange500focus)
             style = Paint.Style.FILL
             textSize = this@FocusableTextView.textSize
             typeface = this@FocusableTextView.typeface

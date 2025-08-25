@@ -56,7 +56,7 @@ import org.videolan.television.ui.browser.VerticalGridActivity
 import org.videolan.tools.HttpImageLoader
 import org.videolan.tools.retrieveParent
 import org.videolan.vlc.BuildConfig
-import org.videolan.vlc.R
+import org.videolan.resources.R
 import org.videolan.vlc.gui.DialogActivity
 import org.videolan.vlc.gui.DialogActivity.Companion.EXTRA_MEDIA
 import org.videolan.vlc.gui.helpers.AudioUtil

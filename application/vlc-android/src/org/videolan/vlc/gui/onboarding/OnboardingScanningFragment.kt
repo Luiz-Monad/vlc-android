@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.switchmaterial.SwitchMaterial
 import org.videolan.resources.KEY_ANIMATED
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.SecondaryActivity

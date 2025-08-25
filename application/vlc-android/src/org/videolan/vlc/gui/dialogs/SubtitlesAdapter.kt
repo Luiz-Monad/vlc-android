@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.SendChannel
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.SubtitleDownloadItemBinding
 import java.util.*
@@ -55,11 +56,11 @@ internal class SubtitlesAdapter(private val eventActor: SendChannel<SubtitleEven
 
             val context = binding.root.context
             val downloadString = context.getString(when(subtitleItem?.state) {
-                State.Downloaded ->R.string.downloaded
-                State.NotDownloaded ->R.string.not_downloaded
-                else -> R.string.downloading
+                State.Downloaded ->RR.string.downloaded
+                State.NotDownloaded ->RR.string.not_downloaded
+                else -> RR.string.downloading
             })
-            itemView.contentDescription = context.getString(R.string.talkback_subtitle_dowload_item, Locale(subtitleItem?.subLanguageID ?: "").displayLanguage, downloadString, subtitleItem?.movieReleaseName ?: "")
+            itemView.contentDescription = context.getString(RR.string.talkback_subtitle_dowload_item, Locale(subtitleItem?.subLanguageID ?: "").displayLanguage, downloadString, subtitleItem?.movieReleaseName ?: "")
         }
     }
 }

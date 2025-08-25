@@ -26,6 +26,7 @@ package org.videolan.vlc.gui.browser
 import androidx.databinding.ViewDataBinding
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
+import org.videolan.resources.R as RR
 
 class FilePickerAdapter internal constructor(browserContainer: BrowserContainer<MediaLibraryItem>) : BaseBrowserAdapter(browserContainer) {
 

@@ -39,13 +39,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.videolan.resources.VLCInstance
+import org.videolan.resources.R
+import org.videolan.vlc.R as BR
 import org.videolan.television.ui.COLOR_PICKER_SELECTED_COLOR
 import org.videolan.television.ui.COLOR_PICKER_TITLE
 import org.videolan.television.ui.ColorPickerActivity
 import org.videolan.tools.LocaleUtils
 import org.videolan.tools.Settings
 import org.videolan.vlc.BuildConfig
-import org.videolan.vlc.R
 import org.videolan.vlc.gui.helpers.restartMediaPlayer
 
 private const val SUBTITLE_COLOR_RESULT = 1
@@ -77,7 +78,7 @@ class PreferencesSubtitles : BasePreferenceFragment(), SharedPreferences.OnShare
     private lateinit var subtitlesOutlineOpacity: SeekBarPreference
 
     override fun getXml(): Int {
-        return R.xml.preferences_subtitles
+        return BR.xml.preferences_subtitles
     }
 
     override fun getTitleId(): Int {

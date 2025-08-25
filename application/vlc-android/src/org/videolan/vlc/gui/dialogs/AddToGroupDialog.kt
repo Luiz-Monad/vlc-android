@@ -37,6 +37,7 @@ import org.videolan.medialibrary.interfaces.media.VideoGroup
 import org.videolan.medialibrary.media.DummyItem
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.DUMMY_NEW_GROUP
+import org.videolan.resources.R as RR
 import org.videolan.tools.AppScope
 import org.videolan.tools.CoroutineContextProvider
 import org.videolan.tools.DependencyProvider
@@ -111,10 +112,10 @@ class AddToGroupDialog : VLCBottomSheetDialogFragment(), SimpleAdapter.ClickHand
         viewModel.provider.pagedList.observe(viewLifecycleOwner) {
 
             val groupList = it.filter { group -> group is VideoGroup && group.mediaCount() > 1 }.apply {
-                forEach { mediaLibraryItem -> mediaLibraryItem.description = resources.getQuantityString(R.plurals.media_quantity, mediaLibraryItem.tracksCount, mediaLibraryItem.tracksCount) }
+                forEach { mediaLibraryItem -> mediaLibraryItem.description = resources.getQuantityString(RR.plurals.media_quantity, mediaLibraryItem.tracksCount, mediaLibraryItem.tracksCount) }
             }.toMutableList().apply {
                 if (newTrack.size > 1 && !forbidNewGroup) {
-                    this.add(0, DummyItem(DUMMY_NEW_GROUP, getString(R.string.new_group), getString(R.string.new_group_desc)))
+                    this.add(0, DummyItem(DUMMY_NEW_GROUP, getString(RR.string.new_group), getString(RR.string.new_group_desc)))
                 }
             }
             adapter.submitList(groupList)

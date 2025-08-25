@@ -43,6 +43,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.videolan.libvlc.MediaPlayer
 import org.videolan.resources.AppContextProvider
+import org.videolan.resources.R as RR
 import org.videolan.resources.VLCInstance
 import org.videolan.resources.VLCOptions
 import org.videolan.tools.Settings
@@ -75,7 +76,7 @@ class EqualizerFragment : VLCBottomSheetDialogFragment(), Slider.OnChangeListene
     private var updateAlreadyHandled = false
     private lateinit var binding: EqualizerBinding
     private val state = EqualizerState()
-    private val newPresetName = AppContextProvider.appResources.getString(R.string.equalizer_new_preset_name)
+    private val newPresetName = AppContextProvider.appResources.getString(RR.string.equalizer_new_preset_name)
     private var bandCount = -1
 
     private val eqBandsViews = ArrayList<EqualizerBar>()
@@ -293,10 +294,10 @@ class EqualizerFragment : VLCBottomSheetDialogFragment(), Slider.OnChangeListene
                 if (context == null) return
                 val newName = input.text.toString()
                 if (input.text.contains("_") || newName == newPresetName) {
-                    input.error = getString(R.string.custom_set_wrong_input)
-                    Toast.makeText(requireActivity(), AppContextProvider.appContext.resources.getString(R.string.custom_set_wrong_input), Toast.LENGTH_SHORT).show()
+                    input.error = getString(RR.string.custom_set_wrong_input)
+                    Toast.makeText(requireActivity(), AppContextProvider.appContext.resources.getString(RR.string.custom_set_wrong_input), Toast.LENGTH_SHORT).show()
                 } else if (allSets.contains(newName) && newName != oldName) {
-                    input.error = getString(R.string.custom_set_already_exist)
+                    input.error = getString(RR.string.custom_set_already_exist)
                 } else input.error = null
             }
 
@@ -305,23 +306,23 @@ class EqualizerFragment : VLCBottomSheetDialogFragment(), Slider.OnChangeListene
 
 
         val container = FrameLayout(requireContext())
-        val klNormal = resources.getDimension(R.dimen.kl_normal).toInt()
+        val klNormal = resources.getDimension(RR.dimen.kl_normal).toInt()
         container.setPadding(klNormal, 0, klNormal, 0)
 
         container.addView(input)
 
         val saveEqualizer = AlertDialog.Builder(requireActivity())
                 .setTitle(resources.getString(if (displayedByUser)
-                    R.string.custom_set_save_title
+                    RR.string.custom_set_save_title
                 else
-                    R.string.custom_set_save_warning))
+                    RR.string.custom_set_save_warning))
                 .setMessage(resources.getString(if (getEqualizerType(positionToSave) == TYPE_CUSTOM)
-                    R.string.existing_custom_set_save_message
+                    RR.string.existing_custom_set_save_message
                 else
-                    R.string.new_custom_set_save_message))
+                    RR.string.new_custom_set_save_message))
                 .setView(container)
-                .setPositiveButton(R.string.save, null)
-                .setNegativeButton(R.string.do_not_save) { _, _ ->
+                .setPositiveButton(RR.string.save, null)
+                .setNegativeButton(RR.string.do_not_save) { _, _ ->
                     if (onPause)
                         VLCOptions.saveEqualizerInSettings(AppContextProvider.appContext, equalizer, allSets[positionToSave], binding.equalizerButton.isChecked, false)
                 }
@@ -389,7 +390,7 @@ class EqualizerFragment : VLCBottomSheetDialogFragment(), Slider.OnChangeListene
             customCount--
             state.update(0, true)
             binding.equalizerPresets.setSelection(0)
-            val message = getString(R.string.custom_set_deleted_message, oldName)
+            val message = getString(RR.string.custom_set_deleted_message, oldName)
             UiTools.snackerWithCancel(requireActivity(), message, action = {}) {
                 VLCOptions.saveCustomSet(requireActivity(), savedEqualizerSet, oldName)
                 equalizer = savedEqualizerSet
@@ -415,9 +416,9 @@ class EqualizerFragment : VLCBottomSheetDialogFragment(), Slider.OnChangeListene
             binding.equalizerPresets.setSelection(revertPos)
 
         val message = if (getEqualizerType(pos) == TYPE_CUSTOM)
-            getString(R.string.custom_set_restored)
+            getString(RR.string.custom_set_restored)
         else
-            getString(R.string.unsaved_set_deleted_message)
+            getString(RR.string.unsaved_set_deleted_message)
         UiTools.snackerWithCancel(requireActivity(), message, action = {}) {
             state.update(pos, false)
             equalizer = temporarySet

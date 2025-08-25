@@ -7,6 +7,7 @@ import org.videolan.medialibrary.MLServiceLocator
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.AndroidDevices.EXTERNAL_PUBLIC_DIRECTORY
+import org.videolan.resources.R as RR
 import org.videolan.tools.IOScopedObject
 import org.videolan.tools.SingletonHolder
 import org.videolan.vlc.R
@@ -50,7 +51,7 @@ fun createDirectory(it: String, context: Context): MediaWrapper {
     val directory = MLServiceLocator.getAbstractMediaWrapper(AndroidUtil.PathToUri(it))
     directory.type = MediaWrapper.TYPE_DIR
     if (EXTERNAL_PUBLIC_DIRECTORY == it) {
-        directory.setDisplayTitle(context.resources.getString(R.string.internal_memory))
+        directory.setDisplayTitle(context.resources.getString(RR.string.internal_memory))
     } else {
         val deviceName = FileUtils.getStorageTag(directory.title)
         if (deviceName != null) directory.setDisplayTitle(deviceName)

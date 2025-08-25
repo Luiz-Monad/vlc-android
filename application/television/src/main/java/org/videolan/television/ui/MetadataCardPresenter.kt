@@ -62,6 +62,7 @@ import org.videolan.moviepedia.database.models.MediaMetadataWithImages
 import org.videolan.moviepedia.database.models.Person
 import org.videolan.moviepedia.database.models.tvEpisodeSubtitle
 import org.videolan.television.R
+import org.videolan.resources.R as RR
 import org.videolan.tools.dp
 import org.videolan.vlc.gui.helpers.downloadIcon
 import org.videolan.vlc.util.generateResolutionClass
@@ -69,7 +70,7 @@ import org.videolan.vlc.util.generateResolutionClass
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 class MetadataCardPresenter(private val context: Activity) : Presenter() {
 
-    private var defaultCardImage: Drawable? = VectorDrawableCompat.create(context.resources, R.drawable.ic_people_big, context.theme)
+    private var defaultCardImage: Drawable? = VectorDrawableCompat.create(context.resources, RR.drawable.ic_people_big, context.theme)
 
     inner class ViewHolder(view: View) : Presenter.ViewHolder(view) {
 
@@ -82,7 +83,7 @@ class MetadataCardPresenter(private val context: Activity) : Presenter() {
 
         init {
             cover.scaleType = ImageView.ScaleType.FIT_CENTER
-            view.findViewById<View>(R.id.container).background = ContextCompat.getDrawable(context, R.drawable.tv_card_background)
+            view.findViewById<View>(R.id.container).background = ContextCompat.getDrawable(context, RR.drawable.tv_card_background)
         }
 
         fun updateCardViewImage(item: Person) {
@@ -105,7 +106,7 @@ class MetadataCardPresenter(private val context: Activity) : Presenter() {
         val cardView = context.layoutInflater.inflate(R.layout.movie_browser_tv_item, parent, false)
         cardView.isFocusable = true
         cardView.isFocusableInTouchMode = true
-        cardView.setBackgroundColor(ContextCompat.getColor(context, R.color.lb_details_overview_bg_color))
+        cardView.setBackgroundColor(ContextCompat.getColor(context, androidx.leanback.R.color.lb_details_overview_bg_color))
         val lp = cardView.findViewById<ImageView>(R.id.media_cover).layoutParams
         lp.width = CARD_WIDTH_POSTER
         lp.height = CARD_HEIGHT_POSTER

@@ -51,6 +51,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.view.SwipeToUnlockView
 
@@ -78,8 +79,8 @@ class FeatureTouchOnlyWarningDialog : FeatureFlagWarningDialog() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-       titleString = getString(R.string.touch_only)
-        warningString = getString(R.string.touch_only_description)
+       titleString = getString(RR.string.touch_only)
+        warningString = getString(RR.string.touch_only_description)
         super.onCreate(savedInstanceState)
     }
 

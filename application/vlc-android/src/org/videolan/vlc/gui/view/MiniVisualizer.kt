@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.LinearInterpolator
 import android.widget.LinearLayout
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 
 class MiniVisualizer : LinearLayout {
@@ -40,9 +41,9 @@ class MiniVisualizer : LinearLayout {
 
     private fun initAttributes(attrs: AttributeSet, defStyle: Int) {
         attrs.let {
-            val a = context.theme.obtainStyledAttributes(attrs, R.styleable.MiniVisualizer, 0, defStyle)
+            val a = context.theme.obtainStyledAttributes(attrs, RR.styleable.MiniVisualizer, 0, defStyle)
             try {
-                mainColor = a.getInt(R.styleable.MiniVisualizer_bar_color, R.color.black)
+                mainColor = a.getInt(RR.styleable.MiniVisualizer_bar_color, RR.color.black)
             } catch (e: Exception) {
                 Log.w("", e.message, e)
             } finally {

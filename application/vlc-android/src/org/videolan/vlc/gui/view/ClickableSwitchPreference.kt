@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.widget.SwitchCompat
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.TwoStatePreference
+import org.videolan.resources.R as RR
 
 class ClickableSwitchPreference(context: Context) : TwoStatePreference(context, null, androidx.preference.R.attr.switchPreferenceCompatStyle, 0) {
 

@@ -17,6 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.isActive
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.SubtitleDownloaderDialogBinding
 import org.videolan.vlc.gui.helpers.UiTools
@@ -64,8 +65,8 @@ class SubtitleDownloaderDialogFragment : VLCBottomSheetDialogFragment() {
             }
             is SubtitleLongClick -> {
                 @StringRes val message = when (subtitleEvent.item.state) {
-                    State.NotDownloaded -> R.string.download_the_selected
-                    State.Downloaded -> R.string.delete_the_selected
+                    State.NotDownloaded -> RR.string.download_the_selected
+                    State.Downloaded -> RR.string.delete_the_selected
                     // Todo else -> {"Cancel download"}
                     else -> return@actor
                 }

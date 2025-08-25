@@ -27,6 +27,7 @@ import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.*
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.resources.interfaces.IMediaContentResolver
 import org.videolan.resources.interfaces.ResumableList
 import org.videolan.resources.util.getFromMl
@@ -128,7 +129,7 @@ object MediaUtils {
             service.append(media)
             context.let {
                 if (it is Activity) {
-                    val text = context.resources.getQuantityString(R.plurals.tracks_appended, media.size, media.size)
+                    val text = context.resources.getQuantityString(RR.plurals.tracks_appended, media.size, media.size)
                     if (it is AudioPlayerContainerActivity) {
                         Snackbar.make(it.appBarLayout, text, Snackbar.LENGTH_LONG).show()
                     } else
@@ -150,7 +151,7 @@ object MediaUtils {
             service.insertNext(media)
             context.let {
                 if (it is Activity) {
-                    val text = context.resources.getQuantityString(R.plurals.tracks_inserted, media.size, media.size)
+                    val text = context.resources.getQuantityString(RR.plurals.tracks_inserted, media.size, media.size)
                     Snackbar.make(it.findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG).show()
                 }
             }
@@ -298,29 +299,29 @@ object MediaUtils {
     }
 
     fun getMediaArtist(ctx: Context, media: MediaWrapper?): String = when {
-        media == null -> getMediaString(ctx, R.string.unknown_artist)
+        media == null -> getMediaString(ctx, RR.string.unknown_artist)
         media.type == MediaWrapper.TYPE_VIDEO -> ""
         media.artist != null -> media.artist
         media.nowPlaying != null -> media.title
         isSchemeStreaming(media.uri.scheme) -> ""
-        else -> getMediaString(ctx, R.string.unknown_artist)
+        else -> getMediaString(ctx, RR.string.unknown_artist)
     }
 
     fun getMediaReferenceArtist(ctx: Context, media: MediaWrapper?) = getMediaArtist(ctx, media)
 
     fun getMediaAlbumArtist(ctx: Context, media: MediaWrapper?) = media?.albumArtist
-            ?: getMediaString(ctx, R.string.unknown_artist)
+            ?: getMediaString(ctx, RR.string.unknown_artist)
 
     fun getMediaAlbum(ctx: Context, media: MediaWrapper?): String = when {
-        media == null -> getMediaString(ctx, R.string.unknown_album)
+        media == null -> getMediaString(ctx, RR.string.unknown_album)
         media.album != null -> media.album
         media.nowPlaying != null -> ""
         isSchemeStreaming(media.uri.scheme) -> ""
-        else -> getMediaString(ctx, R.string.unknown_album)
+        else -> getMediaString(ctx, RR.string.unknown_album)
     }
 
     fun getMediaGenre(ctx: Context, media: MediaWrapper?) = media?.genre
-            ?: getMediaString(ctx, R.string.unknown_genre)
+            ?: getMediaString(ctx, RR.string.unknown_genre)
 
     fun getMediaSubtitle(media: MediaWrapper): String {
         val prefix = when {
@@ -340,8 +341,8 @@ object MediaUtils {
     fun getDisplaySubtitle(ctx: Context, media: MediaWrapper, mediaPosition: Int, mediaSize: Int): String {
         val album = getMediaAlbum(ctx, media)
         val artist = getMediaArtist(ctx, media)
-        val isAlbumUnknown = album == getMediaString(ctx, R.string.unknown_album)
-        val isArtistUnknown = artist == getMediaString(ctx, R.string.unknown_artist)
+        val isAlbumUnknown = album == getMediaString(ctx, RR.string.unknown_album)
+        val isArtistUnknown = artist == getMediaString(ctx, RR.string.unknown_artist)
         val prefix = if (mediaSize > 1) "${mediaPosition + 1} / $mediaSize" else null
         val suffix = if (!isArtistUnknown && !isAlbumUnknown) TextUtils.separatedString('-', artist.markBidi(), album.markBidi()) else null
         return TextUtils.separatedString(prefix, suffix)
@@ -367,9 +368,9 @@ object MediaUtils {
     private fun getMediaString(ctx: Context?, id: Int): String {
         return ctx?.resources?.getString(id)
                 ?: when (id) {
-                    R.string.unknown_artist -> "Unknown Artist"
-                    R.string.unknown_album -> "Unknown Album"
-                    R.string.unknown_genre -> "Unknown Genre"
+                    RR.string.unknown_artist -> "Unknown Artist"
+                    RR.string.unknown_album -> "Unknown Album"
+                    RR.string.unknown_genre -> "Unknown Genre"
                     else -> ""
                 }
     }
@@ -418,8 +419,8 @@ object MediaUtils {
                 delay(300)
                 dialog = ProgressDialog.show(
                         context,
-                        "${context.applicationContext.getString(R.string.loading)}…",
-                        context.applicationContext.getString(R.string.please_wait), true)
+                        "${context.applicationContext.getString(RR.string.loading)}…",
+                        context.applicationContext.getString(RR.string.please_wait), true)
                 dialog.setCancelable(true)
                 dialog.setOnCancelListener { actor.trySend(Disconnect) }
             }

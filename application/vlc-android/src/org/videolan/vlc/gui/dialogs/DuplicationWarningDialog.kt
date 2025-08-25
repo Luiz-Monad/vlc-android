@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.databinding.DialogDuplicationWarningBinding
 
@@ -45,13 +46,13 @@ class DuplicationWarningDialog : VLCBottomSheetDialogFragment(), View.OnClickLis
             binding.addAllButton.setOnClickListener(this)
             binding.addNewButton.setOnClickListener(this)
             binding.cancelButton.setOnClickListener(this)
-            setupSecondaryText(R.plurals.duplication_three_options_secondary)
+            setupSecondaryText(RR.plurals.duplication_three_options_secondary)
         } else {
             binding.addNewButton.visibility = View.GONE
-            binding.addAllButton.text = resources.getString(R.string.add_button)
+            binding.addAllButton.text = resources.getString(RR.string.add_button)
             binding.addAllButton.setOnClickListener(this)
             binding.cancelButton.setOnClickListener(this)
-            setupSecondaryText(R.plurals.duplication_two_options_secondary)
+            setupSecondaryText(RR.plurals.duplication_two_options_secondary)
         }
     }
 

@@ -30,6 +30,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.withClip
+import org.videolan.resources.R as RR
 import org.videolan.tools.dp
 import org.videolan.vlc.R
 
@@ -39,10 +40,10 @@ class PlayerProgress : View {
     private val progressPercent: Float
         get() = if (isDouble) value.toFloat() / 200 else value.toFloat() / 100
 
-    private val progressColor = ContextCompat.getColor(context, R.color.white)
-    private val boostColor = ContextCompat.getColor(context, R.color.orange700)
-    private val shadowColor = ContextCompat.getColor(context, R.color.blacktransparent)
-    private val backgroundColor = ContextCompat.getColor(context, R.color.white_transparent_50)
+    private val progressColor = ContextCompat.getColor(context, RR.color.white)
+    private val boostColor = ContextCompat.getColor(context, RR.color.orange700)
+    private val shadowColor = ContextCompat.getColor(context, RR.color.blacktransparent)
+    private val backgroundColor = ContextCompat.getColor(context, RR.color.white_transparent_50)
 
     private val paintProgress = Paint()
     private val paintBackground = Paint()

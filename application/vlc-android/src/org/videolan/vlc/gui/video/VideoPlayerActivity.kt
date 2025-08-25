@@ -88,6 +88,7 @@ import org.videolan.medialibrary.Tools
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.BuildConfig
 import org.videolan.vlc.PlaybackService
@@ -498,8 +499,8 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
         }
 
         bookmarkModel = BookmarkModel.get(this)
-        overlayDelegate.playToPause = AnimatedVectorDrawableCompat.create(this, R.drawable.anim_play_pause_video)!!
-        overlayDelegate.pauseToPlay = AnimatedVectorDrawableCompat.create(this, R.drawable.anim_pause_play_video)!!
+        overlayDelegate.playToPause = AnimatedVectorDrawableCompat.create(this, RR.drawable.anim_play_pause_video)!!
+        overlayDelegate.pauseToPlay = AnimatedVectorDrawableCompat.create(this, RR.drawable.anim_pause_play_video)!!
 
         ViewCompat.getWindowInsetsController(window.decorView)?.let { windowInsetsController ->
             windowInsetsController.systemBarsBehavior =
@@ -916,8 +917,8 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
         }
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
-                videoLayout?.findViewById<FrameLayout>(R.id.player_surface_frame)?.let {
-                    val surfaceView = it.findViewById<SurfaceView>(R.id.surface_video)
+                videoLayout?.findViewById<FrameLayout>(org.videolan.libvlc.R.id.player_surface_frame)?.let {
+                    val surfaceView = it.findViewById<SurfaceView>(org.videolan.libvlc.R.id.surface_video)
                     surfaceView?.let { surface ->
                         val width = service?.currentVideoTrack?.width ?: surface.width
                         val height = service?.currentVideoTrack?.height ?: surface.height
@@ -928,7 +929,7 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
 
                         PixelCopy.request(surface, bitmap, { copyResult ->
                             if (copyResult != 0) {
-                                UiTools.snacker(this@VideoPlayerActivity, R.string.screenshot_error)
+                                UiTools.snacker(this@VideoPlayerActivity, RR.string.screenshot_error)
                                 return@request
                             }
                             val coords = IntArray(2)
@@ -936,7 +937,7 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
                             if (BitmapUtil.saveOnDisk(bitmap, dst.absolutePath))
                                 screenshotDelegate.takeScreenshot(dst, bitmap, coords, surface.width, surface.height)
                             else
-                                UiTools.snacker(this@VideoPlayerActivity, R.string.screenshot_error)
+                                UiTools.snacker(this@VideoPlayerActivity, RR.string.screenshot_error)
                         }, Handler(Looper.getMainLooper()))
                     }
                 }
@@ -1010,7 +1011,7 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
         } else if (lockBackButton) {
             lockBackButton = false
             handler.sendEmptyMessageDelayed(RESET_BACK_LOCK, 2000)
-            Toast.makeText(applicationContext, getString(R.string.back_quit_lock), Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, getString(RR.string.back_quit_lock), Toast.LENGTH_SHORT).show()
         } else if (isPlaylistVisible) {
             overlayDelegate.togglePlaylist()
         } else if (isPlaybackSettingActive) {
@@ -1277,7 +1278,7 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
 
     override fun bookmark() {
         bookmarkModel.addBookmark(this)
-        UiTools.snackerConfirm(this, getString(R.string.bookmark_added), confirmMessage = R.string.show) {
+        UiTools.snackerConfirm(this, getString(RR.string.bookmark_added), confirmMessage = RR.string.show) {
             overlayDelegate.showOverlay()
             overlayDelegate.showBookmarks()
         }
@@ -1543,7 +1544,7 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
         val preferMatchFrameRate =
             settings.getBoolean("video_match_frame_rate", false)
         if (preferMatchFrameRate) {
-            val surfaceView = rootView?.findViewById<View>(R.id.surface_video) as SurfaceView
+            val surfaceView = rootView?.findViewById<View>(org.videolan.libvlc.R.id.surface_video) as SurfaceView
             FrameRateManager(this, service!!).matchFrameRate(surfaceView, window)
         }
     }
@@ -1553,9 +1554,9 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
         /* Encountered Error, exit player with a message */
         alertDialog = AlertDialog.Builder(this@VideoPlayerActivity)
             .setOnCancelListener { exit(RESULT_PLAYBACK_ERROR) }
-            .setPositiveButton(R.string.ok) { _, _ -> exit(RESULT_PLAYBACK_ERROR) }
-            .setTitle(R.string.encountered_error_title)
-            .setMessage(R.string.encountered_error_message)
+            .setPositiveButton(RR.string.ok) { _, _ -> exit(RESULT_PLAYBACK_ERROR) }
+            .setTitle(RR.string.encountered_error_title)
+            .setMessage(RR.string.encountered_error_message)
             .create().apply { show() }
     }
 
@@ -1631,7 +1632,7 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
     //Toast that appears only once
     fun displayWarningToast() {
         warningToast?.cancel()
-        warningToast = Toast.makeText(application, R.string.audio_boost_warning, Toast.LENGTH_SHORT).apply {
+        warningToast = Toast.makeText(application, RR.string.audio_boost_warning, Toast.LENGTH_SHORT).apply {
             setGravity(Gravity.LEFT or Gravity.BOTTOM, 16.dp, 0)
             show()
         }
@@ -1679,7 +1680,7 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
 
     private fun updateMute() {
         mute(!isMute)
-        overlayDelegate.showInfo(if (isMute) R.string.sound_off else R.string.sound_on, 1000)
+        overlayDelegate.showInfo(if (isMute) RR.string.sound_off else RR.string.sound_on, 1000)
     }
 
     internal fun changeBrightness(delta: Float) {
@@ -2130,11 +2131,11 @@ open class VideoPlayerActivity : AppCompatActivity(), PlaybackService.Callback, 
         alertDialog = AlertDialog.Builder(this@VideoPlayerActivity)
                 .setTitle(confirmation.title)
                 .setView(dialogView)
-                .setPositiveButton(R.string.resume) { _, _ ->
+                .setPositiveButton(RR.string.resume) { _, _ ->
                     if (resumeAllCheck.isChecked) service?.playlistManager?.videoResumeStatus = VideoResumeStatus.ALWAYS
                     lifecycleScope.launch { service?.playlistManager?.playIndex(confirmation.index, confirmation.flags, forceResume = true) }
                 }
-                .setNegativeButton(R.string.no) { _, _ ->
+                .setNegativeButton(RR.string.no) { _, _ ->
                     if (resumeAllCheck.isChecked) service?.playlistManager?.videoResumeStatus = VideoResumeStatus.NEVER
                     lifecycleScope.launch { service?.playlistManager?.playIndex(confirmation.index, confirmation.flags, forceRestart = true) }
                 }

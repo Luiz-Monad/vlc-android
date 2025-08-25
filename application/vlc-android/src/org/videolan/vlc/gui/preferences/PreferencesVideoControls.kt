@@ -27,6 +27,7 @@ import android.os.Bundle
 import androidx.preference.Preference
 import org.videolan.libvlc.util.AndroidUtil
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.video.VideoPlayerActivity
@@ -35,7 +36,7 @@ class PreferencesVideoControls : BasePreferenceFragment(), SharedPreferences.OnS
 
     override fun getXml() = R.xml.preferences_video_controls
 
-    override fun getTitleId() = R.string.controls_prefs_category
+    override fun getTitleId() = RR.string.controls_prefs_category
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,15 +50,15 @@ class PreferencesVideoControls : BasePreferenceFragment(), SharedPreferences.OnS
         findPreference<Preference>(ENABLE_VOLUME_GESTURE)?.isVisible = AndroidDevices.hasTsp
         findPreference<Preference>(ENABLE_BRIGHTNESS_GESTURE)?.isVisible = AndroidDevices.hasTsp
         findPreference<Preference>(POPUP_KEEPSCREEN)?.isVisible = !AndroidDevices.isAndroidTv && !AndroidUtil.isOOrLater
-        findPreference<Preference>(KEY_VIDEO_DOUBLE_TAP_JUMP_DELAY)?.title = getString(if (AndroidDevices.isAndroidTv) R.string.video_key_jump_delay else R.string.video_double_tap_jump_delay)
+        findPreference<Preference>(KEY_VIDEO_DOUBLE_TAP_JUMP_DELAY)?.title = getString(if (AndroidDevices.isAndroidTv) RR.string.video_key_jump_delay else RR.string.video_double_tap_jump_delay)
         updateHudTimeoutSummary()
 
     }
 
     private fun updateHudTimeoutSummary() {
         when (Settings.videoHudDelay) {
-            -1 -> findPreference<Preference>(VIDEO_HUD_TIMEOUT)?.summary = getString(R.string.timeout_infinite)
-            else -> findPreference<Preference>(VIDEO_HUD_TIMEOUT)?.summary =  getString(R.string.video_hud_timeout_summary, Settings.videoHudDelay.toString())
+            -1 -> findPreference<Preference>(VIDEO_HUD_TIMEOUT)?.summary = getString(RR.string.timeout_infinite)
+            else -> findPreference<Preference>(VIDEO_HUD_TIMEOUT)?.summary =  getString(RR.string.video_hud_timeout_summary, Settings.videoHudDelay.toString())
         }
     }
 

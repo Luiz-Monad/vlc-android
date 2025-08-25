@@ -59,6 +59,7 @@ import kotlinx.coroutines.flow.onEach
 import org.videolan.medialibrary.Tools
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.*
+import org.videolan.resources.R as RR
 import org.videolan.tools.*
 import org.videolan.vlc.PlaybackService
 import org.videolan.vlc.R
@@ -128,7 +129,7 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
         playlistModel = PlaylistModel.get(this)
         playlistModel.service?.let {
             if (!it.isVideoPlaying && it.videoTracksCount > 0)
-                UiTools.snacker(requireActivity(), R.string.return_to_video)
+                UiTools.snacker(requireActivity(), RR.string.return_to_video)
         }
         playlistModel.progress.observe(this@AudioPlayer) { it?.let { updateProgress(it) } }
         playlistModel.speed.observe(this@AudioPlayer) { showChips() }
@@ -190,10 +191,10 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
         binding.timeline.setOnSeekBarChangeListener(timelineListener)
 
         //For resizing purpose, we have to cache this twice even if it's from the same resource
-        playToPause = AnimatedVectorDrawableCompat.create(requireActivity(), R.drawable.anim_play_pause_video)!!
-        pauseToPlay = AnimatedVectorDrawableCompat.create(requireActivity(), R.drawable.anim_pause_play_video)!!
-        playToPauseSmall = AnimatedVectorDrawableCompat.create(requireActivity(), R.drawable.anim_play_pause_video)!!
-        pauseToPlaySmall = AnimatedVectorDrawableCompat.create(requireActivity(), R.drawable.anim_pause_play_video)!!
+        playToPause = AnimatedVectorDrawableCompat.create(requireActivity(), RR.drawable.anim_play_pause_video)!!
+        pauseToPlay = AnimatedVectorDrawableCompat.create(requireActivity(), RR.drawable.anim_pause_play_video)!!
+        playToPauseSmall = AnimatedVectorDrawableCompat.create(requireActivity(), RR.drawable.anim_play_pause_video)!!
+        pauseToPlaySmall = AnimatedVectorDrawableCompat.create(requireActivity(), RR.drawable.anim_pause_play_video)!!
         onSlide(0f)
         abRepeatAddMarker = binding.abRepeatContainer.findViewById<Button>(R.id.ab_repeat_add_marker)
         playlistModel.service?.playlistManager?.abRepeat?.observe(viewLifecycleOwner) { abvalues ->
@@ -305,7 +306,7 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
                 }
                 CTX_REMOVE_FROM_PLAYLIST -> view?.let {
                     val mw = playlistAdapter.getItem(position)
-                    val message = String.format(getString(R.string.remove_playlist_item), mw.title)
+                    val message = String.format(getString(RR.string.remove_playlist_item), mw.title)
                     UiTools.snackerWithCancel(requireActivity(), message, true, { })  {
                         playlistModel.insertMedia(position, mw)
                     }
@@ -341,8 +342,8 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
         binding.audioMediaSwitcher.updateMedia(playlistModel.service)
         binding.coverMediaSwitcher.updateMedia(playlistModel.service)
         playlistModel.service?.currentMediaWrapper?.let {
-            binding.audioMediaSwitcher.contentDescription = getString(R.string.talkback_audio_player,TalkbackUtil.getAudioTrack(requireActivity(), it))
-            binding.trackInfoContainer?.contentDescription = getString(R.string.talkback_audio_player,TalkbackUtil.getAudioTrack(requireActivity(), it))
+            binding.audioMediaSwitcher.contentDescription = getString(RR.string.talkback_audio_player,TalkbackUtil.getAudioTrack(requireActivity(), it))
+            binding.trackInfoContainer?.contentDescription = getString(RR.string.talkback_audio_player,TalkbackUtil.getAudioTrack(requireActivity(), it))
         }
 
         val chapter = playlistModel.service?.getCurrentChapter(true)
@@ -356,8 +357,8 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
 
         binding.audioRewindText.text = "${Settings.audioJumpDelay}"
         binding.audioForwardText.text = "${Settings.audioJumpDelay}"
-        binding.audioForward10.contentDescription = getString(R.string.talkback_action_forward, Settings.audioJumpDelay.toString())
-        binding.audioRewind10.contentDescription = getString(R.string.talkback_action_rewind, Settings.audioJumpDelay.toString())
+        binding.audioForward10.contentDescription = getString(RR.string.talkback_action_forward, Settings.audioJumpDelay.toString())
+        binding.audioRewind10.contentDescription = getString(RR.string.talkback_action_rewind, Settings.audioJumpDelay.toString())
         updateBackground()
     }
 
@@ -365,7 +366,7 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
     private fun updatePlayPause() {
         val ctx = context ?: return
         val playing = playlistModel.playing
-        val text = ctx.getString(if (playing) R.string.pause else R.string.play)
+        val text = ctx.getString(if (playing) RR.string.pause else RR.string.play)
 
         val drawable = if (playing) playToPause else pauseToPlay
         val drawableSmall = if (playing) playToPauseSmall else pauseToPlaySmall
@@ -391,8 +392,8 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
         val shuffling = playlistModel.shuffling
         if (wasShuffling == shuffling) return
         shuffleButtons.forEach {
-            it.setImageResource(if (shuffling) R.drawable.ic_shuffle_on else R.drawable.ic_shuffle_audio)
-            it.contentDescription = ctx.getString(if (shuffling) R.string.shuffle_on else R.string.shuffle)
+            it.setImageResource(if (shuffling) RR.drawable.ic_shuffle_on else RR.drawable.ic_shuffle_audio)
+            it.contentDescription = ctx.getString(if (shuffling) RR.string.shuffle_on else RR.string.shuffle)
         }
         wasShuffling = shuffling
     }
@@ -405,20 +406,20 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
         when (repeatType) {
             PlaybackStateCompat.REPEAT_MODE_ONE -> {
                 arrayOf(binding.repeat, binding.headerRepeat).forEach {
-                    it.setImageResource(R.drawable.ic_repeat_one_audio)
-                    it.contentDescription = ctx.getString(R.string.repeat_single)
+                    it.setImageResource(RR.drawable.ic_repeat_one_audio)
+                    it.contentDescription = ctx.getString(RR.string.repeat_single)
                 }
             }
             PlaybackStateCompat.REPEAT_MODE_ALL -> {
                 arrayOf(binding.repeat, binding.headerRepeat).forEach {
-                    it.setImageResource(R.drawable.ic_repeat_all_audio)
-                    it.contentDescription = ctx.getString(R.string.repeat_all)
+                    it.setImageResource(RR.drawable.ic_repeat_all_audio)
+                    it.contentDescription = ctx.getString(RR.string.repeat_all)
                 }
             }
             else -> {
                 arrayOf(binding.repeat, binding.headerRepeat).forEach {
-                    it.setImageResource(R.drawable.ic_repeat_audio)
-                    it.contentDescription = ctx.getString(R.string.repeat)
+                    it.setImageResource(RR.drawable.ic_repeat_audio)
+                    it.contentDescription = ctx.getString(RR.string.repeat)
                 }
             }
         }
@@ -464,40 +465,40 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
                 val progressTimeDescription =  TalkbackUtil.millisToString(requireActivity(), if (showRemainingTime && totalTime > 0) totalTime - progressTime else progressTime)
                 val currentProgressText = if (progressTimeText.isNullOrEmpty()) "0:00" else progressTimeText
 
-                val textTrack = getString(R.string.track_index, "${playlistModel.currentMediaPosition + 1} / ${medias.size}")
-                val textTrackDescription = getString(R.string.talkback_track_index, "${playlistModel.currentMediaPosition + 1}", "${medias.size}")
+                val textTrack = getString(RR.string.track_index, "${playlistModel.currentMediaPosition + 1} / ${medias.size}")
+                val textTrackDescription = getString(RR.string.talkback_track_index, "${playlistModel.currentMediaPosition + 1}", "${medias.size}")
 
                 val textProgress = if (audioPlayProgressMode) {
                     val endsAt = System.currentTimeMillis() + totalTime - progressTime
                     if ((lastEndsAt - endsAt).absoluteValue > 1) lastEndsAt = endsAt
                     getString(
-                            R.string.audio_queue_progress_finished,
+                            RR.string.audio_queue_progress_finished,
                             getTimeInstance(java.text.DateFormat.MEDIUM).format(lastEndsAt)
                     )
                 } else
                     if (showRemainingTime && totalTime > 0) getString(
-                            R.string.audio_queue_progress_remaining,
+                            RR.string.audio_queue_progress_remaining,
                             currentProgressText
                     )
                     else getString(
-                            R.string.audio_queue_progress,
+                            RR.string.audio_queue_progress,
                             if (totalTimeText.isNullOrEmpty()) currentProgressText else "$currentProgressText / $totalTimeText"
                     )
                 val textDescription = if (audioPlayProgressMode) {
                     val endsAt = System.currentTimeMillis() + totalTime - progressTime
                     if ((lastEndsAt - endsAt).absoluteValue > 1) lastEndsAt = endsAt
                     getString(
-                            R.string.audio_queue_progress_finished,
+                            RR.string.audio_queue_progress_finished,
                             getTimeInstance(java.text.DateFormat.MEDIUM).format(lastEndsAt)
                     )
                 } else
                     if (showRemainingTime && totalTime > 0) getString(
-                            R.string.audio_queue_progress_remaining,
+                            RR.string.audio_queue_progress_remaining,
                             progressTimeDescription
                     )
                     else getString(
-                            R.string.audio_queue_progress,
-                            if (totalTimeText.isNullOrEmpty()) progressTimeDescription else getString(R.string.talkback_out_of, progressTimeDescription, totalTimeDescription)
+                            RR.string.audio_queue_progress,
+                            if (totalTimeText.isNullOrEmpty()) progressTimeDescription else getString(RR.string.talkback_out_of, progressTimeDescription, totalTimeDescription)
                     )
                 Pair("$textTrack  ${TextUtils.separator}  $textProgress", "$textTrackDescription. $textDescription")
             }
@@ -557,13 +558,13 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
             if (position > service.length) position = service.length
             service.seek(position, service.length.toDouble(), true)
             if (service.playlistManager.player.lastPosition == 0.0f && (forward || service.getTime() > 0))
-                UiTools.snacker(requireActivity(), getString(R.string.unseekable_stream))
+                UiTools.snacker(requireActivity(), getString(RR.string.unseekable_stream))
         }
     }
 
     fun onPlayPauseClick(@Suppress("UNUSED_PARAMETER") view: View?) {
         if (playlistModel.service?.isPausable == false) {
-            UiTools.snackerConfirm(requireActivity(), getString(R.string.stop_unpaubale), true) {
+            UiTools.snackerConfirm(requireActivity(), getString(RR.string.stop_unpaubale), true) {
                 playlistModel.stop()
             }
             return
@@ -579,11 +580,11 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
     }
 
     fun onNextClick(@Suppress("UNUSED_PARAMETER") view: View?) {
-        if (!playlistModel.next()) UiTools.snacker(requireActivity(), R.string.lastsong, true)
+        if (!playlistModel.next()) UiTools.snacker(requireActivity(), RR.string.lastsong, true)
     }
 
     fun onPreviousClick(@Suppress("UNUSED_PARAMETER") view: View?) {
-        if (!playlistModel.previous()) UiTools.snacker(requireActivity(),  R.string.firstsong)
+        if (!playlistModel.previous()) UiTools.snacker(requireActivity(),  RR.string.firstsong)
     }
 
     fun onRepeatClick(@Suppress("UNUSED_PARAMETER") view: View) {
@@ -824,7 +825,7 @@ class AudioPlayer : Fragment(), PlaylistAdapter.IPlayer, TextWatcher, IAudioPlay
             if (playlistModel.videoTrackCount > 0) onResumeToVideoClick()
             else {
                 requireActivity().copy("VLC - song name", trackInfo)
-                UiTools.snacker(requireActivity(), R.string.track_info_copied_to_clipboard)
+                UiTools.snacker(requireActivity(), RR.string.track_info_copied_to_clipboard)
             }
         }
 

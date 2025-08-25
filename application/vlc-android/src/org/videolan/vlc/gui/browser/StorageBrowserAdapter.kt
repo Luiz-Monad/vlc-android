@@ -37,6 +37,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.medialibrary.media.Storage
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.containsPath
 import org.videolan.tools.removeFileScheme
 import org.videolan.vlc.MediaParsingService
@@ -123,7 +124,7 @@ class StorageBrowserAdapter(browserContainer: BrowserContainer<MediaLibraryItem>
         }
 
         bindingContainer.banIcon.animate().alpha(alpha)
-        bindingContainer.banIcon.setImageDrawable( ContextCompat.getDrawable(context, if (banned || bannedParent) R.drawable.ic_banned else R.drawable.ic_ban))
+        bindingContainer.banIcon.setImageDrawable( ContextCompat.getDrawable(context, if (banned || bannedParent) RR.drawable.ic_banned else RR.drawable.ic_ban))
     }
 
     override fun onViewRecycled(holder: ViewHolder<ViewDataBinding>) {

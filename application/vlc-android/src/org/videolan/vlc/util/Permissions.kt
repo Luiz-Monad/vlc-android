@@ -46,6 +46,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.resources.AndroidDevices
 import org.videolan.resources.AppContextProvider
 import org.videolan.resources.SCHEME_PACKAGE
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.isExternalStorageManager
 import org.videolan.tools.Settings
 import org.videolan.tools.isCallable
@@ -182,16 +183,16 @@ object Permissions {
 
     private fun createDialog(activity: FragmentActivity, exit: Boolean): Dialog {
         val dialogBuilder = android.app.AlertDialog.Builder(activity)
-                .setTitle(activity.getString(R.string.allow_storage_access_title))
-                .setMessage(activity.getString(R.string.allow_storage_access_description))
-                .setIcon(R.drawable.ic_warning)
-                .setPositiveButton(activity.getString(R.string.permission_ask_again)) { _, _ ->
+                .setTitle(activity.getString(RR.string.allow_storage_access_title))
+                .setMessage(activity.getString(RR.string.allow_storage_access_description))
+                .setIcon(RR.drawable.ic_warning)
+                .setPositiveButton(activity.getString(RR.string.permission_ask_again)) { _, _ ->
                     val settings = Settings.getInstance(activity)
                         activity.requestStoragePermission()
                     settings.putSingle("user_declined_storage_access", true)
                 }
         if (exit) {
-            dialogBuilder.setNegativeButton(activity.getString(R.string.exit_app)) { _, _ -> activity.finish() }
+            dialogBuilder.setNegativeButton(activity.getString(RR.string.exit_app)) { _, _ -> activity.finish() }
                     .setCancelable(false)
         }
         return dialogBuilder.show()
@@ -205,12 +206,12 @@ object Permissions {
      */
     private fun createExternalManagerDialog(activity: FragmentActivity, listener: (boolean: Boolean) -> Unit): Dialog {
         val dialogBuilder = android.app.AlertDialog.Builder(activity)
-                .setTitle(activity.getString(R.string.allow_storage_manager_title))
-                .setMessage(activity.getString(R.string.allow_storage_manager_description, activity.getString(R.string.allow_storage_manager_explanation)))
-                .setIcon(R.drawable.ic_warning)
-                .setPositiveButton(activity.getString(R.string.ok)) { _, _ ->
+                .setTitle(activity.getString(RR.string.allow_storage_manager_title))
+                .setMessage(activity.getString(RR.string.allow_storage_manager_description, activity.getString(RR.string.allow_storage_manager_explanation)))
+                .setIcon(RR.drawable.ic_warning)
+                .setPositiveButton(activity.getString(RR.string.ok)) { _, _ ->
                     listener.invoke(true)
-                }.setNegativeButton(activity.getString(R.string.cancel)) { _, _ ->
+                }.setNegativeButton(activity.getString(RR.string.cancel)) { _, _ ->
                     activity.finish()
                     listener.invoke(false)
                 }
@@ -226,16 +227,16 @@ object Permissions {
 
     private fun createDialogCompat(activity: FragmentActivity, exit: Boolean): Dialog {
         val dialogBuilder = AlertDialog.Builder(activity)
-                .setTitle(activity.getString(R.string.allow_storage_access_title))
-                .setMessage(activity.getString(R.string.allow_storage_access_description))
-                .setIcon(R.drawable.ic_warning)
-                .setPositiveButton(activity.getString(R.string.permission_ask_again)) { _, _ ->
+                .setTitle(activity.getString(RR.string.allow_storage_access_title))
+                .setMessage(activity.getString(RR.string.allow_storage_access_description))
+                .setIcon(RR.drawable.ic_warning)
+                .setPositiveButton(activity.getString(RR.string.permission_ask_again)) { _, _ ->
                     val settings = Settings.getInstance(activity)
                         activity.requestStoragePermission()
                     settings.putSingle("user_declined_storage_access", true)
                 }
         if (exit) {
-            dialogBuilder.setNegativeButton(activity.getString(R.string.exit_app)) { _, _ -> activity.finish() }
+            dialogBuilder.setNegativeButton(activity.getString(RR.string.exit_app)) { _, _ -> activity.finish() }
                     .setCancelable(false)
         }
         return dialogBuilder.show().apply {
@@ -266,21 +267,21 @@ object Permissions {
         var action = android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS
         when (mode) {
             PERMISSION_SYSTEM_RINGTONE -> {
-                titleId = R.string.allow_settings_access_ringtone_title
-                textId = R.string.allow_settings_access_ringtone_description
+                titleId = RR.string.allow_settings_access_ringtone_title
+                textId = RR.string.allow_settings_access_ringtone_description
             }
             PERMISSION_SYSTEM_BRIGHTNESS -> {
-                titleId = R.string.allow_settings_access_brightness_title
-                textId = R.string.allow_settings_access_brightness_description
+                titleId = RR.string.allow_settings_access_brightness_title
+                textId = RR.string.allow_settings_access_brightness_description
             }
             PERMISSION_SYSTEM_DRAW_OVRLAYS -> {
-                titleId = R.string.allow_draw_overlays_title
-                textId = R.string.allow_sdraw_overlays_description
+                titleId = RR.string.allow_draw_overlays_title
+                textId = RR.string.allow_sdraw_overlays_description
                 action = android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION
             }
             PERMISSION_PIP -> {
-                titleId = R.string.allow_pip
-                textId = R.string.allow_pip_description
+                titleId = RR.string.allow_pip
+                textId = RR.string.allow_pip_description
                 action = "android.settings.PICTURE_IN_PICTURE_SETTINGS"
             }
         }
@@ -288,8 +289,8 @@ object Permissions {
         val dialogBuilder = AlertDialog.Builder(activity)
                 .setTitle(activity.getString(titleId))
                 .setMessage(activity.getString(textId))
-                .setIcon(R.drawable.ic_warning)
-                .setPositiveButton(activity.getString(R.string.permission_ask_again)) { _, _ ->
+                .setIcon(RR.drawable.ic_warning)
+                .setPositiveButton(activity.getString(RR.string.permission_ask_again)) { _, _ ->
                     val settings = Settings.getInstance(activity)
                     val i = Intent(finalAction)
                     i.data = Uri.fromParts(SCHEME_PACKAGE, activity.packageName, null)

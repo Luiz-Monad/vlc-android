@@ -33,6 +33,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.leanback.graphics.ColorOverlayDimmer
 import org.videolan.television.databinding.TvVideoDetailsBinding
 import org.videolan.television.R
+import org.videolan.resources.R as RR
 
 class VideoDetailsPresenter(private val context: Context, private val screenWidth: Int) : org.videolan.television.ui.FullWidthRowPresenter() {
 
@@ -40,7 +41,7 @@ class VideoDetailsPresenter(private val context: Context, private val screenWidt
 
     override fun createRowViewHolder(parent: ViewGroup): VideoDetailsViewHolder {
         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.tv_video_details, parent, false)
-        binding.container.minWidth = (screenWidth - (context.resources.getDimension(R.dimen.tv_overscan_horizontal) * 2)).toInt()
+        binding.container.minWidth = (screenWidth - (context.resources.getDimension(RR.dimen.tv_overscan_horizontal) * 2)).toInt()
 
         return VideoDetailsViewHolder(binding.root)
     }

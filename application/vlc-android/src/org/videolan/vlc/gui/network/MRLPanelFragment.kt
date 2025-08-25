@@ -38,6 +38,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.videolan.medialibrary.MLServiceLocator
+import org.videolan.resources.R as RR
 import org.videolan.tools.Settings
 import org.videolan.tools.isValidUrl
 import org.videolan.tools.setVisible
@@ -81,14 +82,14 @@ class MRLPanelFragment : BaseFragment(), View.OnKeyListener, TextView.OnEditorAc
             val gridLayoutManager = GridLayoutManager(activity, 2)
             recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                    outRect.left = resources.getDimension(R.dimen.kl_half).toInt()
-                    outRect.right = resources.getDimension(R.dimen.kl_half).toInt()
+                    outRect.left = resources.getDimension(RR.dimen.kl_half).toInt()
+                    outRect.right = resources.getDimension(RR.dimen.kl_half).toInt()
                     super.getItemOffsets(outRect, view, parent, state)
                 }
             })
             recyclerView.layoutManager = gridLayoutManager
-            val horizontalOverscan = resources.getDimension(R.dimen.tv_overscan_horizontal).toInt()
-            val verticalOverscan = resources.getDimension(R.dimen.tv_overscan_vertical).toInt()
+            val horizontalOverscan = resources.getDimension(RR.dimen.tv_overscan_horizontal).toInt()
+            val verticalOverscan = resources.getDimension(RR.dimen.tv_overscan_vertical).toInt()
             binding.mrlRoot.setPadding(horizontalOverscan, verticalOverscan, horizontalOverscan, verticalOverscan)
         } else {
             recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -133,7 +134,7 @@ class MRLPanelFragment : BaseFragment(), View.OnKeyListener, TextView.OnEditorAc
         super.onStart()
         viewModel.refresh()
         (activity as? ContentActivity)?.setTabLayoutVisibility(false)
-        (activity as? AppCompatActivity)?.supportActionBar?.setTitle(R.string.streams)
+        (activity as? AppCompatActivity)?.supportActionBar?.setTitle(RR.string.streams)
     }
 
     override fun onKey(v: View, keyCode: Int, event: KeyEvent) = (keyCode == EditorInfo.IME_ACTION_DONE ||

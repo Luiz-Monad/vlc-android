@@ -24,6 +24,7 @@
 package org.videolan.vlc.gui.dialogs
 
 import org.videolan.vlc.R
+import org.videolan.resources.R as RR
 
 class JumpToTimeDialog : PickTimeFragment() {
 
@@ -37,7 +38,7 @@ class JumpToTimeDialog : PickTimeFragment() {
     }
 
     override fun getTitle(): Int {
-        return R.string.jump_to_time
+        return RR.string.jump_to_time
     }
 
     companion object {

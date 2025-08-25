@@ -33,6 +33,7 @@ import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.DummyItem
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.livedata.LiveDataset
 import org.videolan.vlc.ExternalMonitor
 import org.videolan.vlc.R
@@ -61,8 +62,8 @@ open class FileBrowserProvider(
     override suspend fun browseRootImpl() {
         loading.postValue(true)
         var storageAccess = false
-        val internalmemoryTitle = context.getString(R.string.internal_memory)
-        val browserStorage = context.getString(R.string.browser_storages)
+        val internalmemoryTitle = context.getString(RR.string.internal_memory)
+        val browserStorage = context.getString(RR.string.browser_storages)
         val storages = DirectoryRepository.getInstance(context).getMediaDirectories()
         val devices = mutableListOf<MediaLibraryItem>()
         if (!filePicker && showDummyCategory) devices.add(DummyItem(browserStorage))
@@ -94,7 +95,7 @@ open class FileBrowserProvider(
         }
         if (AndroidUtil.isLolliPopOrLater && !ExternalMonitor.devices.isEmpty()) {
             val otg = MLServiceLocator.getAbstractMediaWrapper("otg://".toUri()).apply {
-                title = context.getString(R.string.otg_device_title)
+                title = context.getString(RR.string.otg_device_title)
                 type = MediaWrapper.TYPE_DIR
             }
             otgPosition = devices.size
@@ -172,7 +173,7 @@ open class FileBrowserProvider(
             }
         } else if (otgPosition == -1) {
             val otg = MLServiceLocator.getAbstractMediaWrapper("otg://".toUri()).apply {
-                title = context.getString(R.string.otg_device_title)
+                title = context.getString(RR.string.otg_device_title)
                 type = MediaWrapper.TYPE_DIR
             }
             otgPosition = storagePosition+1

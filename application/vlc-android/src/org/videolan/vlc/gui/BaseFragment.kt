@@ -19,6 +19,7 @@ import kotlinx.coroutines.delay
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
 import org.videolan.medialibrary.media.MediaLibraryItem
 import org.videolan.resources.TAG_ITEM
+import org.videolan.resources.R as RR
 import org.videolan.tools.setGone
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.browser.KEY_IN_MEDIALIB
@@ -56,7 +57,7 @@ abstract class BaseFragment : Fragment(), ActionMode.Callback {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<SwipeRefreshLayout>(R.id.swipeLayout)?.let {
             swipeRefreshLayout = it
-            val a: TypedArray = requireActivity().obtainStyledAttributes(TypedValue().data, intArrayOf(R.attr.colorPrimary, R.attr.swipe_refresh_background))
+            val a: TypedArray = requireActivity().obtainStyledAttributes(TypedValue().data, intArrayOf(android.R.attr.colorPrimary, RR.attr.swipe_refresh_background))
             val color = a.getColor(0, 0)
             val bColor = a.getColor(1, Color.WHITE)
             a.recycle()

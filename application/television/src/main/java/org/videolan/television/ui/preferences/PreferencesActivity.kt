@@ -27,6 +27,7 @@ import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import org.videolan.vlc.R as BR
 import org.videolan.television.R
 import org.videolan.television.ui.browser.BaseTvActivity
 import org.videolan.tools.RESULT_RESTART
@@ -57,7 +58,7 @@ class PreferencesActivity : BaseTvActivity() {
         val pref = Settings.getInstance(this)
         val enableBlackTheme = pref.getBoolean("enable_black_theme", false)
         if (enableBlackTheme) {
-            setTheme(R.style.Theme_VLC_Black)
+            setTheme(BR.style.Theme_VLC_Black)
         }
     }
 

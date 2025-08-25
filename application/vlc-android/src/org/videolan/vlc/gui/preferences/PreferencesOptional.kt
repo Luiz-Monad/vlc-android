@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
+import org.videolan.resources.R as RR
 import org.videolan.vlc.R
 import org.videolan.vlc.gui.dialogs.FeatureFlagWarningDialog
 import org.videolan.vlc.gui.dialogs.RenameDialog
@@ -41,7 +42,7 @@ class PreferencesOptional : BasePreferenceFragment(), SharedPreferences.OnShared
     override fun getXml() = R.xml.preferences_optional
 
     override fun getTitleId(): Int {
-        return R.string.optional_features
+        return RR.string.optional_features
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +73,7 @@ class PreferencesOptional : BasePreferenceFragment(), SharedPreferences.OnShared
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         val enabled = findPreference<CheckBoxPreference>(key)!!.isChecked
         FeatureFlagManager.getByKey(key)?.let { FeatureFlagManager.enable(requireActivity(), it, enabled) }
-//        if (enabled) UiTools.snacker(requireActivity(), getString(R.string.optional_features_warning))
+//        if (enabled) UiTools.snacker(requireActivity(), getString(RR.string.optional_features_warning))
     }
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {

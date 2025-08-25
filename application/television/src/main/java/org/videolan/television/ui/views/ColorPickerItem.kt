@@ -33,8 +33,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import org.videolan.resources.R
 import org.videolan.tools.dp
-import org.videolan.vlc.R
 
 /**
  * Custom view showing a color item. The color is drawn on the view canvas and the view i selectable
@@ -94,7 +94,7 @@ class ColorPickerItem @JvmOverloads constructor(
      *
      * @param canvas the view's [Canvas]
      */
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas?.drawCircle(width.toFloat() / 2, height.toFloat() / 2, (width.toFloat() / 2) - 4.dp, outerPaint)
         canvas?.drawCircle(width.toFloat() / 2, height.toFloat() / 2, (width.toFloat() / 2) - 5.dp, paint)

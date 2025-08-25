@@ -42,6 +42,7 @@ import androidx.window.layout.FoldingFeature
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.videolan.resources.R as RR
 import org.videolan.tools.AUDIO_HINGE_ON_RIGHT
 import org.videolan.tools.Settings
 import org.videolan.tools.dp
@@ -74,7 +75,7 @@ internal class AudioPlayerAnimator : IAudioPlayerAnimator, LifecycleObserver {
         headerShowPlaylistConstraint.clone(binding.header)
         headerHidePlaylistConstraint.clone(binding.header)
         headerHidePlaylistLandscapeConstraint.clone(binding.header)
-        defaultBackgroundId = UiTools.getResourceFromAttribute(requireActivity(), R.attr.background_default)
+        defaultBackgroundId = UiTools.getResourceFromAttribute(requireActivity(), RR.attr.background_default)
         lifecycle.addObserver(this@AudioPlayerAnimator)
         initConstraintSets()
     }
@@ -108,9 +109,9 @@ internal class AudioPlayerAnimator : IAudioPlayerAnimator, LifecycleObserver {
             field = value
 
             onSlide(1F)
-            binding.playlistSwitch.setImageResource(if (showCover) R.drawable.ic_playlist_audio else R.drawable.ic_playlist_audio_on)
-            binding.playlistSwitch.contentDescription = audioPlayer.getString(if (showCover) R.string.hide_playlist else R.string.show_playlist)
-            binding.playlistSwitch.announceForAccessibility(audioPlayer.getString(if (showCover) R.string.hide_playlist else R.string.show_playlist))
+            binding.playlistSwitch.setImageResource(if (showCover) RR.drawable.ic_playlist_audio else RR.drawable.ic_playlist_audio_on)
+            binding.playlistSwitch.contentDescription = audioPlayer.getString(if (showCover) RR.string.hide_playlist else RR.string.show_playlist)
+            binding.playlistSwitch.announceForAccessibility(audioPlayer.getString(if (showCover) RR.string.hide_playlist else RR.string.show_playlist))
             audioPlayer.setBottomMargin()
         }
 
@@ -225,7 +226,7 @@ internal class AudioPlayerAnimator : IAudioPlayerAnimator, LifecycleObserver {
                 val blurredCover = withContext(Dispatchers.IO) { UiTools.blurBitmap(AudioUtil.readCoverBitmap(Uri.decode(mw.artworkMrl), width)) }
                 if (blurredCover !== null) {
                     val activity = audioPlayer.activity as? AudioPlayerContainerActivity ?: return
-                    binding.backgroundView.setColorFilter(UiTools.getColorFromAttribute(activity, R.attr.audio_player_background_tint))
+                    binding.backgroundView.setColorFilter(UiTools.getColorFromAttribute(activity, RR.attr.audio_player_background_tint))
                     binding.backgroundView.setImageBitmap(blurredCover)
                     binding.backgroundView.visibility = View.VISIBLE
                 } else setDefaultBackground()

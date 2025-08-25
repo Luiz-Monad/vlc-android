@@ -50,9 +50,9 @@ import org.videolan.tools.NetworkMonitor
 import org.videolan.tools.PLAYBACK_HISTORY
 import org.videolan.tools.Settings
 import org.videolan.tools.getContextWithLocale
+import org.videolan.resources.R
 import org.videolan.vlc.ExternalMonitor
 import org.videolan.vlc.PlaybackService
-import org.videolan.vlc.R
 import org.videolan.vlc.gui.DialogActivity
 import org.videolan.vlc.gui.helpers.hf.StoragePermissionsDelegate.Companion.askStoragePermission
 import org.videolan.vlc.media.MediaUtils

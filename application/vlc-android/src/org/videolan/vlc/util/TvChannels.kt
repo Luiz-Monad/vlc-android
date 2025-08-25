@@ -35,6 +35,7 @@ import androidx.tvprovider.media.tv.WatchNextProgram
 import kotlinx.coroutines.*
 import org.videolan.medialibrary.interfaces.Medialibrary
 import org.videolan.medialibrary.interfaces.media.MediaWrapper
+import org.videolan.resources.R as RR
 import org.videolan.resources.util.getFromMl
 import org.videolan.tools.AppScope
 import org.videolan.tools.Settings
@@ -51,8 +52,8 @@ private const val MAX_RECOMMENDATIONS = 3
 fun setChannel(context: Context) = GlobalScope.launch(start = CoroutineStart.UNDISPATCHED) {
     val channelId = withContext(Dispatchers.IO) {
         val prefs = Settings.getInstance(context)
-        val name = context.getString(R.string.tv_my_new_videos)
-        createOrUpdateChannel(prefs, context, name, R.drawable.ic_channel_icon)
+        val name = context.getString(RR.string.tv_my_new_videos)
+        createOrUpdateChannel(prefs, context, name, RR.drawable.ic_channel_icon)
     }
     if (Permissions.canReadStorage(context)) updatePrograms(context, channelId)
 }
@@ -323,7 +324,7 @@ private suspend fun MediaWrapper.artUri() : Uri {
         withContext(Dispatchers.IO) { ThumbnailsProvider.getVideoThumbnail(this@artUri, 512) }
     }
 
-    val resourceUri = "android.resource://${BuildConfig.APP_ID}/${R.drawable.tv_channel_default}".toUri()
+    val resourceUri = "android.resource://${BuildConfig.APP_ID}/${RR.drawable.tv_channel_default}".toUri()
 
     val mrl = artworkMrl ?: return resourceUri
     return try {

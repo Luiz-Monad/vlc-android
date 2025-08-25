@@ -42,6 +42,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Guideline
 import org.videolan.resources.AndroidDevices
+import org.videolan.resources.R as RR
 import org.videolan.tools.dp
 import org.videolan.tools.setGone
 import org.videolan.vlc.R
@@ -207,7 +208,7 @@ class SwipeToUnlockView : ConstraintLayout {
     }
 
     private fun updateText() {
-        currentText = if (!isDPADAllowed || !AndroidDevices.isTv) context.getString(R.string.swipe_unlock) else context.getString(R.string.swipe_unlock_no_touch)
+        currentText = if (!isDPADAllowed || !AndroidDevices.isTv) context.getString(RR.string.swipe_unlock) else context.getString(RR.string.swipe_unlock_no_touch)
         swipeText.text = currentText
     }
 }

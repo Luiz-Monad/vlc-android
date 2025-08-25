@@ -51,6 +51,7 @@ import org.videolan.resources.AppContextProvider
 import org.videolan.resources.UPDATE_REORDER
 import org.videolan.resources.UPDATE_SELECTION
 import org.videolan.resources.interfaces.FocusListener
+import org.videolan.resources.R as RR
 import org.videolan.tools.MultiSelectAdapter
 import org.videolan.tools.MultiSelectHelper
 import org.videolan.tools.Settings
@@ -103,7 +104,7 @@ open class AudioBrowserAdapter @JvmOverloads constructor(
             is Fragment -> eventsHandler.requireContext()
             else -> AppContextProvider.appContext
         }
-        listImageWidth = ctx.resources.getDimension(R.dimen.audio_browser_item_size).toInt()
+        listImageWidth = ctx.resources.getDimension(RR.dimen.audio_browser_item_size).toInt()
         defaultCover = getAudioIconDrawable(ctx, type, false)
         defaultCoverCard = getAudioIconDrawable(ctx, type, true)
     }
@@ -137,8 +138,8 @@ open class AudioBrowserAdapter @JvmOverloads constructor(
         if (position >= itemCount) return
         val item = getItem(position)
         holder.setItem(item)
-        if (item is Artist) item.description = holder.binding.root.context.resources.getQuantityString(R.plurals.albums_quantity, item.albumsCount, item.albumsCount)
-        if (item is Genre) item.description = holder.binding.root.context.resources.getQuantityString(R.plurals.track_quantity, item.tracksCount, item.tracksCount)
+        if (item is Artist) item.description = holder.binding.root.context.resources.getQuantityString(RR.plurals.albums_quantity, item.albumsCount, item.albumsCount)
+        if (item is Genre) item.description = holder.binding.root.context.resources.getQuantityString(RR.plurals.track_quantity, item.tracksCount, item.tracksCount)
         val isSelected = multiSelectHelper.isSelected(position)
         holder.selectView(isSelected)
         if (item is MediaWrapper) {
