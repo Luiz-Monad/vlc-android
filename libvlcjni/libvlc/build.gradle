@@ -104,7 +104,7 @@ android {
 }
 
 clean {
-    delete 'build', 'jni/libs', 'jni/obj'
+    delete 'build', 'jni/obj'
 }
 
 dependencies {
