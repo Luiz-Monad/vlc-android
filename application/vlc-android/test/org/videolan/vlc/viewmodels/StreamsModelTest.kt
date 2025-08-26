@@ -21,7 +21,7 @@ class StreamsModelTest : BaseTest() {
     override fun beforeTest() {
         super.beforeTest()
         mediaLibrary.clearHistory()
-        streamsModel = StreamsModel(application, TestCoroutineContextProvider())
+        streamsModel = StreamsModel(application, false,TestCoroutineContextProvider())
     }
 
     @Test
@@ -77,7 +77,7 @@ class StreamsModelTest : BaseTest() {
 
         val newMediaTitle = "$oldMediaTitle~new"
 
-        streamsModel.rename(pos, newMediaTitle)
+        streamsModel.rename(media, newMediaTitle)
 
         val testResult = streamsModel.dataset.test()
                 .awaitValue()

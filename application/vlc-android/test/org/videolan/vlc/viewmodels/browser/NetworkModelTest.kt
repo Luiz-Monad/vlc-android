@@ -52,7 +52,7 @@ class NetworkModelTest : BaseTest() {
     }
 
     private fun initNetworkModel(url: String?, showHiddenFiles: Boolean = false) {
-        browserModel = NetworkModel(application, url, showHiddenFiles, TestCoroutineContextProvider())
+        browserModel = NetworkModel(application, url,  TestCoroutineContextProvider())
         browserProvider = browserModel.provider
     }
 

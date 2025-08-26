@@ -97,9 +97,9 @@ class ExternalSubRepositoryTest {
         `when`(externalSubDao.get(foo)).thenReturn(fakeFooLiveDataSubtitles)
         `when`(externalSubDao.get(bar)).thenReturn(fakeBarLiveDataSubtitles)
 
-        val fooSubtitles = getValue(externalSubRepository.getDownloadedSubtitles(foo.toUri()))
+        val fooSubtitles = externalSubRepository.getDownloadedSubtitles(foo.toUri()).value
         verify(externalSubDao, times(2)).get(ArgumentMatchers.anyString())
-        assertThat(fooSubtitles.size, `is`(0))
+        assertThat(fooSubtitles?.size, `is`(0))
     }
 
 
@@ -138,11 +138,11 @@ class ExternalSubRepositoryTest {
         `when`(externalSubDao.get(foo)).thenReturn(fakeFooLiveDataSubtitles)
         `when`(externalSubDao.get(bar)).thenReturn(fakeBarLiveDataSubtitles)
 
-        val fooSubtitles = getValue(externalSubRepository.getDownloadedSubtitles(foo.toUri()))
-        val barSubtitles = getValue(externalSubRepository.getDownloadedSubtitles(bar.toUri()))
+        val fooSubtitles = externalSubRepository.getDownloadedSubtitles(foo.toUri()).value
+        val barSubtitles = externalSubRepository.getDownloadedSubtitles(bar.toUri()).value
         verify(externalSubDao, times(2)).get(ArgumentMatchers.anyString())
-        assertThat(fooSubtitles.size, `is`(2))
-        assertThat(barSubtitles.size, `is`(2))
+        assertThat(fooSubtitles?.size, `is`(2))
+        assertThat(barSubtitles?.size, `is`(2))
 
         assertThat(fooSubtitles, hasItem(fakeFooSubtitles[0]))
         assertThat(fooSubtitles, hasItem(fakeFooSubtitles[1]))

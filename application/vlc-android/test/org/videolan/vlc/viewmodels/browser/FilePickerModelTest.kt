@@ -16,6 +16,7 @@ import org.videolan.medialibrary.stubs.StubMediaWrapper
 import org.videolan.vlc.BaseTest
 import org.videolan.vlc.providers.BrowserProvider
 import org.videolan.tools.CoroutineContextProvider
+import org.videolan.vlc.providers.PickerType
 import org.videolan.vlc.util.TestCoroutineContextProvider
 import java.io.File
 
@@ -49,7 +50,7 @@ class FilePickerModelTest : BaseTest() {
         super.beforeTest()
         dummyUrl = temporaryFolder.root.absolutePath
 
-        browserModel = BrowserModel(application, dummyUrl, TYPE_PICKER, false, true, org.videolan.vlc.util.TestCoroutineContextProvider())
+        browserModel = BrowserModel(application, dummyUrl, TYPE_PICKER, false, PickerType.SUBTITLE, org.videolan.vlc.util.TestCoroutineContextProvider())
         browserProvider = browserModel.provider
 
         setupTestFiles()

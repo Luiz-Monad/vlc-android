@@ -180,7 +180,8 @@ android {
 dependencies {
     implementation project(':application:vlc-android')
     implementation project(':application:television')
-    testImplementation project(':application:television')
+    androidTestImplementation project(':application:resources')
+    androidTestImplementation project(':application:vlc-android')
 
     testImplementation "androidx.arch.core:core-testing:$rootProject.ext.androidxArchVersion"
     testImplementation "androidx.test:core:$rootProject.ext.testCoreVersion"

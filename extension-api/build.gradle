@@ -79,6 +79,7 @@ android {
             java.srcDirs = ['test']
         }
         androidTest {
+            manifest.srcFile 'test/AndroidManifest.xml'
             java.srcDirs = ['androidTest']
         }
     }
@@ -97,4 +98,6 @@ android {
 dependencies {
     api "androidx.appcompat:appcompat:$rootProject.ext.appCompatVersion"
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitExtVersion"
 }

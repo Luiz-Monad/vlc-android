@@ -7,7 +7,7 @@
         tools:overrideLibrary="
                 androidx.test.core,
                 androidx.test.monitor,
-                org.videolan.vlc
+                org.videolan.resources
                 "/>
 
     <application>
@@ -18,20 +18,23 @@
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
             android:exported="false"
-            tools:node="merge" />
+            tools:node="merge"
+            tools:replace="android:exported" />
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
             android:exported="false"
-            tools:node="merge" />
+            tools:node="merge"
+            tools:replace="android:exported" />
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
             android:exported="false"
-            tools:node="merge" />
+            tools:node="merge"
+            tools:replace="android:exported" />
 
     </application>
 
     <instrumentation
         android:name="androidx.test.runner.AndroidJUnitRunner"
-        android:targetPackage="org.videolan.vlc" />
+        android:targetPackage="org.videolan.resources" />
 
 </manifest>

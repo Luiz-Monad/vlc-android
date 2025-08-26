@@ -22,7 +22,44 @@
   ~
   -->
 
-<manifest xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-sdk tools:overrideLibrary="android_libs.ub_uiautomator, tools.fastlane.screengrab" />
+    <!-- Keep your uses-sdk override if you were using it from previous steps -->
+    <uses-sdk tools:overrideLibrary="
+        androidx.test.core,
+        androidx.test.monitor,
+        android_libs.ub_uiautomator,
+        tools.fastlane.screengrab,
+        org.videolan.mobile.app,
+        org.videolan.vlc,
+        " />
+
+    <application>
+        <!--
+            Activities from androidx.test.core being added for Android 12+ exported requirement.
+            These are used by the test framework and should not be exported.
+        -->
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+            android:exported="false"
+            tools:node="merge"
+            tools:replace="android:exported" />
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+            android:exported="false"
+            tools:node="merge"
+            tools:replace="android:exported" />
+        <activity
+            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+            android:exported="false"
+            tools:node="merge"
+            tools:replace="android:exported" />
+
+    </application>
+
+    <instrumentation
+        android:name="org.videolan.vlc.MultidexTestRunner"
+        android:targetPackage="org.videolan.mobile.app" />
+
 </manifest>

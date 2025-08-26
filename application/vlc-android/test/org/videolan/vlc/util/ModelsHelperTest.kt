@@ -77,7 +77,7 @@ class ModelsHelperTest : BaseTest() {
     @Test
     fun withDurationSortingAndPreviousItemAndCurrentItemAreBothAlbumLessThanMinute_headerShouldBeNull() {
         val item = MLServiceLocator.getAbstractAlbum(dataSource.uuid, "Abc", 2018, "Artwork", "Dummy", 9, 1, 1, 48000)
-        val aboveItem = MLServiceLocator.getAbstractAlbum(dataSource.uuid, "Abc", 2018, "Artwork", "Dummy", 9, 1, 51000)
+        val aboveItem = MLServiceLocator.getAbstractAlbum(dataSource.uuid, "Abc", 2018, "Artwork", "Dummy", 9, 1, 1, 51000)
         assertEquals(null, getHeader(context, Medialibrary.SORT_DURATION, item, aboveItem))
     }
 

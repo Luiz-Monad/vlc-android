@@ -5,6 +5,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.videolan.tools.*
+import java.text.DecimalFormat
+import kotlin.math.log2
+import kotlin.math.pow
 
 @RunWith(JUnit4::class)
 class StringsTest {
@@ -95,6 +98,14 @@ class StringsTest {
 
         s = "barpath".removeFileScheme()
         assertEquals(s, "barpath")
+    }
+
+    fun Long.readableFileSize(): String {
+        val size: Long = this
+        if (size <= 0) return "0"
+        val units = arrayOf("B", "KiB", "MiB", "GiB", "TiB")
+        val digitGroups = (log2(size.toDouble()) / log2(1024.0)).toInt()
+        return DecimalFormat("#,##0.#").format(size / (1024.0).pow(digitGroups.toDouble())) + " " + units[digitGroups]
     }
 
     @Test

@@ -18,15 +18,18 @@
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
             android:exported="false"
-            tools:node="merge" />
+            tools:node="merge"
+            tools:replace="android:exported" />
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
             android:exported="false"
-            tools:node="merge" />
+            tools:node="merge"
+            tools:replace="android:exported" />
         <activity
             android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
             android:exported="false"
-            tools:node="merge" />
+            tools:node="merge"
+            tools:replace="android:exported" />
 
     </application>
 

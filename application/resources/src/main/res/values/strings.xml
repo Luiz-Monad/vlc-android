@@ -390,6 +390,12 @@
     <string name="subtitles_preset_white_background">With background</string>
     <string name="subtitles_yellow">Yellow</string>
     <string name="subtitles_yellow_background">Yellow with background</string>
+    <string name="subtitles_color_white">white</string>
+    <string name="subtitles_color_gray">gray</string>
+    <string name="subtitles_color_pink">pink</string>
+    <string name="subtitles_color_blue">blue</string>
+    <string name="subtitles_color_yellow">yellow</string>
+    <string name="subtitles_color_green">green</string>
 
     <string name="audio_prefs_category">Audio</string>
     <string name="lockscreen_cover_title">Media cover on Lockscreen</string>

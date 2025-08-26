@@ -90,6 +90,7 @@ android {
             java.srcDirs = ['test']
         }
         androidTest {
+            manifest.srcFile 'test/AndroidManifest.xml'
             java.srcDirs = ['androidTest']
             assets.srcDirs += files("$projectDir/assets/schemas".toString())
         }
